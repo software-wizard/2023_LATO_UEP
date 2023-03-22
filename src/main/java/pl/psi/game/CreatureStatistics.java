@@ -17,8 +17,12 @@ import lombok.Value;
 @Value
 @Builder
 public class CreatureStatistics {
+
+    private final String name;
     private final Range< Integer > damage;
     private final int maxHp;
     private final int attack;
     private final int armor;
+
+    private final int moveRange;
 }
