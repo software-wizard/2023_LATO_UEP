@@ -19,47 +19,50 @@ import java.util.Random;
 @Getter
 public class Creature
 {
+    private final CreatureStatistics stats;
     private final Random rand;
-    private final Range< Integer > damage;
-    private final int maxHp;
-    private final int attack;
-    private final int armor;
     private int currentHp;
 
     @Setter
     private DefaultDamageCalculator dmgCalculator = new DefaultDamageCalculator();
 
-    public Creature( Range< Integer > aDamage, int aMaxHp )
+    public Creature( CreatureStatistics aStats )
     {
-        this( aDamage, aMaxHp, 0, 0, new Random() );
+        this( aStats, new Random() );
     }
 
-    Creature( Range< Integer > aDamage, int aMaxHp, Random aRand )
+    public Creature( CreatureStatistics aStats, Random aRand )
     {
-        this( aDamage, aMaxHp, 0, 0, aRand );
+        stats = aStats;
+        rand = aRand;
+        currentHp = getMaxHp();
     }
 
-    public Creature( Range< Integer > aDamage, int aMaxHp, int aAttack, int aArmor )
+    private int getMaxHp()
     {
-        this( aDamage, aMaxHp, aAttack, aArmor, new Random() );
-    }
-
-    public Creature( Range< Integer > aDamage, int aMaxHp, int aAttack, int aArmor, Random aRandom )
-    {
-        damage = aDamage;
-        maxHp = aMaxHp;
-        attack = aAttack;
-        armor = aArmor;
-        rand = aRandom;
-        currentHp = maxHp;
+        return stats.getMaxHp();
     }
 
     public void attack( Creature aDefender )
     {
-        int randomDmg = (int)(rand.nextDouble() * (damage.upperEndpoint() - damage.lowerEndpoint()))
-            + damage.lowerEndpoint();
+        int randomDmg = (int)(rand.nextDouble() * (stats.getDamage()
+            .upperEndpoint()
+            - stats.getDamage()
+                .lowerEndpoint()))
+            + stats.getDamage()
+                .lowerEndpoint();
         double dmgToDeal = dmgCalculator.calculateDamage( randomDmg, this, aDefender );
         aDefender.currentHp = aDefender.currentHp - (int)dmgToDeal;
+    }
+
+    public int getAttack()
+    {
+        return stats.getAttack();
+    }
+
+    public int getArmor()
+    {
+        return stats.getArmor();
     }
 
     // public class Builder{
