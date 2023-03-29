@@ -7,7 +7,6 @@
 
 package pl.psi.game;
 
-import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,15 +37,29 @@ public class Creature implements PropertyChangeListener
     {
         stats = aStats;
         rand = aRand;
-        currentHp = getMaxHp();
+        currentHp = stats != null ? getMaxHp(): 1;
     }
 
-    private int getMaxHp()
+    public int getMaxHp()
     {
         return stats.getMaxHp();
     }
 
     public void attack( Creature aDefender )
+    {
+        dealDamage( aDefender );
+        if( shouldBeCounterAttacked() )
+        {
+            aDefender.dealDamage( this );
+        }
+    }
+
+    protected boolean shouldBeCounterAttacked()
+    {
+        return true;
+    }
+
+    void dealDamage(Creature aDefender)
     {
         int randomDmg = (int)(rand.nextDouble() * (stats.getDamage()
             .upperEndpoint()
@@ -69,17 +82,22 @@ public class Creature implements PropertyChangeListener
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return stats.getName();
     }
 
-    public int getMoveRange() {
+    public int getMoveRange()
+    {
         return stats.getMoveRange();
     }
 
     @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("END_OF_TURN")){
+    public void propertyChange( PropertyChangeEvent evt )
+    {
+        if( evt.getPropertyName()
+            .equals( "END_OF_TURN" ) )
+        {
 
         }
     }

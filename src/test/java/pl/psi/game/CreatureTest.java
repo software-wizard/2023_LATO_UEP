@@ -28,48 +28,82 @@ class CreatureTest
             .maxHp( 1 )
             .build() );
         Creature defender = new Creature( CreatureStatistics.builder()
-                .damage( Range.closed( 0, 0 ) )
-                .maxHp( 100 )
-                .build() );
+            .damage( Range.closed( 0, 0 ) )
+            .maxHp( 100 )
+            .build() );
 
         attacker.attack( defender );
 
         assertThat( defender.getCurrentHp() ).isEqualTo( 90 );
     }
 
-//    @Test
-//    void creatureShouldAttackProperlyWithRandDmg()
-//    {
-//        Creature attacker = new Creature( Range.closed( 1, 10 ), 1, new TestRandom() );
-//        Creature defender = new Creature( Range.closed( 0, 0 ), 100 );
-//
-//        attacker.attack( defender );
-//
-//        assertThat( defender.getCurrentHp() ).isEqualTo( 95 );
-//    }
-//
-//    @Test
-//    void creatureShouldAttackProperlyWithAttackAndArmorStatistic()
-//    {
-//        Creature attacker = new Creature( Range.closed( 1, 10 ), 1, 30, 10, new TestRandom() );
-//        Creature defender = new Creature( Range.closed( 0, 0 ), 100, 10, 10 );
-//
-//        attacker.attack( defender );
-//
-//        assertThat( defender.getCurrentHp() ).isEqualTo( 90 );
-//    }
-//
-//    @Test
-//    void creatureShouldAttackProperlyWithReduceArmor()
-//    {
-//        Creature attacker = new Creature( Range.closed( 1, 10 ), 1, 30, 10, new TestRandom() );
-//        attacker.setDmgCalculator( new ReduceArmorDamageCalculator( 0.5 ) );
-//        Creature defender = new Creature( Range.closed( 0, 0 ), 100, 10, 10 );
-//
-//        attacker.attack( defender );
-//
-//        assertThat( defender.getCurrentHp() ).isEqualTo( 88 );
-//    }
+    @Test
+    void creatureShouldCounterAttackProperly()
+    {
+        Creature attacker = new Creature( CreatureStatistics.builder()
+            .damage( Range.closed( 0, 0 ) )
+            .maxHp( 100 )
+            .build() );
+        Creature defender = new Creature( CreatureStatistics.builder()
+            .damage( Range.closed( 10, 10 ) )
+            .maxHp( 100 )
+            .build() );
+
+        attacker.attack( defender );
+
+        assertThat( attacker.getCurrentHp() ).isEqualTo( 90 );
+    }
+
+    @Test
+    void shooterCreatureShouldNotBeCounterAttacked()
+    {
+        Creature attacker = new CreatureShooterDecorator( new Creature( CreatureStatistics.builder()
+            .damage( Range.closed( 0, 0 ) )
+            .maxHp( 100 )
+            .build() ) );
+        Creature defender = new Creature( CreatureStatistics.builder()
+            .damage( Range.closed( 10, 10 ) )
+            .maxHp( 100 )
+            .build() );
+
+        attacker.attack( defender );
+
+        assertThat( attacker.getCurrentHp() ).isEqualTo( 100 );
+    }
+
+    // @Test
+    // void creatureShouldAttackProperlyWithRandDmg()
+    // {
+    // Creature attacker = new Creature( Range.closed( 1, 10 ), 1, new TestRandom() );
+    // Creature defender = new Creature( Range.closed( 0, 0 ), 100 );
+    //
+    // attacker.attack( defender );
+    //
+    // assertThat( defender.getCurrentHp() ).isEqualTo( 95 );
+    // }
+    //
+    // @Test
+    // void creatureShouldAttackProperlyWithAttackAndArmorStatistic()
+    // {
+    // Creature attacker = new Creature( Range.closed( 1, 10 ), 1, 30, 10, new TestRandom() );
+    // Creature defender = new Creature( Range.closed( 0, 0 ), 100, 10, 10 );
+    //
+    // attacker.attack( defender );
+    //
+    // assertThat( defender.getCurrentHp() ).isEqualTo( 90 );
+    // }
+    //
+    // @Test
+    // void creatureShouldAttackProperlyWithReduceArmor()
+    // {
+    // Creature attacker = new Creature( Range.closed( 1, 10 ), 1, 30, 10, new TestRandom() );
+    // attacker.setDmgCalculator( new ReduceArmorDamageCalculator( 0.5 ) );
+    // Creature defender = new Creature( Range.closed( 0, 0 ), 100, 10, 10 );
+    //
+    // attacker.attack( defender );
+    //
+    // assertThat( defender.getCurrentHp() ).isEqualTo( 88 );
+    // }
 
     private class TestRandom extends Random
     {
