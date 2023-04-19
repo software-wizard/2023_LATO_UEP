@@ -3,12 +3,9 @@ package pl.psi;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.junit.jupiter.api.Test;
-import pl.psi.creatures.CreatureStats;
-
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Set;
+import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.Resource;
+import pl.psi.mapElements.StaticElement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +16,7 @@ public class BoardTest {
 
     @Test
     void shouldMapElementOnPoint() {
-        final MapElement staticElement = new StaticElement(true);
+        final MapElement staticElement = new StaticElement();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), staticElement);
         final Board board = new Board.Builder()
@@ -57,13 +54,13 @@ public class BoardTest {
     }
 
     @Test
-    void shouldGetGold() {
+    void shouldGetResource() {
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         final Hero hero = new Hero();
         mapElements.put(new Point(1, 1), hero);
-        final StaticElement gold = new StaticElement(true);
+        final Resource gold = new Resource();
         mapElements.put(new Point(2, 2), gold);
-        final StaticElement gold1 = new StaticElement(true);
+        final Resource gold1 = new Resource();
         mapElements.put(new Point(3, 2), gold1);
         final Board board = new Board.Builder()
                 .mapElements(mapElements)
@@ -80,7 +77,7 @@ public class BoardTest {
     @Test
     void shouldBarierWorksProperly() {
         final Hero hero = new Hero();
-        final StaticElement barier = new StaticElement(false);
+        final StaticElement barier = new StaticElement();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
         mapElements.put(new Point(2, 2), barier);

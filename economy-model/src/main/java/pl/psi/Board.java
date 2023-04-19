@@ -2,13 +2,14 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import pl.psi.mapElements.MapElement;
 
 import java.util.*;
 
 public class Board {
 
     private final int MAX_WIDTH = 5;
-    private final BiMap< Point, MapElement > map = HashBiMap.create();
+    private final BiMap< Point, MapElement> map = HashBiMap.create();
 //    private TODO CREATE QUEUE FOR PLAYERS ArrayList<Player> aPlayers,
 
     // Builder for testing purpose
@@ -53,7 +54,7 @@ public class Board {
         if( canMove( aHero, aPoint ) )
         {
             if (map.get(aPoint)!=null) {
-                makeActionOnPoint(aHero, getMapElement(aPoint));
+                map.get(aPoint).apply(aHero);
             }
 
             map.inverse()
@@ -62,16 +63,11 @@ public class Board {
         }
     }
 
-    private void makeActionOnPoint(Hero aHero, Optional<MapElement> aMapElement) {
-        aHero.setGold(aHero.getGold()+1); // TODO apply - interface
-        map.inverse().remove(aMapElement);
-    }
-
     boolean canMove( final Hero aHero, final Point aPoint )
     {
         if( map.containsKey( aPoint ) )
         {
-            if (!map.get(aPoint).isAction()) {
+            if (!map.get(aPoint).isInteractive()) {
                 return false;
             }
         }

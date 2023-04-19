@@ -1,5 +1,7 @@
 package pl.psi;
 
+import pl.psi.mapElements.MapElement;
+
 import java.util.ArrayList;
 import java.util.Map;
 
