@@ -1,6 +1,7 @@
 package pl.psi;
 
 import pl.psi.mapElements.MapElement;
+import pl.psi.player.Player;
 
 import java.util.ArrayList;
 import java.util.Map;

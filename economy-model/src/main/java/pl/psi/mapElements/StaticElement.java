@@ -1,7 +1,6 @@
 package pl.psi.mapElements;
 
-import pl.psi.Hero;
-import pl.psi.mapElements.MapElement;
+import pl.psi.hero.Hero;
 
 /*
 Class for bariers like mountains or rivers.

@@ -2,7 +2,9 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import pl.psi.hero.Hero;
 import pl.psi.mapElements.MapElement;
+import pl.psi.player.Player;
 
 import java.util.*;
 
@@ -49,7 +51,7 @@ public class Board {
         return Optional.ofNullable(map.get(aPoint));
     }
 
-    void move( final Hero aHero, final Point aPoint )
+    void move(final Hero aHero, final Point aPoint )
     {
         if( canMove( aHero, aPoint ) )
         {
@@ -72,7 +74,7 @@ public class Board {
             }
         }
         final Point oldPosition = getPosition( aHero );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aHero.getMoveRange();
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aHero.getHeroStatistics().getMoveRange();
     }
 
     Point getPosition( MapElement aMapElement )

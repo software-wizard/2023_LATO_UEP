@@ -1,19 +1,18 @@
-package pl.psi;
+package pl.psi.hero;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import pl.psi.mapElements.MapElement;
 
 // Zamiast dziedziczenia decorator - to samo dla przeszkód
+@Builder
 public class Hero implements MapElement {
 
     @Getter
-    private int moveRange = 3; // TODO BUILDER STATISTICS
-    @Getter
-    @Setter
-    private int gold = 0;
+    private HeroStatistics heroStatistics;
 
-    public Hero() {
+    public Hero(HeroStatistics aHeroStatistics) {
+        this.heroStatistics = aHeroStatistics;
     }
 
     @Override
