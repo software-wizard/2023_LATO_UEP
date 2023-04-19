@@ -43,7 +43,7 @@ public class MainBattleController implements PropertyChangeListener
         {
             for( int y = 0; y < 10; y++ )
             {
-                Point currentPoint = new Point( x, y );
+                Point currentPoint = new Point( x, y);
                 Optional< Creature > creature = gameEngine.getCreature( currentPoint );
                 final MapTile mapTile = new MapTile( "" );
                 creature.ifPresent( c -> mapTile.setName( c.toString() ) );

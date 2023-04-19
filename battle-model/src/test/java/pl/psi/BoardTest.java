@@ -15,17 +15,36 @@ class BoardTest
     void unitsMoveProperly()
     {
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
-            .moveRange( 5 )
-            .build() )
-            .build();
+                        .moveRange( 5 )
+                        .build() )
+                .build();
         final List< Creature > c1 = List.of( creature );
         final List< Creature > c2 = List.of();
         final Board board = new Board( c1, c2 );
 
-        board.move( creature, new Point( 3, 3 ) );
+        board.move( creature, new Point( 3, 3) );
 
-        assertThat( board.getCreature( new Point( 3, 3 ) )
-            .isPresent() ).isTrue();
+        assertThat( board.getCreature( new Point( 3, 3) )
+                .isPresent() ).isTrue();
     }
+    // asercja w metodzie canMove
+    // sprawdzic punkty do ktorych nie mozemy dojsc
+    @Test
+    void CreatureShouldMoveInDistance()
+    {
+        final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
+                        .moveRange( 5 )
+                        .build() )
+                .build();
+        final List< Creature > c1 = List.of( creature );
+        final List< Creature > c2 = List.of();
+        final Board board = new Board( c1, c2 );
 
+        ;
+
+        assertThat( board.canMove(creature, new Point( 3, 3)))
+                .isTrue();
+        assertThat( board.canMove(creature, new Point(creature.getMoveRange()+1, creature.getMoveRange()+1)))
+                .isFalse();
+    }
 }

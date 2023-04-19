@@ -1,5 +1,6 @@
 package pl.psi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class Board
     {
         for( int i = 0; i < aCreatures.size(); i++ )
         {
-            map.put( new Point( aXPosition, i * 2 + 1 ), aCreatures.get( i ) );
+            map.put( new Point( aXPosition, i * 2 + 1), aCreatures.get( i ) );
         }
     }
 
@@ -47,6 +48,7 @@ public class Board
 
     boolean canMove( final Creature aCreature, final Point aPoint )
     {
+        //TODO: if z przeszkodami - napisac do drugiej grupy(na ten monent hardcoded)
         if( map.containsKey( aPoint ) )
         {
             return false;
@@ -60,4 +62,19 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
+    public List<Point> availablePointsToGo(Creature aCretaure){
+        List<Point> listOfPoints = new ArrayList<>();
+        for (Point point : map.keySet()) {
+            if(canMove(aCretaure, point)){
+                listOfPoints.add(point);
+            }
+        }
+        return listOfPoints;
+    }
+    // metoda przyjmuje pkt na ktorym jest, i move range
+    // mozna wykreowac diagram
+    // waga jeden dla zwyklego pkt
+    // dla przeszdody jakas duza liczba
+    // przeszkoda do przejscia = wieksza waga
+    // dla algorymu jednostek latajacyhch inny diagram
 }
