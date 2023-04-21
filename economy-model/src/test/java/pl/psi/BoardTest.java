@@ -11,6 +11,8 @@ import pl.psi.mapElements.StaticElement;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
+import java.util.LinkedList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -78,7 +80,11 @@ public class BoardTest {
         assertEquals(0, hero.getHeroStatistics().getPlayer().getResources().getGold());
         board.move(hero, new Point(2, 2));
         assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
+        // Check is point empty
+        assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isTrue();
         board.move(hero, new Point(3, 2));
+        // Check is point empty
+        assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isFalse();
         assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
         board.move(hero, new Point(3, 3));
         assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
@@ -95,20 +101,5 @@ public class BoardTest {
         board.move(hero, new Point(2, 2));
         assertEquals(new Point(1, 1), board.getPosition(hero));
     }
-
-//    @Test
-//    void shouldPlayerSwitchProperly() {
-//        // TODO
-//        final Player player1 = new Player();
-//        ArrayList<Hero> heroes1 = new ArrayList<Hero>();
-//        heroes1.add(new Hero());
-//        player1.setHeroes(heroes1);
-//
-//        final Player player2 = new Player();
-//        ArrayList<Hero> heroes2 = new ArrayList<Hero>();
-//        heroes2.add(new Hero());
-//        player2.setHeroes(heroes2);
-//
-//    }
 
 }

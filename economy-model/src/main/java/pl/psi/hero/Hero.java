@@ -2,13 +2,14 @@ package pl.psi.hero;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import pl.psi.mapElements.MapElement;
 
 // Zamiast dziedziczenia decorator - to samo dla przeszkód
 @Builder
+@Getter
 public class Hero implements MapElement {
 
-    @Getter
     private HeroStatistics heroStatistics;
 
     public Hero(HeroStatistics aHeroStatistics) {

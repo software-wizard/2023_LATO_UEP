@@ -12,16 +12,9 @@ public class Board {
 
     private final int MAX_WIDTH = 5;
     private final BiMap< Point, MapElement> map = HashBiMap.create();
-//    private TODO CREATE QUEUE FOR PLAYERS ArrayList<Player> aPlayers,
 
     // Builder for testing purpose
     public static class Builder {
-        private ArrayList<Player> players = new ArrayList<Player>();
-
-        public Builder players(final ArrayList<Player> aPlayers) {
-            players = aPlayers;
-            return this;
-        }
 
         private Map<Point, MapElement> mapElements = new HashMap<Point, MapElement>();
 
@@ -31,11 +24,11 @@ public class Board {
         }
 
         public Board build() {
-            return new Board(players, mapElements);
+            return new Board(mapElements);
         }
     }
 
-    public Board(ArrayList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
+    public Board(Map<Point, MapElement> aMapElements) {
 
         // Set elements like heroes, mountains, gold and so on, on the board.
         for (Point point : aMapElements.keySet()) {
@@ -56,7 +49,7 @@ public class Board {
         if( canMove( aHero, aPoint ) )
         {
             if (map.get(aPoint)!=null) {
-                map.get(aPoint).apply(aHero);
+                map.get(aPoint).apply(aHero); // TODO another map for Hero?
             }
 
             map.inverse()
