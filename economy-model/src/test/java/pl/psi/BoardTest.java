@@ -60,7 +60,11 @@ public class BoardTest {
         // Check if Player gets resource if Hero stands on the point
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         final Hero hero = new Hero(HeroStatistics.builder()
-                .player(new Player("1", PlayerResources.builder().gold(0).build()))
+                .player(Player.builder()
+                        .resources(PlayerResources.builder()
+                                .gold(0)
+                                .build())
+                        .build())
                 .moveRange(3)
                 .build());
         mapElements.put(new Point(1, 1), hero);

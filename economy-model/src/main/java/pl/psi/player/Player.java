@@ -10,7 +10,8 @@ import java.util.Objects;
 public class Player {
 
     private final String name;
-    private PlayerResources resources;
+    private final PlayerResources resources;
+    private final PlayerMine mines = new PlayerMine();
 
     public Player(String aName, PlayerResources aResources) {
         this.name = aName;
