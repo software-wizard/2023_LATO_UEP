@@ -1,5 +1,6 @@
 package pl.psi.mapElements;
 
+import com.google.common.collect.HashBiMap;
 import pl.psi.hero.Hero;
 import pl.psi.player.PlayerResources;
 
@@ -23,7 +24,7 @@ public class Resource implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(Hero aHero, HashBiMap map) {
         // Get resources from Player's instance
         PlayerResources resources = aHero.getHeroStatistics().getPlayer().getResources();
         switch (type) {
@@ -50,5 +51,7 @@ public class Resource implements MapElement {
                 resources.setGems(resources.getGems()+resourceNumber);
                 break;
         }
+
+        map.inverse().remove(this);
     }
 }

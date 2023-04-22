@@ -3,6 +3,8 @@ package pl.psi.player;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 @Builder
 public class Player {
@@ -28,11 +30,7 @@ public class Player {
 
         Player player = (Player) o;
 
-        if (this.getName() == player.getName()) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.equals(this.getName(), player.getName());
     }
 
 }

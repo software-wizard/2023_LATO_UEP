@@ -25,21 +25,17 @@ public class BoardTest {
         final MapElement staticElement = new StaticElement();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), staticElement);
-        final Board board = new Board.Builder()
-                .mapElements(mapElements)
-                .build();
+        final Board board = new Board(mapElements);
         assertThat(board.getMapElement(new Point(1, 1)).isPresent()).isTrue();
     }
 
     @Test
     void shouldHeroOnPoint() {
-        final Hero hero = Hero.builder().build(); // TODO use builder, because if hero rise there will be a problem with test
+        final Hero hero = Hero.builder().build();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
-        final Board board = new Board.Builder()
-                .mapElements(mapElements)
-                .build();
-        assertThat(board.getMapElement(new Point(1, 1)).isPresent()).isTrue();
+        final Board board = new Board(mapElements);
+        assertThat(board.getHero(new Point(1, 1)).isPresent()).isTrue();
     }
 
     @Test
@@ -49,16 +45,14 @@ public class BoardTest {
                 .build());
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
-        final Board board = new Board.Builder()
-                .mapElements(mapElements)
-                .build();
-        board.move(hero, new Point(2, 2));
-        assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isTrue();
+        final Board board = new Board(mapElements);
 
-        assertThat(board.getMapElement(new Point(1, 1)).isPresent()).isFalse();
+        board.move(hero, new Point(2, 2));
+        assertThat(board.getHero(new Point(2, 2)).isPresent()).isTrue();
+        assertThat(board.getHero(new Point(1, 1)).isPresent()).isFalse();
 
         board.move(hero, new Point(5, 3));
-        assertThat(board.getMapElement(new Point(5, 3)).isPresent()).isFalse(); // For move range = 3
+        assertThat(board.getHero(new Point(5, 3)).isPresent()).isFalse(); // For move range = 3
     }
 
     @Test
@@ -72,22 +66,14 @@ public class BoardTest {
         mapElements.put(new Point(1, 1), hero);
         final Resource gold = new Resource(Resource.ResourceType.GOLD, 1);
         mapElements.put(new Point(2, 2), gold);
-        final Resource wood = new Resource(Resource.ResourceType.WOOD, 1);
-        mapElements.put(new Point(3, 2), wood);
-        final Board board = new Board.Builder()
-                .mapElements(mapElements)
-                .build();
+        final Board board = new Board(mapElements);
+
         assertEquals(0, hero.getHeroStatistics().getPlayer().getResources().getGold());
-        board.move(hero, new Point(2, 2));
+        board.move(hero, new Point(2, 2)); // TODO będzie moveRange na turę i trzeba zawsze zmieniać testy?
         assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
-        // Check is point empty
-        assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isTrue();
-        board.move(hero, new Point(3, 2));
         // Check is point empty
         assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isFalse();
-        assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
-        board.move(hero, new Point(3, 3));
-        assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
+        assertThat(board.getHero(new Point(2, 2)).isPresent()).isTrue();
     }
 
     @Test
@@ -97,9 +83,10 @@ public class BoardTest {
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
         mapElements.put(new Point(2, 2), barier);
-        final Board board = new Board.Builder().mapElements(mapElements).build();
+        final Board board = new Board(mapElements);
         board.move(hero, new Point(2, 2));
-        assertEquals(new Point(1, 1), board.getPosition(hero));
+        assertEquals(new Point(1, 1), board.getHeroPosition(hero));
+        assertEquals(new Point(2, 2), board.getPosition(barier));
     }
 
 }

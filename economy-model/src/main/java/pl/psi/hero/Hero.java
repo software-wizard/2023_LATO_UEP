@@ -1,5 +1,6 @@
 package pl.psi.hero;
 
+import com.google.common.collect.HashBiMap;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +23,7 @@ public class Hero implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(Hero aHero, HashBiMap map) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
     }

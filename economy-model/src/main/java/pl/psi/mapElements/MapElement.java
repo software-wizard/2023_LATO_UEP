@@ -1,5 +1,6 @@
 package pl.psi.mapElements;
 
+import com.google.common.collect.HashBiMap;
 import pl.psi.hero.Hero;
 
 public interface MapElement {
@@ -8,6 +9,5 @@ public interface MapElement {
 
     boolean isInteractive();
 
-    void apply(Hero aHero);
-
+    void apply(Hero aHero, HashBiMap map);
 }

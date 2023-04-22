@@ -11,7 +11,8 @@ import java.util.*;
 public class Board {
 
     private final int MAX_WIDTH = 5;
-    private final BiMap< Point, MapElement> map = HashBiMap.create();
+    private final BiMap<Point, MapElement> map = HashBiMap.create();
+    private final BiMap<Point, Hero> mapHero = HashBiMap.create();
 
     // Builder for testing purpose
     public static class Builder {
@@ -37,11 +38,19 @@ public class Board {
     }
 
     private void addMapElement(Point aPoint, MapElement aMapElement) {
-        map.put(aPoint, aMapElement);
+        if (aMapElement instanceof Hero) {
+            mapHero.put(aPoint, (Hero) aMapElement);
+        } else {
+            map.put(aPoint, aMapElement);
+        }
     }
 
     Optional<MapElement> getMapElement(final Point aPoint) {
         return Optional.ofNullable(map.get(aPoint));
+    }
+
+    Optional<Hero> getHero(final Point aPoint) {
+        return Optional.ofNullable(mapHero.get(aPoint));
     }
 
     void move(final Hero aHero, final Point aPoint )
@@ -49,16 +58,17 @@ public class Board {
         if( canMove( aHero, aPoint ) )
         {
             if (map.get(aPoint)!=null) {
-                map.get(aPoint).apply(aHero); // TODO another map for Hero?
+                map.get(aPoint).apply(aHero, (HashBiMap) map); // TODO przekazywanie mapy może mieć sens - surowce, bohater po przegranej walce
             }
 
-            map.inverse()
+            mapHero.inverse()
                     .remove( aHero );
-            map.put( aPoint, aHero );
+            mapHero.put( aPoint, aHero );
         }
     }
 
     boolean canMove( final Hero aHero, final Point aPoint )
+            // TODO brak interakcji, gdy na ponit Hero
     {
         if( map.containsKey( aPoint ) )
         {
@@ -66,7 +76,7 @@ public class Board {
                 return false;
             }
         }
-        final Point oldPosition = getPosition( aHero );
+        final Point oldPosition = getHeroPosition( aHero );
         return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aHero.getHeroStatistics().getMoveRange();
     }
 
@@ -74,5 +84,11 @@ public class Board {
     {
         return map.inverse()
                 .get( aMapElement );
+    }
+
+    Point getHeroPosition( Hero aHero )
+    {
+        return mapHero.inverse()
+                .get( aHero );
     }
 }

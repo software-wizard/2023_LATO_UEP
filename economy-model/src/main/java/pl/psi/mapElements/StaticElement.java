@@ -1,5 +1,6 @@
 package pl.psi.mapElements;
 
+import com.google.common.collect.HashBiMap;
 import pl.psi.hero.Hero;
 
 /*
@@ -13,7 +14,7 @@ public class StaticElement implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(Hero aHero, HashBiMap map) {
 
     }
 }
