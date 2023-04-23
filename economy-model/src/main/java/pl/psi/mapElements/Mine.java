@@ -1,11 +1,8 @@
 package pl.psi.mapElements;
 
 import com.google.common.collect.HashBiMap;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
 import pl.psi.hero.Hero;
-import pl.psi.player.PlayerMine;
+import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 public class Mine implements MapElement {
@@ -15,6 +12,7 @@ public class Mine implements MapElement {
     }
 
     private final Mine.ResourceType type;
+    private Player currentOwner = null;
 
     public Mine(Mine.ResourceType aType) {
         this.type = aType;
@@ -27,23 +25,36 @@ public class Mine implements MapElement {
 
     @Override
     public void apply(Hero aHero, HashBiMap map) {
-        PlayerMine mines = aHero.getHeroStatistics().getPlayer().getMines();
-        switch (type) {
-            case GOLD:
-                mines.getGoldMines().add(this);
-                break;
-            case WOOD:
-                break;
-            case ORE:
-                break;
-            case MERCURY:
-                break;
-            case SULFUR:
-                break;
-            case CRYSTAL:
-                break;
-            case GEMS:
-                break;
+        currentOwner = aHero.getHeroStatistics().getPlayer();
+    }
+
+    public void addResource() {
+        if (currentOwner != null) {
+            PlayerResources resources = currentOwner.getResources();
+            switch (type) {
+                case GOLD:
+                    // Add gold for Player's resources
+                    resources.setGold(resources.getGold()+1000);
+                    break;
+                case WOOD:
+                    resources.setWood(resources.getWood()+2);
+                    break;
+                case ORE:
+                    resources.setOre(resources.getOre()+2);
+                    break;
+                case MERCURY:
+                    resources.setMercury(resources.getMercury()+1);
+                    break;
+                case SULFUR:
+                    resources.setSulfur(resources.getSulfur()+1);
+                    break;
+                case CRYSTAL:
+                    resources.setCrystal(resources.getCrystal()+1);
+                    break;
+                case GEMS:
+                    resources.setGems(resources.getGems()+1);
+                    break;
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package pl.psi;
 import lombok.Builder;
 import lombok.Getter;
 import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
 
 import java.util.HashMap;
@@ -20,7 +21,11 @@ public class EconomyEngine {
     public EconomyEngine(LinkedList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
         this.board = new Board(aMapElements);
         this.players = aPlayers;
-        this.turnQueue = new TurnQueue(aPlayers);
+        this.turnQueue = new TurnQueue(aPlayers, aMapElements);
+    }
+
+    public void getMineResources() {
+
     }
 
 //    public static class Builder {
