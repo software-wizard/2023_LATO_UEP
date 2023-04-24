@@ -10,6 +10,10 @@ public class MagicWell implements MapElement {
 
     private ArrayList<Hero> currentTurnVisitedHeroes = new ArrayList<>();
 
+    public void resetMagicWell() {
+        this.currentTurnVisitedHeroes.clear();
+    }
+
     @Override
     public boolean isInteractive() {
         return true;
@@ -17,8 +21,6 @@ public class MagicWell implements MapElement {
 
     @Override
     public void apply(Hero aHero, HashBiMap map) {
-        // TODO add observer if next turn
-
         if (!currentTurnVisitedHeroes.contains(aHero)) {
             aHero.getHeroStatistics().setMana(aHero.getHeroStatistics().getMaxMana());
             currentTurnVisitedHeroes.add(aHero);

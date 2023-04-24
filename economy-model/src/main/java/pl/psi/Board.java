@@ -3,16 +3,21 @@ package pl.psi;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import pl.psi.hero.Hero;
+import pl.psi.mapElements.MagicWell;
 import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 
-public class Board {
+public class Board implements PropertyChangeListener {
 
     private final int MAX_WIDTH = 5;
     private final BiMap<Point, MapElement> map = HashBiMap.create();
     private final BiMap<Point, Hero> mapHero = HashBiMap.create();
+    private final Map<Point, MapElement> mapElements;
 
     // Builder for testing purpose
     public static class Builder {
@@ -30,6 +35,7 @@ public class Board {
     }
 
     public Board(Map<Point, MapElement> aMapElements) {
+        mapElements = aMapElements;
 
         // Set elements like heroes, mountains, gold and so on, on the board.
         for (Point point : aMapElements.keySet()) {
@@ -90,5 +96,30 @@ public class Board {
     {
         return mapHero.inverse()
                 .get( aHero );
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals(TurnQueue.END_OF_TURN)) {
+            getMineResources();
+            resetMagicWells();
+        }
+    }
+
+    private void getMineResources() {
+        // Add for each Player resources if it has mines
+        for (MapElement mapElement : mapElements.values()) {
+            if (mapElement instanceof Mine) {
+                ((Mine) mapElement).addResource();
+            }
+        }
+    }
+
+    private void resetMagicWells() {
+        for (MapElement mapElement : mapElements.values()) {
+            if (mapElement instanceof MagicWell) {
+                ((MagicWell)mapElement).resetMagicWell();
+            }
+        }
     }
 }

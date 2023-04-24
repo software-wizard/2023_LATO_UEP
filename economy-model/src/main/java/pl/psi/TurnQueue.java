@@ -1,14 +1,11 @@
 package pl.psi;
 
 import lombok.Getter;
-import pl.psi.mapElements.MapElement;
-import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Queue;
 
 public class TurnQueue {
@@ -18,13 +15,11 @@ public class TurnQueue {
     @Getter
     private int day = 1;
     private final Queue<Player> playersQueue;
-    private LinkedList<Player> players;
+    private final LinkedList<Player> players;
     @Getter
     private Player currentPlayer;
-    private final Map<Point, MapElement> mapElements;
 
-    public TurnQueue(final LinkedList<Player> aPlayers, final Map<Point, MapElement> aMapElements) {
-        mapElements = aMapElements;
+    public TurnQueue(final LinkedList<Player> aPlayers) {
         players = aPlayers;
         playersQueue = new LinkedList<>();
         initQueue();
@@ -47,13 +42,6 @@ public class TurnQueue {
         day++;
         observerSupport.firePropertyChange(END_OF_TURN, day - 1, day);
         initQueue();
-
-        // Add for each Player resources if it has mines
-        for (MapElement mapElement : mapElements.values()) {
-            if (mapElement instanceof Mine) {
-                ((Mine) mapElement).addResource();
-            }
-        }
     }
 
     void addObserver(PropertyChangeListener aObserver) {

@@ -15,7 +15,7 @@ public class TurnQueueTest {
     @Test
     void shouldPlayerSwitchProperly() {
         LinkedList<Player> players = new LinkedList<Player>();
-        Player player1 = Player.builder().name("1").build(); // TODO Equals ?
+        Player player1 = Player.builder().name("1").build();
         Player player2 = Player.builder().name("2").build();
         players.add(player1);
         players.add(player2);

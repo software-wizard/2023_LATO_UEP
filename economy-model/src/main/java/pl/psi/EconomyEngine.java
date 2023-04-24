@@ -1,17 +1,14 @@
 package pl.psi;
 
-import lombok.Builder;
 import lombok.Getter;
 import pl.psi.mapElements.MapElement;
-import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
-
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
 @Getter
 public class EconomyEngine {
+    // TODO Czy board może być observerem, czy nie?
 
     private final Board board;
     private final LinkedList<Player> players;
@@ -21,25 +18,7 @@ public class EconomyEngine {
     public EconomyEngine(LinkedList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
         this.board = new Board(aMapElements);
         this.players = aPlayers;
-        this.turnQueue = new TurnQueue(aPlayers, aMapElements);
+        this.turnQueue = new TurnQueue(aPlayers);
+        turnQueue.addObserver(board);
     }
-
-    public void getMineResources() {
-
-    }
-
-//    public static class Builder {
-//
-//        private Map<Point, MapElement> mapElements = new HashMap<Point, MapElement>();
-//
-//        public Builder mapElements(final Map<Point, MapElement> aMapElements) {
-//            mapElements = aMapElements;
-//            return this;
-//        }
-//
-//        public Board build() {
-//            return new Board(mapElements);
-//        }
-//    }
-
 }

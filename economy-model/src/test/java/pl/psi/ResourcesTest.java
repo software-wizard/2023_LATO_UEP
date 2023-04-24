@@ -50,6 +50,7 @@ public class ResourcesTest {
         engine.getTurnQueue().nextTurn();
         assertEquals(1000, hero.getHeroStatistics().getPlayer().getResources().getGold());
         engine.getBoard().move(hero, new Point(3, 3));
+        assertEquals(0, hero.getHeroStatistics().getPlayer().getResources().getWood());
         engine.getTurnQueue().nextTurn();
         assertEquals(2, hero.getHeroStatistics().getPlayer().getResources().getWood());
         engine.getTurnQueue().nextTurn();

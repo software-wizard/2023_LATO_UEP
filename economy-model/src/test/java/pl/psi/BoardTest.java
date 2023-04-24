@@ -126,20 +126,23 @@ public class BoardTest {
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
         mapElements.put(new Point(2, 2), mw);
-        final Board board = new Board(mapElements);
+        final LinkedList<Player> players = new LinkedList<>();
+        final EconomyEngine engine = new EconomyEngine(players, mapElements);
         assertEquals(0, hero.getHeroStatistics().getMana());
-        board.move(hero, new Point(2, 2));
+        engine.getBoard().move(hero, new Point(2, 2));
         assertEquals(10, hero.getHeroStatistics().getMana());
 
         // Check if in the same turn Hero cant get mana
-        board.move(hero, new Point(1, 1));
+        engine.getBoard().move(hero, new Point(1, 1));
         hero.getHeroStatistics().setMana(5);
-        board.move(hero, new Point(2, 2));
+        engine.getBoard().move(hero, new Point(2, 2));
         assertEquals(5, hero.getHeroStatistics().getMana());
-        board.move(hero, new Point(1, 1));
+        engine.getBoard().move(hero, new Point(1, 1));
+
 
         // Check if in the other turn Hero can get mana
-        board.move(hero, new Point(2, 2));
+        engine.getTurnQueue().nextTurn();
+        engine.getBoard().move(hero, new Point(2, 2));
         assertEquals(10, hero.getHeroStatistics().getMana());
     }
 
