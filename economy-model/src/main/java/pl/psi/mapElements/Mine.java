@@ -8,7 +8,7 @@ import pl.psi.player.PlayerResources;
 public class Mine implements MapElement {
 
     public enum ResourceType {
-        GOLD, WOOD, ORE, MERCURY, SULFUR, CRYSTAL, GEMS
+        GOLD, WOOD, ORE, MERCURY, SULFUR, CRYSTAL, GEMS, RANDOM
     }
 
     private final Mine.ResourceType type;
@@ -29,6 +29,7 @@ public class Mine implements MapElement {
     }
 
     public void addResource() {
+        // TODO add observer - not addResource
         if (currentOwner != null) {
             PlayerResources resources = currentOwner.getResources();
             switch (type) {
@@ -53,6 +54,9 @@ public class Mine implements MapElement {
                     break;
                 case GEMS:
                     resources.setGems(resources.getGems()+1);
+                    break;
+                case RANDOM:
+                    // TODO Windmill
                     break;
             }
         }

@@ -5,9 +5,7 @@ import com.google.common.collect.HashBiMap;
 import org.junit.jupiter.api.Test;
 import pl.psi.hero.Hero;
 import pl.psi.hero.HeroStatistics;
-import pl.psi.mapElements.MapElement;
-import pl.psi.mapElements.Resource;
-import pl.psi.mapElements.StaticElement;
+import pl.psi.mapElements.*;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -91,6 +89,58 @@ public class BoardTest {
         board.move(hero, new Point(2, 2));
         assertEquals(new Point(1, 1), board.getHeroPosition(hero));
         assertEquals(new Point(2, 2), board.getPosition(barier));
+    }
+
+    @Test
+    void shouldLearningStoneWorksProperly() {
+        // Learning Stone: gives visiting heroes +1000 experience upon their first visit.
+        final Hero hero = new Hero(HeroStatistics.builder().moveRange(3).experience(0).build());
+        final Hero hero2 = new Hero(HeroStatistics.builder().moveRange(3).experience(50).build());
+        final LearningStone ls = new LearningStone();
+        BiMap<Point, MapElement> mapElements = HashBiMap.create();
+        mapElements.put(new Point(1, 1), hero);
+        mapElements.put(new Point(2, 2), ls);
+        mapElements.put(new Point(1, 2), hero2);
+        final Board board = new Board(mapElements);
+        assertEquals(0, hero.getHeroStatistics().getExperience());
+        board.move(hero, new Point(2,2));
+        assertEquals(1000, hero.getHeroStatistics().getExperience());
+        board.move(hero, new Point(2, 3));
+        board.move(hero, new Point(2, 2));
+        assertEquals(1000, hero.getHeroStatistics().getExperience());
+        board.move(hero, new Point(2, 3));
+        assertEquals(50, hero2.getHeroStatistics().getExperience());
+        board.move(hero2, new Point(2, 2));
+        assertEquals(1050, hero2.getHeroStatistics().getExperience());
+    }
+
+    @Test
+    void shouldMagicWellWorksProperly() {
+        // Magic Well: a hero can restore 100% of mana reserves here once per turn.
+        final Hero hero = new Hero(HeroStatistics.builder()
+                .moveRange(3)//set moveRange to 3
+                .maxMana(10)
+                .mana(0)
+                .build());
+        final MagicWell mw = new MagicWell();
+        BiMap<Point, MapElement> mapElements = HashBiMap.create();
+        mapElements.put(new Point(1, 1), hero);
+        mapElements.put(new Point(2, 2), mw);
+        final Board board = new Board(mapElements);
+        assertEquals(0, hero.getHeroStatistics().getMana());
+        board.move(hero, new Point(2, 2));
+        assertEquals(10, hero.getHeroStatistics().getMana());
+
+        // Check if in the same turn Hero cant get mana
+        board.move(hero, new Point(1, 1));
+        hero.getHeroStatistics().setMana(5);
+        board.move(hero, new Point(2, 2));
+        assertEquals(5, hero.getHeroStatistics().getMana());
+        board.move(hero, new Point(1, 1));
+
+        // Check if in the other turn Hero can get mana
+        board.move(hero, new Point(2, 2));
+        assertEquals(10, hero.getHeroStatistics().getMana());
     }
 
 }

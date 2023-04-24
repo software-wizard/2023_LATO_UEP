@@ -5,12 +5,16 @@ import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
 public class TurnQueue {
 
+    public static final String END_OF_TURN = "END_OF_TURN";
+    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     @Getter
     private int day = 1;
     private final Queue<Player> playersQueue;
@@ -41,6 +45,7 @@ public class TurnQueue {
     private void nextDay() {
         // TODO reset moveRange Hero.
         day++;
+        observerSupport.firePropertyChange(END_OF_TURN, day - 1, day);
         initQueue();
 
         // Add for each Player resources if it has mines
@@ -51,5 +56,8 @@ public class TurnQueue {
         }
     }
 
+    void addObserver(PropertyChangeListener aObserver) {
+        observerSupport.addPropertyChangeListener(aObserver);
+    }
 
 }
