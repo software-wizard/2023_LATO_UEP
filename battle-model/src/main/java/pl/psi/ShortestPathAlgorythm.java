@@ -1,5 +1,4 @@
 package pl.psi;
-import java.awt.Point;
 import java.util.*;
 
 public class ShortestPathAlgorythm {
@@ -65,8 +64,8 @@ public class ShortestPathAlgorythm {
 
     private List<Point> getNeighbors(Point point) {
         List<Point> neighbors = new ArrayList<>();
-        int x = point.x;
-        int y = point.y;
+        int x = point.getX();
+        int y = point.getY();
 
         if (x > 0) {
             neighbors.add(new Point(x - 1, y));
@@ -85,15 +84,15 @@ public class ShortestPathAlgorythm {
     }
 
     private int getDistance(Point p1, Point p2) {
-        return Math.abs(p1.x - p2.x) + Math.abs(p1.y - p2.y);
+        return Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY());
     }
 
     private int getGCost(Point point) {
-        return grid[point.x][point.y];
+        return grid[point.getX()][point.getY()];
     }
 
     private void setGCost(Point point, int gCost) {
-        grid[point.x][point.y] = gCost;
+        grid[point.getX()][point.getY()] = gCost;
     }
 
     private int getHCost(Point point) {
@@ -108,8 +107,8 @@ public class ShortestPathAlgorythm {
         return getGCost(point) + getHCost(point);
     }
     private Point getParent(Point point) {
-        int x = point.x;
-        int y = point.y;
+        int x = point.getX();
+        int y = point.getY();
         int parentX = grid[x][y] >> 16;
         int parentY = grid[x][y] & 0xffff;
         if (parentX == -1 || parentY == -1) {
@@ -118,10 +117,10 @@ public class ShortestPathAlgorythm {
         return new Point(parentX, parentY);
     }
     private void setParent(Point point, Point parent) {
-        int x = point.x;
-        int y = point.y;
-        int parentX = parent.x;
-        int parentY = parent.y;
+        int x = point.getX();
+        int y = point.getY();
+        int parentX = parent.getX();
+        int parentY = parent.getY();
         grid[x][y] = (parentX << 16) | parentY;
     }
 

@@ -1,7 +1,7 @@
 package pl.psi;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 
 import com.google.common.collect.BiMap;
@@ -38,17 +38,24 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
-        if( canMove( aCreature, aPoint ) )
-        {
-            map.inverse()
-                .remove( aCreature );
-            map.put( aPoint, aCreature );
+        ShortestPathAlgorythm  path = new ShortestPathAlgorythm(gridConstruction(availablePointsToGo(aCreature)));
+        int startX = getPosition(aCreature).getX();
+        int startY = getPosition(aCreature).getY();
+        int endX = aPoint.getX();
+        int endY = aPoint.getY();
+        List<Point> theRightPath = path.findPath(startX, startY, endX, endY);
+        for (Point point: theRightPath){
+            if( canMove( aCreature, aPoint ) )
+            {
+                map.inverse()
+                        .remove( aCreature );
+                map.put( aPoint, aCreature );
+            }
         }
     }
 
     boolean canMove( final Creature aCreature, final Point aPoint )
     {
-        //TODO: if z przeszkodami - napisac do drugiej grupy(na ten monent hardcoded)
         if( map.containsKey( aPoint ) )
         {
             return false;
@@ -62,19 +69,46 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
-    public List<Point> availablePointsToGo(Creature aCretaure){
+    public List<Point> availablePointsToGo(Creature aCretaure) {
         List<Point> listOfPoints = new ArrayList<>();
         for (Point point : map.keySet()) {
-            if(canMove(aCretaure, point)){
+            if (canMove(aCretaure, point)) {
                 listOfPoints.add(point);
             }
         }
         return listOfPoints;
     }
-    // metoda przyjmuje pkt na ktorym jest, i move range
+
+    public int[][] gridConstruction(List<Point> listOfPoints){
+        int a = 0;
+        int b = 0;
+        for(Point point: listOfPoints){
+            if(point.getX() > a) {
+                a = point.getX();
+                if (point.getY() > b) {
+                    b = point.getY();
+                }
+            }
+        }
+        int[][] grid = new int[a][b];
+        for (Point point: listOfPoints) {
+            // na ten moment jeden - pozniej zmiana kosztow
+            grid[point.getX()][point.getY()] = 1;
+        }
+        for (int x = 0; x<=grid.length; x++){
+            for (int y = 0; y<=grid[0].length; y++){
+                if (grid[x][y] != 1){
+                    grid[x][y] = 1000000;
+                }
+            }
+        }
+        return grid;
+    }
+
+    // metoda przyjmuje pkt na ktorym jest, i move range??
     // mozna wykreowac diagram
-    // waga jeden dla zwyklego pkt
-    // dla przeszdody jakas duza liczba
+    // [/] waga jeden dla zwyklego pkt
+    // [/] dla przeszdody jakas duza liczba
     // przeszkoda do przejscia = wieksza waga
     // dla algorymu jednostek latajacyhch inny diagram
 }
