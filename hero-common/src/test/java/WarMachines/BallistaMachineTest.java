@@ -9,7 +9,7 @@ class BallistaMachineTest {
     @Test
     void caclculateDamageFromBallista() {
         int attack = 5;
-        int damage = ballistaMachine.caclculateDamageFromBallista(attack);
+        int damage = ballistaMachine.calculateDamageFromBallista(attack);
         assertTrue(2*(attack+11) <= damage && damage <= 3*(attack+11));
         assertFalse(damage < 2*(attack+11));
         assertFalse(damage > 3*(attack+11));
