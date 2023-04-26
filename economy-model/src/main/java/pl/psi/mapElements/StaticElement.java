@@ -14,7 +14,17 @@ public class StaticElement implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero, HashBiMap map) {
+    public void apply(Hero aHero) {
+
+    }
+
+    @Override
+    public boolean shouldBeRemoveAfterAction() {
+        return false;
+    }
+
+    @Override
+    public void endOfTurn() {
 
     }
 }

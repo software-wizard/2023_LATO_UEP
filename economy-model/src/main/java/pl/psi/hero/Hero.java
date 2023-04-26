@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.psi.mapElements.MapElement;
 
-// Zamiast dziedziczenia decorator - to samo dla przeszkód
 @Builder
 @Getter
 public class Hero implements MapElement {
+
+    // TODO equipment HashMap for artifacts
+    // Metoda apply for EconomyArtifact
 
     private HeroStatistics heroStatistics;
 
@@ -23,8 +25,18 @@ public class Hero implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero, HashBiMap map) {
+    public void apply(Hero aHero) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
+    }
+
+    @Override
+    public boolean shouldBeRemoveAfterAction() {
+        return false;
+    }
+
+    @Override
+    public void endOfTurn() {
+
     }
 }

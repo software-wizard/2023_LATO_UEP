@@ -10,6 +10,8 @@ import pl.psi.player.Player;
 @Builder
 public class HeroStatistics {
 
+    // Plain Object Java O
+
     private Player player;
     private int moveRange;
     private int experience;

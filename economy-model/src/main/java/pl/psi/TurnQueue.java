@@ -38,7 +38,6 @@ public class TurnQueue {
     }
 
     private void nextDay() {
-        // TODO reset moveRange Hero.
         day++;
         observerSupport.firePropertyChange(END_OF_TURN, day - 1, day);
         initQueue();

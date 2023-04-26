@@ -1,20 +1,17 @@
 package pl.psi.mapElements;
 
 import com.google.common.collect.HashBiMap;
+import pl.psi.Resource;
 import pl.psi.hero.Hero;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 public class Mine implements MapElement {
 
-    public enum ResourceType {
-        GOLD, WOOD, ORE, MERCURY, SULFUR, CRYSTAL, GEMS, RANDOM
-    }
-
-    private final Mine.ResourceType type;
+    private final Resource.Type type;
     private Player currentOwner = null;
 
-    public Mine(Mine.ResourceType aType) {
+    public Mine(Resource.Type aType) {
         this.type = aType;
     }
 
@@ -24,12 +21,18 @@ public class Mine implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero, HashBiMap map) {
+    public void apply(Hero aHero) {
         currentOwner = aHero.getHeroStatistics().getPlayer();
     }
 
-    public void addResource() {
-        // TODO add observer - not addResource
+    @Override
+    public boolean shouldBeRemoveAfterAction() {
+        return false;
+    }
+
+    @Override
+    public void endOfTurn() {
+        // add Resources if Player owns
         if (currentOwner != null) {
             PlayerResources resources = currentOwner.getResources();
             switch (type) {
@@ -54,9 +57,6 @@ public class Mine implements MapElement {
                     break;
                 case GEMS:
                     resources.setGems(resources.getGems()+1);
-                    break;
-                case RANDOM:
-                    // TODO Windmill
                     break;
             }
         }
