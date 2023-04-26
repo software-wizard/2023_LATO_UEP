@@ -11,7 +11,7 @@ public class BallistaMachine {
     }
 
     // Method uses given attack value to calculate damage wich will be applied on creature attacked by ballisa
-    public int caclculateDamageFromBallista(int attack){
+    public int calculateDamageFromBallista(int attack){
         int lowerBoundary = 2 * (attack + 11);
         int upperBoundary = 3 * (attack + 11);
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
