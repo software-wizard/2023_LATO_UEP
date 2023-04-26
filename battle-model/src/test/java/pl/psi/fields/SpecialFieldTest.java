@@ -27,5 +27,5 @@ class SpecialFieldTest {
         someBushIdk.setHp(0);
         assertThat(someBushIdk.isAlive()).isFalse();
     }
-
+    //smh
 }
