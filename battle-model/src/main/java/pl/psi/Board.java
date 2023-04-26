@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.*;
 import java.util.Optional;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -22,8 +23,9 @@ public class Board
         addCreatures( aCreatures1, 0 );
         addCreatures( aCreatures2, MAX_WITDH );
     }
-
-    private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
+    // Mamy stworzone do testow(bylo private ale do testowania robimy wszystko public zeby to sprawdzic)
+    @VisibleForTesting
+    void addCreatures( final List< Creature > aCreatures, final int aXPosition )
     {
         for( int i = 0; i < aCreatures.size(); i++ )
         {
@@ -38,6 +40,7 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
+        // za duzo parametrow - do zmiany
         ShortestPathAlgorythm  path = new ShortestPathAlgorythm(gridConstruction(availablePointsToGo(aCreature)));
         int startX = getPosition(aCreature).getX();
         int startY = getPosition(aCreature).getY();
@@ -45,6 +48,7 @@ public class Board
         int endY = aPoint.getY();
         List<Point> theRightPath = path.findPath(startX, startY, endX, endY);
         for (Point point: theRightPath){
+            // nie powinno byc tutaj byc tego - ma byc wczesniej sprawdzone
             if( canMove( aCreature, aPoint ) )
             {
                 map.inverse()
@@ -69,6 +73,11 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
+    /*
+    TODO Zdecydowanie wiecej testow na wszystko, sprawdzic wszystko
+    dodatkowo mozna wygenerowac sobie poprzez wstrzykniecie dodatkowy konstruktor na którym
+    tworzymy plansze np 5 na 5 i testujemy sobie wszystko
+    */
     public List<Point> availablePointsToGo(Creature aCretaure) {
         List<Point> listOfPoints = new ArrayList<>();
         for (Point point : map.keySet()) {
@@ -78,7 +87,6 @@ public class Board
         }
         return listOfPoints;
     }
-
     public int[][] gridConstruction(List<Point> listOfPoints){
         int a = 0;
         int b = 0;
@@ -105,10 +113,12 @@ public class Board
         return grid;
     }
 
-    // metoda przyjmuje pkt na ktorym jest, i move range??
-    // mozna wykreowac diagram
-    // [/] waga jeden dla zwyklego pkt
-    // [/] dla przeszdody jakas duza liczba
-    // przeszkoda do przejscia = wieksza waga
-    // dla algorymu jednostek latajacyhch inny diagram
+    /*
+    metoda przyjmuje pkt na ktorym jest, i move range - raczej juz nie przydatne
+    mozna wykreowac diagram
+    [/] waga jeden dla zwyklego pkt
+    [/] dla przeszdody jakas duza liczba
+    przeszkoda do przejscia = wieksza waga
+    dla algorymu jednostek latajacyhch inny diagram
+     */
 }

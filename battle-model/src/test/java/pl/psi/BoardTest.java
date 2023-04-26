@@ -39,8 +39,7 @@ class BoardTest
         final List< Creature > c1 = List.of( creature );
         final List< Creature > c2 = List.of();
         final Board board = new Board( c1, c2 );
-
-        ;
+        board.move(c1.get(0),new Point(5,5));
 
         assertThat( board.canMove(creature, new Point( 3, 3)))
                 .isTrue();
