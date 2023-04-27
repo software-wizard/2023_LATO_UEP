@@ -10,18 +10,30 @@ import com.google.common.collect.HashBiMap;
 
 import pl.psi.creatures.Creature;
 
-/**
- * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
- */
+/*
+TODO Zdecydowanie wiecej testow na wszystko, sprawdzic wszystko
+dodatkowo mozna wygenerowac sobie poprzez wstrzykniecie dodatkowy konstruktor na którym
+tworzymy plansze np 5 na 5 i testujemy sobie wszystko, mozna zapiac w debug co sie chce
+TODO availablePointsToGo() ma sprawdzac czy dana kreatura moze sie gdzies poruszyc,
+w ten sposob  w move nie ma bramki logicznej - sprawdzic w testach i jak trzeba zapiac w debug
+*/
 public class Board
 {
     private static final int MAX_WITDH = 14;
+    private List<Point> boardTest = new ArrayList<>();
     private final BiMap< Point, Creature > map = HashBiMap.create();
 
-    public Board( final List< Creature > aCreatures1, final List< Creature > aCreatures2 )
-    {
-        addCreatures( aCreatures1, 0 );
-        addCreatures( aCreatures2, MAX_WITDH );
+    public Board( final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
+        // Tworzymy boarda - wstrzykniecie
+        for( int x = 0; x < 15; x++ ){
+            for( int y = 0; y < 10; y++ )
+            {
+                Point point = new Point(x,y);
+                boardTest.add(point);
+            }
+        }
+        addCreatures(aCreatures1, 0);
+        addCreatures(aCreatures2, MAX_WITDH);
     }
     // Mamy stworzone do testow(bylo private ale do testowania robimy wszystko public zeby to sprawdzic)
     @VisibleForTesting
@@ -40,21 +52,13 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
-        // za duzo parametrow - do zmiany
         ShortestPathAlgorythm  path = new ShortestPathAlgorythm(gridConstruction(availablePointsToGo(aCreature)));
-        int startX = getPosition(aCreature).getX();
-        int startY = getPosition(aCreature).getY();
-        int endX = aPoint.getX();
-        int endY = aPoint.getY();
-        List<Point> theRightPath = path.findPath(startX, startY, endX, endY);
+        Point startingPoint = getPosition(aCreature);
+        Point endPoint = aPoint;
+        List<Point> theRightPath = path.findPath(startingPoint, endPoint);
         for (Point point: theRightPath){
-            // nie powinno byc tutaj byc tego - ma byc wczesniej sprawdzone
-            if( canMove( aCreature, aPoint ) )
-            {
-                map.inverse()
-                        .remove( aCreature );
-                map.put( aPoint, aCreature );
-            }
+            map.inverse().remove( aCreature );
+            map.put( aPoint, aCreature );
         }
     }
 
@@ -73,14 +77,11 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
-    /*
-    TODO Zdecydowanie wiecej testow na wszystko, sprawdzic wszystko
-    dodatkowo mozna wygenerowac sobie poprzez wstrzykniecie dodatkowy konstruktor na którym
-    tworzymy plansze np 5 na 5 i testujemy sobie wszystko
-    */
     public List<Point> availablePointsToGo(Creature aCretaure) {
         List<Point> listOfPoints = new ArrayList<>();
-        for (Point point : map.keySet()) {
+        // Mysle ze problem jest tu taki ze aby cos bylo przypisane do mapy ma miec punkt i kreature
+        // a on musi miec plansze po ktorej musi iterowac, na ten moment test przechodzi ale nie wiem jak to docelowo ma wygladac
+        for (Point point : boardTest) {
             if (canMove(aCretaure, point)) {
                 listOfPoints.add(point);
             }

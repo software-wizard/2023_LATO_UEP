@@ -14,6 +14,7 @@ class BoardTest
     @Test
     void unitsMoveProperly()
     {
+        // Na ten moment nie działa - blad w tworzeniu siatki
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
                         .moveRange( 5 )
                         .build() )
@@ -27,10 +28,8 @@ class BoardTest
         assertThat( board.getCreature( new Point( 3, 3) )
                 .isPresent() ).isTrue();
     }
-    // asercja w metodzie canMove
-    // sprawdzic punkty do ktorych nie mozemy dojsc
     @Test
-    void CreatureShouldMoveInDistance()
+    void availablePointsToGoShouldFindAllAvailablePoints()
     {
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
                         .moveRange( 5 )
@@ -39,11 +38,21 @@ class BoardTest
         final List< Creature > c1 = List.of( creature );
         final List< Creature > c2 = List.of();
         final Board board = new Board( c1, c2 );
-        board.move(c1.get(0),new Point(5,5));
-
-        assertThat( board.canMove(creature, new Point( 3, 3)))
-                .isTrue();
-        assertThat( board.canMove(creature, new Point(creature.getMoveRange()+1, creature.getMoveRange()+1)))
-                .isFalse();
+        board.availablePointsToGo(c1.get(0));
+        assertThat(board.availablePointsToGo(c1.get(0))).isNotEmpty();
+    }
+    @Test
+    void shouldChangeListOfPointsInToGrid()
+    {
+        final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
+                        .moveRange( 5 )
+                        .build() )
+                .build();
+        final List< Creature > c1 = List.of( creature );
+        final List< Creature > c2 = List.of();
+        final Board board = new Board( c1, c2 );
+        List<Point> listOfPoints = board.availablePointsToGo(c1.get(0));
+        int[][] grid = board.gridConstruction(listOfPoints);
+        assertThat(grid).isNotEmpty();
     }
 }

@@ -20,9 +20,7 @@ public class ShortestPathAlgorythm {
         closedSet = new HashSet<>();
     }
 
-    public List<Point> findPath(int startX, int startY, int endX, int endY) {
-        start = new Point(startX, startY);
-        end = new Point(endX, endY);
+    public List<Point> findPath(Point start, Point end) {
         openSet.add(start);
 
         while (!openSet.isEmpty()) {
