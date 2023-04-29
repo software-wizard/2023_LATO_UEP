@@ -18,6 +18,7 @@ public class EconomyStart extends Application
     @Override
     public void start( final Stage aStage ) throws Exception
     {
+        /*
         final FXMLLoader loader = new FXMLLoader();
         loader.setLocation( getClass().getClassLoader()
             .getResource( "fxml/eco.fxml" ) );
@@ -28,5 +29,16 @@ public class EconomyStart extends Application
         aStage.setX( 5 );
         aStage.setY( 5 );
         aStage.show();
+         */
+
+        final FXMLLoader loader = new FXMLLoader();
+        loader.setLocation( getClass().getClassLoader()
+                .getResource( "fxml/ecoLauncher.fxml" ) );
+        final Scene scene = new Scene( loader.load() );
+        aStage.setScene( scene );
+        aStage.setX( 5 );
+        aStage.setY( 5 );
+        aStage.show();
+
     }
 }

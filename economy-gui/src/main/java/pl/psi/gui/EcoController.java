@@ -3,6 +3,7 @@ package pl.psi.gui;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javafx.event.ActionEvent;
 import pl.psi.EconomyEngine;
 import pl.psi.converter.EcoBattleConverter;
 import pl.psi.creatures.EconomyCreature;
@@ -41,6 +42,7 @@ public class EcoController implements PropertyChangeListener
     void initialize()
     {
         refreshGui();
+        /*
         economyEngine.addObserver( EconomyEngine.ACTIVE_HERO_CHANGED, this );
         economyEngine.addObserver( EconomyEngine.HERO_BOUGHT_CREATURE, this );
         economyEngine.addObserver( EconomyEngine.NEXT_ROUND, this );
@@ -55,6 +57,8 @@ public class EcoController implements PropertyChangeListener
                 goToBattle();
             }
         } );
+
+         */
     }
 
     private void goToBattle()
@@ -64,6 +68,7 @@ public class EcoController implements PropertyChangeListener
 
     void refreshGui()
     {
+        /*
         playerLabel.setText( economyEngine.getActiveHero()
             .toString() );
         currentGoldLabel.setText( String.valueOf( economyEngine.getActiveHero()
@@ -100,6 +105,8 @@ public class EcoController implements PropertyChangeListener
             } );
         heroStateHBox.getChildren()
             .add( creaturesBox );
+
+         */
     }
 
     void buy( final EconomyCreature aCreature )
@@ -111,5 +118,9 @@ public class EcoController implements PropertyChangeListener
     public void propertyChange( final PropertyChangeEvent aPropertyChangeEvent )
     {
         refreshGui();
+    }
+
+    public void begin(ActionEvent e){
+        System.out.println("czy dziala");
     }
 }
