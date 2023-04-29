@@ -1,7 +1,7 @@
 package pl.psi.gui;
 
 import javafx.scene.Parent;
-import pl.psi.hero.EconomyHero;
+import pl.psi.hero.Hero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
