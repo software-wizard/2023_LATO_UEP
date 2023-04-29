@@ -61,17 +61,17 @@
                   <HBox id="playerOptions" layoutX="20.0" layoutY="113.0" prefHeight="53.0" prefWidth="406.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="125.0" text="Player: " />
-                        <ChoiceBox id="playerTown" prefWidth="150.0" />
-                        <ChoiceBox id="playerHero" prefWidth="150.0" />
-                        <ChoiceBox id="playerBonus" prefWidth="150.0" />
+                        <ChoiceBox id="playerTownChoiceBox" fx:id="playerTownChoiceBox" prefWidth="150.0" />
+                        <ChoiceBox id="playerHero" fx:id="playerHeroChoiceBox" prefWidth="150.0" />
+                        <ChoiceBox id="playerBonus" fx:id="playerBonusChoiceBox" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox id="computerOptions" layoutX="20.0" layoutY="172.0" prefHeight="53.0" prefWidth="406.0">
                      <children>
                         <Label prefHeight="17.0" prefWidth="127.0" text="Computer: " />
-                        <ChoiceBox id="computerTown" prefWidth="150.0" />
-                        <ChoiceBox id="computerHero" prefWidth="150.0" />
-                        <ChoiceBox id="computerBonus" prefWidth="150.0" />
+                        <ChoiceBox id="computerTown" fx:id="computerTownChoiceBox" prefWidth="150.0" />
+                        <ChoiceBox id="computerHero" fx:id="computerHeroChoiceBox" prefWidth="150.0" />
+                        <ChoiceBox id="computerBonus" fx:id="computerBonusChoiceBox" prefWidth="150.0" />
                      </children>
                   </HBox>
                   <HBox id="playerOptions" layoutX="20.0" layoutY="79.0" prefHeight="34.0" prefWidth="406.0">

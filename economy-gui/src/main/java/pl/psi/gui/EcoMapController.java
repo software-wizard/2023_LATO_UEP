@@ -10,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class ecoMapController {
+public class EcoMapController {
     private Stage stage;
     private Scene scene;
     private Parent root;
