@@ -53,10 +53,14 @@ public class BallistaMachine {
         double probability = Math.random();
         if (heroArtillerySkill == 1 && probability >= 0.5){
             damage *= 2;
-        } else if (heroArtillerySkill == 2 && probability >= 0.25) {
-            damage *= 2;
+        } else if (heroArtillerySkill == 2) {
+            if (probability >= 0.25){
+                damage *=4;
+            } else {
+                damage *= 2;
+            }
         } else if(heroArtillerySkill == 3){
-            damage *=2;
+            damage *=4;
         }
         return (int) damage;
     }
