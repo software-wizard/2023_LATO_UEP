@@ -10,6 +10,7 @@ Advanced Artillery gives ballista a 75% chance of double damage
 Expert Artillery gives ballista a 100% chance of double damage
  */
 
+import com.google.common.collect.Range;
 import lombok.Getter;
 
 public class BallistaMachine {
@@ -35,37 +36,12 @@ public class BallistaMachine {
         heroAttackPoints = aHeroAttackPoints;
         heroDefense = aHeroDefense;
         heroArtillerySkill = aHeroArtillerySkill;
-        ballistaDamage = calculateDamageFromBallista(aHeroAttackPoints);
+        ballistaDamage = DamageCalculatorWarMachine.calculateDamageFromBallista(aHeroAttackPoints);
     }
 
-    public BallistaMachine(){}
+    public BallistaMachine(){
 
-
-
-    // Method uses given attack value to calculate damage which will be applied on creature attacked by ballista
-    public int calculateDamageFromBallista(int attack){
-        int lowerBoundary = 2 * (attack + 1);
-        int upperBoundary = 3 * (attack + 1);
-        float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
-        damage = Math.round(damage);
-
-//        If hero has artillery skill
-        double probability = Math.random();
-        if (heroArtillerySkill == 1 && probability >= 0.5){
-            damage *= 2;
-        } else if (heroArtillerySkill == 2) {
-            if (probability >= 0.25){
-                damage *=4;
-            } else {
-                damage *= 2;
-            }
-        } else if(heroArtillerySkill == 3){
-            damage *=4;
-        }
-        return (int) damage;
     }
 
-    private double getRandomNumber(int min, int max) {
-        return ((Math.random() * (max - min)) + min);
-    }
+
 }

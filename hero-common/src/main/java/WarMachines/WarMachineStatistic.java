@@ -10,7 +10,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
     AMMO_CART( "Ammo Cart", 0, 5, 100, 0, Range.closed( 0, 0 ), 1,
             "",
             false ), //
-    BALLISTA( "Ballista", 10, 10, 250, 0, Range.closed( 0, 0 ), 5,
+    BALLISTA( "Ballista", 10, 10, 250, 0, Range.closed( 2, 3 ), 5,
             "", false ), //
     FIRST_AID_TENT( "First Aid Tent", 0, 0, 75, 0, Range.closed( 0, 0 ), 1,
             "",
