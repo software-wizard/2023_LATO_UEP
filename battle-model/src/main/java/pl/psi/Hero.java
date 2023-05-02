@@ -2,6 +2,7 @@ package pl.psi;
 
 import java.util.List;
 
+import WarMachines.WarMachine;
 import pl.psi.creatures.Creature;
 
 import lombok.Getter;
@@ -14,8 +15,23 @@ public class Hero
     @Getter
     private final List< Creature > creatures;
 
-    public Hero( final List< Creature > aCreatures )
+//    TODO should be final
+    @Getter
+    private List<WarMachine> warMachines;
+
+
+
+    public Hero( final List< Creature > aCreatures)
     {
         creatures = aCreatures;
     }
+
+
+    public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
+    {
+        creatures = aCreatures;
+        warMachines = aWarMachine;
+    }
+
+
 }

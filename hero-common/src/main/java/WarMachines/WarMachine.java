@@ -6,10 +6,11 @@ import lombok.Setter;
 //import pl.psi.TurnQueue;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 @Getter
-public class WarMachine {
+public class WarMachine implements PropertyChangeListener  {
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
@@ -107,6 +108,11 @@ public class WarMachine {
 
     public int getShotRange() {
         return stats.getShotRange();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        //todo shouldn't be empty
     }
 
     public static class Builder {
