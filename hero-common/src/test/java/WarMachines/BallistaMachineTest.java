@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BallistaMachineTest {
-    DamageCalculatorWarMachine ballistaMachine = new DamageCalculatorWarMachine();
+    BallistaMachine ballistaMachine = new BallistaMachine();
     @Test
     void calculateDamageFromBallista() {
         int attack = 5;
-        int damage = DamageCalculatorWarMachine.calculateDamageFromBallista(attack);
+        int damage = ballistaMachine.calculateDamageFromBallista(attack);
         assertTrue(2*(attack+1) <= damage && damage <= 3*(attack+1));
         assertFalse(damage < 2*(attack+1));
         assertFalse(damage > 3*(attack+1));
@@ -23,7 +23,7 @@ class BallistaMachineTest {
         int averageDamage = 0;
         int iterations = 10000000;
         for (int i = 0; i < iterations; i++) {
-            averageDamage += DamageCalculatorWarMachine.calculateDamageFromBallista(attack);
+            averageDamage += ballistaMachine.calculateDamageFromBallista(attack);
         }
         averageDamage /= iterations;
         averageDamage = Math.round(averageDamage);
