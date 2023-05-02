@@ -10,16 +10,16 @@ class BallistaMachineTest {
     void calculateDamageFromBallista() {
         int attack = 5;
         int damage = ballistaMachine.calculateDamageFromBallista(attack);
-        assertTrue(2*(attack+1) <= damage && damage <= 3*(attack+1));
-        assertFalse(damage < 2*(attack+1));
-        assertFalse(damage > 3*(attack+1));
-        assertFalse(damage > 100*attack);
+        assertTrue(2 * (attack + 1) <= damage && damage <= 3 * (attack + 1));
+        assertFalse(damage < 2 * (attack + 1));
+        assertFalse(damage > 3 * (attack + 1));
+        assertFalse(damage > 100 * attack);
     }
 
     @Test
     void calculateAverageDamageFromBallista(){
         int attack = 25;
-        int expectedDamage = (2*(attack+1) + 3*(attack+1))/2;
+        int expectedDamage = (2 * (attack + 1) + 3 * (attack + 1)) / 2;
         int averageDamage = 0;
         int iterations = 10000000;
         for (int i = 0; i < iterations; i++) {
@@ -33,13 +33,38 @@ class BallistaMachineTest {
     }
 
     @Test
-    void calculateDamageFromBallistaWithArtillerySkills(){
+    void calculateDamageFromBallistaWithArtillerySkillLvlOne(){
+        int heroAttackPoints = 10;
+        int heroArtillerySkill = 1;
+        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+        int damage = ballistaMachine2.getBallistaDamage();
+        System.out.println("Damage: " + damage);
+        assertTrue(2 * 2 * (heroAttackPoints + 1) <= damage &&
+                damage <= 2 * 3 * (heroAttackPoints + 1));
+    }
+    @Test
+    void calculateDamageFromBallistaWithArtillerySkillLvlTwo(){
+        int heroAttackPoints = 10;
+        int heroArtillerySkill = 2;
+        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+        int damage = ballistaMachine2.getBallistaDamage();
+        System.out.println("Damage: " + damage);
+        System.out.println("Lower: " + 2 * 2 * (heroAttackPoints + 1));
+        System.out.println("Upper: " + 4 * 3 * (heroAttackPoints + 1));
+        assertTrue(2 * 2 * (heroAttackPoints + 1) <= damage &&
+                damage <= 4 * 3 * (heroAttackPoints + 1));
+    }
+    @Test
+    void calculateDamageFromBallistaWithArtillerySkillLvlThree(){
         int heroAttackPoints = 10;
         int heroArtillerySkill = 3;
         BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
-        assertTrue(4*(heroAttackPoints+1) <= damage && damage <= 4*3*(heroAttackPoints+1));
+        System.out.println("Lower: " + 6 * 2 * (heroAttackPoints + 1));
+        System.out.println("Upper: " + 6 * 3 * (heroAttackPoints + 1));
+        assertTrue(6 * 2 * (heroAttackPoints + 1) <= damage &&
+                damage <= 6 * 3 * (heroAttackPoints + 1));
     }
 
     @Test

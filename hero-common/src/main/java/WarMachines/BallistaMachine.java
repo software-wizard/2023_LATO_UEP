@@ -38,9 +38,9 @@ public class BallistaMachine {
         ballistaDamage = calculateDamageFromBallista(aHeroAttackPoints);
     }
 
-    public BallistaMachine(){}
+    public BallistaMachine(){
 
-
+    }
 
     // Method uses given attack value to calculate damage which will be applied on creature attacked by ballista
     public int calculateDamageFromBallista(int attack){
@@ -49,7 +49,7 @@ public class BallistaMachine {
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
         damage = Math.round(damage);
 
-//        If hero has artillery skill
+    //If hero has artillery skill
         double probability = Math.random();
         if (heroArtillerySkill == 1 && probability >= 0.5){
             damage *= 2;
@@ -60,7 +60,7 @@ public class BallistaMachine {
                 damage *= 2;
             }
         } else if(heroArtillerySkill == 3){
-            damage *=4;
+            damage *= 6;
         }
         return (int) damage;
     }
