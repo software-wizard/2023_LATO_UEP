@@ -49,7 +49,7 @@ public class BallistaMachine {
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
         damage = Math.round(damage);
 
-//        If hero has basic artillery skill
+//        If hero has artillery skill
         double probability = Math.random();
         if (heroArtillerySkill == 1 && probability >= 0.5){
             damage *= 2;
