@@ -44,7 +44,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="launcherGUI" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.psi.gui.EcoLauncherController">
+<VBox id="launcherGUI" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.psi.gui.EcoLauncherSceneController">
   <children>
     <SplitPane id="mainPanel" dividerPositions="0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
@@ -82,6 +82,8 @@
                         <Label layoutX="187.0" layoutY="10.0" prefHeight="17.0" prefWidth="86.0" text="Bonus" />
                      </children>
                   </HBox>
+                  <Button fx:id="addPlayersButton" layoutX="348.0" layoutY="29.0" mnemonicParsing="false" onAction="#addPlayers" text="Add players" />
+                  <VBox fx:id="playerChoiceBoxes" layoutX="16.0" layoutY="243.0" prefHeight="263.0" prefWidth="406.0" />
         </children>
       </AnchorPane>
         <AnchorPane id="rightPanel">

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import pl.psi.mapElements.Resource;
 
 
-public class EcoMapController {
+public class EcoMapSceneController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -32,7 +32,7 @@ public class EcoMapController {
     }
 
     public void switchToLauncher(ActionEvent event) throws IOException {
-        root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoLauncher.fxml")));
+        root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoLauncherScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new  Scene(root);
         stage.setScene( scene );
