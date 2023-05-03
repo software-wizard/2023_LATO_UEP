@@ -37,8 +37,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
@@ -47,7 +49,7 @@
   <children>
     <SplitPane dividerPositions="0.7561247216035635" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane>
+        <AnchorPane prefHeight="575.0" prefWidth="632.0">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Map" textAlignment="CENTER" wrapText="false">
               <font>
@@ -59,26 +61,97 @@
             </Label>
           </children>
         </AnchorPane>
-        <AnchorPane prefHeight="551.0" prefWidth="295.0">
+        <AnchorPane prefHeight="575.0" prefWidth="307.0">
           <children>
             <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="ControlPanel" textAlignment="CENTER" textFill="$x2" wrapText="false" />
                   <Button layoutX="47.0" layoutY="162.0" mnemonicParsing="false" onAction="#switchToLauncher" text="Go back to launcher" />
+                  <GridPane gridLinesVisible="true" layoutX="77.0" layoutY="226.0" prefHeight="90.0" prefWidth="66.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" text="Button" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Button layoutX="77.0" layoutY="338.0" mnemonicParsing="false" text="End turn" />
+                  <Label fx:id="heroNameLabel" layoutX="69.0" layoutY="395.0" text="Hero name: xxx" />
+                  <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="545.0" prefHeight="30.0" prefWidth="207.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Month: xxx" />
+                        <Label layoutX="10.0" layoutY="17.0" text="Week: xxx" GridPane.columnIndex="1" />
+                        <Label layoutX="79.0" layoutY="17.0" text="Day: xxx" GridPane.columnIndex="2" />
+                     </children>
+                  </GridPane>
+                  <GridPane gridLinesVisible="true" layoutX="19.0" layoutY="414.0" prefHeight="59.0" prefWidth="186.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="61.88885498046875" minHeight="10.0" prefHeight="52.111083984375" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="29.333343505859375" minHeight="3.5555419921875" prefHeight="22.55558268229167" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="1" GridPane.rowIndex="1" />
+                        <Label layoutX="10.0" layoutY="53.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label layoutX="56.0" layoutY="53.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Label layoutX="10.0" layoutY="24.0" text="4" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label text="Image" />
+                        <Label layoutX="10.0" layoutY="24.0" text="Image" GridPane.columnIndex="1" />
+                        <Label layoutX="56.0" layoutY="24.0" text="Image" GridPane.columnIndex="2" />
+                        <Label layoutX="102.0" layoutY="24.0" text="Image" GridPane.columnIndex="3" />
+                     </children>
+                  </GridPane>
           </children>
         </AnchorPane>
       </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="672.0" spacing="5.0" VBox.vgrow="NEVER">
       <children>
-        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
-          <font>
-            <Font size="11.0" fx:id="x3" />
-          </font>
-          <textFill>
-            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-          </textFill>
-        </Label>
-        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS" />
-        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
+            <GridPane gridLinesVisible="true" prefHeight="15.0" prefWidth="665.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Gold: xxx" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Wood: xxx" GridPane.columnIndex="1" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Ore: xxx" GridPane.columnIndex="2" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Mercury: xxx" GridPane.columnIndex="3" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Sulfur: xxx" GridPane.columnIndex="4" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Crystal: xxx" GridPane.columnIndex="5" />
+                  <Label layoutX="10.0" layoutY="9.0" text="Gems: xxx" GridPane.columnIndex="6" />
+               </children>
+            </GridPane>
       </children>
       <padding>
         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />

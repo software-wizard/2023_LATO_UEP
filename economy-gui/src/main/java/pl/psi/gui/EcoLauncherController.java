@@ -34,6 +34,7 @@ public class EcoLauncherController implements Initializable
     @FXML
     private ChoiceBox<String> computerBonusChoiceBox;
 
+    //placeholdery z tablicami z danymi do choiceboxow
     private String[] towns = {"Necropolis", "Rampart", "Tower", "Bydgoszcz"};
 
     private String[] heroes = {"Christian", "Edric", "Bonus BGC", "Valeska"};
@@ -44,7 +45,18 @@ public class EcoLauncherController implements Initializable
         //tu bedzie jakas metoda do przeslania wybranych frakcji(miast), herosów i bonusow do silnika gry
         //runGame.getChosenParameters(playerBonusChoiceBox,.....);
 
-        root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoMap.fxml")));
+        //placeholdery do wyciagania wybranych danych z choiceboxow
+        String chosenHero = playerHeroChoiceBox.getValue();
+        String chosenTown = playerTownChoiceBox.getValue();
+        String chosenBonus = playerBonusChoiceBox.getValue();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMap.fxml"));
+        root = loader.load();
+
+        EcoMapController ecoMapController = loader.getController();
+        ecoMapController.displayName(chosenHero);
+
+       // root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoMap.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new  Scene(root);
         stage.setScene( scene );
