@@ -11,16 +11,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import pl.psi.player.Player;
+import pl.psi.player.PlayerResources;
 
 public class EcoLauncherSceneController implements Initializable
 {
@@ -42,6 +45,11 @@ public class EcoLauncherSceneController implements Initializable
     @FXML
     private ChoiceBox<String> computerBonusChoiceBox;
 
+    @FXML
+    private VBox playerChoiceBoxes;
+
+    List<Player> players = new ArrayList<>();
+
     //placeholdery z tablicami z danymi do choiceboxow
     private String[] towns = {"Necropolis", "Rampart", "Tower", "Bydgoszcz"};
 
@@ -52,11 +60,6 @@ public class EcoLauncherSceneController implements Initializable
 
     // Create a VBox to hold the choice boxes for each player
    public void addPlayers(ActionEvent event) throws Exception {
-       //startPlayers(stage);
-   }
-
-    public void startPlayers(Stage stage) throws Exception {
-         // Get the number of players from the user
        // Prompt the user for the number of players
        TextInputDialog numPlayersDialog = new TextInputDialog();
        numPlayersDialog.setTitle("Number of Players");
@@ -64,8 +67,6 @@ public class EcoLauncherSceneController implements Initializable
        numPlayersDialog.setContentText("Enter the number of players:");
        Optional<String> numPlayersResult = numPlayersDialog.showAndWait();
 
-       // Create a list to hold the players
-       List<Player> players = new ArrayList<>();
 
        // If the user entered a number, create the specified number of players
        if (numPlayersResult.isPresent()) {
@@ -77,53 +78,85 @@ public class EcoLauncherSceneController implements Initializable
                nameDialog.setHeaderText(null);
                nameDialog.setContentText("Enter player " + i + " name:");
                Optional<String> nameResult = nameDialog.showAndWait();
-               Player player = new Player(nameResult.get(), null);
-               players.add(player);
+
+
+
+               // If the user entered both a name and an age, create a new player and add it to the list
+               if (nameResult.isPresent()) {
+                   Player player = new Player(nameResult.get(), PlayerResources.builder().
+                           wood(1000).
+                           ore(1000).
+                           gold(1000).
+                           crystal(1000).
+                           gems(1000).build());
+                   players.add(player);
+               }
            }
        }
-       VBox playerChoiceBoxes = new VBox();
+
+       // Create a VBox to hold the choice boxes for each player
        playerChoiceBoxes.setSpacing(10);
        playerChoiceBoxes.setPadding(new Insets(10));
 
        // Loop through the list of players and create a ChoiceBox for each one
+       //TODO ogarnac settery do miast, nazw herosow itd
        for (Player player : players) {
-           ChoiceBox<String> choiceBox = new ChoiceBox<>();
-           choiceBox.getItems().addAll("Option 1", "Option 2", "Option 3"); // Replace with your own options
-           Label label = new Label(player.getName() + "'s choice:");
-           playerChoiceBoxes.getChildren().addAll(label, choiceBox);
+           HBox playerChoiceBox = new HBox();
+           playerChoiceBox.setSpacing(10);
+           playerChoiceBox.setPadding(new Insets(10));
+
+           ChoiceBox<String> choiceBoxTown = new ChoiceBox<>();
+           choiceBoxTown.getItems().addAll(towns);
+               choiceBoxTown.setOnAction(e -> {
+                   String chosenTown = choiceBoxTown.getValue();
+                   //player.setTown(chosenTown);
+               });
+
+           ChoiceBox<String> choiceBoxHero = new ChoiceBox<>();
+           choiceBoxHero.getItems().addAll(heroes);
+              choiceBoxHero.setOnAction(e -> {
+                String chosenHero = choiceBoxHero.getValue();
+                //player.setHeroName(chosenHero);
+              });
+
+           ChoiceBox<String> choiceBoxBonus = new ChoiceBox<>();
+           choiceBoxBonus.getItems().addAll(bonuses);
+          choiceBoxBonus.setOnAction(e -> {
+            String chosenBonus = choiceBoxBonus.getValue();
+            //player.setBonus(chosenBonus);
+          });
+
+          player.getResources().setGold(1000);
+            player.getResources().setWood(1000);
+            player.getResources().setOre(100);
+            player.getResources().setMercury(10);
+            player.getResources().setSulfur(10);
+            player.getResources().setCrystal(10);
+            player.getResources().setGems(10);
+
+           playerChoiceBox.getChildren().addAll(choiceBoxTown, choiceBoxHero, choiceBoxBonus);
+
+           Label label = new Label(player.getName() + " options:");
+           playerChoiceBoxes.getChildren().addAll(label, playerChoiceBox);
        }
-
-       this.stage = stage;
-       //this.stage.setTitle("Economy");
-       this.stage.show();
-
-       // Create a scene and add the VBox to it
-       Scene scene = new Scene(playerChoiceBoxes, 400, 400);
-
-       // Show the stage
-       stage.setScene(scene);
-       stage.setTitle("Player Choice Boxes");
-       stage.show();
-    }
-
-
-
+   }
     public void switchToMap(ActionEvent event) throws IOException {
         //tu bedzie jakas metoda do przeslania wybranych frakcji(miast), herosów i bonusow do silnika gry
-        //runGame.getChosenParameters(playerBonusChoiceBox,.....);
 
         //placeholdery do wyciagania wybranych danych z choiceboxow
         String chosenHero = playerHeroChoiceBox.getValue();
-        String chosenTown = playerTownChoiceBox.getValue();
-        String chosenBonus = playerBonusChoiceBox.getValue();
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         root = loader.load();
 
-        EcoMapSceneController ecoMapSceneController = loader.getController();
-        ecoMapSceneController.displayName(chosenHero);
+        try {
+            EcoMapSceneController ecoMapSceneController = loader.getController();
+            ecoMapSceneController.displayName(chosenHero);
+            ecoMapSceneController.displayResources(players);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-       // root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new  Scene(root);
         stage.setScene( scene );
@@ -134,8 +167,6 @@ public class EcoLauncherSceneController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //pobieranie tych danych bedzie z jakiegos Jsona lub innego pliku z bohaterami, frakcjami i bonusami
         playerTownChoiceBox.getItems().addAll(towns);
         playerHeroChoiceBox.getItems().addAll(heroes);
         playerBonusChoiceBox.getItems().addAll(bonuses);

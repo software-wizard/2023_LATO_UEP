@@ -143,13 +143,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Gold: xxx" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Wood: xxx" GridPane.columnIndex="1" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Ore: xxx" GridPane.columnIndex="2" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Mercury: xxx" GridPane.columnIndex="3" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Sulfur: xxx" GridPane.columnIndex="4" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Crystal: xxx" GridPane.columnIndex="5" />
-                  <Label layoutX="10.0" layoutY="9.0" text="Gems: xxx" GridPane.columnIndex="6" />
+                  <Label fx:id="goldLabel" text="Gold: xxx" />
+                  <Label fx:id="woodLabel" layoutX="10.0" layoutY="9.0" text="Wood: xxx" GridPane.columnIndex="1" />
+                  <Label fx:id="oreLabel" layoutX="10.0" layoutY="9.0" text="Ore: xxx" GridPane.columnIndex="2" />
+                  <Label fx:id="mercuryLabel" layoutX="10.0" layoutY="9.0" text="Mercury: xxx" GridPane.columnIndex="3" />
+                  <Label fx:id="sulfurLabel" layoutX="10.0" layoutY="9.0" text="Sulfur: xxx" GridPane.columnIndex="4" />
+                  <Label fx:id="crystalLabel" layoutX="10.0" layoutY="9.0" text="Crystal: xxx" GridPane.columnIndex="5" />
+                  <Label fx:id="gemsLabel" layoutX="10.0" layoutY="9.0" text="Gems: xxx" GridPane.columnIndex="6" />
                </children>
             </GridPane>
       </children>

@@ -36,6 +36,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -83,7 +84,11 @@
                      </children>
                   </HBox>
                   <Button fx:id="addPlayersButton" layoutX="348.0" layoutY="29.0" mnemonicParsing="false" onAction="#addPlayers" text="Add players" />
-                  <VBox fx:id="playerChoiceBoxes" layoutX="16.0" layoutY="243.0" prefHeight="263.0" prefWidth="406.0" />
+                  <ScrollPane layoutX="15.0" layoutY="214.0" prefHeight="339.0" prefWidth="423.0">
+                     <content>
+                        <VBox fx:id="playerChoiceBoxes" prefHeight="328.0" prefWidth="418.0" />
+                     </content>
+                  </ScrollPane>
         </children>
       </AnchorPane>
         <AnchorPane id="rightPanel">
