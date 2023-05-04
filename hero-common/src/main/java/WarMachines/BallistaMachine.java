@@ -12,7 +12,7 @@ Expert Artillery gives ballista a 100% chance of double damage
 
 import lombok.Getter;
 
-public class BallistaWarMachine {
+public class BallistaMachine {
 
     private int heroAttackPoints;
     private int heroDefense;
@@ -31,14 +31,14 @@ public class BallistaWarMachine {
 //    0 = no artillery skill; 1 = basic artillery skill; 2 = advanced artillery skill; 3 = expert artillery skill
     private int heroArtillerySkill;
 
-    public BallistaWarMachine(int aHeroAttackPoints, int aHeroDefense, int aHeroArtillerySkill) {
+    public BallistaMachine(int aHeroAttackPoints, int aHeroDefense, int aHeroArtillerySkill) {
         heroAttackPoints = aHeroAttackPoints;
         heroDefense = aHeroDefense;
         heroArtillerySkill = aHeroArtillerySkill;
         ballistaDamage = calculateDamageFromBallista(aHeroAttackPoints);
     }
 
-    public BallistaWarMachine(){}
+    public BallistaMachine(){}
 
 
 

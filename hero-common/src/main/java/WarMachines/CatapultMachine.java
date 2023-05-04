@@ -6,7 +6,7 @@ Catapult is always with Hero. It can't be purchased. Hex size: 2
 
 import lombok.Getter;
 
-public class CatapultWarMachine {
+public class CatapultMachine {
     @Getter
     private final int catapultHP = 1000;
     @Getter
@@ -23,7 +23,7 @@ public class CatapultWarMachine {
     private final int catapultSecondShotDamage;
 
     //    0 = no ballistic skill; 1 = basic ballistic skill; 2 = advanced ballistic skill; 3 = expert ballistic skill
-    public CatapultWarMachine(int heroBallisticSkills) {
+    public CatapultMachine(int heroBallisticSkills) {
         this.catapultFirstShotDamage = calculateFirstShotDamage(heroBallisticSkills);
         this.catapultSecondShotDamage = calculateSecondShotDamage(heroBallisticSkills);
     }
