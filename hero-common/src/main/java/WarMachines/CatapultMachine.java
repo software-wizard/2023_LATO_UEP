@@ -8,8 +8,6 @@ import lombok.Getter;
 
 public class CatapultMachine {
     @Getter
-    private final int catapultCost = 2500;
-    @Getter
     private final int catapultFirstShotDamage;
     @Getter
     private final int catapultSecondShotDamage;
