@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BallistaMachineTest {
-    BallistaMachine ballistaMachine = new BallistaMachine();
+class BallistaWarMachineTest {
+    BallistaWarMachine ballistaWarMachine = new BallistaWarMachine();
     @Test
     void calculateDamageFromBallista() {
         int attack = 5;
-        int damage = ballistaMachine.calculateDamageFromBallista(attack);
+        int damage = ballistaWarMachine.calculateDamageFromBallista(attack);
         assertTrue(2*(attack+1) <= damage && damage <= 3*(attack+1));
         assertFalse(damage < 2*(attack+1));
         assertFalse(damage > 3*(attack+1));
@@ -23,7 +23,7 @@ class BallistaMachineTest {
         int averageDamage = 0;
         int iterations = 10000000;
         for (int i = 0; i < iterations; i++) {
-            averageDamage += ballistaMachine.calculateDamageFromBallista(attack);
+            averageDamage += ballistaWarMachine.calculateDamageFromBallista(attack);
         }
         averageDamage /= iterations;
         averageDamage = Math.round(averageDamage);
@@ -36,8 +36,8 @@ class BallistaMachineTest {
     void calculateDamageFromBallistaWithArtillerySkills(){
         int heroAttackPoints = 10;
         int heroArtillerySkill = 3;
-        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
-        int damage = ballistaMachine2.getBallistaDamage();
+        BallistaWarMachine ballistaWarMachine2 = new BallistaWarMachine(heroAttackPoints,0,heroArtillerySkill);
+        int damage = ballistaWarMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
         assertTrue(4*(heroAttackPoints+1) <= damage && damage <= 4*3*(heroAttackPoints+1));
     }
@@ -51,8 +51,8 @@ class BallistaMachineTest {
         float averageDamage = 0;
         int iterations = 10000;
         for (int i = 0; i < iterations; i++) {
-            BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
-            averageDamage += ballistaMachine2.getBallistaDamage();
+            BallistaWarMachine ballistaWarMachine2 = new BallistaWarMachine(heroAttackPoints,0,heroArtillerySkill);
+            averageDamage += ballistaWarMachine2.getBallistaDamage();
         }
         averageDamage /= iterations;
         System.out.println("Average damage: " + averageDamage);
