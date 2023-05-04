@@ -16,4 +16,5 @@ public class WarMachineStats implements WarMachineStatisticIf{
     private final int tier;
     private final String description;
     private final boolean isUpgraded;
+    private final int hexSize;
 }
