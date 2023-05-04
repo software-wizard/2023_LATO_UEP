@@ -1,20 +1,28 @@
 package pl.psi.fields;
 
-import pl.psi.creatures.CreatureStatisticIf;
+import pl.psi.fields.abilities.AbilityStrategy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpecialField {
 
-    private CreatureStatisticIf stat;
-    private AbilitiesDecorator abilities;
+    private FieldStatisticIf stat;
     private int hp;
+
+    //just to see if adding abilities work
+    public static List<String> logs = new ArrayList<>();
 
     SpecialField() {
     }
 
-    private SpecialField(CreatureStatisticIf stat, AbilitiesDecorator abilities) {
+    private SpecialField(FieldStatisticIf stat, AbilityStrategy... ability) {
         this.stat = stat;
-        this.abilities = abilities;
         this.hp = stat.getMaxHp();
+    }
+
+    public static void resetLogs() {
+        logs.clear();
     }
 
     public void setHp(int hp) {
@@ -38,22 +46,22 @@ public class SpecialField {
 
     public static class Builder {
 
-        private CreatureStatisticIf stats;
-        private AbilitiesDecorator abilities;
+        private FieldStatisticIf stats;
+        private AbilityStrategy[] ability;
 
-        public Builder statistics(CreatureStatisticIf stats) {
+        public Builder statistics(FieldStatisticIf stats) {
             this.stats = stats;
             return this;
         }
 
-        public Builder abilities(AbilitiesDecorator abilities) {
-            this.abilities = abilities;
+        public Builder abilities(AbilityStrategy... ability) {
+            this.ability = ability;
             return this;
         }
 
         public SpecialField build() {
             //return new SpecialField(stats, abilities);
-            return new SpecialField(stats, new AbilitiesDecorator());
+            return new SpecialField(stats, ability);
         }
     }
 }
