@@ -8,7 +8,7 @@ public interface WarMachineStatisticIf {
     int getArmor();
     int getMaxHp();
     int getShotRange();
-    int getDamage();
+    Range< Integer > getDamage();
     int getTier();
     String getDescription();
     boolean isUpgraded();

@@ -15,9 +15,13 @@ public class GameEngine {
     private final TurnQueue turnQueue;
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
+//    private final NewTurnQueueWithWarMachines newTurnQueueWithWarMachines;
 
     public  GameEngine(final Hero aHero1, final Hero aHero2) {
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
+//        newTurnQueueWithWarMachines = new NewTurnQueueWithWarMachines(aHero1.getCreatures(), aHero2.getCreatures(), aHero1.getWarMachines(),aHero2.getWarMachines());
+
+//        TODO war machines also should be added to board
         board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
     }
 

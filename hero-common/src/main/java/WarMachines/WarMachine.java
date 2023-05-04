@@ -79,7 +79,7 @@ public class WarMachine implements PropertyChangeListener  {
 //        aAttacker.counterAttackCounter--;
 //    }
 
-    int getDamage() {
+    Range<Integer> getDamage() {
         return stats.getDamage();
     }
 

@@ -22,6 +22,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
 
 
     private final String name;
+
     private final int attack; //counterattack?
     private final int maxHp;
     private final int shotRange;
@@ -30,7 +31,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
     private final int tier;
     private final String description;
     private final boolean isUpgraded;
-
+    
     WarMachineStatistic(final String aName, final int aAttack, final int aMaxHp,
                         final int aShotRange, final int aArmor, final Range<Integer> aDamage, final int aTier, final String aDescription,
                         final boolean aIsUpgraded )
@@ -40,6 +41,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
         maxHp = aMaxHp;
         shotRange = aShotRange;
         armor = aArmor;
+
         damage = aDamage;
         tier = aTier;
         description = aDescription;
