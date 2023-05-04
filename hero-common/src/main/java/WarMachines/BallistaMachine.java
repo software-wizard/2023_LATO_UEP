@@ -18,16 +18,7 @@ public class BallistaMachine {
     private int heroDefense;
     @Getter
     private int ballistaDamage;
-    @Getter
-    private final int ballistaAttack = 10 + heroAttackPoints;
-    @Getter
-    private final int ballistaDefense = 10 + heroDefense;
-    @Getter
-    private final int ballistaHP = 250;
-    @Getter
-    private final int ballistaCost = 2500;
-    @Getter
-    private final int ballistaDefaultShotsNumber = 24;
+
 //    0 = no artillery skill; 1 = basic artillery skill; 2 = advanced artillery skill; 3 = expert artillery skill
     private int heroArtillerySkill;
 
@@ -38,9 +29,9 @@ public class BallistaMachine {
         ballistaDamage = calculateDamageFromBallista(aHeroAttackPoints);
     }
 
-    public BallistaMachine(){}
+    public BallistaMachine(){
 
-
+    }
 
     // Method uses given attack value to calculate damage which will be applied on creature attacked by ballista
     public int calculateDamageFromBallista(int attack){
@@ -49,7 +40,7 @@ public class BallistaMachine {
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
         damage = Math.round(damage);
 
-//        If hero has artillery skill
+    //If hero has artillery skill
         double probability = Math.random();
         if (heroArtillerySkill == 1 && probability >= 0.5){
             damage *= 2;
@@ -60,7 +51,7 @@ public class BallistaMachine {
                 damage *= 2;
             }
         } else if(heroArtillerySkill == 3){
-            damage *=4;
+            damage *= 4;
         }
         return (int) damage;
     }

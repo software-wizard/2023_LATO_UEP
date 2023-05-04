@@ -106,6 +106,8 @@ public class WarMachine implements PropertyChangeListener  {
         return stats.getName();
     }
 
+    public int getHexSize() {return stats.getHexSize();}
+
     public int getShotRange() {
         return stats.getShotRange();
     }

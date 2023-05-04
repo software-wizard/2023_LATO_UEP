@@ -25,7 +25,8 @@ class NewTurnQueueWithWarMachinesTest {
     final WarMachine warMachine1 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
     final WarMachine warMachine2 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
     final WarMachine warMachine3 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
-    NewTurnQueueWithWarMachines newTurnQueueWithWarMachines = new NewTurnQueueWithWarMachines( List.of( creature1, creature2 ), List.of( creature3 ), List.of(warMachine1, warMachine2), List.of(warMachine3) );
+    final WarMachine warMachine4 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
+    NewTurnQueueWithWarMachines newTurnQueueWithWarMachines = new NewTurnQueueWithWarMachines( List.of( creature1, creature2 ), List.of( creature3 ), List.of(warMachine1, warMachine2), List.of(warMachine3, warMachine4) );
 
     @Test
     void getCurrentCreature() {
@@ -51,6 +52,11 @@ class NewTurnQueueWithWarMachinesTest {
 
         assertEquals(newTurnQueueWithWarMachines.getCurrentCreature(), creature3);
         assertEquals(newTurnQueueWithWarMachines.getCurrentWarMachine(), warMachine3);
+
+        newTurnQueueWithWarMachines.next();
+
+        assertTrue(newTurnQueueWithWarMachines.getCurrentCreature() == null);
+        assertEquals(newTurnQueueWithWarMachines.getCurrentWarMachine(), warMachine4);
 
         newTurnQueueWithWarMachines.next();
 
