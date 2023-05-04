@@ -11,34 +11,52 @@ import java.util.Random;
 
 @Getter
 public class WarMachine implements PropertyChangeListener  {
+    private WarMachineDamageCalculatorIF calculator;
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
+    private int damageINT;
 
     WarMachine(){
 
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
-              // final DamageCalculatorIf aCalculator,
+               final WarMachineDamageCalculatorIF aCalculator,
                final int aAmount) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
-        //calculator = aCalculator;
+        calculator = aCalculator;
 
     }
 
 //    public void attack(final WarMachine aDefender) {
 //        if (isAlive()) {
 //            final int damage = getCalculator().calculateDamage(this, aDefender);
-//            applyDamage(aDefender, damage);
+//             damageINT = getCalculator().calculateDamage(this, aDefender);
+////            applyDamage(aDefender, damage);
 ////            if (canCounterAttack(aDefender)) {
 ////                counterAttack(aDefender);
 ////            }
 //        }
 //    }
+
+    //THIS IS METHOD FOR TESTS - after should be removed
+    public int attack(final WarMachine aDefender) {
+//        if (isAlive()) {
+            final int damage = getCalculator().calculateDamage(this, aDefender);
+            damageINT = getCalculator().calculateDamage(this, aDefender);
+//            applyDamage(aDefender, damage);
+//            if (canCounterAttack(aDefender)) {
+//                counterAttack(aDefender);
+//            }
+//        }
+        return damageINT;
+
+    }
+
 
     public boolean isAlive() {
         return getAmount() > 0;
@@ -119,7 +137,7 @@ public class WarMachine implements PropertyChangeListener  {
 
     public static class Builder {
         private int amount = 1;
-        //private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
+        private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
         private WarMachineStatisticIf statistic;
 
         public Builder statistic(final WarMachineStatisticIf aStatistic) {
@@ -132,13 +150,13 @@ public class WarMachine implements PropertyChangeListener  {
             return this;
         }
 
-//        Builder calculator(final DamageCalculatorIf aCalc) {
-//            calculator = aCalc;
-//            return this;
-//        }
+        Builder calculator(final WarMachineDamageCalculatorIF aCalc) {
+            calculator = aCalc;
+            return this;
+        }
 
         public WarMachine build() { return new WarMachine(statistic,
-                //calculator,
+                calculator,
                 amount); }
     }
 

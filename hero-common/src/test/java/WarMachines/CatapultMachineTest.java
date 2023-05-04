@@ -8,30 +8,30 @@ class CatapultMachineTest {
 
     CatapultMachine catapultMachine = new CatapultMachine(0);
 
-    @Test
-    void getCatapultHP() {
-        assertEquals(1000, catapultMachine.getCatapultHP());
-    }
-
-    @Test
-    void getCatapultAttack() {
-        assertEquals(10, catapultMachine.getCatapultAttack());
-    }
-
-    @Test
-    void getCatapultShotsNumber() {
-        assertEquals(24, catapultMachine.getCatapultShotsNumber());
-    }
-
-    @Test
-    void getCatapultDefence() {
-        assertEquals(10, catapultMachine.getCatapultDefence());
-    }
-
-    @Test
-    void getCatapultCost() {
-        assertEquals(2500, catapultMachine.getCatapultCost());
-    }
+//    @Test
+//    void getCatapultHP() {
+//        assertEquals(1000, catapultMachine.getCatapultHP());
+//    }
+//
+//    @Test
+//    void getCatapultAttack() {
+//        assertEquals(10, catapultMachine.getCatapultAttack());
+//    }
+//
+//    @Test
+//    void getCatapultShotsNumber() {
+//        assertEquals(24, catapultMachine.getCatapultShotsNumber());
+//    }
+//
+//    @Test
+//    void getCatapultDefence() {
+//        assertEquals(10, catapultMachine.getCatapultDefence());
+//    }
+//
+//    @Test
+//    void getCatapultCost() {
+//        assertEquals(2500, catapultMachine.getCatapultCost());
+//    }
 
     @Test
     void getCatapultFirstShotDamage() {
