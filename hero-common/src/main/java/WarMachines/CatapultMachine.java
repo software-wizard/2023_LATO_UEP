@@ -8,14 +8,6 @@ import lombok.Getter;
 
 public class CatapultMachine {
     @Getter
-    private final int catapultHP = 1000;
-    @Getter
-    private final int catapultAttack = 10;
-    @Getter
-    private final int catapultShotsNumber = 24;
-    @Getter
-    private final int catapultDefence = 10;
-    @Getter
     private final int catapultCost = 2500;
     @Getter
     private final int catapultFirstShotDamage;
