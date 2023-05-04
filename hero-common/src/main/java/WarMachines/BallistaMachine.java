@@ -60,7 +60,7 @@ public class BallistaMachine {
                 damage *= 2;
             }
         } else if(heroArtillerySkill == 3){
-            damage *= 6;
+            damage *= 4;
         }
         return (int) damage;
     }

@@ -61,10 +61,10 @@ class BallistaMachineTest {
         BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
-        System.out.println("Lower: " + 6 * 2 * (heroAttackPoints + 1));
-        System.out.println("Upper: " + 6 * 3 * (heroAttackPoints + 1));
-        assertTrue(6 * 2 * (heroAttackPoints + 1) <= damage &&
-                damage <= 6 * 3 * (heroAttackPoints + 1));
+        System.out.println("Lower: " + 4 * 2 * (heroAttackPoints + 1));
+        System.out.println("Upper: " + 4 * 3 * (heroAttackPoints + 1));
+        assertTrue(4 * 2 * (heroAttackPoints + 1) <= damage &&
+                damage <= 4 * 3 * (heroAttackPoints + 1));
     }
 
     @Test
