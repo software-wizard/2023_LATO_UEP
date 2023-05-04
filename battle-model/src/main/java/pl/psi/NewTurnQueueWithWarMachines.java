@@ -17,7 +17,7 @@ public class NewTurnQueueWithWarMachines {
     private final Collection<Creature> creatures;
     private final Queue<Creature> creaturesQueue;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-    private final List<WarMachine> warMachines;
+    private final Collection<WarMachine> warMachines;
     private Creature currentCreature;
     private WarMachine currentWarMachine;
     private int roundNumber;
@@ -55,8 +55,7 @@ public class NewTurnQueueWithWarMachines {
         Creature oldCreature = currentCreature;
         WarMachine oldWarMachine = currentWarMachine;
 
-        // OR or AND?
-        if (creaturesQueue.isEmpty() || warMachinesQueue.isEmpty()) {
+        if (creaturesQueue.isEmpty() && warMachinesQueue.isEmpty()) {
             endOfTurn();
         }
         currentCreature = creaturesQueue.poll();
