@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BallistaMachineTest {
+class BallistaMachineTestArtillerySkill {
     BallistaMachine ballistaMachine = new BallistaMachine();
     @Test
     void calculateDamageFromBallista() {
@@ -36,7 +36,7 @@ class BallistaMachineTest {
     void calculateDamageFromBallistaWithArtillerySkillLvlOne(){
         int heroAttackPoints = 10;
         int heroArtillerySkill = 1;
-        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill,0);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
         assertTrue(2 * 2 * (heroAttackPoints + 1) <= damage &&
@@ -46,7 +46,7 @@ class BallistaMachineTest {
     void calculateDamageFromBallistaWithArtillerySkillLvlTwo(){
         int heroAttackPoints = 10;
         int heroArtillerySkill = 2;
-        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill,0);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
         System.out.println("Lower: " + 2 * 2 * (heroAttackPoints + 1));
@@ -58,7 +58,7 @@ class BallistaMachineTest {
     void calculateDamageFromBallistaWithArtillerySkillLvlThree(){
         int heroAttackPoints = 10;
         int heroArtillerySkill = 3;
-        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+        BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill,0);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
         System.out.println("Lower: " + 4 * 2 * (heroAttackPoints + 1));
@@ -76,7 +76,7 @@ class BallistaMachineTest {
         float averageDamage = 0;
         int iterations = 10000;
         for (int i = 0; i < iterations; i++) {
-            BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill);
+            BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill,0);
             averageDamage += ballistaMachine2.getBallistaDamage();
         }
         averageDamage /= iterations;
