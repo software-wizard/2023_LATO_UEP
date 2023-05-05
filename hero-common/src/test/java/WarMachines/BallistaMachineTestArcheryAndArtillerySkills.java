@@ -54,6 +54,7 @@ public class BallistaMachineTestArcheryAndArtillerySkills {
         assertTrue(damage <= Math.round(3*1.1));
     }
 
+    //tests for different skill lvl combinations
     @Test
     void calculateDamageFromBallistaWithArcheryLvl1AndArtilleryLvl1() {
         int heroArcherySkill = 1;
@@ -95,6 +96,17 @@ public class BallistaMachineTestArcheryAndArtillerySkills {
         System.out.println("Damage: " + damage);
         assertTrue( damage >= Math.round(4*2*1.5) && damage <= Math.round(4*3*1.5) ||
                 damage >= Math.round(2*2*1.5) && damage <= Math.round(2*3*1.5));
+    }
+
+    @Test
+    void calculateDamageFromBallistaWithArcheryLvl2AndArtilleryLvl2() {
+        int heroArcherySkill = 2;
+        int heroArtillerySkill = 2;
+        BallistaMachine ballistaMachine = new BallistaMachine(0,0,heroArtillerySkill,heroArcherySkill);
+        int damage = ballistaMachine.getBallistaDamage();
+        System.out.println("Damage: " + damage);
+        assertTrue( damage >= Math.round(4*2*1.25) && damage <= Math.round(4*3*1.25) ||
+                damage >= Math.round(2*2*1.25) && damage <= Math.round(2*3*1.25));
     }
 
 }
