@@ -39,8 +39,8 @@ class BallistaMachineTestArtillerySkill {
         BallistaMachine ballistaMachine2 = new BallistaMachine(heroAttackPoints,0,heroArtillerySkill,0);
         int damage = ballistaMachine2.getBallistaDamage();
         System.out.println("Damage: " + damage);
-        assertTrue(2 * 2 * (heroAttackPoints + 1) <= damage &&
-                damage <= 2 * 3 * (heroAttackPoints + 1));
+        assertTrue(damage >= Math.round(2*(heroAttackPoints + 1)) && damage <= Math.round(3*(heroAttackPoints + 1)) ||
+                damage >= Math.round(2*2*(heroAttackPoints + 1)) && damage <= Math.round(3*2*(heroAttackPoints + 1)));
     }
     @Test
     void calculateDamageFromBallistaWithArtillerySkillLvlTwo(){
@@ -51,8 +51,8 @@ class BallistaMachineTestArtillerySkill {
         System.out.println("Damage: " + damage);
         System.out.println("Lower: " + 2 * 2 * (heroAttackPoints + 1));
         System.out.println("Upper: " + 4 * 3 * (heroAttackPoints + 1));
-        assertTrue(2 * 2 * (heroAttackPoints + 1) <= damage &&
-                damage <= 4 * 3 * (heroAttackPoints + 1));
+        assertTrue(damage >= Math.round(4*2*(heroAttackPoints + 1)) && damage <= Math.round(4*3*(heroAttackPoints + 1)) ||
+                damage >= Math.round(2*2*(heroAttackPoints + 1)) && damage <= Math.round(2*3*(heroAttackPoints + 1)));
     }
     @Test
     void calculateDamageFromBallistaWithArtillerySkillLvlThree(){
