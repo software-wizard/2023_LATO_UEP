@@ -11,6 +11,7 @@ import java.util.Random;
 
 @Getter
 public class WarMachine implements PropertyChangeListener  {
+    private WarMachineDamageCalculatorIF calculator;
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
@@ -21,42 +22,57 @@ public class WarMachine implements PropertyChangeListener  {
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
-              // final DamageCalculatorIf aCalculator,
+               final WarMachineDamageCalculatorIF aCalculator,
                final int aAmount) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
-        //calculator = aCalculator;
+        calculator = aCalculator;
 
     }
 
-//    public void attack(final WarMachine aDefender) {
-//        if (isAlive()) {
+    public void attack(final WarMachine aDefender) throws Exception {
+        if (isAlive()) {
+            final int damage = getCalculator().calculateDamage(this, aDefender);
+            applyDamage(aDefender, damage);
+//            if (canCounterAttack(aDefender)) {
+//                counterAttack(aDefender);
+//            }
+        }
+    }
+
+    //THIS IS METHOD FOR TESTS - after should be removed
+//    public int attack(final WarMachine aDefender) throws Exception {
+////        if (isAlive()) {
+//        int damageINT;
 //            final int damage = getCalculator().calculateDamage(this, aDefender);
-//            applyDamage(aDefender, damage);
+//            damageINT = getCalculator().calculateDamage(this, aDefender);
+////            applyDamage(aDefender, damage);
 ////            if (canCounterAttack(aDefender)) {
 ////                counterAttack(aDefender);
 ////            }
-//        }
+////        }
+//        return damageINT;
 //    }
+
 
     public boolean isAlive() {
         return getAmount() > 0;
     }
 
     private void applyDamage(final WarMachine aDefender, final int aDamage) {
-        int hpToSubstract = aDamage % aDefender.getMaxHp();
-        int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
+        int hpToSubtract = aDamage % aDefender.getMaxHp();
+//        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        int hp = aDefender.getCurrentHp() - hpToSubtract;
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
-            aDefender.setAmount(aDefender.getAmount() - 1);
+//            aDefender.setAmount(aDefender.getAmount() - 1);
         }
         else{
             aDefender.setCurrentHp(hp);
         }
-        aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
+//        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
     public int getMaxHp() {
@@ -67,7 +83,7 @@ public class WarMachine implements PropertyChangeListener  {
         currentHp = aCurrentHp;
     }
 
-    //TODO chyba zadna maszyna nie może kontratakować - do wywalenia
+//    TODO chyba zadna maszyna nie może kontratakować - do wywalenia
 //    private boolean canCounterAttack(final Creature aDefender) {
 //        return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
 //    }
@@ -119,7 +135,7 @@ public class WarMachine implements PropertyChangeListener  {
 
     public static class Builder {
         private int amount = 1;
-        //private DamageCalculatorIf calculator = new DefaultDamageCalculator(new Random());
+        private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
         private WarMachineStatisticIf statistic;
 
         public Builder statistic(final WarMachineStatisticIf aStatistic) {
@@ -132,13 +148,13 @@ public class WarMachine implements PropertyChangeListener  {
             return this;
         }
 
-//        Builder calculator(final DamageCalculatorIf aCalc) {
-//            calculator = aCalc;
-//            return this;
-//        }
+        Builder calculator(final WarMachineDamageCalculatorIF aCalc) {
+            calculator = aCalc;
+            return this;
+        }
 
         public WarMachine build() { return new WarMachine(statistic,
-                //calculator,
+                calculator,
                 amount); }
     }
 
