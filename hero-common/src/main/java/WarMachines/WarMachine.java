@@ -16,7 +16,6 @@ public class WarMachine implements PropertyChangeListener  {
     @Setter
     private int amount;
     private int currentHp;
-    private int damageINT;
 
     WarMachine(){
 
@@ -32,30 +31,29 @@ public class WarMachine implements PropertyChangeListener  {
 
     }
 
-//    public void attack(final WarMachine aDefender) {
-//        if (isAlive()) {
+    public void attack(final WarMachine aDefender) throws Exception {
+        if (isAlive()) {
+            final int damage = getCalculator().calculateDamage(this, aDefender);
+            applyDamage(aDefender, damage);
+//            if (canCounterAttack(aDefender)) {
+//                counterAttack(aDefender);
+//            }
+        }
+    }
+
+    //THIS IS METHOD FOR TESTS - after should be removed
+//    public int attack(final WarMachine aDefender) throws Exception {
+////        if (isAlive()) {
+//        int damageINT;
 //            final int damage = getCalculator().calculateDamage(this, aDefender);
-//             damageINT = getCalculator().calculateDamage(this, aDefender);
+//            damageINT = getCalculator().calculateDamage(this, aDefender);
 ////            applyDamage(aDefender, damage);
 ////            if (canCounterAttack(aDefender)) {
 ////                counterAttack(aDefender);
 ////            }
-//        }
+////        }
+//        return damageINT;
 //    }
-
-    //THIS IS METHOD FOR TESTS - after should be removed
-    public int attack(final WarMachine aDefender) {
-//        if (isAlive()) {
-            final int damage = getCalculator().calculateDamage(this, aDefender);
-            damageINT = getCalculator().calculateDamage(this, aDefender);
-//            applyDamage(aDefender, damage);
-//            if (canCounterAttack(aDefender)) {
-//                counterAttack(aDefender);
-//            }
-//        }
-        return damageINT;
-
-    }
 
 
     public boolean isAlive() {
@@ -63,18 +61,18 @@ public class WarMachine implements PropertyChangeListener  {
     }
 
     private void applyDamage(final WarMachine aDefender, final int aDamage) {
-        int hpToSubstract = aDamage % aDefender.getMaxHp();
-        int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
+        int hpToSubtract = aDamage % aDefender.getMaxHp();
+//        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        int hp = aDefender.getCurrentHp() - hpToSubtract;
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
-            aDefender.setAmount(aDefender.getAmount() - 1);
+//            aDefender.setAmount(aDefender.getAmount() - 1);
         }
         else{
             aDefender.setCurrentHp(hp);
         }
-        aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
+//        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
     public int getMaxHp() {
@@ -85,7 +83,7 @@ public class WarMachine implements PropertyChangeListener  {
         currentHp = aCurrentHp;
     }
 
-    //TODO chyba zadna maszyna nie może kontratakować - do wywalenia
+//    TODO chyba zadna maszyna nie może kontratakować - do wywalenia
 //    private boolean canCounterAttack(final Creature aDefender) {
 //        return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
 //    }
