@@ -14,7 +14,6 @@ class BoardTest
     @Test
     void unitsMoveProperly()
     {
-        // Na ten moment nie działa - blad w tworzeniu siatki
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
                         .moveRange( 5 )
                         .build() )
@@ -28,6 +27,7 @@ class BoardTest
         assertThat( board.getCreature( new Point( 3, 3) )
                 .isPresent() ).isTrue();
     }
+
     @Test
     void availablePointsToGoShouldFindAllAvailablePoints()
     {

@@ -56,9 +56,11 @@ public class Board
         Point startingPoint = getPosition(aCreature);
         Point endPoint = aPoint;
         List<Point> theRightPath = path.findPath(startingPoint, endPoint);
-        for (Point point: theRightPath){
-            map.inverse().remove( aCreature );
-            map.put( aPoint, aCreature );
+        if (theRightPath != null) {
+            for (Point point : theRightPath) {
+                map.inverse().remove(aCreature);
+                map.put(point, aCreature);
+            }
         }
     }
 
@@ -69,7 +71,7 @@ public class Board
             return false;
         }
         final Point oldPosition = getPosition( aCreature );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange()-1;
     }
 
     Point getPosition( Creature aCreature )
@@ -81,7 +83,7 @@ public class Board
         List<Point> listOfPoints = new ArrayList<>();
         // Mysle ze problem jest tu taki ze aby cos bylo przypisane do mapy ma miec punkt i kreature
         // a on musi miec plansze po ktorej musi iterowac, na ten moment test przechodzi ale nie wiem jak to docelowo ma wygladac
-        for (Point point : boardTest) {
+        for (Point point : boardTest) { //zamiast po mapie iterujemy po boardzie, jeżeli na punkcie nie ma creatury to nie należy do mapy
             if (canMove(aCretaure, point)) {
                 listOfPoints.add(point);
             }
@@ -94,18 +96,18 @@ public class Board
         for(Point point: listOfPoints){
             if(point.getX() > a) {
                 a = point.getX();
-                if (point.getY() > b) {
-                    b = point.getY();
-                }
+            }
+            if (point.getY() > b) {
+                b = point.getY();
             }
         }
-        int[][] grid = new int[a][b];
+
+        int[][] grid = new int[a+1][b+1];
         for (Point point: listOfPoints) {
-            // na ten moment jeden - pozniej zmiana kosztow
-            grid[point.getX()][point.getY()] = 1;
+            grid[point.getX()][point.getY()] = 1; // na ten moment jeden - pozniej zmiana kosztow
         }
-        for (int x = 0; x<=grid.length; x++){
-            for (int y = 0; y<=grid[0].length; y++){
+        for (int x = 0; x<=a; x++){
+            for (int y = 0; y<=b; y++){
                 if (grid[x][y] != 1){
                     grid[x][y] = 1000000;
                 }

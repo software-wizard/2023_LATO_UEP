@@ -10,8 +10,8 @@ public class ShortestPathAlgorythm {
 
     public ShortestPathAlgorythm(int[][] grid) {
         this.grid = grid;
-        rows = grid.length;
-        cols = grid[0].length;
+        rows = (grid.length)-1;
+        cols = (grid[0].length)-1;
         openSet = new PriorityQueue<>(new Comparator<Point>() {
             public int compare(Point p1, Point p2) {
                 return Integer.compare(getFCost(p1), getFCost(p2));
@@ -21,6 +21,8 @@ public class ShortestPathAlgorythm {
     }
 
     public List<Point> findPath(Point start, Point end) {
+        this.start = start;
+        this.end = end;
         openSet.add(start);
 
         while (!openSet.isEmpty()) {
@@ -60,7 +62,7 @@ public class ShortestPathAlgorythm {
         return null;
     }
 
-    private List<Point> getNeighbors(Point point) {
+    private List<Point> getNeighbors(Point point) { //Pozbyłabym się tego, iterowałabym po gridzie (bo tam są przecież już koszty ustalone przez nas) bo obecnie end nigdy nie jest curr -> jest za daleko by być sąsiadem w rozumieniu tego kodu
         List<Point> neighbors = new ArrayList<>();
         int x = point.getX();
         int y = point.getY();
@@ -82,6 +84,9 @@ public class ShortestPathAlgorythm {
     }
 
     private int getDistance(Point p1, Point p2) {
+        if (p1 == null || p2 == null) {
+            throw new IllegalArgumentException("Points cannot be null");
+        }
         return Math.abs(p1.getX() - p2.getX()) + Math.abs(p1.getY() - p2.getY());
     }
 
