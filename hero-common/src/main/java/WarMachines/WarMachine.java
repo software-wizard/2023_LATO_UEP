@@ -160,6 +160,6 @@ public class WarMachine implements PropertyChangeListener  {
 
     @Override
     public String toString() {
-        return getName() + System.lineSeparator() + getAmount();
+        return getName() + System.lineSeparator() + getCurrentHp();
     }
 }

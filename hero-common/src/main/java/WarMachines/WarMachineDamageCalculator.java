@@ -6,7 +6,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         if (aAttacker.getStats().equals(WarMachineStatistic.BALLISTA)){
             //todo real hero artillery skill value and heroAttack value must be used
             // lack of archery skill verification
-            damage = calculateDamageFromBallista(5, 0);
+            damage = calculateDamageFromBallista(3, 0, 3);
         } else if (aAttacker.getStats().equals(WarMachineStatistic.CATAPULT)) {
             //todo real hero ballistics skill value must be used
             damage = calculateFirstShotDamageFromCatapult(0) + calculateSecondShotDamageFromCatapult(0);
@@ -16,10 +16,32 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         return damage;
     }
 
-    // Method uses given heroAttack value to calculate damage which will be applied on creature attacked by ballista
-    public int calculateDamageFromBallista(int heroAttack, int heroArtillerySkill){
-        int lowerBoundary = 2 * (heroAttack + 1);
-        int upperBoundary = 3 * (heroAttack + 1);
+    // Method uses given attack value to calculate damage which will be applied on creature attacked by ballista
+    private int calculateDamageFromBallista(int heroAttack, int heroArtillerySkill, int heroArcherySkill){
+
+        //Base damage (heroAttackPoints = 0)
+        float lowerBoundary = 2;
+        float upperBoundary = 3;
+
+    /*
+    If hero has archery skill - this has to be calculated before the added bonus of artillery skill AND attack skill
+    As opposed to slightly misleading in-game skill description Archery increases the base damage of ranged attacks
+    by 10%, 25% or 50% depending on the level of the skill. This does not mean that the total damage (final damage)
+    is necessarily increased by the same percentage, as it might also be increased by other factors,
+    such as high Attack skill - compare damage formula.
+    */
+        if (heroArcherySkill == 1){
+            lowerBoundary *= 1.1;
+            upperBoundary *= 1.1;
+        } else if (heroArcherySkill == 2) {
+            lowerBoundary *= 1.25;
+            upperBoundary *= 1.25;
+        } else if(heroArcherySkill == 3){
+            lowerBoundary *= 1.5;
+            upperBoundary *= 1.5;
+        }
+        lowerBoundary *= (heroAttack + 1);
+        upperBoundary *= (heroAttack + 1);
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
         damage = Math.round(damage);
 
@@ -39,7 +61,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         return (int) damage;
     }
 
-    private double getRandomNumber(int min, int max) {
+    private double getRandomNumber(float min, float max) {
         return ((Math.random() * (max - min)) + min);
     }
 

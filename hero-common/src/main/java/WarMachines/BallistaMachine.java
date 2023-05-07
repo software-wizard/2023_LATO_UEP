@@ -48,10 +48,8 @@ public class BallistaMachine {
         float lowerBoundary = 2;
         float upperBoundary = 3;
 
-
     /*
     If hero has archery skill - this has to be calculated before the added bonus of artillery skill AND attack skill
-
     As opposed to slightly misleading in-game skill description Archery increases the base damage of ranged attacks
     by 10%, 25% or 50% depending on the level of the skill. This does not mean that the total damage (final damage)
     is necessarily increased by the same percentage, as it might also be increased by other factors,
@@ -67,15 +65,11 @@ public class BallistaMachine {
             lowerBoundary *= 1.5;
             upperBoundary *= 1.5;
         }
-
-
         lowerBoundary *= (attack + 1);
         upperBoundary *= (attack + 1);
         float damage = (float) getRandomNumber(lowerBoundary, upperBoundary);
         damage = Math.round(damage);
-
-
-
+        
     //If hero has artillery skill
         double probability = Math.random();
         if (heroArtillerySkill == 1 && probability >= 0.5){
@@ -90,8 +84,6 @@ public class BallistaMachine {
             damage *= 4;
         }
         return (int) damage;
-
-
     }
 
     private double getRandomNumber(float min, float max) {
