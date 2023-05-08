@@ -4,7 +4,7 @@ import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
 
-import javafx.fxml.FXML.*;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
