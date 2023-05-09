@@ -23,8 +23,12 @@ public class Board
     private List<Point> boardTest = new ArrayList<>();
     private final BiMap< Point, Creature > map = HashBiMap.create();
 
-    public Board( final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
-        // Tworzymy boarda - wstrzykniecie
+    public List<Point> getBoardTest() {
+        return boardTest;
+    }
+
+    public Board(final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
+        // Tworzymy boarda
         for( int x = 0; x < 15; x++ ){
             for( int y = 0; y < 10; y++ )
             {
@@ -71,7 +75,7 @@ public class Board
             return false;
         }
         final Point oldPosition = getPosition( aCreature );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange()-1;
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
     }
 
     Point getPosition( Creature aCreature )
