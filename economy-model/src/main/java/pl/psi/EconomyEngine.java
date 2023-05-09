@@ -8,16 +8,14 @@ import java.util.Map;
 
 @Getter
 public class EconomyEngine {
-    // TODO Czy board może być observerem, czy nie?
 
     private final Board board;
-    private final LinkedList<Player> players;
     private final TurnQueue turnQueue;
 
     // TODO Launcher - choose type of castle
     public EconomyEngine(LinkedList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
+        // TODO engine dostarcza canMove - battleEngine
         this.board = new Board(aMapElements);
-        this.players = aPlayers;
         this.turnQueue = new TurnQueue(aPlayers);
         turnQueue.addObserver(board);
     }

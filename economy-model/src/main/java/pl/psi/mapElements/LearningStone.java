@@ -16,11 +16,21 @@ public class LearningStone implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero, HashBiMap map) {
+    public void apply(Hero aHero) {
         if (!visitedHeroes.contains(aHero)) {
             aHero.getHeroStatistics().setExperience(aHero.getHeroStatistics().getExperience()+1000);
             visitedHeroes.add(aHero);
         }
+
+    }
+
+    @Override
+    public boolean shouldBeRemoveAfterAction() {
+        return false;
+    }
+
+    @Override
+    public void endOfTurn() {
 
     }
 }

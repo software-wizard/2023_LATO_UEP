@@ -8,6 +8,8 @@ public interface MapElement {
 //    void getIcon();
 
     boolean isInteractive();
+    boolean shouldBeRemoveAfterAction();
 
-    void apply(Hero aHero, HashBiMap map);
+    void apply(Hero aHero);
+    void endOfTurn();
 }

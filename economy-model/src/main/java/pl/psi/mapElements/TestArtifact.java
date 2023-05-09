@@ -1,10 +1,18 @@
+
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
+import lombok.Getter;
 import pl.psi.hero.Hero;
 
-public class Artifact implements MapElement {
-    // TODO
+@Getter
+public class TestArtifact implements MapElement {
+    private final String type ;
+    private final String name ;
+
+    public TestArtifact(String aType,String aName){
+        this.type=aType;
+        this.name=aName;
+    }
 
     @Override
     public boolean isInteractive() {
@@ -13,6 +21,7 @@ public class Artifact implements MapElement {
 
     @Override
     public void apply(Hero aHero) {
+        aHero.addArtifactToBackpack(this);
     }
 
     @Override

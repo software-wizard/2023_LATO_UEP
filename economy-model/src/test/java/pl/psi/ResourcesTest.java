@@ -36,8 +36,8 @@ public class ResourcesTest {
                         .player(player)
                         .build()).
                 build();
-        final Mine goldMine = new Mine(Mine.ResourceType.GOLD);
-        final Mine woodMine = new Mine(Mine.ResourceType.WOOD);
+        final Mine goldMine = new Mine(Resource.Type.GOLD);
+        final Mine woodMine = new Mine(Resource.Type.WOOD);
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
         mapElements.put(new Point(2, 2), goldMine);

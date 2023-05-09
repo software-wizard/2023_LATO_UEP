@@ -16,8 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BoardTest {
 
-    // Verify Mock apply - Point
-
     @Test
     void shouldMapElementOnPoint() {
         final MapElement staticElement = new StaticElement();
@@ -66,12 +64,12 @@ public class BoardTest {
                 .moveRange(3)
                 .build());
         mapElements.put(new Point(1, 1), hero);
-        final Resource gold = new Resource(Resource.ResourceType.GOLD, 1);
+        final pl.psi.mapElements.Resource gold = new pl.psi.mapElements.Resource(Resource.Type.GOLD, 1);
         mapElements.put(new Point(2, 2), gold);
         final Board board = new Board(mapElements);
 
         assertEquals(0, hero.getHeroStatistics().getPlayer().getResources().getGold());
-        board.move(hero, new Point(2, 2)); // TODO będzie moveRange na turę i trzeba zawsze zmieniać testy?
+        board.move(hero, new Point(2, 2));
         assertEquals(1, hero.getHeroStatistics().getPlayer().getResources().getGold());
         // Check is point empty
         assertThat(board.getMapElement(new Point(2, 2)).isPresent()).isFalse();
@@ -138,7 +136,6 @@ public class BoardTest {
         engine.getBoard().move(hero, new Point(2, 2));
         assertEquals(5, hero.getHeroStatistics().getMana());
         engine.getBoard().move(hero, new Point(1, 1));
-
 
         // Check if in the other turn Hero can get mana
         engine.getTurnQueue().nextTurn();

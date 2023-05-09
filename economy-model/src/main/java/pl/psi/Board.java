@@ -13,26 +13,9 @@ import java.beans.PropertyChangeListener;
 import java.util.*;
 
 public class Board implements PropertyChangeListener {
-
-    private final int MAX_WIDTH = 5;
     private final BiMap<Point, MapElement> map = HashBiMap.create();
     private final BiMap<Point, Hero> mapHero = HashBiMap.create();
     private final Map<Point, MapElement> mapElements;
-
-    // Builder for testing purpose
-    public static class Builder {
-
-        private Map<Point, MapElement> mapElements = new HashMap<Point, MapElement>();
-
-        public Builder mapElements(final Map<Point, MapElement> aMapElements) {
-            mapElements = aMapElements;
-            return this;
-        }
-
-        public Board build() {
-            return new Board(mapElements);
-        }
-    }
 
     public Board(Map<Point, MapElement> aMapElements) {
         mapElements = aMapElements;
@@ -64,7 +47,11 @@ public class Board implements PropertyChangeListener {
         if( canMove( aHero, aPoint ) )
         {
             if (map.get(aPoint)!=null) {
-                map.get(aPoint).apply(aHero, (HashBiMap) map); // TODO przekazywanie mapy może mieć sens - surowce, bohater po przegranej walce
+                map.get(aPoint).apply(aHero);
+
+                if (map.get(aPoint).shouldBeRemoveAfterAction()) {
+                    map.inverse().remove(map.get(aPoint));
+                }
             }
 
             mapHero.inverse()
@@ -74,7 +61,6 @@ public class Board implements PropertyChangeListener {
     }
 
     boolean canMove( final Hero aHero, final Point aPoint )
-            // TODO brak interakcji, gdy na ponit Hero
     {
         if( map.containsKey( aPoint ) )
         {
@@ -101,24 +87,8 @@ public class Board implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals(TurnQueue.END_OF_TURN)) {
-            getMineResources();
-            resetMagicWells();
-        }
-    }
-
-    private void getMineResources() {
-        // Add for each Player resources if it has mines
-        for (MapElement mapElement : mapElements.values()) {
-            if (mapElement instanceof Mine) {
-                ((Mine) mapElement).addResource();
-            }
-        }
-    }
-
-    private void resetMagicWells() {
-        for (MapElement mapElement : mapElements.values()) {
-            if (mapElement instanceof MagicWell) {
-                ((MagicWell)mapElement).resetMagicWell();
+            for (MapElement mapElement : mapElements.values()) {
+                mapElement.endOfTurn();
             }
         }
     }
