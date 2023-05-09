@@ -6,6 +6,7 @@ import java.util.List;
 
 import pl.psi.Hero;
 import pl.psi.creatures.Creature;
+import pl.psi.creatures.EconomyCreature;
 import pl.psi.gui.MainBattleController;
 import pl.psi.creatures.NecropolisFactory;
 import pl.psi.hero.EconomyHero;
@@ -46,6 +47,10 @@ public class EcoBattleConverter
         aPlayer1.getCreatures()
             .forEach( ecoCreature -> creatures.add( factory.create( ecoCreature.isUpgraded(),
                 ecoCreature.getTier(), ecoCreature.getAmount() ) ) );
+
+
+        //najlepiej na końcu żeby zrobić dekoratorem opakowanie creature w hero-common chyba nejlepiej?
+       // aPlayer1.getSkills().forEach(s  -> s.apply(aPlayer1.getCreatures()));
         return new Hero( creatures );
     }
 }

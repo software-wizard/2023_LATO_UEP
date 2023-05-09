@@ -52,6 +52,13 @@ public class EconomyHero
         gold -= aAmount;
     }
 
+
+    //TODO zrobić potem pobieranie skilli
+    public Iterable<Object> getSkills() {
+
+        return null;
+    }
+
     public enum Fraction
     {
         NECROPOLIS;
