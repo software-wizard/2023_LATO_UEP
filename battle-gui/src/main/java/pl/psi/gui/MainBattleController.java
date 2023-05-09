@@ -1,5 +1,11 @@
 package pl.psi.gui;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -13,6 +19,7 @@ import pl.psi.creatures.Creature;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.Optional;
 
 public class MainBattleController implements PropertyChangeListener
@@ -22,6 +29,9 @@ public class MainBattleController implements PropertyChangeListener
     private GridPane gridMap;
     @FXML
     private Button passButton;
+
+    @FXML
+    private Button windowButton;
 
     public MainBattleController( final Hero aHero1, final Hero aHero2 )
     {
@@ -70,8 +80,27 @@ public class MainBattleController implements PropertyChangeListener
         }
     }
 
+    private void openSpellBook(){
+        windowButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Parent root;
+                try{
+                    root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/spell-book-gui.fxml"));
+                    Stage stage = new Stage();
+                    stage.setTitle("Spell Book");
+                    stage.setScene(new Scene(root, 250, 450));
+                    stage.show();
+                }catch (final IOException aE){
+                    aE.printStackTrace();
+                }
+            }
+        });
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         refreshGui();
+        openSpellBook();
     }
 }

@@ -9,7 +9,7 @@
             minWidth="-Infinity"
             prefHeight="700" prefWidth="1024" xmlns="http://javafx.com/javafx/8.0.171">
     <top>
-        <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER" >
             <children>
                 <Label fx:id="p1Name" style="-fx-padding: 0 20 0 0;" text="Player 1">
                     <font>

@@ -21,6 +21,7 @@
         <module>battle-model</module>
         <module>battle-gui</module>
         <module>eco-battle-converter</module>
+        <module>spells</module>
     </modules>
 
 
