@@ -73,7 +73,7 @@ import pl.psi.Buildings.Building;
 import pl.psi.Buildings.RecruitmentBuilding;
 import pl.psi.hero.Hero;
 import java.util.ArrayList;
-import static pl.psi.Resource.Type;
+import static pl.psi.Resource.ResourceType;
 
 
 public class Castle implements MapElement {
@@ -102,20 +102,20 @@ public class Castle implements MapElement {
             case TOWER:
                 buildingsOwned.add(new RecruitmentBuilding("Workshop", Building.Type.RECRUITMENT, 1, 1, fractionType));
                 buildingsOwned.add(new RecruitmentBuilding("Parapet", Building.Type.RECRUITMENT, 2, 2, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Golem factory", Building.Type.RECRUITMENT, 3, new Resource(Type.GOLD, 1500), 3, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Mage tower", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 2000), 4, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Altar of Wishes", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 2000), 5, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Golden pavilion", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 6000), 6, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Cloud temple", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 10000), 7, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Golem factory", Building.Type.RECRUITMENT, 3, new Resource(ResourceType.GOLD, 1500), 3, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Mage tower", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 2000), 4, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Altar of Wishes", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 2000), 5, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Golden pavilion", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 6000), 6, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Cloud temple", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 10000), 7, fractionType));
                 break;
             case NECROPOLIS:
                 buildingsOwned.add(new RecruitmentBuilding("Cursed temple", Building.Type.RECRUITMENT, 1, 1, fractionType));
                 buildingsOwned.add(new RecruitmentBuilding("Graveyard", Building.Type.RECRUITMENT, 2, 2, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Tomb of souls", Building.Type.RECRUITMENT, 3, new Resource(Type.GOLD, 1500), 3, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Estate", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 2000), 4, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Mausoleum", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 2000), 5, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Hall of Darkness", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 6000), 6, fractionType));
-                buildingsToBuy.add(new RecruitmentBuilding("Dragon vault", Building.Type.RECRUITMENT, 4, new Resource(Type.GOLD, 10000), 7, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Tomb of souls", Building.Type.RECRUITMENT, 3, new Resource(ResourceType.GOLD, 1500), 3, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Estate", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 2000), 4, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Mausoleum", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 2000), 5, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Hall of Darkness", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 6000), 6, fractionType));
+                buildingsToBuy.add(new RecruitmentBuilding("Dragon vault", Building.Type.RECRUITMENT, 4, new Resource(ResourceType.GOLD, 10000), 7, fractionType));
                 break;
                 //factory do tego z innym słowkiem na castle
         }

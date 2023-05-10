@@ -1,6 +1,5 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
 import pl.psi.Resource;
 import pl.psi.hero.Hero;
 import pl.psi.player.Player;
@@ -8,11 +7,11 @@ import pl.psi.player.PlayerResources;
 
 public class Mine implements MapElement {
 
-    private final Resource.Type type;
+    private final Resource.ResourceType resourceType;
     private Player currentOwner = null;
 
-    public Mine(Resource.Type aType) {
-        this.type = aType;
+    public Mine(Resource.ResourceType aResourceType) {
+        this.resourceType = aResourceType;
     }
 
     @Override
@@ -35,7 +34,7 @@ public class Mine implements MapElement {
         // add Resources if Player owns
         if (currentOwner != null) {
             PlayerResources resources = currentOwner.getResources();
-            switch (type) {
+            switch (resourceType) {
                 case GOLD:
                     // Add gold for Player's resources
                     resources.setGold(resources.getGold()+1000);

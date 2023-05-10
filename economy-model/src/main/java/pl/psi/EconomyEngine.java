@@ -21,6 +21,9 @@ public class EconomyEngine {
 
     // TODO ENDPOINT, engine dostarcza canMove, jak w battleEngine
 
+    // TODO getter Player
+
+    // Fasade - easy for GUI
     public boolean canMove(final Point aPoint, final Hero aChoosenHero) {
         return board.canMove(aChoosenHero, aPoint);
     }

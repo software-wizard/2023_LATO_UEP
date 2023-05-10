@@ -64,7 +64,7 @@ public class BoardTest {
                 .moveRange(3)
                 .build());
         mapElements.put(new Point(1, 1), hero);
-        final pl.psi.mapElements.Resource gold = new pl.psi.mapElements.Resource(Resource.Type.GOLD, 1);
+        final pl.psi.mapElements.Resource gold = new pl.psi.mapElements.Resource(Resource.ResourceType.GOLD, 1);
         mapElements.put(new Point(2, 2), gold);
         final Board board = new Board(mapElements);
 

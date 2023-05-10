@@ -1,16 +1,15 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
 import pl.psi.hero.Hero;
 import pl.psi.player.PlayerResources;
 
 public class Resource implements MapElement {
 
-    private final pl.psi.Resource.Type type;
+    private final pl.psi.Resource.ResourceType resourceType;
     private final int resourceAmount;
 
-    public Resource(pl.psi.Resource.Type aType, int aResourceAmount) {
-        this.type = aType;
+    public Resource(pl.psi.Resource.ResourceType aResourceType, int aResourceAmount) {
+        this.resourceType = aResourceType;
         this.resourceAmount = aResourceAmount;
     }
 
@@ -23,7 +22,7 @@ public class Resource implements MapElement {
     public void apply(Hero aHero) {
         // Get resources from Player's instance
         PlayerResources resources = aHero.getHeroStatistics().getPlayer().getResources();
-        switch (type) {
+        switch (resourceType) {
             case GOLD:
                 // Add gold for Player's resources
                 resources.setGold(resources.getGold()+ resourceAmount);
