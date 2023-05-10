@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import pl.psi.Buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.mapElements.Artifact;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
 
@@ -70,7 +71,7 @@ public class Hero implements MapElement {
 
     }
 
-    public void addArtifactToBackpack(MapElement aArtifact) {
+    public void addArtifactToBackpack(Artifact aArtifact) {
         //open gui
         this.heroEquipment.addItemToBackpack(aArtifact);
     }
