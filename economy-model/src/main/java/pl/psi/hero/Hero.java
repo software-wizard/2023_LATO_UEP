@@ -9,7 +9,7 @@ import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 @AllArgsConstructor
 @Builder
 @Getter
@@ -72,6 +72,6 @@ public class Hero implements MapElement {
 
     public void addArtifactToBackpack(MapElement aArtifact) {
         //open gui
-        this.heroEquipment.addItem(aArtifact);
+        this.heroEquipment.addItemToBackpack(aArtifact);
     }
 }

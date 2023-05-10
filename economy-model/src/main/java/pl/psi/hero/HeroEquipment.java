@@ -3,8 +3,8 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.TestArtifact;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +37,20 @@ public class HeroEquipment {
         this.heroInventory.put("spellBook", null);
     }
 
-    public void addItem(MapElement item){
+    public void addItemToBackpack(MapElement item){
         this.heroBackpack.add(item);
+    }
+
+    public void moveFromBackpackToInventory(TestArtifact backpackItem){
+        if (heroInventory.get(backpackItem.getType())!=null){}
+        else {
+            heroInventory.put(backpackItem.getType(),backpackItem);
+            heroBackpack.remove(backpackItem);
+        }
+    }
+
+    public void moveFromInventoryToBackpack(TestArtifact inventoryItem){
+        heroBackpack.add(inventoryItem);
+        heroInventory.put(inventoryItem.getType(),null);
     }
 }

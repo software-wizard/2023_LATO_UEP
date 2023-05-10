@@ -8,9 +8,7 @@ import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.TestArtifact;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -23,5 +21,33 @@ public class HeroEquipmentTest {
         MapElement testArtifact2 = new TestArtifact("helmet","thunderHelmet");
         hero.addArtifactToBackpack(testArtifact1);
         assertTrue(hero.getHeroEquipment().getHeroBackpack().contains(testArtifact1));
+    }
+
+    @Test
+    void shouldMoveItemFromBackpackToInventory() {
+        final HeroEquipment heroEquipment = new HeroEquipment();
+        MapElement testArtifact1 = new TestArtifact("helmet","skullHelmet");
+        MapElement testArtifact2 = new TestArtifact("helmet","thunderHelmet");
+        heroEquipment.addItemToBackpack(testArtifact1);
+        heroEquipment.addItemToBackpack(testArtifact2);
+        heroEquipment.moveFromBackpackToInventory((TestArtifact) testArtifact1);
+        heroEquipment.moveFromBackpackToInventory((TestArtifact) testArtifact2);
+        assertTrue(heroEquipment.getHeroInventory().containsValue(testArtifact1));
+        assertFalse(heroEquipment.getHeroBackpack().contains(testArtifact1));
+    }
+
+    @Test
+    void shouldMoveItemFromInventoryToBackpack() {
+        final HeroEquipment heroEquipment = new HeroEquipment();
+        MapElement testArtifact1 = new TestArtifact("helmet","skullHelmet");
+        MapElement testArtifact2 = new TestArtifact("helmet","thunderHelmet");
+        heroEquipment.addItemToBackpack(testArtifact1);
+        heroEquipment.addItemToBackpack(testArtifact2);
+        heroEquipment.moveFromBackpackToInventory((TestArtifact) testArtifact1);
+        heroEquipment.moveFromInventoryToBackpack((TestArtifact) testArtifact1);
+        
+        assertTrue(heroEquipment.getHeroInventory().get(((TestArtifact) testArtifact1).getType())==null);
+        assertTrue(heroEquipment.getHeroBackpack().contains(testArtifact1));
+        assertTrue(heroEquipment.getHeroBackpack().contains(testArtifact2));
     }
 }
