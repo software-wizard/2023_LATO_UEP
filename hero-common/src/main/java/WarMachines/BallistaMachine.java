@@ -9,9 +9,9 @@ Basic Artillery gives ballista a 50% chance of double damage
 Advanced Artillery gives ballista a 75% chance of double damage
 Expert Artillery gives ballista a 100% chance of double damage
 
-Basic Archery increases ballista's damage by 10%
-Advanced Archery increases ballista's damage by 25%
-Expert Archery increases ballista's damage by 50%
+Basic Archery increases ballista's base damage (2-3) by 10%
+Advanced Archery increases ballista's base damage (2-3) by 25%
+Expert Archery increases ballista's base damage (2-3) by 50%
  */
 
 import lombok.Getter;
