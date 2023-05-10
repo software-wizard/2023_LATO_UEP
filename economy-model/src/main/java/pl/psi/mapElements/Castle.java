@@ -72,7 +72,6 @@ package pl.psi.mapElements;
 import pl.psi.buildings.Building;
 import pl.psi.hero.Hero;
 import java.util.ArrayList;
-import static pl.psi.Resource.ResourceType;
 
 
 public class Castle implements MapElement {
