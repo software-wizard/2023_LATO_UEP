@@ -60,14 +60,13 @@ public class Hero implements MapElement {
         // TODO battle if enemy hero
     }
 
-    public void addCreaturesToArmy(RecruitmentBuilding building, int amount, PlayerResources resources) {
-        int creaturesCost = building.getCreaturesToRecruit().getAmount() * building.getCreaturesToRecruit().getGoldCost();
+    public void addCreaturesToArmy(RecruitmentBuilding building, int amount, PlayerResources resources){
+        int creaturesCost = building.getCreaturesToRecruit().getAmount()*building.getCreaturesToRecruit().getGoldCost();
 
-        if (creaturesCost < resources.getGold()) {
+        if(creaturesCost<resources.getGold()){
             EconomyCreature armyCreature = building.takeCreaturesFromBuilding(amount);
             heroArmy.add(armyCreature);
-            resources.setGold(resources.getGold() - creaturesCost);
-//            building.getCreaturesToRecruit().setAmount(building.getCreaturesToRecruit().getAmount()-amount);
+            resources.setGold(resources.getGold()-creaturesCost);
         }
     }
 
