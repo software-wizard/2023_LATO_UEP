@@ -97,12 +97,12 @@ public class Board
     public int[][] gridConstruction(List<Point> listOfPoints){
         int a = 0;
         int b = 0;
-        for(Point point: listOfPoints){
-            if(point.getX() > a) {
-                a = point.getX();
+        for(Point point: listOfPoints){ //transpozycja?
+            if(point.getX() > b) {
+                b = point.getX();
             }
-            if (point.getY() > b) {
-                b = point.getY();
+            if (point.getY() > a) {
+                a = point.getY();
             }
         }
 

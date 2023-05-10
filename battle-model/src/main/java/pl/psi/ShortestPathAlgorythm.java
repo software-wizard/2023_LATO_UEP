@@ -62,7 +62,7 @@ public class ShortestPathAlgorythm {
         return null;
     }
 
-    private List<Point> getNeighbors(Point point) { //Pozbyłabym się tego, iterowałabym po gridzie (bo tam są przecież już koszty ustalone przez nas) bo obecnie end nigdy nie jest curr -> jest za daleko by być sąsiadem w rozumieniu tego kodu
+    private List<Point> getNeighbors(Point point) {
         List<Point> neighbors = new ArrayList<>();
         int x = point.getX();
         int y = point.getY();
@@ -92,7 +92,7 @@ public class ShortestPathAlgorythm {
 
     private int getGCost(Point point) {
         return grid[point.getX()][point.getY()];
-    }
+    } //start - current
 
     private void setGCost(Point point, int gCost) {
         grid[point.getX()][point.getY()] = gCost;
@@ -100,7 +100,7 @@ public class ShortestPathAlgorythm {
 
     private int getHCost(Point point) {
         return getDistance(point, end);
-    }
+    } // current - goal
 
     private void setHCost(Point point, int hCost) {
         // Do nothing since we're using Manhattan distance as our heuristic
@@ -108,7 +108,7 @@ public class ShortestPathAlgorythm {
 
     private int getFCost(Point point) {
         return getGCost(point) + getHCost(point);
-    }
+    } // start - goal
     private Point getParent(Point point) {
         int x = point.getX();
         int y = point.getY();

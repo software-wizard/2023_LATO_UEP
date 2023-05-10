@@ -55,7 +55,7 @@ class BoardTest
         List<Point> listOfPoints = board.availablePointsToGo(c1.get(0));
         int[][] grid = board.gridConstruction(listOfPoints);
         assertThat(grid).isNotEmpty();
-        assertThat(grid).hasDimensions(3,4);
+        assertThat(grid).hasDimensions(4,3);
 
     }
 }
