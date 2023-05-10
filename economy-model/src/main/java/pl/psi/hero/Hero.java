@@ -15,33 +15,22 @@ import java.util.HashMap;
 @Getter
 public class Hero implements MapElement {
 
-    // TODO equipment HashMap for artifacts
+
     // Metoda apply for EconomyArtifact
 
     private HeroStatistics heroStatistics;
+    private HeroEquipment heroEquipment;
     private ArrayList<EconomyCreature> heroArmy;
-    private HashMap<String, Object> heroEquipment;
-    private ArrayList<MapElement> heroBackpack;
+    //klasa dla eq backpack/ osobno pod i otwiera eq z herosem i zmienia eq
+    //metody do wkładania i sciagania z eq tetsty w klasie / jeśli juz jest załozone to exception czy sciagac tamto
+    //gui osobno w gui i laczy sie z herosem
 
-    public Hero(HeroStatistics aHeroStatistics) {
+    //ecoLauncherScene Controller - switchToMap otweira nowa scene
+
+
+    public Hero(HeroStatistics aHeroStatistics, HeroEquipment aHeroEquipment) {
         this.heroStatistics = aHeroStatistics;
-        this.heroBackpack = new ArrayList<>();
-        this.heroEquipment = new HashMap<>();
-        //w innej metodzie wrzucac dopiero type = name
-        this.heroEquipment.put("helmet", null);
-        this.heroEquipment.put("cape", null);
-        this.heroEquipment.put("necklace", null);
-        this.heroEquipment.put("rightHand", null);
-        this.heroEquipment.put("leftHand", null);
-        this.heroEquipment.put("torso", null);
-        this.heroEquipment.put("ring", null);
-        this.heroEquipment.put("feet", null);
-        this.heroEquipment.put("miscellaneous", null);
-        this.heroEquipment.put("ballista", null);
-        this.heroEquipment.put("ammoCart", null);
-        this.heroEquipment.put("firstAidTent", null);
-        this.heroEquipment.put("catapult", null);
-        this.heroEquipment.put("spellBook", null);
+        this.heroEquipment = aHeroEquipment;
     }
     public Hero(HeroStatistics aHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
         this.heroStatistics = aHeroStatistics;
@@ -82,6 +71,7 @@ public class Hero implements MapElement {
     }
 
     public void addArtifactToBackpack(MapElement aArtifact) {
-        this.heroBackpack.add(aArtifact);
+        //open gui
+        this.heroEquipment.addItem(aArtifact);
     }
 }

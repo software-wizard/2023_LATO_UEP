@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.junit.jupiter.api.Test;
 import pl.psi.hero.Hero;
+import pl.psi.hero.HeroEquipment;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.*;
 import pl.psi.player.Player;
@@ -38,7 +39,7 @@ public class BoardTest {
     void shouldHeroMovesProperly() {
         final Hero hero = new Hero(HeroStatistics.builder()
                 .moveRange(3)
-                .build());
+                .build(), HeroEquipment.builder().build());
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
         final Board board = new Board(mapElements);
@@ -62,7 +63,7 @@ public class BoardTest {
                                 .build())
                         .build())
                 .moveRange(3)
-                .build());
+                .build(), HeroEquipment.builder().build());
         mapElements.put(new Point(1, 1), hero);
         final pl.psi.mapElements.Resource gold = new pl.psi.mapElements.Resource(Resource.Type.GOLD, 1);
         mapElements.put(new Point(2, 2), gold);
@@ -78,7 +79,7 @@ public class BoardTest {
 
     @Test
     void shouldBarierWorksProperly() {
-        final Hero hero = new Hero(HeroStatistics.builder().moveRange(3).build());
+        final Hero hero = new Hero(HeroStatistics.builder().moveRange(3).build(), HeroEquipment.builder().build());
         final StaticElement barier = new StaticElement();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
@@ -92,8 +93,8 @@ public class BoardTest {
     @Test
     void shouldLearningStoneWorksProperly() {
         // Learning Stone: gives visiting heroes +1000 experience upon their first visit.
-        final Hero hero = new Hero(HeroStatistics.builder().moveRange(3).experience(0).build());
-        final Hero hero2 = new Hero(HeroStatistics.builder().moveRange(3).experience(50).build());
+        final Hero hero = new Hero(HeroStatistics.builder().moveRange(3).experience(0).build(), HeroEquipment.builder().build());
+        final Hero hero2 = new Hero(HeroStatistics.builder().moveRange(3).experience(50).build(), HeroEquipment.builder().build());
         final LearningStone ls = new LearningStone();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
@@ -119,7 +120,7 @@ public class BoardTest {
                 .moveRange(3)//set moveRange to 3
                 .maxMana(10)
                 .mana(0)
-                .build());
+                .build(), HeroEquipment.builder().build());
         final MagicWell mw = new MagicWell();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), hero);
