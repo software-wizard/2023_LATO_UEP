@@ -5,10 +5,10 @@ import pl.psi.player.PlayerResources;
 
 public class Resource implements MapElement {
 
-    private final pl.psi.Resource.ResourceType resourceType;
+    private final pl.psi.ResourceType resourceType;
     private final int resourceAmount;
 
-    public Resource(pl.psi.Resource.ResourceType aResourceType, int aResourceAmount) {
+    public Resource(pl.psi.ResourceType aResourceType, int aResourceAmount) {
         this.resourceType = aResourceType;
         this.resourceAmount = aResourceAmount;
     }

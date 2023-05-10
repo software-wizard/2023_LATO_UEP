@@ -6,7 +6,7 @@ import pl.psi.buildings.RecruitmentBuilding;
 
 import java.util.ArrayList;
 
-import static pl.psi.mapElements.Resource.ResourceType.GOLD;
+import static pl.psi.ResourceType.GOLD;
 
 public class TownFactory {
     public static ArrayList<Building> createBuildingsOwned(Castle.FractionType fraction) {

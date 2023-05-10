@@ -1,16 +1,16 @@
 package pl.psi.mapElements;
 
-import pl.psi.Resource;
+import pl.psi.ResourceType;
 import pl.psi.hero.Hero;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 public class Mine implements MapElement {
 
-    private final Resource.ResourceType resourceType;
+    private final ResourceType resourceType;
     private Player currentOwner = null;
 
-    public Mine(Resource.ResourceType aResourceType) {
+    public Mine(ResourceType aResourceType) {
         this.resourceType = aResourceType;
     }
 
