@@ -1,4 +1,4 @@
-package pl.psi.Buildings;
+package pl.psi.buildings;
 
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.creatures.EconomyNecropolisFactory;

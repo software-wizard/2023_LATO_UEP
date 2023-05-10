@@ -69,8 +69,7 @@
 //}
 
 package pl.psi.mapElements;
-import pl.psi.Buildings.Building;
-import pl.psi.Buildings.RecruitmentBuilding;
+import pl.psi.buildings.Building;
 import pl.psi.hero.Hero;
 import java.util.ArrayList;
 import static pl.psi.Resource.ResourceType;

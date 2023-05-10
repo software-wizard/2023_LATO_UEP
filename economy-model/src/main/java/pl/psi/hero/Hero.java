@@ -3,7 +3,7 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import pl.psi.Buildings.RecruitmentBuilding;
+import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;

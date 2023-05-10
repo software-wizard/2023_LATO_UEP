@@ -1,8 +1,6 @@
-package pl.psi.Buildings;
+package pl.psi.buildings;
 import lombok.Getter;
 import lombok.Setter;
-import pl.psi.hero.Hero;
-import pl.psi.player.PlayerResources;
 import pl.psi.mapElements.*;
 @Getter
 @Setter
