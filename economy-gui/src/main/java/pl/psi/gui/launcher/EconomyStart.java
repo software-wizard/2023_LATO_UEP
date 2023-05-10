@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.launcher;
 
 import javafx.scene.Parent;
 import javafx.scene.control.TextInputDialog;

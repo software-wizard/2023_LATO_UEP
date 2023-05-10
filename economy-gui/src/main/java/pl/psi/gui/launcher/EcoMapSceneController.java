@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.launcher;
 
 import java.io.IOException;
 import java.util.List;
