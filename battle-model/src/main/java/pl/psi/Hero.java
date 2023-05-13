@@ -18,4 +18,5 @@ public class Hero
     {
         creatures = aCreatures;
     }
+
 }
