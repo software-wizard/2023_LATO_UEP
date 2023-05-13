@@ -2,9 +2,9 @@ package pl.psi.creatures;
 
 import java.util.Random;
 
-public class DefenceSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
+public class ArmourerSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
     public int level;
-    protected DefenceSkill(Random aRand, int level) {
+    protected ArmourerSkill(Random aRand, int level) {
         super(aRand);
     }
 
@@ -12,11 +12,11 @@ public class DefenceSkill extends AbstractCalculateDamageStrategy implements Dam
        if (x == 0){
            return 1;
        } else if (x == 1) {
-           return 1.1;
+           return 0.9;
        } else if (x == 2) {
-           return 1.2;
+           return 0.8;
        } else {
-           return 1.3;
+           return 0.7;
        }
     }
 
