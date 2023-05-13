@@ -1,5 +1,7 @@
 package pl.psi.creatures;
 
+import lombok.ToString;
+
 import java.util.Random;
 
 public class ArmourerSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
@@ -12,11 +14,11 @@ public class ArmourerSkill extends AbstractCalculateDamageStrategy implements Da
        if (x == 0){
            return 1;
        } else if (x == 1) {
-           return 0.9;
+           return 0.95;
        } else if (x == 2) {
-           return 0.8;
+           return 0.90;
        } else {
-           return 0.7;
+           return 0.85;
        }
     }
 
