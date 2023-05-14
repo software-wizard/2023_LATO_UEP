@@ -2,17 +2,11 @@ package pl.psi.creatures;
 
 import java.util.Random;
 
-public class OffenceSkillStrategy extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
+public class OffenceSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
 
-    protected OffenceSkillStrategy(Random aRand) {
+    protected OffenceSkill(Random aRand) {
         super(aRand);
     }
-
-    @Override
-    protected int getArmor(Creature aDefender) {
-        return super.getArmor(aDefender);
-    }
-
     @Override
     public int calculateDamage(Creature aAttacker, Creature aDefender) {
         return calculateOutcome(super.calculateDamage(aAttacker, aDefender));
@@ -22,5 +16,11 @@ public class OffenceSkillStrategy extends AbstractCalculateDamageStrategy implem
     @Override
     public int calculateOutcome(int i) {
         return (int)(i * 1.1);
+    }
+
+    public void apply(Creature attacker) {
+
+        //TODO implement this method
+
     }
 }
