@@ -7,8 +7,11 @@ import java.util.Random;
  */
 class DefaultDamageCalculator extends AbstractCalculateDamageStrategy
 {
-    public DefaultDamageCalculator( final Random aRand )
-    {
+    public DefaultDamageCalculator( final Random aRand ) {
         super( aRand );
     }
+
+    @Override
+    protected int getArmor(final Creature aDefender) {
+        return aDefender.getArmor() + aDefender.getHero().getDefenseLevel();
 }
