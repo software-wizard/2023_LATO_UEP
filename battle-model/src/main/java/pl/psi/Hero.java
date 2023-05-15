@@ -1,5 +1,6 @@
 package pl.psi;
 
+import java.awt.font.NumericShaper;
 import java.util.List;
 
 import pl.psi.creatures.Creature;
@@ -15,6 +16,8 @@ public class Hero
 {
     @Getter
     private final List< Creature > creatures;
+    public int level;
+    public int mana;
     private List< Skill > skillList;
     public Hero( final List< Creature > aCreatures)
     {
