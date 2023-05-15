@@ -39,12 +39,22 @@ public class NewGameEnginePrototype {
                     try {
                         temporaryTurnQueueWithoutCreatures.getCurrentWarMachine()
                                 .attack(defender);
+                        checkIfAlive(defender);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 });
         pass();
     }
+
+    private void checkIfAlive(WarMachine defender) {
+        if(!(temporaryTurnQueueWithoutCreatures.getCurrentWarMachine().checkIfAlive(defender))){
+            board.removeWarMachine(defender);
+            temporaryTurnQueueWithoutCreatures.removeWarMachine(defender);
+            pass();
+        }
+    }
+
 
 //    public boolean canMove(final Point aPoint) {
 //        return board.canMove(turnQueue.getCurrentCreature(), aPoint);

@@ -58,6 +58,10 @@ public class TemporaryTurnQueueWithoutCreatures {
     void addObserver(PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aObserver);
     }
+
+    public void removeWarMachine(WarMachine warMachine){
+        warMachines.remove(warMachine);
+    }
 }
 
 

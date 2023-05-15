@@ -49,4 +49,20 @@ class WarMachineTest {
         ballista.attack(ammoCart);
         System.out.println("Ammo cart hp after second attack: " + ammoCart.getCurrentHp());
     }
+
+    @Test
+    void getCurrentHp() throws Exception {
+        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
+        assertEquals(1000, catapult.getCurrentHp());
+
+        ballista.attack(catapult);
+        assertTrue(catapult.getCurrentHp() < 1000);
+
+        for (int i = 0; i < 1000; i++) {
+            ballista.attack(catapult);
+        }
+
+        assertEquals(0, catapult.getCurrentHp());
+    }
 }

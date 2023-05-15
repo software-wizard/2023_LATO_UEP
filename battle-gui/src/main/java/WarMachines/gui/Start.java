@@ -55,7 +55,7 @@ public class Start extends Application
 
     private NewHeroPrototype createP1()
     {
-        return new NewHeroPrototype( List.of( new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build()) );
+        return new NewHeroPrototype( List.of( new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build(), new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build()) );
     }
 
 }
