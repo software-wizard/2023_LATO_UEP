@@ -1,12 +1,11 @@
 package pl.psi.creatures;
 
-import lombok.ToString;
 
 import java.util.Random;
 
-public class ArmourerSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
-    public int level;
-    protected ArmourerSkill(Random aRand, int level) {
+public class ArmourerSkill extends Skill{
+
+    protected ArmourerSkill(Random aRand) {
         super(aRand);
         this.level = level;
     }
@@ -33,4 +32,8 @@ public class ArmourerSkill extends AbstractCalculateDamageStrategy implements Da
     public int calculateOutcome(int i) {
         return (int)(i * calculateInfluence(level));
     }
+
+/*    public void apply (Creature attacker, Creature defender){
+
+  }*/
 }

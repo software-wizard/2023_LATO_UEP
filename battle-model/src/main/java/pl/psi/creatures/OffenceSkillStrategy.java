@@ -12,7 +12,6 @@ public class OffenceSkillStrategy extends AbstractCalculateDamageStrategy implem
     protected int getArmor(Creature aDefender) {
         return super.getArmor(aDefender);
     }
-    // po co to w offence skillu?
 
     @Override
     public int calculateDamage(Creature aAttacker, Creature aDefender) {
