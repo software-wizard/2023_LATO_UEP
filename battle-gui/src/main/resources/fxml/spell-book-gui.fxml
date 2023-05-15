@@ -5,6 +5,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="218.0" xmlns="http://javafx.com/javafx/11-ea+25" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,4 +22,22 @@
    <children>
       <Button fx:id="castButton" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Cast" translateX="40.0" translateY="20.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
+    <children>
+        <ImageView
+                fx:id="imageView"
+                fitHeight="150.0"
+                fitWidth="200.0"
+                layoutX="61.0"
+                layoutY="83.0"
+                pickOnBounds="true"
+                preserveRatio="true"
+        >
+            <image>
+                <Image
+                        url="@../../resources/52_haste.png"
+                        backgroundLoading="true"
+                />
+            </image>
+        </ImageView>
+    </children>
 </GridPane>

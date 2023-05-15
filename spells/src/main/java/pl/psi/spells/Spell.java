@@ -13,7 +13,7 @@ public class Spell {
     private Spell(SpellBuilder builder){
         this.name = builder.name;
         this.type = builder.type;
-        this.manaCost = builder.cost;
+        this.manaCost = builder.manaCost;
         this.duration = builder.duration;
         this.damage = builder.damage;
     }
@@ -21,7 +21,7 @@ public class Spell {
     public static class SpellBuilder{
         private String name;
         private String type;
-        private int cost;
+        private int manaCost;
         private int duration;
         private int damage;
 
@@ -33,26 +33,25 @@ public class Spell {
             return this;
         }
 
-        public SpellBuilder damage(int aMultiplier, int aAddition){
-            final int spellDamage = ((1 * aMultiplier) + aAddition);
-            this.damage = spellDamage;
-            return this;
-        }
-        public SpellBuilder duration(int aAmount){
-            this.duration = aAmount;
-            return this;
-        }
-
-        public SpellBuilder cost(int aAmount){
-            this.cost = aAmount;
-            return this;
-        }
-
         public SpellBuilder type(String aType){
             this.type = aType;
             return this;
         }
 
+        public SpellBuilder cost(int aAmount){
+            this.manaCost = aAmount;
+            return this;
+        }
+
+        public SpellBuilder duration(int aAmount){
+            this.duration = aAmount;
+            return this;
+        }
+        public SpellBuilder damage(int aMultiplier, int aAddition){
+            final int spellDamage = ((1 * aMultiplier) + aAddition);
+            this.damage = spellDamage;
+            return this;
+        }
         public Spell build(){
             return new Spell(this);
         }
