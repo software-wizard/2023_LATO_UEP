@@ -8,9 +8,10 @@ import pl.psi.creatures.Creature;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+/*
+Prototype class for board - currently only for war machines
  */
+
 public class NewBoardPrototype
 {
 //    private static final int MAX_WITDH = 14;
@@ -28,6 +29,10 @@ public class NewBoardPrototype
         {
             map.put( new Point( aXPosition, i * 2 + 4 ), aWarMachines.get( i ) );
         }
+    }
+
+    public void removeWarMachine(WarMachine warMachine ){
+        map.remove(getPosition(warMachine));
     }
 
     Optional< WarMachine > getWarMachine( final Point aPoint )
@@ -57,7 +62,11 @@ public class NewBoardPrototype
 
     Point getPosition( WarMachine aWarMachine )
     {
-        return map.inverse()
-            .get( aWarMachine );
+        if ((map.inverse().get( aWarMachine )) != null){
+            return map.inverse()
+                    .get( aWarMachine );
+        } else{
+            return new Point(0,0);
+        }
     }
 }

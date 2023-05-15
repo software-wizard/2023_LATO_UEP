@@ -65,13 +65,10 @@ public class WarMachine implements PropertyChangeListener  {
 //        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
 
         int hp = aDefender.getCurrentHp() - hpToSubtract;
-        if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
-//            aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
-            aDefender.setCurrentHp(hp);
-        }
+        //            System.out.println("HP: " + hp);
+        //            System.out.println("War Machine is dead");
+        //            aDefender.setAmount(aDefender.getAmount() - 1);
+        aDefender.setCurrentHp(Math.max(hp, 0));
 //        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
@@ -131,6 +128,10 @@ public class WarMachine implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         //todo shouldn't be empty
+    }
+
+    public boolean checkIfAlive(WarMachine defender) {
+        return defender.getCurrentHp() > 0;
     }
 
     public static class Builder {
