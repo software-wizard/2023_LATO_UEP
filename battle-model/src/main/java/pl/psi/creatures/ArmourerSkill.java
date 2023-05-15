@@ -8,14 +8,15 @@ public class ArmourerSkill extends AbstractCalculateDamageStrategy implements Da
     public int level;
     protected ArmourerSkill(Random aRand, int level) {
         super(aRand);
+        this.level = level;
     }
 
-    private double calculateInfluence (int x){
-       if (x == 0){
+    private double calculateInfluence (int level) {
+       if (level == 0){
            return 1;
-       } else if (x == 1) {
+       } else if (level == 1) {
            return 0.95;
-       } else if (x == 2) {
+       } else if (level == 2) {
            return 0.90;
        } else {
            return 0.85;
