@@ -37,7 +37,7 @@ public class MainBattleController implements PropertyChangeListener
     {
         gameEngine = new GameEngine( aHero1, aHero2 );
     }
-
+//dodac metode openspellbok
     @FXML
     private void initialize()
     {
@@ -80,6 +80,7 @@ public class MainBattleController implements PropertyChangeListener
         }
     }
 
+    //zmienic nazwe buttona, metoda initialize spell button, metoda prepare spell button
     private void openSpellBook(){
         windowButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

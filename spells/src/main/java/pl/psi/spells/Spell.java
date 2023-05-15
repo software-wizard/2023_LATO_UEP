@@ -1,19 +1,19 @@
 package pl.psi.spells;
 
 import lombok.Getter;
-
+//dodac metode cast przyjmujaca punkt, wziac kreature z tego punktu
 @Getter
 public class Spell {
     private final String name;
     private final String type;
-    private final int cost;
+    private final int manaCost;
     private final int duration;
     private final int damage;
 
     private Spell(SpellBuilder builder){
         this.name = builder.name;
         this.type = builder.type;
-        this.cost = builder.cost;
+        this.manaCost = builder.cost;
         this.duration = builder.duration;
         this.damage = builder.damage;
     }
