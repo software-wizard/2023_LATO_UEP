@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 @Getter
-public class WarMachine implements PropertyChangeListener  {
+public class WarMachine implements PropertyChangeListener, MapObjectIf  {
     private WarMachineDamageCalculatorIF calculator;
     private WarMachineStatisticIf stats;
     @Setter
@@ -28,10 +28,9 @@ public class WarMachine implements PropertyChangeListener  {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
-
     }
 
-    public void attack(final WarMachine aDefender) throws Exception {
+    public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
@@ -60,7 +59,7 @@ public class WarMachine implements PropertyChangeListener  {
         return getAmount() > 0;
     }
 
-    private void applyDamage(final WarMachine aDefender, final int aDamage) {
+    private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
         int hpToSubtract = aDamage % aDefender.getMaxHp();
 //        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
 
@@ -76,7 +75,7 @@ public class WarMachine implements PropertyChangeListener  {
         return stats.getMaxHp();
     }
 
-    protected void setCurrentHp(final int aCurrentHp) {
+    public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -130,7 +129,7 @@ public class WarMachine implements PropertyChangeListener  {
         //todo shouldn't be empty
     }
 
-    public boolean checkIfAlive(WarMachine defender) {
+    public boolean checkIfAlive(MapObjectIf defender) {
         return defender.getCurrentHp() > 0;
     }
 

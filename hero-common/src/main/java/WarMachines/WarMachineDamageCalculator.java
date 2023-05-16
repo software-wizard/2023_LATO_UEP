@@ -1,7 +1,7 @@
 package WarMachines;
 
 public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF {
-    public int calculateDamage(WarMachine aAttacker, WarMachine aDefender) throws Exception {
+    public int calculateDamage(WarMachine aAttacker, MapObjectIf aDefender) throws Exception {
         int damage;
         if (aAttacker.getStats().equals(WarMachineStatistic.BALLISTA)){
             //todo real hero artillery skill value and heroAttack value must be used

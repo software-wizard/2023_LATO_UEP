@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
+import WarMachines.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
 
@@ -21,7 +22,7 @@ import lombok.Getter;
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
 @Getter
-public class Creature implements PropertyChangeListener {
+public class Creature implements PropertyChangeListener, MapObjectIf {
     private CreatureStatisticIf stats;
     @Setter
     private int amount;
@@ -73,7 +74,7 @@ public class Creature implements PropertyChangeListener {
         return stats.getMaxHp();
     }
 
-    protected void setCurrentHp(final int aCurrentHp) {
+     public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -117,6 +118,16 @@ public class Creature implements PropertyChangeListener {
 
     public int getMoveRange() {
         return stats.getMoveRange();
+    }
+
+    @Override
+    public void attack(MapObjectIf defender) throws Exception {
+        System.out.println("Creature is attacking");
+    }
+
+    @Override
+    public boolean checkIfAlive(MapObjectIf defender) {
+        return true;
     }
 
     public static class Builder {
