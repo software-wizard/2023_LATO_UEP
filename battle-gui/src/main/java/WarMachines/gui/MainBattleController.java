@@ -1,15 +1,13 @@
 package WarMachines.gui;
 
-import WarMachines.WarMachine;
+import WarMachines.MapObjectIf;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import pl.psi.GameEngine;
 import pl.psi.Point;
-import pl.psi.creatures.Creature;
-import pl.psi.creatures.NewHeroPrototype;
+import pl.psi.MapObject;
 import pl.psi.NewGameEnginePrototype;
 
 import java.beans.PropertyChangeEvent;
@@ -24,9 +22,9 @@ public class MainBattleController implements PropertyChangeListener
     @FXML
     private Button passButton;
 
-    public MainBattleController(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2 )
+    public MainBattleController(final MapObject mapObject, final MapObject mapObject1)
     {
-        gameEngine = new NewGameEnginePrototype( aHero1, aHero2 );
+        gameEngine = new NewGameEnginePrototype(mapObject, mapObject1);
     }
 
     @FXML
@@ -45,11 +43,11 @@ public class MainBattleController implements PropertyChangeListener
             for( int y = 0; y < 10; y++ )
             {
                 Point currentPoint = new Point( x, y );
-                Optional<WarMachine> warMachine = gameEngine.getWarMachine( currentPoint );
+                Optional<MapObjectIf> gameObject = gameEngine.getMapObject( currentPoint );
                 final MapTile mapTile = new MapTile( "" );
-                warMachine.ifPresent( c -> mapTile.setName( c.toString() ) );
+                gameObject.ifPresent( c -> mapTile.setName( c.toString() ) );
 
-                if( gameEngine.isCurrentWarMachine( currentPoint ) )
+                if( gameEngine.isCurrentMapObject( currentPoint ) )
                 {
                     mapTile.setBackground( Color.GREENYELLOW );
                 }

@@ -1,9 +1,8 @@
 package pl.psi;
 
-import WarMachines.WarMachine;
+import WarMachines.MapObjectIf;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import pl.psi.creatures.Creature;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,27 +14,27 @@ Prototype class for board - currently only for war machines
 public class NewBoardPrototype
 {
 //    private static final int MAX_WITDH = 14;
-    private final BiMap< Point, WarMachine> map = HashBiMap.create();
+    private final BiMap< Point, MapObjectIf> map = HashBiMap.create();
 
-    public NewBoardPrototype(final List< WarMachine > aWarMachines1, final List< WarMachine > aWarMachines2 )
+    public NewBoardPrototype(final List< MapObjectIf > mapObjectIfs, final List< MapObjectIf > mapObjectIfs1 )
     {
-        addWarMachines( aWarMachines1, 3 );
-        addWarMachines( aWarMachines2, 11 );
+        addMapObject( mapObjectIfs, 3 );
+        addMapObject( mapObjectIfs1, 11 );
     }
 
-    private void addWarMachines(final List< WarMachine > aWarMachines, final int aXPosition )
+    private void addMapObject(final List< MapObjectIf > mapObjectIfs, final int aXPosition )
     {
-        for( int i = 0; i < aWarMachines.size(); i++ )
+        for( int i = 0; i < mapObjectIfs.size(); i++ )
         {
-            map.put( new Point( aXPosition, i * 2 + 4 ), aWarMachines.get( i ) );
+            map.put( new Point( aXPosition, i * 2 + 4 ), mapObjectIfs.get( i ) );
         }
     }
 
-    public void removeWarMachine(WarMachine warMachine ){
-        map.remove(getPosition(warMachine));
+    public void removeMapObject(MapObjectIf mapObjectIf ){
+        map.remove(getPosition(mapObjectIf));
     }
 
-    Optional< WarMachine > getWarMachine( final Point aPoint )
+    Optional< MapObjectIf > getMapObject(final Point aPoint )
     {
         return Optional.ofNullable( map.get( aPoint ) );
     }
@@ -60,11 +59,11 @@ public class NewBoardPrototype
 //        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
 //    }
 
-    Point getPosition( WarMachine aWarMachine )
+    Point getPosition( MapObjectIf mapObjectIf )
     {
-        if ((map.inverse().get( aWarMachine )) != null){
+        if ((map.inverse().get( mapObjectIf )) != null){
             return map.inverse()
-                    .get( aWarMachine );
+                    .get( mapObjectIf );
         } else{
             return new Point(0,0);
         }
