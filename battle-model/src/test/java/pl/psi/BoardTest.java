@@ -32,7 +32,7 @@ class BoardTest
     void availablePointsToGoShouldFindAllAvailablePoints()
     {
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
-                        .moveRange( 3 )
+                        .moveRange( 4 )
                         .build() )
                 .build();
         final List< Creature > c1 = List.of( creature );
@@ -40,13 +40,13 @@ class BoardTest
         final Board board = new Board( c1, c2 );
         board.availablePointsToGo(c1.get(0));
         assertThat(board.availablePointsToGo(c1.get(0))).isNotEmpty();
-        assertThat(board.availablePointsToGo(c1.get(0))).hasSize(11);
+        assertThat(board.availablePointsToGo(c1.get(0))).hasSize(18);
     }
     @Test
     void shouldChangeListOfPointsInToGrid()
     {
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
-                        .moveRange( 3 )
+                        .moveRange( 4 )
                         .build() )
                 .build();
         final List< Creature > c1 = List.of( creature );
@@ -55,7 +55,7 @@ class BoardTest
         List<Point> listOfPoints = board.availablePointsToGo(c1.get(0));
         int[][] grid = board.gridConstruction(listOfPoints);
         assertThat(grid).isNotEmpty();
-        assertThat(grid).hasDimensions(4,3);
+        assertThat(grid).hasDimensions(5,4);
 
     }
 }

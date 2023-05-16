@@ -21,8 +21,8 @@ public class ShortestPathAlgorythm {
     }
 
     public List<Point> findPath(Point start, Point end) {
-        this.start = start;
-        this.end = end;
+        this.start = new Point(start.getY(), start.getX());
+        this.end = new Point(end.getY(), end.getX());
         openSet.add(start);
 
         while (!openSet.isEmpty()) {

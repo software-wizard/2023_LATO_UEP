@@ -19,7 +19,7 @@ public class ShortestPathAlgorythmTest {
         ShortestPathAlgorythm pathAlgorythm = new ShortestPathAlgorythm(grid);
 
 
-        List<Point> path = pathAlgorythm.findPath(new Point(0, 1), new Point(3, 3));
+        List<Point> path = pathAlgorythm.findPath(new Point(0, 1), new Point(1, 3));
         assertThat(path).isNotEmpty();
     }
 
