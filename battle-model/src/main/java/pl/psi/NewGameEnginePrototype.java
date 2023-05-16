@@ -47,6 +47,20 @@ public class NewGameEnginePrototype {
         pass();
     }
 
+    public void heal(final Point point) {
+        board.getWarMachine(point)
+                .ifPresent(defender -> {
+                    try {
+                        temporaryTurnQueueWithoutCreatures.getCurrentWarMachine()
+                                .attack(defender);
+                        checkIfAlive(defender);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        pass();
+    }
+
     private void checkIfAlive(WarMachine defender) {
         if(!(temporaryTurnQueueWithoutCreatures.getCurrentWarMachine().checkIfAlive(defender))){
             board.removeWarMachine(defender);

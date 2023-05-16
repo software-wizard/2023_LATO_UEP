@@ -1,6 +1,6 @@
 package WarMachines;
 
-public class FirstAidTentMachine {
+public class FirstAidTentMachine extends WarMachine {
 
     public FirstAidTentMachine(){
 
@@ -8,7 +8,7 @@ public class FirstAidTentMachine {
 
     // 0 - no skill; 1 - basic gives control heal 1-50 points of damage; 2 - advanced heal 1 - 75; 3 - expert heal 1 - 100
     private int heroFirstAidSkill;
-    public int calculateHealPoints(int heroFirstAidSkill, int currentHp){
+    protected int calculateHealPoints(int heroFirstAidSkill, int currentHp){
         switch (heroFirstAidSkill){
             case 0: currentHp += calculateUpperBoundary(25); break;
             case 1: currentHp += calculateUpperBoundary(50); break;
@@ -23,5 +23,10 @@ public class FirstAidTentMachine {
 
     public void chooseCreatureToHeal(){
 
+    }
+    public void heal(final WarMachine aDefender) throws Exception {
+        if (isAlive()) {
+            setCurrentHp(calculateHealPoints(1, getCurrentHp()));
+        }
     }
 }
