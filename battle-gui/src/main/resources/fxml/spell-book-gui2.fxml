@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="614.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="547.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+      <children>
+            <ImageView fitHeight="614.0" fitWidth="607.0" layoutX="-3.0">
+               <image>
+                  <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/Picsart_23-05-16_22-18-03-343.png" />
+               </image>
+            </ImageView>
+            <HBox layoutX="35.0" layoutY="54.0" prefHeight="66.0" prefWidth="230.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../resources/52_haste.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../resources/06_viewair.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/03_magicarrow.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Label layoutX="41.0" layoutY="120.0" prefHeight="36.0" prefWidth="67.0" text="Level 2" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="31.0" layoutY="156.0" prefHeight="66.0" prefWidth="469.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/05_disguise.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/48_disruptingray.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/50b_fortune.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/18_lightningbolt.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/45_precision.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/16_visions.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label layoutX="41.0" layoutY="234.0" text="Level 3" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="35.0" layoutY="270.0" prefHeight="66.0" prefWidth="308.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/29_airshield.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/26_destroyundead.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/31_protectionair.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/59_hypnotize.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label layoutX="41.0" layoutY="344.0" text="Level 4" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="41.0" layoutY="375.0" prefHeight="66.0" prefWidth="156.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/20_chainlightning.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/57_counterstrike.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label layoutX="41.0" layoutY="450.0" text="Level 5" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <HBox layoutX="31.0" layoutY="486.0" prefHeight="66.0" prefWidth="312.0">
+               <children>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/09_dimensiondoor.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/07_fly.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/37_magicmirror.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView>
+                     <image>
+                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/68_summonair.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Button fx:id="castButton" layoutX="500.0" layoutY="575.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Cast" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="575.0" />
+            <Button layoutX="428.0" layoutY="575.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="61.0" text="Close" />
+        <Label alignment="CENTER" layoutX="41.0" layoutY="27.0" style="&#10;" text="Level 1" textAlignment="JUSTIFY" textFill="#fff9f9">
+          <font>
+            <Font size="18.0" />
+          </font>
+        </Label>
+            <VBox prefHeight="614.0" prefWidth="604.0">
+              <children>
+                <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="547.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                  <children>
+                        <ImageView fitHeight="614.0" fitWidth="607.0" layoutX="-3.0">
+                           <image>
+                              <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/Picsart_23-05-16_22-18-03-343.png" />
+                           </image>
+                        </ImageView>
+                        <HBox layoutX="35.0" layoutY="54.0" prefHeight="66.0" prefWidth="230.0">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../resources/52_haste.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../resources/06_viewair.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/03_magicarrow.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <Label layoutX="41.0" layoutY="120.0" prefHeight="36.0" prefWidth="67.0" text="Level 2" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="31.0" layoutY="156.0" prefHeight="66.0" prefWidth="469.0">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/05_disguise.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/48_disruptingray.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/50b_fortune.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/18_lightningbolt.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/45_precision.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/16_visions.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label layoutX="41.0" layoutY="234.0" text="Level 3" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="35.0" layoutY="270.0" prefHeight="66.0" prefWidth="308.0">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/29_airshield.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/26_destroyundead.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/31_protectionair.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/59_hypnotize.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label layoutX="41.0" layoutY="344.0" text="Level 4" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="41.0" layoutY="375.0" prefHeight="66.0" prefWidth="156.0">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/20_chainlightning.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/57_counterstrike.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Label layoutX="41.0" layoutY="450.0" text="Level 5" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="31.0" layoutY="486.0" prefHeight="66.0" prefWidth="312.0">
+                           <children>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/09_dimensiondoor.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/07_fly.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/37_magicmirror.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/68_summonair.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </HBox>
+                        <Button fx:id="castButton1" layoutX="500.0" layoutY="575.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Cast" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="575.0" />
+                        <Button layoutX="428.0" layoutY="575.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="61.0" text="Close" />
+                    <Label alignment="CENTER" layoutX="41.0" layoutY="27.0" style="&#10;" text="Level 1" textAlignment="JUSTIFY" textFill="#fff9f9">
+                      <font>
+                        <Font size="18.0" />
+                      </font>
+                    </Label>
+                  </children>
+                </AnchorPane>
+              </children>
+            </VBox>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
