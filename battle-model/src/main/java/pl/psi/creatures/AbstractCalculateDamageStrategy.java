@@ -38,12 +38,6 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
             }
             oneCreatureDamageToDeal = randValue * (1 + attackPoints * ATTACK_BONUS);
         }
-       /* else
-        {
-            double damageReduction = DefenseSkillCalculator.calculateDamageReduction(aAttacker.getAttack(), armor);
-            double reducedDamage = randValue * damageReduction;
-            oneCreatureDamageToDeal = Math.max(reducedDamage, 0);
-        } */
         else
         {
             int defencePoints = armor - aAttacker.getAttack();

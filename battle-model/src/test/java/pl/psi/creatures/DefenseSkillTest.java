@@ -45,7 +45,6 @@ public class DefenseSkillTest {
 
         attacker.attack(defender);
 
-        //int expectedDamage = 10; // assume attacker deals 10 damage without defense skill
 
 
     }
