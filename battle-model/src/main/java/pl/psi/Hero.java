@@ -16,7 +16,7 @@ public class Hero
     private final List< Creature > creatures;
 
     @Getter
-    private int defesceLevel;
+    public int defesceLevel;
 
     public void increaseDefenceLevel(){
         defesceLevel++;
