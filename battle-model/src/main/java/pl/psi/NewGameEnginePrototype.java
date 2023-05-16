@@ -49,11 +49,11 @@ public class NewGameEnginePrototype {
 
     public void heal(final Point point) {
         board.getWarMachine(point)
-                .ifPresent(defender -> {
+                .ifPresent(comrade -> {
                     try {
-                        temporaryTurnQueueWithoutCreatures.getCurrentWarMachine()
-                                .attack(defender);
-                        checkIfAlive(defender);
+                        temporaryTurnQueueWithoutCreatures.getFirstAidTent()
+                                .heal(comrade);
+                        checkIfAlive(comrade);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

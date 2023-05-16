@@ -24,9 +24,9 @@ public class FirstAidTentMachine extends WarMachine {
     public void chooseCreatureToHeal(){
 
     }
-    public void heal(final WarMachine aDefender) throws Exception {
+    public void heal(final WarMachine aComrade) throws Exception {
         if (isAlive()) {
-            setCurrentHp(calculateHealPoints(1, getCurrentHp()));
+            aComrade.setCurrentHp(calculateHealPoints(1, getCurrentHp()));
         }
     }
 }
