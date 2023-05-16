@@ -16,10 +16,10 @@ public class Hero
     private final List< Creature > creatures;
 
     @Getter
-    public int defesceLevel;
+    public int defenseLevel;
 
-    public void increaseDefenceLevel(){
-        defesceLevel++;
+    public void increaseDefenseLevel(){
+        defenseLevel++;
     }
 
     public Hero( final List< Creature > aCreatures )
