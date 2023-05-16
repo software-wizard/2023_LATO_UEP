@@ -11,7 +11,4 @@ class DefaultDamageCalculator extends AbstractCalculateDamageStrategy
         super( aRand );
     }
 
-    @Override
-    protected int getArmor(final Creature aDefender) {
-        return aDefender.getArmor() + aDefender.getHero().getDefenseLevel();
 }
