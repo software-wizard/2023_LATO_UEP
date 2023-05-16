@@ -85,9 +85,7 @@ public class Board
     }
     public List<Point> availablePointsToGo(Creature aCretaure) {
         List<Point> listOfPoints = new ArrayList<>();
-        // Mysle ze problem jest tu taki ze aby cos bylo przypisane do mapy ma miec punkt i kreature
-        // a on musi miec plansze po ktorej musi iterowac, na ten moment test przechodzi ale nie wiem jak to docelowo ma wygladac
-        for (Point point : boardTest) { //zamiast po mapie iterujemy po boardzie, jeżeli na punkcie nie ma creatury to nie należy do mapy
+        for (Point point : boardTest) {
             if (canMove(aCretaure, point)) {
                 listOfPoints.add(point);
             }
@@ -95,29 +93,40 @@ public class Board
         return listOfPoints;
     }
     public int[][] gridConstruction(List<Point> listOfPoints){
-        int a = 0;
-        int b = 0;
-        for(Point point: listOfPoints){ //transpozycja?
-            if(point.getX() > b) {
-                b = point.getX();
+        int width = 0;
+        int height = 0;
+        for (Point point : listOfPoints) {
+            if (point.getX() > width) {
+                width = point.getX();
             }
-            if (point.getY() > a) {
-                a = point.getY();
+            if (point.getY() > height) {
+                height = point.getY();
+            }
+        }
+        width++;
+        height++;
+
+        int[][] grid = new int[width][height];
+        for (int i = 0; i < listOfPoints.size(); i++) {
+            Point point = listOfPoints.get(i);
+            grid[point.getX()][point.getY()] = 1;
+        }
+        return transposeGrid(grid);
+    }
+
+    private int[][] transposeGrid(int[][] grid) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        int[][] transposedGrid = new int[cols][rows];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transposedGrid[j][i] = grid[i][j];
             }
         }
 
-        int[][] grid = new int[a+1][b+1];
-        for (Point point: listOfPoints) {
-            grid[point.getX()][point.getY()] = 1; // na ten moment jeden - pozniej zmiana kosztow
-        }
-        for (int x = 0; x<=a; x++){
-            for (int y = 0; y<=b; y++){
-                if (grid[x][y] != 1){
-                    grid[x][y] = 1000000;
-                }
-            }
-        }
-        return grid;
+        return transposedGrid;
     }
 
     /*
