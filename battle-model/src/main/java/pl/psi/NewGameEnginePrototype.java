@@ -1,8 +1,7 @@
 package pl.psi;
 
+import WarMachines.MapObjectIf;
 import WarMachines.WarMachine;
-import pl.psi.creatures.Creature;
-import pl.psi.creatures.NewHeroPrototype;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,7 +17,7 @@ public class NewGameEnginePrototype {
     private final NewBoardPrototype board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 //    private final NewTurnQueueWithWarMachines newTurnQueueWithWarMachines;
-    private final TemporaryTurnQueueWithoutCreatures temporaryTurnQueueWithoutCreatures;
+    private final NewTurnQueuePrototype newTurnQueuePrototype;
 
 //    public newGameEnginePrototype(final Hero aHero1, final Hero aHero2) {
 //        turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
@@ -28,16 +27,16 @@ public class NewGameEnginePrototype {
 //        board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
 //    }
 
-    public NewGameEnginePrototype(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2) {
-        temporaryTurnQueueWithoutCreatures = new TemporaryTurnQueueWithoutCreatures(aHero1.getWarMachines(), aHero2.getWarMachines());
-        board = new NewBoardPrototype(aHero1.getWarMachines(), aHero2.getWarMachines());
+    public NewGameEnginePrototype(final MapObject mapObject, final MapObject mapObject1) {
+        newTurnQueuePrototype = new NewTurnQueuePrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
+        board = new NewBoardPrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
     }
 
     public void attack(final Point point) {
-        board.getWarMachine(point)
+        board.getMapObject(point)
                 .ifPresent(defender -> {
                     try {
-                        temporaryTurnQueueWithoutCreatures.getCurrentWarMachine()
+                        newTurnQueuePrototype.getCurrentMapObject()
                                 .attack(defender);
                         checkIfAlive(defender);
                     } catch (Exception e) {
@@ -47,10 +46,10 @@ public class NewGameEnginePrototype {
         pass();
     }
 
-    private void checkIfAlive(WarMachine defender) {
-        if(!(temporaryTurnQueueWithoutCreatures.getCurrentWarMachine().checkIfAlive(defender))){
-            board.removeWarMachine(defender);
-            temporaryTurnQueueWithoutCreatures.removeWarMachine(defender);
+    private void checkIfAlive(MapObjectIf defender) {
+        if(!(newTurnQueuePrototype.getCurrentMapObject().checkIfAlive(defender))){
+            board.removeMapObject(defender);
+            newTurnQueuePrototype.removeMapObject(defender);
             pass();
         }
     }
@@ -65,28 +64,28 @@ public class NewGameEnginePrototype {
 //        observerSupport.firePropertyChange(CREATURE_MOVED, null, aPoint);
 //    }
 
-    public Optional<WarMachine> getWarMachine(final Point aPoint) {
-        return board.getWarMachine(aPoint);
+    public Optional<MapObjectIf> getMapObject(final Point aPoint) {
+        return board.getMapObject(aPoint);
     }
 
     public void pass() {
-        temporaryTurnQueueWithoutCreatures.next();
+        newTurnQueuePrototype.next();
     }
 
     public void addObserver(final PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aObserver);
-        temporaryTurnQueueWithoutCreatures.addObserver(aObserver);
+        newTurnQueuePrototype.addObserver(aObserver);
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(temporaryTurnQueueWithoutCreatures.getCurrentWarMachine())
+        double distance = board.getPosition(newTurnQueuePrototype.getCurrentMapObject())
                 .distance(point);
-        return board.getWarMachine(point)
+        return board.getMapObject(point)
                 .isPresent()
                 && distance < 10 && distance > 0;
     }
 
-    public boolean isCurrentWarMachine(Point aPoint) {
-        return Optional.of(temporaryTurnQueueWithoutCreatures.getCurrentWarMachine()).equals(board.getWarMachine(aPoint));
+    public boolean isCurrentMapObject(Point aPoint) {
+        return Optional.of(newTurnQueuePrototype.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
 }

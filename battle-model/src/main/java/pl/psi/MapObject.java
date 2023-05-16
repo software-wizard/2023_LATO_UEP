@@ -1,17 +1,17 @@
-package pl.psi.creatures;
+package pl.psi;
 
-import WarMachines.WarMachine;
 import lombok.Getter;
+import WarMachines.MapObjectIf;
 
 import java.util.List;
 
-public class NewHeroPrototype {
+public class MapObject {
 //    @Getter
 //    private List< Creature > creatures;
 
     //    TODO should be final
     @Getter
-    private List<WarMachine> warMachines;
+    private final List<MapObjectIf> mapObjectIf;
 
 
 
@@ -27,9 +27,9 @@ public class NewHeroPrototype {
 //        warMachines = aWarMachine;
 //    }
 
-    public NewHeroPrototype( final List<WarMachine> aWarMachine)
+    public MapObject(final List<MapObjectIf> mapObjectIfs)
     {
-        warMachines = aWarMachine;
+        this.mapObjectIf = mapObjectIfs;
     }
 
 }
