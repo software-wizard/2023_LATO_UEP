@@ -15,35 +15,38 @@ public class DefenseSkillTest {
     private Random randomMock;
 
     @Test
+    void shouldReduceDamageBy2Point5PercentPerDefenseSkillPoint() {
 
-    public void ShouldReduceDamageBy2_5Percent()
-    {
-        // Arrange
-        var randomMock = new System.Random();
-        var attacker = new Creature.Builder()
-                .Statistic(new CreatureStats.Builder()
-                        .MaxHp(100)
-                        .Damage(new Range<int>(10, 10))
-                        .Attack(50)
-                        .Armor(0)
-                        .Build())
-                .Build();
-        var defender = new Creature.Builder()
-                .Statistic(new CreatureStats.Builder()
-                        .MaxHp(100)
-                        .Damage(new Range<int>(10, 10))
-                        .Attack(50)
-                        .Armor(0)
-                        .Build())
-                .Build();
-        var defenseSkill = new DefenseSkill(randomMock);
+        // Initialize the mocks
+        MockitoAnnotations.initMocks(this);
 
-        // Act
+        // Set the fixed number to be returned by the randomMock
+        Mockito.when(randomMock.nextInt(Mockito.anyInt())).thenReturn(5);
+
+        Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(115)
+                        .damage(Range.closed(10, 10))
+                        .attack(47)
+                        .armor(0)
+                        .build())
+                .build();
+
+        Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                        .maxHp(80)
+                        .damage(Range.closed(8, 8))
+                        .attack(30)
+                        .armor(0)
+                        .build())
+                .build();
+
+        DefenseSkill defenseSkill = new DefenseSkill(randomMock);
+
         defenseSkill.apply(defender);
 
-        //attacker.attack(defender);
+        attacker.attack(defender);
 
-        // Assert
-        var expectedDamageReduction = (int)(10 * 0.025); // Oczekiwane zmniejszenie obrażeń: 10 * 0.025 = 0.25, zaokrąglone do 0
-        //Assert.AreEqual(10 - expectedDamageReduction, defender.CurrentHp);
+        //int expectedDamage = 10; // assume attacker deals 10 damage without defense skill
+
+
+    }
 }
