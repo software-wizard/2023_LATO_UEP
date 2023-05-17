@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.Point;
-import pl.psi.MapObject;
+
 import pl.psi.NewGameEnginePrototype;
 import pl.psi.warmachines.NewHeroPrototype;
 
