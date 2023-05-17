@@ -1,42 +1,16 @@
 package pl.psi;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
-import java.util.List;
-
+import pl.psi.warmachines.WarMachine;
 import WarMachines.WarMachineStatistic;
 import WarMachines.WarMachineStats;
 import org.junit.jupiter.api.Test;
 
-import pl.psi.creatures.Creature;
-import pl.psi.creatures.CreatureStats;
-import pl.psi.warmachines.WarMachine;
+import java.util.List;
 
-class TurnQueueTest
-{
-    @Test
-    void shouldAddPawnsCorrectly()
-    {
-        final Creature creature1 = new Creature.Builder().statistic( CreatureStats.builder()
-            .build() )
-            .build();
-        final Creature creature2 = new Creature.Builder().statistic( CreatureStats.builder()
-            .build() )
-            .build();
-        final Creature creature3 = new Creature.Builder().statistic( CreatureStats.builder()
-            .build() )
-            .build();
-        final TurnQueue turnQueue = new TurnQueue( List.of( creature1, creature2 ), List.of( creature3 ) );
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-        assertEquals( turnQueue.getCurrentMapObject(), creature1 );
-        turnQueue.next();
-        assertEquals( turnQueue.getCurrentMapObject(), creature2 );
-        turnQueue.next();
-        assertEquals( turnQueue.getCurrentMapObject(), creature3 );
-        turnQueue.next();
-        assertEquals( turnQueue.getCurrentMapObject(), creature1 );
-    }
+class NewTurnQueuePrototypeTest {
 
     final WarMachine warMachine1 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
     final WarMachine warMachine2 = new WarMachine.Builder().statistic(WarMachineStats.builder().build()).build();
@@ -45,13 +19,13 @@ class TurnQueueTest
     TurnQueue turnQueue = new TurnQueue(List.of(warMachine1, warMachine2), List.of(warMachine3));
 
     @Test
-    void getCurrentMapObject() {
+    void getCurrentWarMachine() {
         assertEquals(turnQueue.getCurrentMapObject(), warMachine1);
     }
 
 
     @Test
-    void shouldGoToNextMapObject() {
+    void shouldGoToNextWarMachine() {
         assertEquals(turnQueue.getCurrentMapObject(), warMachine1);
 
         turnQueue.next();
@@ -68,7 +42,7 @@ class TurnQueueTest
     }
 
     @Test
-    void removeMapObject() {
+    void removeWarMachine() {
         WarMachine ballista1 = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
         WarMachine ballista2 = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
         WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();

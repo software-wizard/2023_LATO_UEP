@@ -5,10 +5,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import pl.psi.creatures.Creature;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -16,38 +15,46 @@ import pl.psi.creatures.Creature;
 public class TurnQueue {
 
     public static final String END_OF_TURN = "END_OF_TURN";
-    public static final String NEXT_CREATURE = "NEXT_CREATURE";
-    private final Collection<Creature> creatures;
-    private final Queue<Creature> creaturesQueue;
+    public static final String NEXT_MAP_OBJECT = "NEXT_CREATURE";
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-    private Creature currentCreature;
+    private final Collection<MapObjectIf> mapObjectIfs;
+    private MapObjectIf currentMapObject;
+    private final Queue<MapObjectIf> mapObjectsQueue;
     private int roundNumber;
 
-    public TurnQueue(final Collection<Creature> aCreatureList,
-                     final Collection<Creature> aCreatureList2) {
-        creatures = Stream.concat(aCreatureList.stream(), aCreatureList2.stream())
+    public TurnQueue(final Collection<MapObjectIf> aMapObjectList1,
+                     final Collection<MapObjectIf> aMapObjectList2) {
+        mapObjectIfs = Stream.concat(aMapObjectList1.stream(), aMapObjectList2.stream())
                 .collect(Collectors.toList());
-        creaturesQueue = new LinkedList<>();
+        mapObjectsQueue = new LinkedList<>();
         initQueue();
-        creatures.forEach(observerSupport::addPropertyChangeListener);
+        mapObjectIfs.forEach(observerSupport::addPropertyChangeListener);
         next();
     }
 
     private void initQueue() {
-        creaturesQueue.addAll(creatures);
+        mapObjectsQueue.addAll(mapObjectIfs);
     }
 
-    public Creature getCurrentCreature() {
-        return currentCreature;
+    public MapObjectIf getCurrentMapObject() {
+        return currentMapObject;
+    }
+
+    public MapObjectIf getRandomMapObject() {
+        MapObjectIf[] array = mapObjectIfs.toArray(new MapObjectIf[0]);
+        Random random = new Random();
+        int randomIndex = random.nextInt(array.length);
+        return array[randomIndex];
     }
 
     public void next() {
-        Creature oldCreature = currentCreature;
-        if (creaturesQueue.isEmpty()) {
+        MapObjectIf oldMapObject = currentMapObject;
+
+        if (mapObjectsQueue.isEmpty()) {
             endOfTurn();
         }
-        currentCreature = creaturesQueue.poll();
-        observerSupport.firePropertyChange(NEXT_CREATURE, oldCreature, currentCreature);
+        currentMapObject = mapObjectsQueue.poll();
+        observerSupport.firePropertyChange(NEXT_MAP_OBJECT, oldMapObject, currentMapObject);
     }
 
     private void endOfTurn() {
@@ -58,5 +65,9 @@ public class TurnQueue {
 
     void addObserver(PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aObserver);
+    }
+
+    public void removeMapObject(MapObjectIf mapObjectIf){
+        mapObjectIfs.remove(mapObjectIf);
     }
 }

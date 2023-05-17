@@ -1,5 +1,6 @@
 package pl.psi.gui;
 
+import pl.psi.MapObjectIf;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -9,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import pl.psi.creatures.Creature;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -44,10 +44,11 @@ public class MainBattleController implements PropertyChangeListener
             for( int y = 0; y < 10; y++ )
             {
                 Point currentPoint = new Point( x, y );
-                Optional< Creature > creature = gameEngine.getCreature( currentPoint );
+                Optional<MapObjectIf> gameObject = gameEngine.getMapObject( currentPoint );
                 final MapTile mapTile = new MapTile( "" );
-                creature.ifPresent( c -> mapTile.setName( c.toString() ) );
-                if( gameEngine.isCurrentCreature( currentPoint ) )
+                gameObject.ifPresent( c -> mapTile.setName( c.toString() ) );
+
+                if( gameEngine.isCurrentMapObject( currentPoint ) )
                 {
                     mapTile.setBackground( Color.GREENYELLOW );
                 }
@@ -60,9 +61,11 @@ public class MainBattleController implements PropertyChangeListener
                 }
                 if( gameEngine.canAttack( currentPoint ) )
                 {
-                    mapTile.setBackground( Color.RED );
+                    mapTile.setBackground( Color.INDIANRED );
                     mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-                        gameEngine.attack( currentPoint );
+                        gameEngine.performAction(currentPoint);
+                        //gameEngine.attack( currentPoint );
+                        //gameEngine.heal(currentPoint);
                     } );
                 }
                 gridMap.add( mapTile, x, y );
