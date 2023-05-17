@@ -1,9 +1,12 @@
 package pl.psi;
 
 import WarMachines.MapObjectIf;
+import pl.psi.warmachines.NewHeroPrototype;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -15,10 +18,34 @@ public class NewGameEnginePrototype {
     private final NewBoardPrototype board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final NewTurnQueuePrototype newTurnQueuePrototype;
+    private List<MapObjectIf> mapObjectIf1 = null;
+    private List<MapObjectIf> mapObjectIf2 = null;
 
-    public NewGameEnginePrototype(final MapObject mapObject, final MapObject mapObject1) {
-        newTurnQueuePrototype = new NewTurnQueuePrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
-        board = new NewBoardPrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
+//    public NewGameEnginePrototype(final MapObject mapObject, final MapObject mapObject1) {
+//        newTurnQueuePrototype = new NewTurnQueuePrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
+//        board = new NewBoardPrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
+//    }
+//    public NewGameEnginePrototype(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2) {
+//        mapObjectIf1.add((MapObjectIf) aHero1.getCreatures());
+//        mapObjectIf1.add((MapObjectIf) aHero1.getWarMachines());
+//        mapObjectIf2.add((MapObjectIf) aHero2.getCreatures());
+//        mapObjectIf2.add((MapObjectIf) aHero2.getWarMachines());
+//
+//        newTurnQueuePrototype = new NewTurnQueuePrototype(mapObjectIf1, mapObjectIf2);
+//        board = new NewBoardPrototype(mapObjectIf1, mapObjectIf2);
+//    }
+
+    public NewGameEnginePrototype(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2) {
+        List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
+        mapObjectIf1.addAll(aHero1.getCreatures());
+        mapObjectIf1.addAll(aHero1.getWarMachines());
+
+        List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
+        mapObjectIf2.addAll(aHero2.getCreatures());
+        mapObjectIf2.addAll(aHero2.getWarMachines());
+
+        newTurnQueuePrototype = new NewTurnQueuePrototype(mapObjectIf1, mapObjectIf2);
+        board = new NewBoardPrototype(mapObjectIf1, mapObjectIf2);
     }
 
     public void attack(final Point point) {

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import pl.psi.Point;
 import pl.psi.MapObject;
 import pl.psi.NewGameEnginePrototype;
+import pl.psi.warmachines.NewHeroPrototype;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -22,9 +23,9 @@ public class MainBattleController implements PropertyChangeListener
     @FXML
     private Button passButton;
 
-    public MainBattleController(final MapObject mapObject, final MapObject mapObject1)
+    public MainBattleController(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2)
     {
-        gameEngine = new NewGameEnginePrototype(mapObject, mapObject1);
+        gameEngine = new NewGameEnginePrototype(aHero1, aHero2);
     }
 
     @FXML
