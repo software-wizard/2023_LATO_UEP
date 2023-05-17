@@ -55,14 +55,14 @@ public class NewGameEnginePrototype {
     }
 
 
-//    public boolean canMove(final Point aPoint) {
-//        return board.canMove(turnQueue.getCurrentCreature(), aPoint);
-//    }
+    public boolean canMove(final Point aPoint) {
+        return board.canMove(newTurnQueuePrototype.getCurrentMapObject(), aPoint);
+    }
 
-//    public void move(final Point aPoint) {
-//        board.move(turnQueue.getCurrentCreature(), aPoint);
-//        observerSupport.firePropertyChange(CREATURE_MOVED, null, aPoint);
-//    }
+    public void move(final Point aPoint) {
+        board.move(newTurnQueuePrototype.getCurrentMapObject(), aPoint);
+        observerSupport.firePropertyChange(CREATURE_MOVED, null, aPoint);
+    }
 
     public Optional<MapObjectIf> getMapObject(final Point aPoint) {
         return board.getMapObject(aPoint);
