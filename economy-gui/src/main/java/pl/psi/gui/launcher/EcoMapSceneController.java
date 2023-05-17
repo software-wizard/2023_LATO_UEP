@@ -43,6 +43,12 @@ public class EcoMapSceneController {
         heroNameLabel.setText("Hero name: " + heroName);
     }
 
+    public void displayAllPlayersWithProperties(List<Player> players) {
+        for (Player player : players) {
+            System.out.println(player.getName() + " " + player.getTown() + " " + player.getHeroName() + " " + player.getBonus());
+        }
+    }
+
     public void displayResources(List<Player> players) {
         goldLabel.setText("Gold: "+ players.get(0).getResources().getGold());
         woodLabel.setText("Wood: "+ players.get(0).getResources().getWood());

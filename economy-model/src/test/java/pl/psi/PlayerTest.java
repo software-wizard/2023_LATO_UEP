@@ -12,7 +12,7 @@ public class PlayerTest {
     void shouldPlayerHasGold() {
         final Player player = new Player("1", PlayerResources.builder()
                 .gold(5)
-                .build());
+                .build(), town, heroName, bonus);
         assertEquals(5, player.getResources().getGold());
     }
 
