@@ -1,7 +1,6 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 public interface MapElement {
 
@@ -10,6 +9,6 @@ public interface MapElement {
     boolean isInteractive();
     boolean shouldBeRemoveAfterAction();
 
-    void apply(Hero aHero);
+    void apply(EconomyHero aEconomyHero);
     void endOfTurn();
 }

@@ -2,7 +2,7 @@
 package pl.psi.mapElements;
 
 import lombok.Getter;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 @Getter
 public class TestArtifact implements MapElement {
@@ -20,8 +20,8 @@ public class TestArtifact implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
-        aHero.addArtifactToBackpack(this);
+    public void apply(EconomyHero aEconomyHero) {
+        aEconomyHero.addArtifactToBackpack(this);
     }
 
     @Override

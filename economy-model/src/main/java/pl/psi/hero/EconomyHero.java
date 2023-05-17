@@ -3,27 +3,33 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import pl.psi.buildings.Building;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.mapElements.Castle;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 @AllArgsConstructor
 @Builder
 @Getter
-public class Hero implements MapElement {
+public class EconomyHero implements MapElement {
 
     // TODO equipment HashMap for artifacts
     // Metoda apply for EconomyArtifact
 
     private HeroStatistics heroStatistics;
+
+    public static Castle.FractionType Fraction;
     private ArrayList<EconomyCreature> heroArmy;
     private HashMap<String, Object> heroEquipment;
     private ArrayList<MapElement> heroBackpack;
 
-    public Hero(HeroStatistics aHeroStatistics) {
+    public EconomyHero(HeroStatistics aHeroStatistics) {
         this.heroStatistics = aHeroStatistics;
         this.heroBackpack = new ArrayList<>();
         this.heroEquipment = new HashMap<>();
@@ -43,7 +49,7 @@ public class Hero implements MapElement {
         this.heroEquipment.put("catapult", null);
         this.heroEquipment.put("spellBook", null);
     }
-    public Hero(HeroStatistics aHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
+    public EconomyHero(HeroStatistics aHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
         this.heroStatistics = aHeroStatistics;
         this.heroArmy = aHeroArmy;
     }
@@ -55,7 +61,7 @@ public class Hero implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
     }
@@ -83,4 +89,15 @@ public class Hero implements MapElement {
     public void addArtifactToBackpack(MapElement aArtifact) {
         this.heroBackpack.add(aArtifact);
     }
+
+    public ArrayList<EconomyCreature> addCreature(EconomyCreature economyCreature) {
+        heroArmy.add( economyCreature);
+        return heroArmy;
+    }
+
+    public ArrayList<EconomyCreature> getCreatures() {
+        return heroArmy;
+    }
 }
+
+

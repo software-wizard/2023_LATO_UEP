@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.Castle;
 import pl.psi.player.PlayerResources;
@@ -40,7 +40,7 @@ public class Scene1Controller {
             .gems(5)
             .build();
     static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-    static Hero hero = new Hero(HeroStatistics.builder().build(), army);
+    static EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army);
 
     static int currentBuyingUnit;
 
@@ -53,8 +53,8 @@ public class Scene1Controller {
     }
 
     public static void buyCreatures(int currentBuyingUnit, int amount){
-        hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(currentBuyingUnit), amount, resources);
-        System.out.println(hero.getHeroArmy().get(0).getName()+" "+hero.getHeroArmy().get(0).getAmount());
+        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(currentBuyingUnit), amount, resources);
+        System.out.println(economyHero.getHeroArmy().get(0).getName()+" "+ economyHero.getHeroArmy().get(0).getAmount());
     }
 
     @FXML
