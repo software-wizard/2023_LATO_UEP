@@ -74,6 +74,11 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
         currentHp = aCurrentHp;
     }
 
+    @Override
+    public int getMoveRange() {
+        return 0;
+    }
+
 //    TODO chyba zadna maszyna nie może kontratakować - do wywalenia
 //    private boolean canCounterAttack(final Creature aDefender) {
 //        return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;

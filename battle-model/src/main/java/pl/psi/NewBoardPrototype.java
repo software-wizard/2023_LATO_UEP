@@ -39,25 +39,25 @@ public class NewBoardPrototype
         return Optional.ofNullable( map.get( aPoint ) );
     }
 
-//    void move( final Creature aCreature, final Point aPoint )
-//    {
-//        if( canMove( aCreature, aPoint ) )
-//        {
-//            map.inverse()
-//                .remove( aCreature );
-//            map.put( aPoint, aCreature );
-//        }
-//    }
+    void move( final MapObjectIf mapObjectIf, final Point aPoint )
+    {
+        if( canMove( mapObjectIf, aPoint ) )
+        {
+            map.inverse()
+                .remove( mapObjectIf );
+            map.put( aPoint, mapObjectIf );
+        }
+    }
 
-//    boolean canMove( final Creature aCreature, final Point aPoint )
-//    {
-//        if( map.containsKey( aPoint ) )
-//        {
-//            return false;
-//        }
-//        final Point oldPosition = getPosition( aCreature );
-//        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
-//    }
+    boolean canMove( final MapObjectIf mapObjectIf, final Point aPoint )
+    {
+        if( map.containsKey( aPoint ) )
+        {
+            return false;
+        }
+        final Point oldPosition = getPosition( mapObjectIf );
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < mapObjectIf.getMoveRange();
+    }
 
     Point getPosition( MapObjectIf mapObjectIf )
     {
