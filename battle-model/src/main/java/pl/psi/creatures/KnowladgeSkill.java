@@ -6,11 +6,11 @@ public class KnowladgeSkill {
     public KnowladgeSkill(){
     }
 
-    public int increaseByLevel(int mana, int level) {
-        mana = 0;
+    public int increaseByLevel(int manaMax, int level) {
+        manaMax = 0;
         for (int i = 1; i >= level; i++) {
-            mana = mana + 10;
+            manaMax += 10;
         }
-        return mana;
+        return manaMax  ;
     }
 }

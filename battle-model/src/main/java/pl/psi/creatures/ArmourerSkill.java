@@ -33,7 +33,8 @@ public class ArmourerSkill extends Skill{
         return (int)(i * calculateInfluence(level));
     }
 
-/*    public void apply (Creature attacker, Creature defender){
+   public void apply (Creature attacker){
+        attacker.setLambda(0.9);
+   }
 
-  }*/
 }

@@ -1,6 +1,7 @@
 package pl.psi.creatures;
 
 import com.google.common.collect.Range;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -28,24 +29,22 @@ public class ArmourerSkillTest {
         Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(Range.closed(10, 10))
-                        .attack(50)
                         .armor(0)
                         .build())
                 .build();
         Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(Range.closed(10, 10))
-                        .attack(50)
                         .armor(0)
                         .build())
                 .build();
 
         ArmourerSkill armourerSkill = new ArmourerSkill(randomMock);
 
-        //armourerSkill.apply(defender);
+        armourerSkill.apply(attacker);
 
         attacker.attack(defender);
 
-        //assertThat(defender.getCurrentHp()).isEqualTo(9.5);
+        Assertions.assertEquals(9.5,defender.getCurrentHp(),"");
     }
 }

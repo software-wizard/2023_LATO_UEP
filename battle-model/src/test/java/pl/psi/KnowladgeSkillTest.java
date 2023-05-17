@@ -11,11 +11,11 @@ public class KnowladgeSkillTest {
 
         KnowladgeSkill knowladgeSkill = new KnowladgeSkill();
 
-        int mana = 0;
+        int manaMax = 0;
         int level = 5;
         int expectedMana = 50;
 
-        int result = knowladgeSkill.increaseByLevel(mana, level);
+        int result = knowladgeSkill.increaseByLevel(manaMax, level);
 
         Assertions.assertEquals(expectedMana, result, "Incorrect mana value after increasing by level");
     }
