@@ -1,7 +1,6 @@
 package pl.psi;
 
 import WarMachines.MapObjectIf;
-import WarMachines.WarMachine;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -13,19 +12,9 @@ import java.util.Optional;
 public class NewGameEnginePrototype {
 
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
-//    private final TurnQueue turnQueue;
     private final NewBoardPrototype board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-//    private final NewTurnQueueWithWarMachines newTurnQueueWithWarMachines;
     private final NewTurnQueuePrototype newTurnQueuePrototype;
-
-//    public newGameEnginePrototype(final Hero aHero1, final Hero aHero2) {
-//        turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
-////        newTurnQueueWithWarMachines = new NewTurnQueueWithWarMachines(aHero1.getCreatures(), aHero2.getCreatures(), aHero1.getWarMachines(),aHero2.getWarMachines());
-//
-////        TODO war machines also should be added to board
-//        board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
-//    }
 
     public NewGameEnginePrototype(final MapObject mapObject, final MapObject mapObject1) {
         newTurnQueuePrototype = new NewTurnQueuePrototype(mapObject.getMapObjectIf(), mapObject1.getMapObjectIf());
@@ -47,10 +36,11 @@ public class NewGameEnginePrototype {
     }
 
     public void heal(final Point point) {
-        board.getWarMachine(point)
+
+        board.getMapObject(point)
                 .ifPresent(comrade -> {
                     try {
-                        temporaryTurnQueueWithoutCreatures.getFirstAidTent()
+                        newTurnQueuePrototype.getCurrentMapObject()
                                 .heal(comrade);
                         checkIfAlive(comrade);
                     } catch (Exception e) {
@@ -58,6 +48,14 @@ public class NewGameEnginePrototype {
                     }
                 });
         pass();
+    }
+
+    public void performAction(final Point point){
+        if(newTurnQueuePrototype.getCurrentMapObject().getName().equals("First Aid Tent")){
+            heal(point);
+        }else {
+            attack(point);
+        }
     }
 
     private void checkIfAlive(MapObjectIf defender) {
@@ -72,7 +70,7 @@ public class NewGameEnginePrototype {
 //    public boolean canMove(final Point aPoint) {
 //        return board.canMove(turnQueue.getCurrentCreature(), aPoint);
 //    }
-
+//
 //    public void move(final Point aPoint) {
 //        board.move(turnQueue.getCurrentCreature(), aPoint);
 //        observerSupport.firePropertyChange(CREATURE_MOVED, null, aPoint);

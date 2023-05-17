@@ -5,7 +5,6 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         int damage;
         if (aAttacker.getStats().equals(WarMachineStatistic.BALLISTA)){
             //todo real hero artillery skill value and heroAttack value must be used
-            // lack of archery skill verification
             damage = calculateDamageFromBallista(3, 0, 3);
         } else if (aAttacker.getStats().equals(WarMachineStatistic.CATAPULT)) {
             //todo real hero ballistics skill value must be used

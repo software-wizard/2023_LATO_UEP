@@ -10,11 +10,16 @@ public interface MapObjectIf extends PropertyChangeListener {
 
     void attack(MapObjectIf defender) throws Exception;
 
+    void heal(MapObjectIf comrade) throws Exception;
+
     boolean checkIfAlive(MapObjectIf defender);
 
     int getMaxHp();
 
     void setCurrentHp(int max);
+    String getName();
+
+
 
 //    void attack(final Point point);
 //

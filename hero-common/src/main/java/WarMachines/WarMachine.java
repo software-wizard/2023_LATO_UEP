@@ -12,6 +12,7 @@ import java.util.Random;
 @Getter
 public class WarMachine implements PropertyChangeListener, MapObjectIf  {
     private WarMachineDamageCalculatorIF calculator;
+    private FirstAidTentIf HPcalculator;
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
@@ -23,37 +24,31 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
 
     WarMachine(final WarMachineStatisticIf aStats,
                final WarMachineDamageCalculatorIF aCalculator,
+               final FirstAidTentIf aHPcalculator,
                final int aAmount) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+        HPcalculator = aHPcalculator;
     }
 
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
-//            if (canCounterAttack(aDefender)) {
-//                counterAttack(aDefender);
-//            }
         }
     }
 
-    //THIS IS METHOD FOR TESTS - after should be removed
-//    public int attack(final WarMachine aDefender) throws Exception {
-////        if (isAlive()) {
-//        int damageINT;
-//            final int damage = getCalculator().calculateDamage(this, aDefender);
-//            damageINT = getCalculator().calculateDamage(this, aDefender);
-////            applyDamage(aDefender, damage);
-////            if (canCounterAttack(aDefender)) {
-////                counterAttack(aDefender);
-////            }
-////        }
-//        return damageINT;
-//    }
-
+    public void heal(MapObjectIf aComrade) throws Exception {
+        if (isAlive()) {
+            final int hp = getHPcalculator().calculateHealPoint(this, aComrade, aComrade.getCurrentHp());
+            aComrade.setCurrentHp(hp);
+            if ((aComrade.getCurrentHp() > aComrade.getMaxHp())){
+                aComrade.setCurrentHp(aComrade.getMaxHp());
+            }
+        }
+    }
 
     public boolean isAlive() {
         return getAmount() > 0;
@@ -136,6 +131,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
     public static class Builder {
         private int amount = 1;
         private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
+        private FirstAidTentIf HPcalculator = new WarMachineHealPointsCalculator();
         private WarMachineStatisticIf statistic;
 
         public Builder statistic(final WarMachineStatisticIf aStatistic) {
@@ -155,6 +151,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
 
         public WarMachine build() { return new WarMachine(statistic,
                 calculator,
+                HPcalculator,
                 amount); }
     }
 

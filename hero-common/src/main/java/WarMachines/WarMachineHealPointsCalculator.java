@@ -1,12 +1,19 @@
 package WarMachines;
 
-public class FirstAidTentMachine extends WarMachine {
+public class WarMachineHealPointsCalculator implements FirstAidTentIf{
 
-    public FirstAidTentMachine(){
+    public int calculateHealPoint(WarMachine aAttacker, MapObjectIf aComrade, int currentHP) throws Exception {
 
+        int hp;
+        if (aAttacker.getStats().equals(WarMachineStatistic.FIRST_AID_TENT)){
+            //todo real hero first aid skill value must be used
+            hp = calculateHealPoints(0, currentHP);
+        } else{
+            throw new Exception("Only FirstAidTent can heal");
+        }
+        return hp;
     }
 
-    // 0 - no skill; 1 - basic gives control heal 1-50 points of damage; 2 - advanced heal 1 - 75; 3 - expert heal 1 - 100
     private int heroFirstAidSkill;
     protected int calculateHealPoints(int heroFirstAidSkill, int currentHp){
         switch (heroFirstAidSkill){
@@ -19,14 +26,5 @@ public class FirstAidTentMachine extends WarMachine {
     }
     private int calculateUpperBoundary(int upperBoundary){
         return (int) (Math.random() * upperBoundary) + 1;
-    }
-
-    public void chooseCreatureToHeal(){
-
-    }
-    public void heal(final WarMachine aComrade) throws Exception {
-        if (isAlive()) {
-            aComrade.setCurrentHp(calculateHealPoints(1, getCurrentHp()));
-        }
     }
 }
