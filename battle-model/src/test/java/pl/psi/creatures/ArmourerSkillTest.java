@@ -7,7 +7,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.awt.*;
 import java.util.Random;
 
 public class ArmourerSkillTest {

@@ -7,7 +7,6 @@ public class ArmourerSkill extends Skill{
 
     protected ArmourerSkill(Random aRand) {
         super(aRand);
-        this.level = level;
     }
 
     private double calculateInfluence (int level) {
