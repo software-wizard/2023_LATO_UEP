@@ -18,6 +18,9 @@ public interface MapObjectIf extends PropertyChangeListener {
 
     int getMoveRange();
 
+    //to do implementacja
+    void performAction(); 
+
 //    void attack(final Point point);
 //
 //    boolean canMove(final Point point);
