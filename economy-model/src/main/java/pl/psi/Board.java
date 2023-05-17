@@ -66,7 +66,7 @@ public class Board implements PropertyChangeListener {
             }
         }
         final Point oldPosition = getHeroPosition(aEconomyHero);
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aEconomyHero.getEconomyHeroStatistics().getMoveRange();
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aEconomyHero.getHeroStatistics().getMoveRange();
     }
 
     Point getPosition( MapElement aMapElement )

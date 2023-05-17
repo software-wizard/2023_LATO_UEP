@@ -17,14 +17,14 @@ import javafx.stage.Stage;
 public class EcoBattleConverter
 {
 
-    public static void startBattle(final EconomyHero aPlayer1, final EconomyHero aPlayer2 )
+    public static void startBattle( final EconomyHero aPlayer1, final EconomyHero aPlayer2 )
     {
         Scene scene = null;
         try
         {
             final FXMLLoader loader = new FXMLLoader();
             loader.setLocation( EcoBattleConverter.class.getClassLoader()
-                .getResource( "fxml/main-battle.fxml" ) );
+                    .getResource( "fxml/main-battle.fxml" ) );
             loader.setController( new MainBattleController( convert( aPlayer1 ), convert( aPlayer2 ) ) );
             scene = new Scene( loader.load() );
             final Stage aStage = new Stage();
@@ -43,9 +43,9 @@ public class EcoBattleConverter
     {
         final List< Creature > creatures = new ArrayList<>();
         final NecropolisFactory factory = new NecropolisFactory();
-        aPlayer1.getHeroArmy()
-            .forEach( ecoCreature -> creatures.add( factory.create( ecoCreature.isUpgraded(),
-                ecoCreature.getTier(), ecoCreature.getAmount() ) ) );
+        aPlayer1.getCreatures()
+                .forEach( ecoCreature -> creatures.add( factory.create( ecoCreature.isUpgraded(),
+                        ecoCreature.getTier(), ecoCreature.getAmount() ) ) );
         return new Hero( creatures );
     }
 }

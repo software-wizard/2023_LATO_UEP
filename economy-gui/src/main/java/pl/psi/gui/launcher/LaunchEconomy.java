@@ -1,8 +1,12 @@
 package pl.psi.gui.launcher;
 
-public class LaunchEconomy {
+import pl.psi.gui.launcher.EconomyStart;
 
-    public static void main(final String[] args) {
-        EconomyStart.main(args);
+public class LaunchEconomy
+{
+
+    public static void main( final String[] args )
+    {
+        EconomyStart.main( args );
     }
 }

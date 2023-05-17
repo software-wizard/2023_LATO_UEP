@@ -24,6 +24,22 @@ public class Player {
         this.bonus = bonus;
     }
 
+    @Override
+    public boolean equals(Object o) { // TODO is ok?
+
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) o;
+
+        return Objects.equals(this.getName(), player.getName());
+    }
+
     public void setTown(String chosenTown) {
         this.town = chosenTown;
     }

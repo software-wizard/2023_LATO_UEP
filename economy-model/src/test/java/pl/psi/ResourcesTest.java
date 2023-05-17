@@ -4,7 +4,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import org.junit.jupiter.api.Test;
 import pl.psi.hero.EconomyHero;
-import pl.psi.hero.EconomyHeroStatistics;
+import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
@@ -31,7 +31,7 @@ public class ResourcesTest {
                         .build())
                 .build();
         final EconomyHero economyHero = EconomyHero.builder()
-                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                .heroStatistics(HeroStatistics.builder()
                         .moveRange(3)
                         .player(player)
                         .build()).
@@ -46,15 +46,15 @@ public class ResourcesTest {
         players.add(player);
         final EconomyEngine engine = new EconomyEngine(players, mapElements);
         engine.getBoard().move(economyHero, new Point(2, 2));
-        assertEquals(0, economyHero.getEconomyHeroStatistics().getPlayer().getResources().getGold());
+        assertEquals(0, economyHero.getHeroStatistics().getPlayer().getResources().getGold());
         engine.getTurnQueue().nextTurn();
-        assertEquals(1000, economyHero.getEconomyHeroStatistics().getPlayer().getResources().getGold());
+        assertEquals(1000, economyHero.getHeroStatistics().getPlayer().getResources().getGold());
         engine.getBoard().move(economyHero, new Point(3, 3));
-        assertEquals(0, economyHero.getEconomyHeroStatistics().getPlayer().getResources().getWood());
+        assertEquals(0, economyHero.getHeroStatistics().getPlayer().getResources().getWood());
         engine.getTurnQueue().nextTurn();
-        assertEquals(2, economyHero.getEconomyHeroStatistics().getPlayer().getResources().getWood());
+        assertEquals(2, economyHero.getHeroStatistics().getPlayer().getResources().getWood());
         engine.getTurnQueue().nextTurn();
-        assertEquals(4, economyHero.getEconomyHeroStatistics().getPlayer().getResources().getWood());
+        assertEquals(4, economyHero.getHeroStatistics().getPlayer().getResources().getWood());
 
     }
 

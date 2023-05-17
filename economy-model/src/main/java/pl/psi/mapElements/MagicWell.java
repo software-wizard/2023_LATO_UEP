@@ -17,7 +17,7 @@ public class MagicWell implements MapElement {
     @Override
     public void apply(EconomyHero aEconomyHero) {
         if (!currentTurnVisitedEconomyHeroes.contains(aEconomyHero)) {
-            aEconomyHero.getEconomyHeroStatistics().setMana(aEconomyHero.getEconomyHeroStatistics().getMaxMana());
+            aEconomyHero.getHeroStatistics().setMana(aEconomyHero.getHeroStatistics().getMaxMana());
             currentTurnVisitedEconomyHeroes.add(aEconomyHero);
         }
     }

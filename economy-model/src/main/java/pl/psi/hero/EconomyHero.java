@@ -3,29 +3,35 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import pl.psi.Fraction;
+import pl.psi.buildings.Building;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.mapElements.Castle;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 @AllArgsConstructor
 @Builder
 @Getter
 public class EconomyHero implements MapElement {
 
-    private EconomyHeroStatistics economyHeroStatistics;
+    // TODO equipment HashMap for artifacts
+    // Metoda apply for EconomyArtifact
 
-    @Getter
+    private HeroStatistics heroStatistics;
+
+    public static Castle.FractionType Fraction;
     private ArrayList<EconomyCreature> heroArmy;
     private HashMap<String, Object> heroEquipment;
     private ArrayList<MapElement> heroBackpack;
 
-    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
-        this.economyHeroStatistics = aEconomyHeroStatistics;
-        this.heroBackpack = new ArrayList<MapElement>();
+    public EconomyHero(HeroStatistics aHeroStatistics) {
+        this.heroStatistics = aHeroStatistics;
+        this.heroBackpack = new ArrayList<>();
         this.heroEquipment = new HashMap<>();
         //w innej metodzie wrzucac dopiero type = name
         this.heroEquipment.put("helmet", null);
@@ -42,8 +48,12 @@ public class EconomyHero implements MapElement {
         this.heroEquipment.put("firstAidTent", null);
         this.heroEquipment.put("catapult", null);
         this.heroEquipment.put("spellBook", null);
+    }
+    public EconomyHero(HeroStatistics aHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
+        this.heroStatistics = aHeroStatistics;
         this.heroArmy = aHeroArmy;
     }
+
 
     @Override
     public boolean isInteractive() {
@@ -79,4 +89,15 @@ public class EconomyHero implements MapElement {
     public void addArtifactToBackpack(MapElement aArtifact) {
         this.heroBackpack.add(aArtifact);
     }
+
+    public ArrayList<EconomyCreature> addCreature(EconomyCreature economyCreature) {
+        heroArmy.add( economyCreature);
+        return heroArmy;
+    }
+
+    public ArrayList<EconomyCreature> getCreatures() {
+        return heroArmy;
+    }
 }
+
+

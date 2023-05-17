@@ -21,7 +21,7 @@ public class Mine implements MapElement {
 
     @Override
     public void apply(EconomyHero aEconomyHero) {
-        currentOwner = aEconomyHero.getEconomyHeroStatistics().getPlayer();
+        currentOwner = aEconomyHero.getHeroStatistics().getPlayer();
     }
 
     @Override

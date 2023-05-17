@@ -21,7 +21,7 @@ public class Resource implements MapElement {
     @Override
     public void apply(EconomyHero aEconomyHero) {
         // Get resources from Player's instance
-        PlayerResources resources = aEconomyHero.getEconomyHeroStatistics().getPlayer().getResources();
+        PlayerResources resources = aEconomyHero.getHeroStatistics().getPlayer().getResources();
         switch (resourceType) {
             case GOLD:
                 // Add gold for Player's resources
