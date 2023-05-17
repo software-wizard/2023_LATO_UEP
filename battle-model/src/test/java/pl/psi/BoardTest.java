@@ -24,7 +24,7 @@ class BoardTest
 
         board.move( creature, new Point( 3, 3 ) );
 
-        assertThat( board.getCreature( new Point( 3, 3 ) )
+        assertThat( board.getMapObject( new Point( 3, 3 ) )
             .isPresent() ).isTrue();
     }
 

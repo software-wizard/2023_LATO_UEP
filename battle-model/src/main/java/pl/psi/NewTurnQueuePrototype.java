@@ -22,7 +22,8 @@ public class NewTurnQueuePrototype {
     private final Queue<MapObjectIf> mapObjectsQueue;
 
     public NewTurnQueuePrototype(final Collection<MapObjectIf> aMapObjectList, final Collection<MapObjectIf> aMapObjectList2) {
-        mapObjectIfs = Stream.concat(aMapObjectList.stream(), aMapObjectList2.stream()).collect(Collectors.toList());
+        mapObjectIfs = Stream.concat(aMapObjectList.stream(), aMapObjectList2.stream())
+                .collect(Collectors.toList());
         mapObjectsQueue = new LinkedList<>();
         initQueue();
         mapObjectIfs.forEach(observerSupport::addPropertyChangeListener);

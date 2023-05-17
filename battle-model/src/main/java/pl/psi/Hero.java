@@ -13,25 +13,13 @@ import lombok.Getter;
 public class Hero
 {
     @Getter
-    private final List< Creature > creatures;
-
-//    TODO should be final
+    private final List<Creature> creatures;
     @Getter
-    private List<WarMachine> warMachines;
-
-
-
-    public Hero( final List< Creature > aCreatures)
-    {
-        creatures = aCreatures;
-    }
-
+    private final List<WarMachine> warMachines;
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
         creatures = aCreatures;
         warMachines = aWarMachine;
     }
-
-
 }

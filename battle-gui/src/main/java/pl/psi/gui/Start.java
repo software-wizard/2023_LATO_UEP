@@ -3,13 +3,17 @@ package pl.psi.gui;
 import java.io.IOException;
 import java.util.List;
 
+import WarMachines.WarMachine;
+import WarMachines.WarMachineStatistic;
 import pl.psi.Hero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.psi.creatures.Creature;
 import pl.psi.creatures.NecropolisFactory;
+import pl.psi.warmachines.NewHeroPrototype;
 
 public class Start extends Application
 {
@@ -48,13 +52,20 @@ public class Start extends Application
 
     private Hero createP2()
     {
-        final Hero ret = new Hero( List.of( new NecropolisFactory().create( true, 1, 5 ) ) );
+        Creature creature1 = new NecropolisFactory().create( false, 1, 1);
+        WarMachine warMachine1 = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
+
+        final Hero ret = new Hero(List.of(creature1), List.of(warMachine1));
         return ret;
     }
 
     private Hero createP1()
     {
-        final Hero ret = new Hero( List.of( new NecropolisFactory().create( false, 1, 5 ) ) );
+        Creature creature1 = new NecropolisFactory().create( false, 2, 1);
+        WarMachine warMachine1 = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
+        WarMachine warMachine2 = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).amount(1).build();
+
+        final Hero ret = new Hero(List.of(creature1), List.of(warMachine1, warMachine2));
         return ret;
     }
 
