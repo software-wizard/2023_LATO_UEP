@@ -51,13 +51,13 @@ public class MainBattleController implements PropertyChangeListener
                 {
                     mapTile.setBackground( Color.GREENYELLOW );
                 }
-//                if( gameEngine.canMove( currentPoint ) )
-//                {
-//                    mapTile.setBackground( Color.GREY );
-//                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-//                        gameEngine.move( currentPoint );
-//                    } );
-//                }
+                if( gameEngine.canMove( currentPoint ) )
+                {
+                    mapTile.setBackground( Color.GREY );
+                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
+                        gameEngine.move( currentPoint );
+                    } );
+                }
                 if( gameEngine.canAttack( currentPoint ) )
                 {
                     mapTile.setBackground( Color.INDIANRED );

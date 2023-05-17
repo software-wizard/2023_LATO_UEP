@@ -16,6 +16,8 @@ public interface MapObjectIf extends PropertyChangeListener {
 
     void setCurrentHp(int max);
 
+    int getMoveRange();
+
 //    void attack(final Point point);
 //
 //    boolean canMove(final Point point);
