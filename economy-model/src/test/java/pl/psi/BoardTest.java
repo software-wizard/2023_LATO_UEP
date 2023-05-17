@@ -36,9 +36,11 @@ public class BoardTest {
 
     @Test
     void shouldHeroMovesProperly() {
-        final EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder()
-                .moveRange(3)
-                .build());
+        final EconomyHero economyHero = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .build())
+                .build();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), economyHero);
         final Board board = new Board(mapElements);
@@ -55,14 +57,18 @@ public class BoardTest {
     void shouldHeroGetResource() {
         // Check if Player gets resource if Hero stands on the point
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
-        final EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder()
-                .player(Player.builder()
-                        .resources(PlayerResources.builder()
-                                .gold(0)
+
+        final EconomyHero economyHero = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .player(Player.builder()
+                                .resources(PlayerResources.builder()
+                                        .gold(0)
+                                        .build())
                                 .build())
                         .build())
-                .moveRange(3)
-                .build());
+                .build();
+
         mapElements.put(new Point(1, 1), economyHero);
         final pl.psi.mapElements.Resource gold = new pl.psi.mapElements.Resource(ResourceType.GOLD, 1);
         mapElements.put(new Point(2, 2), gold);
@@ -78,7 +84,13 @@ public class BoardTest {
 
     @Test
     void shouldBarierWorksProperly() {
-        final EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder().moveRange(3).build());
+
+        final EconomyHero economyHero = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .build())
+                .build();
+
         final StaticElement barier = new StaticElement();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), economyHero);
@@ -92,8 +104,19 @@ public class BoardTest {
     @Test
     void shouldLearningStoneWorksProperly() {
         // Learning Stone: gives visiting heroes +1000 experience upon their first visit.
-        final EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder().moveRange(3).experience(0).build());
-        final EconomyHero economyHero2 = new EconomyHero(EconomyHeroStatistics.builder().moveRange(3).experience(50).build());
+        final EconomyHero economyHero = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .experience(0)
+                        .build())
+                .build();
+        final EconomyHero economyHero2 = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .experience(50)
+                        .build())
+                .build();
+
         final LearningStone ls = new LearningStone();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), economyHero);
@@ -115,11 +138,13 @@ public class BoardTest {
     @Test
     void shouldMagicWellWorksProperly() {
         // Magic Well: a hero can restore 100% of mana reserves here once per turn.
-        final EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder()
-                .moveRange(3)//set moveRange to 3
-                .maxMana(10)
-                .mana(0)
-                .build());
+        final EconomyHero economyHero = EconomyHero.builder()
+                .economyHeroStatistics(EconomyHeroStatistics.builder()
+                        .moveRange(3)
+                        .maxMana(10)
+                        .mana(0)
+                        .build())
+                .build();
         final MagicWell mw = new MagicWell();
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(1, 1), economyHero);

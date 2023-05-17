@@ -3,6 +3,7 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import pl.psi.Fraction;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.MapElement;
@@ -22,9 +23,9 @@ public class EconomyHero implements MapElement {
     private HashMap<String, Object> heroEquipment;
     private ArrayList<MapElement> heroBackpack;
 
-    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics) {
+    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
         this.economyHeroStatistics = aEconomyHeroStatistics;
-        this.heroBackpack = new ArrayList<>();
+        this.heroBackpack = new ArrayList<MapElement>();
         this.heroEquipment = new HashMap<>();
         //w innej metodzie wrzucac dopiero type = name
         this.heroEquipment.put("helmet", null);
@@ -41,9 +42,6 @@ public class EconomyHero implements MapElement {
         this.heroEquipment.put("firstAidTent", null);
         this.heroEquipment.put("catapult", null);
         this.heroEquipment.put("spellBook", null);
-    }
-    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
-        this.economyHeroStatistics = aEconomyHeroStatistics;
         this.heroArmy = aHeroArmy;
     }
 

@@ -10,9 +10,11 @@ public class PlayerTest {
 
     @Test
     void shouldPlayerHasGold() {
-        final Player player = new Player("1", PlayerResources.builder()
-                .gold(5)
-                .build(), town, heroName, bonus);
+        final Player player = Player.builder()
+                .resources(PlayerResources.builder()
+                        .gold(5)
+                        .build())
+                .build();
         assertEquals(5, player.getResources().getGold());
     }
 

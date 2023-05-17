@@ -3,6 +3,7 @@ package pl.psi.hero;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import pl.psi.Fraction;
 import pl.psi.player.Player;
 
 @Getter
@@ -13,6 +14,7 @@ public class EconomyHeroStatistics {
     // Plain Object Java O
 
     private Player player;
+    private Fraction fraction;
     private int moveRange;
     private int experience;
     private int level;
