@@ -16,8 +16,10 @@ public class ArmourerSkill extends Skill{
            return 0.95;
        } else if (level == 2) {
            return 0.90;
-       } else {
+       } else if (level == 3){
            return 0.85;
+       } else {
+           return 1;
        }
     }
 
@@ -33,7 +35,7 @@ public class ArmourerSkill extends Skill{
     }
 
    public void apply (Creature attacker){
-        attacker.setLambda(0.9);
+        attacker.setLambda(calculateInfluence(level));
    }
 
 }
