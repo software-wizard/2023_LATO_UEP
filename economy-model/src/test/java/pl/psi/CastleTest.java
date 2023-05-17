@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import pl.psi.buildings.HallBuilding;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroEquipment;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.*;
 import pl.psi.player.PlayerResources;
@@ -54,11 +55,11 @@ public class CastleTest {
                 .gems(5)
                 .build();
         ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-        Hero hero = new Hero(HeroStatistics.builder().build(), army);
+        EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
 
-        hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
+        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
 
-        assertEquals(12, hero.getHeroArmy().get(0).getAmount());
+        assertEquals(12, economyHero.getHeroArmy().get(0).getAmount());
         assertEquals(8, ((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1)).getCreaturesToRecruit().getAmount());
         assertEquals(3800, resources.getGold());
     }

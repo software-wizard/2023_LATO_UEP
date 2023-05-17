@@ -1,7 +1,6 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 // Sanctuary: a visiting hero cannot be attacked by enemies (but can interact with allied heroes).
 public class Sanctuary implements MapElement {
@@ -13,7 +12,7 @@ public class Sanctuary implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
 
     }
 

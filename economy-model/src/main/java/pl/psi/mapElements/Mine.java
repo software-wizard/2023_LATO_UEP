@@ -1,7 +1,7 @@
 package pl.psi.mapElements;
 
 import pl.psi.ResourceType;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -20,8 +20,8 @@ public class Mine implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
-        currentOwner = aHero.getHeroStatistics().getPlayer();
+    public void apply(EconomyHero aEconomyHero) {
+        currentOwner = aEconomyHero.getHeroStatistics().getPlayer();
     }
 
     @Override

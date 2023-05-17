@@ -1,5 +1,4 @@
 package pl.psi.gui;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +8,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroEquipment;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.Castle;
 import pl.psi.player.PlayerResources;
@@ -40,7 +40,7 @@ public class Scene1Controller {
             .gems(5)
             .build();
     static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-    static Hero hero = new Hero(HeroStatistics.builder().build(), army);
+    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
 
     static int currentBuyingUnit;
 

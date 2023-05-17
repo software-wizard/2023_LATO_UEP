@@ -123,6 +123,7 @@
                         <Label layoutX="102.0" layoutY="24.0" text="Image" GridPane.columnIndex="3" />
                      </children>
                   </GridPane>
+                  <Button layoutX="82.0" layoutY="370.0" mnemonicParsing="false" onAction="#openEq" text="Inventory" />
           </children>
         </AnchorPane>
       </items>
