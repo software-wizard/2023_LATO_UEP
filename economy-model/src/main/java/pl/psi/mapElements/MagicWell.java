@@ -1,14 +1,13 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 import java.util.ArrayList;
 
 // Magic Well: a hero can restore 100% of mana reserves here once per turn.
 public class MagicWell implements MapElement {
 
-    private ArrayList<Hero> currentTurnVisitedHeroes = new ArrayList<>();
+    private ArrayList<EconomyHero> currentTurnVisitedEconomyHeroes = new ArrayList<>();
 
     @Override
     public boolean isInteractive() {
@@ -16,10 +15,10 @@ public class MagicWell implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
-        if (!currentTurnVisitedHeroes.contains(aHero)) {
-            aHero.getHeroStatistics().setMana(aHero.getHeroStatistics().getMaxMana());
-            currentTurnVisitedHeroes.add(aHero);
+    public void apply(EconomyHero aEconomyHero) {
+        if (!currentTurnVisitedEconomyHeroes.contains(aEconomyHero)) {
+            aEconomyHero.getEconomyHeroStatistics().setMana(aEconomyHero.getEconomyHeroStatistics().getMaxMana());
+            currentTurnVisitedEconomyHeroes.add(aEconomyHero);
         }
     }
 
@@ -31,6 +30,6 @@ public class MagicWell implements MapElement {
     @Override
     public void endOfTurn() {
         // reset Heroes who visited MagicWell
-        this.currentTurnVisitedHeroes.clear();
+        this.currentTurnVisitedEconomyHeroes.clear();
     }
 }

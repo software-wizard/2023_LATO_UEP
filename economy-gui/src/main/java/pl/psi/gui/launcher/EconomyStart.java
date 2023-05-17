@@ -2,7 +2,6 @@ package pl.psi.gui.launcher;
 
 import javafx.scene.Parent;
 import javafx.scene.control.TextInputDialog;
-import pl.psi.hero.Hero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

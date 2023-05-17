@@ -70,7 +70,8 @@
 
 package pl.psi.mapElements;
 import pl.psi.buildings.Building;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
+
 import java.util.ArrayList;
 
 
@@ -93,7 +94,7 @@ public class Castle implements MapElement {
         NECROPOLIS;
     }
 
-    private final Hero owner = null;
+    private final EconomyHero owner = null;
 
     public Castle(FractionType fractionType) {
         buildingsOwned = TownFactory.createBuildingsOwned(fractionType);
@@ -107,7 +108,7 @@ public class Castle implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
 
     }
 

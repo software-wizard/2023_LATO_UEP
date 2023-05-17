@@ -2,11 +2,8 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
-import pl.psi.mapElements.MagicWell;
+import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
-import pl.psi.mapElements.Mine;
-import pl.psi.player.Player;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -14,7 +11,7 @@ import java.util.*;
 
 public class Board implements PropertyChangeListener {
     private final BiMap<Point, MapElement> map = HashBiMap.create();
-    private final BiMap<Point, Hero> mapHero = HashBiMap.create();
+    private final BiMap<Point, EconomyHero> mapHero = HashBiMap.create();
     private final Map<Point, MapElement> mapElements;
 
     public Board(Map<Point, MapElement> aMapElements) {
@@ -27,8 +24,8 @@ public class Board implements PropertyChangeListener {
     }
 
     private void addMapElement(Point aPoint, MapElement aMapElement) {
-        if (aMapElement instanceof Hero) {
-            mapHero.put(aPoint, (Hero) aMapElement);
+        if (aMapElement instanceof EconomyHero) {
+            mapHero.put(aPoint, (EconomyHero) aMapElement);
         } else {
             map.put(aPoint, aMapElement);
         }
@@ -38,16 +35,16 @@ public class Board implements PropertyChangeListener {
         return Optional.ofNullable(map.get(aPoint));
     }
 
-    Optional<Hero> getHero(final Point aPoint) {
+    Optional<EconomyHero> getHero(final Point aPoint) {
         return Optional.ofNullable(mapHero.get(aPoint));
     }
 
-    void move(final Hero aHero, final Point aPoint )
+    void move(final EconomyHero aEconomyHero, final Point aPoint )
     {
-        if( canMove( aHero, aPoint ) )
+        if( canMove(aEconomyHero, aPoint ) )
         {
             if (map.get(aPoint)!=null) {
-                map.get(aPoint).apply(aHero);
+                map.get(aPoint).apply(aEconomyHero);
 
                 if (map.get(aPoint).shouldBeRemoveAfterAction()) {
                     map.inverse().remove(map.get(aPoint));
@@ -55,12 +52,12 @@ public class Board implements PropertyChangeListener {
             }
 
             mapHero.inverse()
-                    .remove( aHero );
-            mapHero.put( aPoint, aHero );
+                    .remove(aEconomyHero);
+            mapHero.put( aPoint, aEconomyHero);
         }
     }
 
-    boolean canMove( final Hero aHero, final Point aPoint )
+    boolean canMove(final EconomyHero aEconomyHero, final Point aPoint )
     {
         if( map.containsKey( aPoint ) )
         {
@@ -68,8 +65,8 @@ public class Board implements PropertyChangeListener {
                 return false;
             }
         }
-        final Point oldPosition = getHeroPosition( aHero );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aHero.getHeroStatistics().getMoveRange();
+        final Point oldPosition = getHeroPosition(aEconomyHero);
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aEconomyHero.getEconomyHeroStatistics().getMoveRange();
     }
 
     Point getPosition( MapElement aMapElement )
@@ -78,10 +75,10 @@ public class Board implements PropertyChangeListener {
                 .get( aMapElement );
     }
 
-    Point getHeroPosition( Hero aHero )
+    Point getHeroPosition( EconomyHero aEconomyHero)
     {
         return mapHero.inverse()
-                .get( aHero );
+                .get(aEconomyHero);
     }
 
     @Override

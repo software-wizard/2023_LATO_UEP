@@ -8,7 +8,7 @@ import pl.psi.player.Player;
 @Getter
 @Setter
 @Builder
-public class HeroStatistics {
+public class EconomyHeroStatistics {
 
     // Plain Object Java O
 

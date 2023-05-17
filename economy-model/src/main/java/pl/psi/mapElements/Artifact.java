@@ -1,7 +1,6 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 public class Artifact implements MapElement {
     // TODO
@@ -12,7 +11,7 @@ public class Artifact implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
     }
 
     @Override

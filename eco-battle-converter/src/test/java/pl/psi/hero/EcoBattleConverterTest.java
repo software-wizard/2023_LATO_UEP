@@ -1,18 +1,18 @@
-//package pl.psi.hero;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//
-//import java.util.List;
-//
-//import org.junit.jupiter.api.Test;
-//
-//import pl.psi.converter.EcoBattleConverter;
-//import pl.psi.creatures.Creature;
-//import pl.psi.creatures.EconomyNecropolisFactory;
-//
-//class EcoBattleConverterTest
-//{
-//
+package pl.psi.hero;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import pl.psi.converter.EcoBattleConverter;
+import pl.psi.creatures.Creature;
+import pl.psi.creatures.EconomyNecropolisFactory;
+
+class EcoBattleConverterTest
+{
+
 //    @Test
 //    void shouldConvertCreaturesCorrectly()
 //    {
@@ -66,5 +66,5 @@
 //        assertEquals( 7, convertedCreatures.get( 6 )
 //            .getAmount() );
 //    }
-//
-//}
+
+}

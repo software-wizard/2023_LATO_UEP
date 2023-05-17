@@ -1,6 +1,6 @@
 package pl.psi.mapElements;
 
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 import pl.psi.player.PlayerResources;
 
 public class Resource implements MapElement {
@@ -19,9 +19,9 @@ public class Resource implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
         // Get resources from Player's instance
-        PlayerResources resources = aHero.getHeroStatistics().getPlayer().getResources();
+        PlayerResources resources = aEconomyHero.getEconomyHeroStatistics().getPlayer().getResources();
         switch (resourceType) {
             case GOLD:
                 // Add gold for Player's resources

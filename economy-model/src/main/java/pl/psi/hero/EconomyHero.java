@@ -13,18 +13,17 @@ import java.util.HashMap;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Hero implements MapElement {
+public class EconomyHero implements MapElement {
 
-    // TODO equipment HashMap for artifacts
-    // Metoda apply for EconomyArtifact
+    private EconomyHeroStatistics economyHeroStatistics;
 
-    private HeroStatistics heroStatistics;
+    @Getter
     private ArrayList<EconomyCreature> heroArmy;
     private HashMap<String, Object> heroEquipment;
     private ArrayList<MapElement> heroBackpack;
 
-    public Hero(HeroStatistics aHeroStatistics) {
-        this.heroStatistics = aHeroStatistics;
+    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics) {
+        this.economyHeroStatistics = aEconomyHeroStatistics;
         this.heroBackpack = new ArrayList<>();
         this.heroEquipment = new HashMap<>();
         //w innej metodzie wrzucac dopiero type = name
@@ -43,11 +42,10 @@ public class Hero implements MapElement {
         this.heroEquipment.put("catapult", null);
         this.heroEquipment.put("spellBook", null);
     }
-    public Hero(HeroStatistics aHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
-        this.heroStatistics = aHeroStatistics;
+    public EconomyHero(EconomyHeroStatistics aEconomyHeroStatistics, ArrayList<EconomyCreature> aHeroArmy) {
+        this.economyHeroStatistics = aEconomyHeroStatistics;
         this.heroArmy = aHeroArmy;
     }
-
 
     @Override
     public boolean isInteractive() {
@@ -55,7 +53,7 @@ public class Hero implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
+    public void apply(EconomyHero aEconomyHero) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
     }
