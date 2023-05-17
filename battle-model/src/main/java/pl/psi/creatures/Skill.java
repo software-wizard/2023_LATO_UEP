@@ -6,10 +6,16 @@ import lombok.Setter;
 import java.util.Random;
 
 @Getter
-public class Skill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
+public class Skill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf {
     @Setter
     public int level;
-    protected Skill(Random aRand) {
-        super(aRand);
+
+    // TODO change Skill to match new properties
+
+    private final DamageCalculatorIf decorated;
+
+    public Skill(DamageCalculatorIf calculator) {
+        decorated = calculator;
     }
+
 }

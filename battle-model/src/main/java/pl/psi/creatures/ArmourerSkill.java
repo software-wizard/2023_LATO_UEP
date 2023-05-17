@@ -1,25 +1,32 @@
 package pl.psi.creatures;
 
+import com.google.common.annotations.VisibleForTesting;
+import lombok.ToString;
 
 import java.util.Random;
 
-public class ArmourerSkill extends Skill{
+public class ArmourerSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
+    private final DamageCalculatorIf decorated;
 
-    protected ArmourerSkill(Random aRand) {
-        super(aRand);
+    public ArmourerSkill(DamageCalculatorIf calculator) {
+        decorated = calculator;
     }
 
-    private double calculateInfluence (int level) {
-       if (level == 0){
+    @VisibleForTesting
+    protected ArmourerSkill (Random aRand){
+        this.decorated = new DefaultDamageCalculator(aRand);
+    }
+
+
+    private double calculateInfluence (int x){
+       if (x == 0){
            return 1;
-       } else if (level == 1) {
+       } else if (x == 1) {
            return 0.95;
-       } else if (level == 2) {
+       } else if (x == 2) {
            return 0.90;
-       } else if (level == 3){
-           return 0.85;
        } else {
-           return 1;
+           return 0.85;
        }
     }
 
@@ -28,14 +35,7 @@ public class ArmourerSkill extends Skill{
         return calculateOutcome(super.calculateDamage(aAttacker, aDefender));
     }
 
-    //basic offence
-    @Override
-    public int calculateOutcome(int i) {
-        return (int)(i * calculateInfluence(level));
+    public void apply(Creature creature) {
+        creature.setCalculator(new ArmourerSkill(creature.getCalculator()));
     }
-
-   public void apply (Creature attacker){
-        attacker.setLambda(calculateInfluence(level));
-   }
-
 }
