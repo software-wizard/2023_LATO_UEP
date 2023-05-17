@@ -126,6 +126,11 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
     }
 
     @Override
+    public void heal(MapObjectIf comrade) throws Exception {
+
+    }
+
+    @Override
     public boolean checkIfAlive(MapObjectIf defender) {
         return true;
     }

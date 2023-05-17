@@ -7,8 +7,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.Point;
-import pl.psi.MapObject;
+
 import pl.psi.NewGameEnginePrototype;
+import pl.psi.warmachines.NewHeroPrototype;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -22,9 +23,9 @@ public class MainBattleController implements PropertyChangeListener
     @FXML
     private Button passButton;
 
-    public MainBattleController(final MapObject mapObject, final MapObject mapObject1)
+    public MainBattleController(final NewHeroPrototype aHero1, final NewHeroPrototype aHero2)
     {
-        gameEngine = new NewGameEnginePrototype(mapObject, mapObject1);
+        gameEngine = new NewGameEnginePrototype(aHero1, aHero2);
     }
 
     @FXML
@@ -62,7 +63,9 @@ public class MainBattleController implements PropertyChangeListener
                 {
                     mapTile.setBackground( Color.INDIANRED );
                     mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-                        gameEngine.attack( currentPoint );
+                        gameEngine.performAction(currentPoint);
+                        //gameEngine.attack( currentPoint );
+                        //gameEngine.heal(currentPoint);
                     } );
                 }
                 gridMap.add( mapTile, x, y );

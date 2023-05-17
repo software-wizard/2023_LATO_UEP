@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -19,7 +20,6 @@ public class NewTurnQueuePrototype {
     private MapObjectIf currentMapObject;
     private int roundNumber;
     private final Queue<MapObjectIf> mapObjectsQueue;
-
 
     public NewTurnQueuePrototype(final Collection<MapObjectIf> aMapObjectList, final Collection<MapObjectIf> aMapObjectList2) {
         mapObjectIfs = Stream.concat(aMapObjectList.stream(), aMapObjectList2.stream()).collect(Collectors.toList());
@@ -36,6 +36,13 @@ public class NewTurnQueuePrototype {
 
     public MapObjectIf getCurrentMapObject(){
         return currentMapObject;
+    }
+
+    public MapObjectIf getRandomMapObject() {
+        MapObjectIf[] array = mapObjectIfs.toArray(new MapObjectIf[0]);
+        Random random = new Random();
+        int randomIndex = random.nextInt(array.length);
+        return array[randomIndex];
     }
 
     public void next() {
