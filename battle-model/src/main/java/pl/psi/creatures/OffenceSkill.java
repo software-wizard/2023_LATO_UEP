@@ -1,12 +1,22 @@
 package pl.psi.creatures;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import java.util.Random;
 
 public class OffenceSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
 
-    protected OffenceSkill(Random aRand) {
-        super(aRand);
+    private final DamageCalculatorIf decorated;
+
+    public OffenceSkill(DamageCalculatorIf calculator) {
+        decorated = calculator;
     }
+
+    @VisibleForTesting
+    protected OffenceSkill (Random aRand){
+        this.decorated = new DefaultDamageCalculator(aRand);
+    }
+
     @Override
     public int calculateDamage(Creature aAttacker, Creature aDefender) {
         return calculateOutcome(super.calculateDamage(aAttacker, aDefender));
@@ -18,9 +28,7 @@ public class OffenceSkill extends AbstractCalculateDamageStrategy implements Dam
         return (int)(i * 1.1);
     }
 
-    public void apply(Creature attacker) {
-
-        //TODO implement this method
-
+    public void apply(Creature creature) {
+        creature.setCalculator(new OffenceSkill(creature.getCalculator()));
     }
 }
