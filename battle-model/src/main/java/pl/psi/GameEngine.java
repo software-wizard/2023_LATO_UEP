@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import WarMachines.MapObjectIf;
-
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
@@ -103,9 +101,17 @@ public class GameEngine {
     public boolean canAttack(final Point point) {
         double distance = board.getPosition(turnQueue.getCurrentMapObject())
                 .distance(point);
-        return board.getMapObject(point)
-                .isPresent()
-                && distance < 10 && distance > 0;
+        boolean canAttackFromDistance = turnQueue.getCurrentMapObject().canAttackFromDistance();
+        if(canAttackFromDistance){
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0;
+        } else {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance < 2 && distance > 0;
+        }
+
     }
 
     public boolean isCurrentMapObject(Point aPoint) {

@@ -1,6 +1,6 @@
 package pl.psi.gui;
 
-import WarMachines.MapObjectIf;
+import pl.psi.MapObjectIf;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import pl.psi.creatures.Creature;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

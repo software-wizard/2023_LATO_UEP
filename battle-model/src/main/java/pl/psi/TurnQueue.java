@@ -1,7 +1,5 @@
 package pl.psi;
 
-import WarMachines.MapObjectIf;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Collection;

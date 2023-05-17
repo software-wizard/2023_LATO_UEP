@@ -1,6 +1,9 @@
-package WarMachines;
+package pl.psi.WarMachines;
 
+import WarMachines.WarMachineStatistic;
 import org.junit.jupiter.api.Test;
+import pl.psi.warmachines.WarMachine;
+import pl.psi.warmachines.WarMachineDamageCalculator;
 
 import static org.junit.jupiter.api.Assertions.*;
 

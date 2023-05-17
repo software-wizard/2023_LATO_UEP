@@ -1,4 +1,7 @@
-package WarMachines;
+package pl.psi.warmachines;
+
+import WarMachines.WarMachineStatistic;
+import pl.psi.MapObjectIf;
 
 public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF {
     public int calculateDamage(WarMachine aAttacker, MapObjectIf aDefender) throws Exception {
