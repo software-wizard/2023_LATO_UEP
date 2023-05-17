@@ -55,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>pl.psi</groupId>
-            <artifactId>economyHero-common</artifactId>
+            <artifactId>hero-common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
