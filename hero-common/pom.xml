@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hero-common</artifactId>
+    <artifactId>economyHero-common</artifactId>
 
     <dependencies>
         <dependency>
