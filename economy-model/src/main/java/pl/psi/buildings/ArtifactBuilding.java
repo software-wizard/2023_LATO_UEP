@@ -1,4 +1,4 @@
-package pl.psi.Buildings;
+package pl.psi.buildings;
 
 public class ArtifactBuilding {
 }

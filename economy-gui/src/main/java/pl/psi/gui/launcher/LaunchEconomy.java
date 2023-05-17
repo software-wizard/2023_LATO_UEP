@@ -1,4 +1,6 @@
-package pl.psi.gui;
+package pl.psi.gui.launcher;
+
+import pl.psi.gui.launcher.EconomyStart;
 
 public class LaunchEconomy
 {

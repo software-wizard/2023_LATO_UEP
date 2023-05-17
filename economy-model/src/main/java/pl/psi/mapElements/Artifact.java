@@ -2,7 +2,7 @@ package pl.psi.mapElements;
 
 import com.google.common.collect.HashBiMap;
 import lombok.Getter;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 @Getter
 public class Artifact implements MapElement {
     // TODO
@@ -18,8 +18,8 @@ public class Artifact implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
-        aHero.addArtifactToBackpack(this);
+    public void apply(EconomyHero aEconomyHero) {
+        aEconomyHero.addArtifactToBackpack(this);
     }
 
     @Override

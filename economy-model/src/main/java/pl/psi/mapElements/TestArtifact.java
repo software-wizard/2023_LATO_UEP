@@ -2,7 +2,7 @@
 package pl.psi.mapElements;
 
 import lombok.Getter;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 @Getter
 public class TestArtifact extends Artifact {

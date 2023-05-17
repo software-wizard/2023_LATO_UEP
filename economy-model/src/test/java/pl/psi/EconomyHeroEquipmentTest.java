@@ -1,7 +1,8 @@
 package pl.psi;
 
 import org.junit.jupiter.api.Test;
-import pl.psi.hero.Hero;
+import pl.psi.creatures.EconomyCreature;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.Artifact;
@@ -9,14 +10,17 @@ import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.TestArtifact;
 
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class HeroEquipmentTest {
+public class EconomyHeroEquipmentTest {
     @Test
     void shouldAddItemToBackpack() {
-        final Hero hero = new Hero(HeroStatistics.builder().build(),
+        final EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(),
+                new ArrayList<EconomyCreature>(),
                 new HeroEquipment());
         Artifact testArtifact1 = new Artifact("helmet","skullHelmet");
         Artifact testArtifact2 = new Artifact("helmet","thunderHelmet");

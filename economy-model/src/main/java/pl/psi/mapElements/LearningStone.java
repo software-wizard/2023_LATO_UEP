@@ -1,14 +1,13 @@
 package pl.psi.mapElements;
 
-import com.google.common.collect.HashBiMap;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 
 import java.util.ArrayList;
 
 // Learning Stone: gives visiting heroes +1000 experience upon their first visit.
 public class LearningStone implements MapElement {
 
-    private ArrayList<Hero> visitedHeroes = new ArrayList<Hero>();
+    private ArrayList<EconomyHero> visitedEconomyHeroes = new ArrayList<EconomyHero>();
 
     @Override
     public boolean isInteractive() {
@@ -16,10 +15,10 @@ public class LearningStone implements MapElement {
     }
 
     @Override
-    public void apply(Hero aHero) {
-        if (!visitedHeroes.contains(aHero)) {
-            aHero.getHeroStatistics().setExperience(aHero.getHeroStatistics().getExperience()+1000);
-            visitedHeroes.add(aHero);
+    public void apply(EconomyHero aEconomyHero) {
+        if (!visitedEconomyHeroes.contains(aEconomyHero)) {
+            aEconomyHero.getHeroStatistics().setExperience(aEconomyHero.getHeroStatistics().getExperience()+1000);
+            visitedEconomyHeroes.add(aEconomyHero);
         }
 
     }

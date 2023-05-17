@@ -1,7 +1,7 @@
 package pl.psi;
 
 import lombok.Getter;
-import pl.psi.hero.Hero;
+import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.Player;
 import java.util.LinkedList;
@@ -21,12 +21,15 @@ public class EconomyEngine {
 
     // TODO ENDPOINT, engine dostarcza canMove, jak w battleEngine
 
-    public boolean canMove(final Point aPoint, final Hero aChoosenHero) {
-        return board.canMove(aChoosenHero, aPoint);
+    // TODO getter Player
+
+    // Fasade - easy for GUI
+    public boolean canMove(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
+        return board.canMove(aChoosenEconomyHero, aPoint);
     }
 
-    public void move(final Point aPoint, final Hero aChoosenHero) {
-        board.move(aChoosenHero, aPoint);
+    public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
+        board.move(aChoosenEconomyHero, aPoint);
     }
 
 }

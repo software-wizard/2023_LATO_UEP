@@ -1,8 +1,7 @@
-package pl.psi.gui;
+package pl.psi.gui.launcher;
 
 import javafx.scene.Parent;
 import javafx.scene.control.TextInputDialog;
-import pl.psi.hero.Hero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -53,33 +52,6 @@ public class EconomyStart extends Application
 
     }
 
-    private void askForPlayers() {
-        // Prompt the user for the number of players
-        TextInputDialog numPlayersDialog = new TextInputDialog();
-        numPlayersDialog.setTitle("Number of Players");
-        numPlayersDialog.setHeaderText(null);
-        numPlayersDialog.setContentText("Enter the number of players:");
-        Optional<String> numPlayersResult = numPlayersDialog.showAndWait();
-
-        // Create a list to hold the players
-        List<Player> players = new ArrayList<>();
-
-        // If the user entered a number, create the specified number of players
-        if (numPlayersResult.isPresent()) {
-            int numPlayers = Integer.parseInt(numPlayersResult.get());
-            for (int i = 1; i <= numPlayers; i++) {
-                // Prompt the user for the player's name
-                TextInputDialog nameDialog = new TextInputDialog();
-                nameDialog.setTitle("Player " + i + " Name");
-                nameDialog.setHeaderText(null);
-                nameDialog.setContentText("Enter player " + i + " name:");
-                Optional<String> nameResult = nameDialog.showAndWait();
-                Player player = new Player(nameResult.get(), null);
-                players.add(player);
-            }
-        }
-
-    }
 
 
 }

@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.launcher;
 
 import java.io.IOException;
 import java.util.List;
@@ -41,6 +41,12 @@ public class EcoMapSceneController {
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
         heroNameLabel.setText("Hero name: " + heroName);
+    }
+
+    public void displayAllPlayersWithProperties(List<Player> players) {
+        for (Player player : players) {
+            System.out.println(player.getName() + " " + player.getTown() + " " + player.getHeroName() + " " + player.getBonus());
+        }
     }
 
     public void displayResources(List<Player> players) {
