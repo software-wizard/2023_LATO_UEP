@@ -2,11 +2,9 @@ package pl.psi.gui.launcher;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
+import com.google.common.collect.HashBiMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -46,7 +45,7 @@ public class EcoLauncherSceneController implements Initializable
     @FXML
     private VBox playerChoiceBoxes;
 
-    List<Player> players = new ArrayList<>();
+    LinkedList<Player> players = new LinkedList<>();
 
     //placeholdery z tablicami z danymi do choiceboxow
     private String[] towns = {"Necropolis", "Rampart", "Tower", "Bydgoszcz"};
@@ -139,17 +138,21 @@ public class EcoLauncherSceneController implements Initializable
        }
    }
     public void switchToMap(ActionEvent event) throws IOException {
-        //tu bedzie jakas metoda do przeslania wybranych frakcji(miast), herosów i bonusow do silnika gry
 
-        //placeholdery do wyciagania wybranych danych z choiceboxow
-        String chosenHero = playerHeroChoiceBox.getValue();
+        //Ladowanie playerow do economyEngine
+        EconomyEngine economyEngine = new EconomyEngine(players, HashBiMap.create());
+
+
+
+
+        //String chosenHero = playerHeroChoiceBox.getValue();
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         root = loader.load();
 
         try {
             EcoMapSceneController ecoMapSceneController = loader.getController();
-            ecoMapSceneController.displayName(chosenHero);
+            ecoMapSceneController.displayName(players.get(0).getHeroName());
             ecoMapSceneController.displayResources(players);
             ecoMapSceneController.displayAllPlayersWithProperties(players);
         } catch (Exception e) {
