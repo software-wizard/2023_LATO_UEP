@@ -7,8 +7,8 @@ import java.util.Random;
  */
 class DefaultDamageCalculator extends AbstractCalculateDamageStrategy
 {
-    public DefaultDamageCalculator( final Random aRand )
-    {
+    public DefaultDamageCalculator( final Random aRand ) {
         super( aRand );
     }
+
 }

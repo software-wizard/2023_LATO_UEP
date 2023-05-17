@@ -19,9 +19,15 @@ public class Hero
     public int level;
     public int manaMax;
     private List< Skill > skillList;
-    public Hero( final List< Creature > aCreatures)
+    @Getter
+    public int defenseLevel;
+
+    public Hero( final List< Creature > aCreatures )
     {
         creatures = aCreatures;
     }
 
+    public void increaseDefenseLevel(){
+        defenseLevel++;
+    }
 }
