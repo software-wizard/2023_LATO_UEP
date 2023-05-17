@@ -9,7 +9,6 @@ import java.util.Random;
 public class Skill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
     @Setter
     public int level;
-
     protected Skill(Random aRand) {
         super(aRand);
     }
