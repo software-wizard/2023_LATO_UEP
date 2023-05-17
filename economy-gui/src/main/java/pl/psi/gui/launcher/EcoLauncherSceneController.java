@@ -86,7 +86,7 @@ public class EcoLauncherSceneController implements Initializable
                            ore(1000).
                            gold(1000).
                            crystal(1000).
-                           gems(1000).build());
+                           gems(1000).build(), null, null, null);
                    players.add(player);
                }
            }
@@ -107,21 +107,21 @@ public class EcoLauncherSceneController implements Initializable
            choiceBoxTown.getItems().addAll(towns);
                choiceBoxTown.setOnAction(e -> {
                    String chosenTown = choiceBoxTown.getValue();
-                   //player.setTown(chosenTown);
+                   players.get(players.indexOf(player)).setTown(chosenTown);
                });
 
            ChoiceBox<String> choiceBoxHero = new ChoiceBox<>();
            choiceBoxHero.getItems().addAll(heroes);
               choiceBoxHero.setOnAction(e -> {
                 String chosenHero = choiceBoxHero.getValue();
-                //player.setHeroName(chosenHero);
+                  players.get(players.indexOf(player)).setHeroName(chosenHero);
               });
 
            ChoiceBox<String> choiceBoxBonus = new ChoiceBox<>();
            choiceBoxBonus.getItems().addAll(bonuses);
           choiceBoxBonus.setOnAction(e -> {
             String chosenBonus = choiceBoxBonus.getValue();
-            //player.setBonus(chosenBonus);
+              players.get(players.indexOf(player)).setBonus(chosenBonus);
           });
 
           player.getResources().setGold(1000);
@@ -151,6 +151,7 @@ public class EcoLauncherSceneController implements Initializable
             EcoMapSceneController ecoMapSceneController = loader.getController();
             ecoMapSceneController.displayName(chosenHero);
             ecoMapSceneController.displayResources(players);
+            ecoMapSceneController.displayAllPlayersWithProperties(players);
         } catch (Exception e) {
             e.printStackTrace();
         }
