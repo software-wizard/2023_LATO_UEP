@@ -8,7 +8,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Random;
 
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class OffenceSkillTest {
 
@@ -26,7 +26,6 @@ public class OffenceSkillTest {
 
         // Set the fixed number to be returned by the randomMock
         Mockito.when(randomMock.nextInt(Mockito.anyInt())).thenReturn(5);
-
 
         Creature attacker =  new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
@@ -49,7 +48,9 @@ public class OffenceSkillTest {
 
         attacker.attack(defender);
 
-        //assertThat(defender.getCurrentHp()).isEqualTo(X);
+        int expectedHp = (int) (100 * 1.1 * 5);
+
+        assertThat(defender.getCurrentHp()).isEqualTo(expectedHp);
 
        // X nalezy obliczyć tj. Kreatura zada np. 10 obrażeń to z offence na poziomie basic powinna zadać 11.
 
