@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 @Getter
-public class WarMachine implements PropertyChangeListener  {
+public class WarMachine implements PropertyChangeListener, MapObjectIf  {
     private WarMachineDamageCalculatorIF calculator;
     private WarMachineStatisticIf stats;
     @Setter
@@ -28,10 +28,9 @@ public class WarMachine implements PropertyChangeListener  {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
-
     }
 
-    public void attack(final WarMachine aDefender) throws Exception {
+    public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
@@ -60,18 +59,15 @@ public class WarMachine implements PropertyChangeListener  {
         return getAmount() > 0;
     }
 
-    private void applyDamage(final WarMachine aDefender, final int aDamage) {
+    private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
         int hpToSubtract = aDamage % aDefender.getMaxHp();
 //        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
 
         int hp = aDefender.getCurrentHp() - hpToSubtract;
-        if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
-//            aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
-            aDefender.setCurrentHp(hp);
-        }
+        //            System.out.println("HP: " + hp);
+        //            System.out.println("War Machine is dead");
+        //            aDefender.setAmount(aDefender.getAmount() - 1);
+        aDefender.setCurrentHp(Math.max(hp, 0));
 //        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
@@ -79,7 +75,7 @@ public class WarMachine implements PropertyChangeListener  {
         return stats.getMaxHp();
     }
 
-    protected void setCurrentHp(final int aCurrentHp) {
+    public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -131,6 +127,10 @@ public class WarMachine implements PropertyChangeListener  {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         //todo shouldn't be empty
+    }
+
+    public boolean checkIfAlive(MapObjectIf defender) {
+        return defender.getCurrentHp() > 0;
     }
 
     public static class Builder {

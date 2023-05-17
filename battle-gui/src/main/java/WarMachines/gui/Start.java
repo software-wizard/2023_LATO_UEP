@@ -6,9 +6,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.psi.Hero;
+import pl.psi.MapObject;
 import pl.psi.creatures.NecropolisFactory;
-import pl.psi.creatures.NewHeroPrototype;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,14 +47,14 @@ public class Start extends Application
         }
     }
 
-    private NewHeroPrototype createP2()
+    private MapObject createP2()
     {
-        return new NewHeroPrototype( List.of( new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build() ));
+        return new MapObject( List.of( new NecropolisFactory().create( false, 1, 1) ));
     }
 
-    private NewHeroPrototype createP1()
+    private MapObject createP1()
     {
-        return new NewHeroPrototype( List.of( new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build()) );
+        return new MapObject( List.of( new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build(), new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build()) );
     }
 
 }
