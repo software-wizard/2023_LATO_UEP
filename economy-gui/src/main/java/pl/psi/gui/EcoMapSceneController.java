@@ -62,4 +62,20 @@ public class EcoMapSceneController {
         stage.setY( 5 );
         stage.show();
     }
+
+    public void openEq(ActionEvent event) throws IOException {
+        //otworzyc tu okno i z gamenegine brac atrybuty
+        //utworzyc tu heros z ekqipunkiem po prostu i z niego brac wszystko i testowac metody
+        //nowy kontroller
+//        przejscie takie jak w eco launcher scene controller i w tym nowym controllerze zrobic metody na ekwipunek
+        //metody z eq hero przeniesc pozniej do tego kontrollera
+        System.out.println("SDDS");
+//        root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoLauncherScene.fxml")));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new  Scene(root);
+//        stage.setScene( scene );
+//        stage.setX( 5 );
+//        stage.setY( 5 );
+//        stage.show();
+    }
 }

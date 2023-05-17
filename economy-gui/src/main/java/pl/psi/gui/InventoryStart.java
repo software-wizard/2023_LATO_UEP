@@ -23,9 +23,9 @@
 //
 //    // Define a constructor that takes a Hero parameter
 //    public InventoryStart(Hero hero) {
-//        super();
 //        this.hero = hero;
 //    }
+//    // Konstruktor bezargumentowy
 //    public InventoryStart() {
 //        super();
 //    }
@@ -96,8 +96,8 @@
 //    }
 //
 //    public static void main(String[] args) {
-//        //jak miec dostep do tego hero
 //        Hero hero = new Hero(HeroStatistics.builder().build(), HeroEquipment.builder().heroBackpack(new ArrayList<>()).heroInventory(new HashMap<>()).build());
+//        hero.addArtifactToBackpack(new Artifact("sd", "sd"));
 //
 //        // Create an instance of InventoryStart and pass the Hero object to its constructor
 //        InventoryStart app = new InventoryStart(hero);
