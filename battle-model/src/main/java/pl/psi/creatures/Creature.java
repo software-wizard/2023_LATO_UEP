@@ -28,6 +28,8 @@ public class Creature implements PropertyChangeListener {
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
+    @Setter
+    private double lambda = 1;
 
     Creature() {
     }
@@ -58,7 +60,7 @@ public class Creature implements PropertyChangeListener {
         int hpToSubstract = aDamage % aDefender.getMaxHp();
         int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        int hp = (int) (aDefender.getCurrentHp() - hpToSubstract*lambda); //tymczasowy cast do inta
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
             aDefender.setAmount(aDefender.getAmount() - 1);
@@ -117,6 +119,10 @@ public class Creature implements PropertyChangeListener {
 
     public int getMoveRange() {
         return stats.getMoveRange();
+    }
+
+    public void setCalculator(DamageCalculatorIf calculator) {
+        this.calculator = calculator;
     }
 
     public static class Builder {
