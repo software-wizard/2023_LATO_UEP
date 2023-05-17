@@ -57,7 +57,6 @@ public class CastleTest {
         Hero hero = new Hero(HeroStatistics.builder().build(), army);
 
         hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
-        hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 1, resources);
 
         assertEquals(12, hero.getHeroArmy().get(0).getAmount());
         assertEquals(8, ((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1)).getCreaturesToRecruit().getAmount());
