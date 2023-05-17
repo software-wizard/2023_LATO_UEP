@@ -15,7 +15,6 @@
     </properties>
 
     <modules>
-        <module>economyHero-common</module>
         <module>economy-model</module>
         <module>economy-gui</module>
         <module>battle-model</module>
