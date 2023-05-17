@@ -1,5 +1,6 @@
 package pl.psi.gui;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -15,9 +16,14 @@ class MapTile extends StackPane
     {
         rect = new Rectangle( 60, 60 );
         rect.setFill( Color.WHITE );
-        rect.setStroke( Color.RED );
+        rect.setStroke( Color.BLACK );
         getChildren().add( rect );
         label = new Label( aName );
+        label.setAlignment(Pos.CENTER);
+        label.setWrapText(true);
+        label.setMaxWidth(rect.getWidth() - 10);
+        label.setMaxHeight(rect.getHeight());
+
         getChildren().add( label );
     }
 

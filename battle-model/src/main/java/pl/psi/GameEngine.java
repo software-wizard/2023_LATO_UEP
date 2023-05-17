@@ -2,9 +2,11 @@ package pl.psi;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-import pl.psi.creatures.Creature;
+import WarMachines.MapObjectIf;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -12,37 +14,81 @@ import pl.psi.creatures.Creature;
 public class GameEngine {
 
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
-    private final TurnQueue turnQueue;
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-//    private final NewTurnQueueWithWarMachines newTurnQueueWithWarMachines;
+    private final TurnQueue turnQueue;
+    private List<MapObjectIf> mapObjectIf1 = null;
+    private List<MapObjectIf> mapObjectIf2 = null;
 
     public  GameEngine(final Hero aHero1, final Hero aHero2) {
-        turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
-//        newTurnQueueWithWarMachines = new NewTurnQueueWithWarMachines(aHero1.getCreatures(), aHero2.getCreatures(), aHero1.getWarMachines(),aHero2.getWarMachines());
+        List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
+        mapObjectIf1.addAll(aHero1.getCreatures());
+        mapObjectIf1.addAll(aHero1.getWarMachines());
 
-//        TODO war machines also should be added to board
-        board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
+        List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
+        mapObjectIf2.addAll(aHero2.getCreatures());
+        mapObjectIf2.addAll(aHero2.getWarMachines());
+
+        turnQueue = new TurnQueue(mapObjectIf1, mapObjectIf2);
+        board = new Board(mapObjectIf1, mapObjectIf2);
     }
 
     public void attack(final Point point) {
-        board.getCreature(point)
-                .ifPresent(defender -> turnQueue.getCurrentCreature()
-                        .attack(defender));
+        board.getMapObject(point)
+                .ifPresent(defender -> {
+                    try {
+                        turnQueue.getCurrentMapObject()
+                                .attack(defender);
+                        checkIfAlive(defender);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
         pass();
     }
 
+    public void heal(final Point point) {
+
+        board.getMapObject(point)
+                .ifPresent(comrade -> {
+                    try {
+                        turnQueue.getCurrentMapObject()
+                                .heal(comrade);
+                        checkIfAlive(comrade);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        pass();
+    }
+
+    public void performAction(final Point point){
+        if(turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
+            heal(point);
+        }else {
+            attack(point);
+        }
+    }
+
+    private void checkIfAlive(MapObjectIf defender) {
+        if(!(turnQueue.getCurrentMapObject().checkIfAlive(defender))){
+            board.removeMapObject(defender);
+            turnQueue.removeMapObject(defender);
+            pass();
+        }
+    }
+
     public boolean canMove(final Point aPoint) {
-        return board.canMove(turnQueue.getCurrentCreature(), aPoint);
+        return board.canMove(turnQueue.getCurrentMapObject(), aPoint);
     }
 
     public void move(final Point aPoint) {
-        board.move(turnQueue.getCurrentCreature(), aPoint);
+        board.move(turnQueue.getCurrentMapObject(), aPoint);
         observerSupport.firePropertyChange(CREATURE_MOVED, null, aPoint);
     }
 
-    public Optional<Creature> getCreature(final Point aPoint) {
-        return board.getCreature(aPoint);
+    public Optional<MapObjectIf> getMapObject(final Point aPoint) {
+        return board.getMapObject(aPoint);
     }
 
     public void pass() {
@@ -55,14 +101,14 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentCreature())
+        double distance = board.getPosition(turnQueue.getCurrentMapObject())
                 .distance(point);
-        return board.getCreature(point)
+        return board.getMapObject(point)
                 .isPresent()
-                && distance < 2 && distance > 0;
+                && distance < 10 && distance > 0;
     }
 
-    public boolean isCurrentCreature(Point aPoint) {
-        return Optional.of(turnQueue.getCurrentCreature()).equals(board.getCreature(aPoint));
+    public boolean isCurrentMapObject(Point aPoint) {
+        return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
 }

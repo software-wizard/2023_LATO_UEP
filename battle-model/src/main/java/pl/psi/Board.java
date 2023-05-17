@@ -3,6 +3,7 @@ package pl.psi;
 import java.util.List;
 import java.util.Optional;
 
+import WarMachines.MapObjectIf;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -14,50 +15,58 @@ import pl.psi.creatures.Creature;
 public class Board
 {
     private static final int MAX_WITDH = 14;
-    private final BiMap< Point, Creature > map = HashBiMap.create();
+    private final BiMap< Point, MapObjectIf> map = HashBiMap.create();
 
-    public Board( final List< Creature > aCreatures1, final List< Creature > aCreatures2 )
+    public Board( final List< MapObjectIf > mapObjectIfs1, final List< MapObjectIf > mapObjectIfs2 )
     {
-        addCreatures( aCreatures1, 0 );
-        addCreatures( aCreatures2, MAX_WITDH );
+        addMapObject( mapObjectIfs1, 3 );
+        addMapObject( mapObjectIfs2, 11 );
     }
 
-    private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
+    private void addMapObject(final List< MapObjectIf > mapObjectIfs, final int aXPosition )
     {
-        for( int i = 0; i < aCreatures.size(); i++ )
+        for( int i = 0; i < mapObjectIfs.size(); i++ )
         {
-            map.put( new Point( aXPosition, i * 2 + 1 ), aCreatures.get( i ) );
+            map.put( new Point( aXPosition, i * 2 + 1 ), mapObjectIfs.get( i ) );
         }
     }
 
-    Optional< Creature > getCreature( final Point aPoint )
+    public void removeMapObject(MapObjectIf mapObjectIf ){
+        map.remove(getPosition(mapObjectIf));
+    }
+
+    Optional< MapObjectIf > getMapObject(final Point aPoint )
     {
         return Optional.ofNullable( map.get( aPoint ) );
     }
 
-    void move( final Creature aCreature, final Point aPoint )
+    void move( final MapObjectIf mapObjectIf, final Point aPoint )
     {
-        if( canMove( aCreature, aPoint ) )
+        if( canMove( mapObjectIf, aPoint ) )
         {
             map.inverse()
-                .remove( aCreature );
-            map.put( aPoint, aCreature );
+                .remove( mapObjectIf );
+            map.put( aPoint, mapObjectIf );
         }
     }
 
-    boolean canMove( final Creature aCreature, final Point aPoint )
+    boolean canMove( final MapObjectIf mapObjectIf, final Point aPoint )
     {
         if( map.containsKey( aPoint ) )
         {
             return false;
         }
-        final Point oldPosition = getPosition( aCreature );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
+        final Point oldPosition = getPosition( mapObjectIf );
+        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < mapObjectIf.getMoveRange();
     }
 
-    Point getPosition( Creature aCreature )
+    Point getPosition( MapObjectIf mapObjectIf )
     {
-        return map.inverse()
-            .get( aCreature );
+        if ((map.inverse().get( mapObjectIf )) != null){
+            return map.inverse()
+                    .get( mapObjectIf );
+        } else{
+            return new Point(0,0);
+        }
     }
 }

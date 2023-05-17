@@ -25,12 +25,12 @@ class TurnQueueTest
             .build();
         final TurnQueue turnQueue = new TurnQueue( List.of( creature1, creature2 ), List.of( creature3 ) );
 
-        assertEquals( turnQueue.getCurrentCreature(), creature1 );
+        assertEquals( turnQueue.getCurrentMapObject(), creature1 );
         turnQueue.next();
-        assertEquals( turnQueue.getCurrentCreature(), creature2 );
+        assertEquals( turnQueue.getCurrentMapObject(), creature2 );
         turnQueue.next();
-        assertEquals( turnQueue.getCurrentCreature(), creature3 );
+        assertEquals( turnQueue.getCurrentMapObject(), creature3 );
         turnQueue.next();
-        assertEquals( turnQueue.getCurrentCreature(), creature1 );
+        assertEquals( turnQueue.getCurrentMapObject(), creature1 );
     }
 }
