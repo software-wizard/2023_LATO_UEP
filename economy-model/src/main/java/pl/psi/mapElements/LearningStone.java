@@ -17,7 +17,7 @@ public class LearningStone implements MapElement {
     @Override
     public void apply(EconomyHero aEconomyHero) {
         if (!visitedEconomyHeroes.contains(aEconomyHero)) {
-            aEconomyHero.getHeroStatistics().setExperience(aEconomyHero.getHeroStatistics().getExperience()+1000);
+            aEconomyHero.getEconomyHeroStatistics().setExperience(aEconomyHero.getEconomyHeroStatistics().getExperience()+1000);
             visitedEconomyHeroes.add(aEconomyHero);
         }
 

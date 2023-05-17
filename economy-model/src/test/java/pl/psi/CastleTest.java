@@ -5,7 +5,7 @@ import pl.psi.buildings.HallBuilding;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.hero.EconomyHero;
-import pl.psi.hero.HeroStatistics;
+import pl.psi.hero.EconomyHeroStatistics;
 import pl.psi.mapElements.*;
 import pl.psi.player.PlayerResources;
 
@@ -54,7 +54,7 @@ public class CastleTest {
                 .gems(5)
                 .build();
         ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-        EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army);
+        EconomyHero economyHero = new EconomyHero(EconomyHeroStatistics.builder().build(), army);
 
         economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
         economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 1, resources);

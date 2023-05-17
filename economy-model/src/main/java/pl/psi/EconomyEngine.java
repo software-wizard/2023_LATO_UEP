@@ -19,8 +19,6 @@ public class EconomyEngine {
         turnQueue.addObserver(board);
     }
 
-    // TODO ENDPOINT, engine dostarcza canMove, jak w battleEngine
-
     // TODO getter Player
 
     // Fasade - easy for GUI
