@@ -46,7 +46,7 @@
                         <Font size="16.0"/>
                     </font>
                 </Button>
-                <Button fx:id="windowButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="SPELL"
+                <Button fx:id="spellButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="SPELL"
                         textAlignment="CENTER">
                     <font>
                         <Font size="16.0"/>

@@ -30,6 +30,11 @@ public class SpellMenu {
         }
     }
 
+    //KOMENTARZE
+    // w konwerterze, do klasy hero wlozyc, w klasie hero przekazac klase spell w konstruktorze, spell abstract, i rozdzielic na konkretne typy spelli klasami albo kompozycja (klasa spell +klasa spell efect)
+    //najpierw mamy zrobić zadawanie obrażeń, żeby działało, potem to co tu wyżej jest napisane
+    //zadawanie obrażeń - otwiera się okienko, wyświetlają się tylko spelle które posiada hero (gui nie jest statyczne), możemy usunąć przysick cast i po kliknięciu ma się zamykać okienko i na niebiesko podświetlają się przeciwnicy, na których możemy użyć spella
+
 
 
 

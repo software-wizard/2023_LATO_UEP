@@ -46,9 +46,9 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="547.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
       <children>
-            <ImageView fitHeight="614.0" fitWidth="607.0" layoutX="-3.0">
-               <image>
-                  <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/Picsart_23-05-16_22-18-03-343.png" />
+            <ImageView fx:id="BackGround" fitHeight="614.0" fitWidth="607.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">   <!--id , na podstawie id w kodzie mozna odwolac, przeanalizowac jak w kreatuerze, cast nie musi,-->
+               <image>                                                                                                                  <!--zmiany w klasie hero-->
+                  <Image url="@../../resources/Picsart_23-05-16_22-18-03-343.png" />
                </image>
             </ImageView>
             <HBox layoutX="35.0" layoutY="54.0" prefHeight="66.0" prefWidth="230.0">
@@ -65,7 +65,7 @@
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/03_magicarrow.jpg" />
+                        <Image url="@../../resources/03_magicarrow.png" />
                      </image>
                   </ImageView>
                </children>
@@ -82,32 +82,32 @@
                <children>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/05_disguise.png" />
+                        <Image url="@../../resources/05_disguise.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/48_disruptingray.png" />
+                        <Image url="@../../resources/48_disruptingray.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/50b_fortune.png" />
+                        <Image url="@../../resources/50b_fortune.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/18_lightningbolt.png" />
+                        <Image url="@../../resources/18_lightningbolt.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/45_precision.png" />
+                        <Image url="@../../resources/45_precision.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/16_visions.png" />
+                        <Image url="@../../resources/16_visions.png" />
                      </image>
                   </ImageView>
                </children>
@@ -121,22 +121,22 @@
                <children>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/29_airshield.png" />
+                        <Image url="@../../resources/29_airshield.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/26_destroyundead.png" />
+                        <Image url="@../../resources/26_destroyundead.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/31_protectionair.png" />
+                        <Image url="@../../resources/31_protectionair.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/59_hypnotize.png" />
+                        <Image url="@../../resources/59_hypnotize.png" />
                      </image>
                   </ImageView>
                </children>
@@ -150,12 +150,12 @@
                <children>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/20_chainlightning.png" />
+                        <Image url="@../../resources/20_chainlightning.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/57_counterstrike.png" />
+                        <Image url="@../../resources/57_counterstrike.png" />
                      </image>
                   </ImageView>
                </children>
@@ -169,22 +169,22 @@
                <children>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/09_dimensiondoor.png" />
+                        <Image url="@../../resources/09_dimensiondoor.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/07_fly.png" />
+                        <Image url="@../../resources/07_fly.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/37_magicmirror.png" />
+                        <Image url="@../../resources/37_magicmirror.png" />
                      </image>
                   </ImageView>
                   <ImageView>
                      <image>
-                        <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/68_summonair.png" />
+                        <Image url="@../../resources/68_summonair.png" />
                      </image>
                   </ImageView>
                </children>
@@ -196,164 +196,9 @@
             <Font size="18.0" />
           </font>
         </Label>
-            <VBox prefHeight="614.0" prefWidth="604.0">
-              <children>
-                <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="547.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
-                  <children>
-                        <ImageView fitHeight="614.0" fitWidth="607.0" layoutX="-3.0">
-                           <image>
-                              <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/Picsart_23-05-16_22-18-03-343.png" />
-                           </image>
-                        </ImageView>
-                        <HBox layoutX="35.0" layoutY="54.0" prefHeight="66.0" prefWidth="230.0">
-                           <children>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../resources/52_haste.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../resources/06_viewair.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/03_magicarrow.jpg" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </HBox>
-                        <Label layoutX="41.0" layoutY="120.0" prefHeight="36.0" prefWidth="67.0" text="Level 2" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox layoutX="31.0" layoutY="156.0" prefHeight="66.0" prefWidth="469.0">
-                           <children>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/05_disguise.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/48_disruptingray.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/50b_fortune.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/18_lightningbolt.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/45_precision.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/16_visions.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label layoutX="41.0" layoutY="234.0" text="Level 3" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox layoutX="35.0" layoutY="270.0" prefHeight="66.0" prefWidth="308.0">
-                           <children>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/29_airshield.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/26_destroyundead.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/31_protectionair.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/59_hypnotize.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label layoutX="41.0" layoutY="344.0" text="Level 4" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox layoutX="41.0" layoutY="375.0" prefHeight="66.0" prefWidth="156.0">
-                           <children>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/20_chainlightning.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/57_counterstrike.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Label layoutX="41.0" layoutY="450.0" text="Level 5" textFill="WHITE">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <HBox layoutX="31.0" layoutY="486.0" prefHeight="66.0" prefWidth="312.0">
-                           <children>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/09_dimensiondoor.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/07_fly.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/37_magicmirror.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView>
-                                 <image>
-                                    <Image url="@../../../../../../../Desktop/Studia%20files%206%20semestr/Java%20Kurs/68_summonair.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </HBox>
-                        <Button fx:id="castButton1" layoutX="500.0" layoutY="575.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="Cast" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="575.0" />
-                        <Button layoutX="428.0" layoutY="575.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="61.0" text="Close" />
-                    <Label alignment="CENTER" layoutX="41.0" layoutY="27.0" style="&#10;" text="Level 1" textAlignment="JUSTIFY" textFill="#fff9f9">
-                      <font>
-                        <Font size="18.0" />
-                      </font>
-                    </Label>
-                  </children>
-                </AnchorPane>
-              </children>
-            </VBox>
+
+
+
       </children>
     </AnchorPane>
   </children>

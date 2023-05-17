@@ -20,6 +20,7 @@ import pl.psi.creatures.Creature;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MainBattleController implements PropertyChangeListener
@@ -31,17 +32,19 @@ public class MainBattleController implements PropertyChangeListener
     private Button passButton;
 
     @FXML
-    private Button windowButton;
+    private Button spellButton;
+
+
 
     public MainBattleController( final Hero aHero1, final Hero aHero2 )
     {
         gameEngine = new GameEngine( aHero1, aHero2 );
     }
-//dodac metode openspellbok
     @FXML
     private void initialize()
     {
         refreshGui();
+        initializeSpellBook();
         gameEngine.addObserver(this);
     }
 
@@ -80,14 +83,13 @@ public class MainBattleController implements PropertyChangeListener
         }
     }
 
-    //zmienic nazwe buttona, metoda initialize spell button, metoda prepare spell button
-    private void openSpellBook(){
-        windowButton.setOnAction(new EventHandler<ActionEvent>() {
+    private void initializeSpellBook(){
+        spellButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Parent root;
                 try{
-                    root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/spell-book-gui.fxml"));
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/spell-book-gui2.fxml")));
                     Stage stage = new Stage();
                     stage.setTitle("Spell Book");
                     stage.setScene(new Scene(root, 250, 450));
@@ -102,6 +104,5 @@ public class MainBattleController implements PropertyChangeListener
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         refreshGui();
-        openSpellBook();
     }
 }
