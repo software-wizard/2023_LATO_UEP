@@ -1,16 +1,17 @@
-package WarMachines;
+package pl.psi.warmachines;
 
+import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
+import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Random;
 
 @Getter
-public class WarMachine implements PropertyChangeListener, MapObjectIf  {
+public class WarMachine implements PropertyChangeListener, MapObjectIf {
     private WarMachineDamageCalculatorIF calculator;
     private FirstAidTentIf HPcalculator;
     private WarMachineStatisticIf stats;
@@ -79,17 +80,11 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
         return 0;
     }
 
-//    TODO chyba zadna maszyna nie może kontratakować - do wywalenia
-//    private boolean canCounterAttack(final Creature aDefender) {
-//        return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
-//    }
+    @Override
+    public boolean canAttackFromDistance() {
+        return true;
+    }
 
-//    private void counterAttack(final Creature aAttacker) {
-//        final int damage = aAttacker.getCalculator()
-//                .calculateDamage(aAttacker, this);
-//        applyDamage(this, damage);
-//        aAttacker.counterAttackCounter--;
-//    }
 
     Range<Integer> getDamage() {
         return stats.getDamage();

@@ -2,7 +2,7 @@ package pl.psi;
 
 import java.util.List;
 
-import WarMachines.WarMachine;
+import pl.psi.warmachines.WarMachine;
 import pl.psi.creatures.Creature;
 
 import lombok.Getter;

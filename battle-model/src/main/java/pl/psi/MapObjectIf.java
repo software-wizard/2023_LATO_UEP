@@ -1,9 +1,8 @@
-package WarMachines;
+package pl.psi;
 
 //import pl.psi.creatures.Creature;
 
 import java.beans.PropertyChangeListener;
-import java.util.Optional;
 
 public interface MapObjectIf extends PropertyChangeListener {
     int getCurrentHp();
@@ -22,6 +21,8 @@ public interface MapObjectIf extends PropertyChangeListener {
 
 
     int getMoveRange();
+
+    boolean canAttackFromDistance();
 
 //    void attack(final Point point);
 //

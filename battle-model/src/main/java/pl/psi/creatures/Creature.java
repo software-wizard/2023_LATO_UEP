@@ -10,7 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
-import WarMachines.MapObjectIf;
+import pl.psi.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
 
@@ -118,6 +118,11 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
 
     public int getMoveRange() {
         return stats.getMoveRange();
+    }
+
+    @Override
+    public boolean canAttackFromDistance() {
+        return false;
     }
 
     @Override
