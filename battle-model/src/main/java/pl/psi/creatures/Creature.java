@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
+import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
@@ -30,6 +31,10 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
 
+    @Setter
+    @Getter
+    private Hero hero;
+
     Creature() {
     }
 
@@ -39,6 +44,10 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+    }
+
+    Creature(Hero aHero){
+        this.hero = aHero;
     }
 
     public void attack(final Creature aDefender) {

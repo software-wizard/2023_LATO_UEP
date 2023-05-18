@@ -36,4 +36,9 @@ class MapTile extends StackPane
     {
         rect.setFill( aColor );
     }
+
+    void setBorderColor(final Color aColor){
+        rect.setStroke(aColor);
+        rect.setStrokeWidth(2.0);
+    }
 }

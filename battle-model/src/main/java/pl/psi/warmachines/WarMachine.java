@@ -4,6 +4,7 @@ import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
+import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
 
@@ -18,6 +19,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Setter
     private int amount;
     private int currentHp;
+    @Setter
+    @Getter
+    private Hero hero;
 
     WarMachine(){
 
@@ -34,6 +38,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         HPcalculator = aHPcalculator;
     }
 
+    WarMachine(Hero aHero){
+        this.hero = aHero;
+    }
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
@@ -84,8 +91,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     public boolean canAttackFromDistance() {
         return true;
     }
-
-
     Range<Integer> getDamage() {
         return stats.getDamage();
     }

@@ -46,11 +46,21 @@ public class MainBattleController implements PropertyChangeListener
                 Point currentPoint = new Point( x, y );
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject( currentPoint );
                 final MapTile mapTile = new MapTile( "" );
-                gameObject.ifPresent( c -> mapTile.setName( c.toString() ) );
+
+                gameObject.ifPresent( (c) -> {mapTile.setName( c.toString() );
+                    mapTile.setBackground(Color.rgb(255,195,18));
+                    mapTile.setBackground(Color.rgb(18,203,196));
+//                    if (c.getHero().equals(hero1)) {
+//                        mapTile.setBackground(Color.IVORY);
+//                    } else if (c.getHero().equals(hero2)) {
+//                        mapTile.setBackground(Color.BLUEVIOLET);
+//                    }
+                } );
 
                 if( gameEngine.isCurrentMapObject( currentPoint ) )
                 {
-                    mapTile.setBackground( Color.GREENYELLOW );
+                    //mapTile.setBackground( Color.GREENYELLOW );
+                    mapTile.setBorderColor(Color.GREENYELLOW);
                 }
                 if( gameEngine.canMove( currentPoint ) )
                 {
@@ -61,7 +71,8 @@ public class MainBattleController implements PropertyChangeListener
                 }
                 if( gameEngine.canAttack( currentPoint ) )
                 {
-                    mapTile.setBackground( Color.INDIANRED );
+                    //mapTile.setBackground( Color.INDIANRED );
+                    mapTile.setBorderColor( Color.INDIANRED );
                     mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
                         gameEngine.performAction(currentPoint);
                         //gameEngine.attack( currentPoint );
