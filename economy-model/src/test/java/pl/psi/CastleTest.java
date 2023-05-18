@@ -58,7 +58,6 @@ public class CastleTest {
         EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
 
         economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
-        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 1, resources);
 
         assertEquals(12, economyHero.getHeroArmy().get(0).getAmount());
         assertEquals(8, ((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1)).getCreaturesToRecruit().getAmount());

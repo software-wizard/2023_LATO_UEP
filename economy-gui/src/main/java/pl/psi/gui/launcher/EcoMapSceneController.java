@@ -11,9 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import pl.psi.mapElements.Resource;
 import pl.psi.player.Player;
-import pl.psi.player.PlayerResources;
 
 
 public class EcoMapSceneController {

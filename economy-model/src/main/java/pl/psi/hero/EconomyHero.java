@@ -3,17 +3,13 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import pl.psi.buildings.Building;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.Castle;
 import pl.psi.mapElements.Artifact;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 @AllArgsConstructor
