@@ -15,11 +15,19 @@ public class Hero
     @Getter
     private final List<Creature> creatures;
     @Getter
-    private final List<WarMachine> warMachines;
+    private  List<WarMachine> warMachines;
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
         creatures = aCreatures;
         warMachines = aWarMachine;
     }
+
+    public Hero( final List< Creature > aCreatures)
+    {
+        creatures = aCreatures;
+    }
+
+
+
 }
