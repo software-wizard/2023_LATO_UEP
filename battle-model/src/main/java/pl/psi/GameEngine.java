@@ -69,13 +69,13 @@ public class GameEngine {
         pass();
     }
 
-    public void performAction(final Point point){
-        if(turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
-            heal(point);
-        }else {
-            attack(point);
-        }
-    }
+//    public void performAction(final Point point){
+//        if()){
+//            heal(point);
+//        }else {
+//            attack(point);
+//        }
+//    }
 
     private void checkIfAlive(MapObjectIf defender) {
         if(!(turnQueue.getCurrentMapObject().checkIfAlive(defender))){
@@ -108,37 +108,43 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                .distance(point);
-        boolean canAttackFromDistance = turnQueue.getCurrentMapObject().canAttackFromDistance();
-        if(canAttackFromDistance){
-            return board.getMapObject(point)
-                    .isPresent()
-                    && distance <= 14 && distance > 0
-                    && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-        } else {
-            return board.getMapObject(point)
-                    .isPresent()
-                    && distance < 2 && distance > 0;
+        if(!turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
+            double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                    .distance(point);
+            boolean canAttackFromDistance = turnQueue.getCurrentMapObject().canAttackFromDistance();
+            if(canAttackFromDistance){
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance <= 14 && distance > 0
+                        && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+            } else {
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance < 2 && distance > 0;
+            }
+        }else {
+            return false;
         }
-
     }
 
     public boolean canHeal(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                .distance(point);
-        boolean canAttackFromDistance = turnQueue.getCurrentMapObject().canAttackFromDistance();
-        if(canAttackFromDistance){
-            return board.getMapObject(point)
-                    .isPresent()
-                    && distance <= 14 && distance > 0
-                    && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-        } else {
-            return board.getMapObject(point)
-                    .isPresent()
-                    && distance < 2 && distance > 0;
+        if (turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
+            double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                    .distance(point);
+            boolean canAttackFromDistance = turnQueue.getCurrentMapObject().canAttackFromDistance();
+            if(canAttackFromDistance){
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance <= 14 && distance > 0
+                        && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+            } else {
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance < 2 && distance > 0;
+            }
+        }else {
+            return false;
         }
-
     }
     public boolean isCurrentMapObject(Point aPoint) {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
@@ -163,14 +169,6 @@ public class GameEngine {
         }
         for (int i = 0; i < mapObjectIf2.size(); i++){
             mapObjectIf2.get(i).setHero(hero2);
-        }
-    }
-
-    public boolean whichHero(Point point){
-        if(true){
-            return isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-        } else {
-            return !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
         }
     }
 }

@@ -46,9 +46,9 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
         calculator = aCalculator;
     }
 
-    Creature(Hero aHero){
-        this.hero = aHero;
-    }
+//    Creature(Hero aHero){
+//        this.hero = aHero;
+//    }
 
     public void attack(final Creature aDefender) {
         if (isAlive()) {
@@ -139,8 +139,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
         System.out.println("Creature is attacking");
     }
 
-    @Override
-    public void heal(MapObjectIf comrade) throws Exception {
+    public void heal(MapObjectIf ally) throws Exception {
 
     }
 

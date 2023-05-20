@@ -38,9 +38,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         HPcalculator = aHPcalculator;
     }
 
-    WarMachine(Hero aHero){
-        this.hero = aHero;
-    }
+//    WarMachine(Hero aHero){
+//        this.hero = aHero;
+//    }
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
@@ -48,12 +48,12 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         }
     }
 
-    public void heal(MapObjectIf aComrade) throws Exception {
+    public void heal(MapObjectIf ally) throws Exception {
         if (isAlive()) {
-            final int hp = getHPcalculator().calculateHealPoint(this, aComrade, aComrade.getCurrentHp());
-            aComrade.setCurrentHp(hp);
-            if ((aComrade.getCurrentHp() > aComrade.getMaxHp())){
-                aComrade.setCurrentHp(aComrade.getMaxHp());
+            final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
+            ally.setCurrentHp(hp);
+            if ((ally.getCurrentHp() > ally.getMaxHp())){
+                ally.setCurrentHp(ally.getMaxHp());
             }
         }
     }
@@ -136,7 +136,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     public static class Builder {
         private int amount = 1;
         private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
-        private FirstAidTentIf HPcalculator = new WarMachineHealPointsCalculator();
+        private FirstAidTentIf HPcalculator = new FirstAidTentHealPointsCalculator();
         private WarMachineStatisticIf statistic;
 
         public Builder statistic(final WarMachineStatisticIf aStatistic) {
