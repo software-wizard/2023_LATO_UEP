@@ -81,7 +81,6 @@ public class GameEngine {
         if(!(turnQueue.getCurrentMapObject().checkIfAlive(defender))){
             board.removeMapObject(defender);
             turnQueue.removeMapObject(defender);
-            pass();
         }
     }
 

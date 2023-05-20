@@ -69,43 +69,39 @@ class TurnQueueTest
 
     @Test
     void removeMapObject() {
-        WarMachine ballista1 = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
-        WarMachine ballista2 = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
         WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
-        TurnQueue turnQueue1 = new TurnQueue(List.of(ballista1, catapult), List.of(ballista2));
-        assertEquals(turnQueue1.getCurrentMapObject(), ballista1);
+        WarMachine ammoCart = new WarMachine.Builder().statistic(WarMachineStatistic.AMMO_CART).build();
+        TurnQueue turnQueue1 = new TurnQueue(List.of(ballista, catapult), List.of(ammoCart));
+        assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
         assertEquals(catapult, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
+        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
+        assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.removeMapObject(catapult);
         turnQueue1.next();
-        assertEquals(catapult, turnQueue1.getCurrentMapObject());
+        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
+        assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
-        turnQueue1.removeMapObject(ballista2);
-        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
-
-        turnQueue1.next();
-        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
+        turnQueue1.removeMapObject(ballista);
+        assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertNotEquals(ballista2, turnQueue1.getCurrentMapObject());
-        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
+        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
+        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
+        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
 
     }
 }
