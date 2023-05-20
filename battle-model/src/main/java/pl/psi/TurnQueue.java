@@ -69,5 +69,6 @@ public class TurnQueue {
 
     public void removeMapObject(MapObjectIf mapObjectIf){
         mapObjectIfs.remove(mapObjectIf);
+        mapObjectsQueue.remove(mapObjectIf);
     }
 }
