@@ -3,14 +3,14 @@ package pl.psi.warmachines;
 import WarMachines.WarMachineStatistic;
 import pl.psi.MapObjectIf;
 
-public class WarMachineHealPointsCalculator implements FirstAidTentIf{
+public class FirstAidTentHealPointsCalculator implements FirstAidTentIf{
 
-    public int calculateHealPoint(WarMachine aAttacker, MapObjectIf aComrade, int currentHP) throws Exception {
+    public int calculateHealPoint(WarMachine aAttacker, MapObjectIf aAlly, int currentHP) throws Exception {
 
         int hp;
         if (aAttacker.getStats().equals(WarMachineStatistic.FIRST_AID_TENT)){
             //todo real hero first aid skill value must be used
-            hp = calculateHealPoints(0, currentHP);
+            hp = calculateHealPoints(1, currentHP);
         } else{
             throw new Exception("Only FirstAidTent can heal");
         }
