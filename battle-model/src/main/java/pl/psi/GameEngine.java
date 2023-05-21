@@ -150,10 +150,10 @@ public class GameEngine {
     }
 
     public boolean isEnemyUnit(MapObjectIf mapObject1, MapObjectIf mapObject2){
-        System.out.println("MO1 hero: " + mapObject1.getHero());
-        System.out.println("MO2 hero: " + mapObject2.getHero());
-        System.out.println(mapObject1.getHero() == mapObject2.getHero());
-        System.out.println("--------------------------------------------");
+//        System.out.println("MO1 hero: " + mapObject1.getHero());
+//        System.out.println("MO2 hero: " + mapObject2.getHero());
+//        System.out.println(mapObject1.getHero() == mapObject2.getHero());
+//        System.out.println("--------------------------------------------");
 
         if(mapObject1.getHero() != mapObject2.getHero()){
             return true;
