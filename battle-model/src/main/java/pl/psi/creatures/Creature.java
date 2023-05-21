@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
+import pl.psi.AttackerIF;
 import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Getter;
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
 @Getter
-public class Creature implements PropertyChangeListener, MapObjectIf {
+public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF {
     private CreatureStatisticIf stats;
     @Setter
     private int amount;
@@ -137,10 +138,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
     @Override
     public void attack(MapObjectIf defender) throws Exception {
         System.out.println("Creature is attacking");
-    }
-
-    public void heal(MapObjectIf ally) throws Exception {
-
     }
 
     @Override

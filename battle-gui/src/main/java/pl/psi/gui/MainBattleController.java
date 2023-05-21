@@ -48,7 +48,7 @@ public class MainBattleController implements PropertyChangeListener
 
                 gameObject.ifPresent( (c) -> {mapTile.setName( c.toString() );
                     mapTile.setBackground(Color.rgb(255,195,18));
-                    mapTile.setBackground(Color.rgb(18,203,196));
+                    mapTile.setBackground(Color.rgb(150,203,196));
 //                    if (c.getHero().equals(hero1)) {
 //                        mapTile.setBackground(Color.IVORY);
 //                    } else if (c.getHero().equals(hero2)) {

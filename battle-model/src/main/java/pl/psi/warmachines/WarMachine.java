@@ -4,6 +4,8 @@ import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
+import pl.psi.AttackerIF;
+import pl.psi.HealerIF;
 import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
@@ -12,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 @Getter
-public class WarMachine implements PropertyChangeListener, MapObjectIf {
+public class WarMachine implements PropertyChangeListener, MapObjectIf, AttackerIF, HealerIF {
     private WarMachineDamageCalculatorIF calculator;
     private FirstAidTentIf HPcalculator;
     private WarMachineStatisticIf stats;
