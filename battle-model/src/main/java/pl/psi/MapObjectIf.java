@@ -7,9 +7,6 @@ import java.beans.PropertyChangeListener;
 public interface MapObjectIf extends PropertyChangeListener {
 
     int getCurrentHp();
-    void attack(MapObjectIf defender) throws Exception;
-
-    void heal(MapObjectIf ally) throws Exception;
 
     boolean checkIfAlive(MapObjectIf defender);
 
@@ -20,8 +17,6 @@ public interface MapObjectIf extends PropertyChangeListener {
     String getName();
 
     int getMoveRange();
-
-    boolean canAttackFromDistance();
 
     Hero getHero();
 

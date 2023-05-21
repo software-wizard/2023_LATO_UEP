@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 public class MainBattleController implements PropertyChangeListener
@@ -29,14 +30,12 @@ public class MainBattleController implements PropertyChangeListener
     }
 
     @FXML
-    private void initialize()
-    {
+    private void initialize() throws FileNotFoundException {
         refreshGui();
         gameEngine.addObserver(this);
     }
 
-    private void refreshGui()
-    {
+    private void refreshGui() throws FileNotFoundException {
         gridMap.getChildren()
             .clear();
         for( int x = 0; x < 15; x++ )
@@ -49,13 +48,21 @@ public class MainBattleController implements PropertyChangeListener
 
                 gameObject.ifPresent( (c) -> {mapTile.setName( c.toString() );
                     mapTile.setBackground(Color.rgb(255,195,18));
-                    mapTile.setBackground(Color.rgb(18,203,196));
+                    mapTile.setBackground(Color.rgb(150,203,196));
 //                    if (c.getHero().equals(hero1)) {
 //                        mapTile.setBackground(Color.IVORY);
 //                    } else if (c.getHero().equals(hero2)) {
 //                        mapTile.setBackground(Color.BLUEVIOLET);
 //                    }
                 } );
+
+                gameObject.ifPresent((mapObject) -> {
+                    try {
+                        mapTile.setGraphic(mapObject.getName());
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 
                 if( gameEngine.isCurrentMapObject( currentPoint ) )
                 {
@@ -96,6 +103,10 @@ public class MainBattleController implements PropertyChangeListener
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        refreshGui();
+        try {
+            refreshGui();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
