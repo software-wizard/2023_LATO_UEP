@@ -3,12 +3,14 @@ package pl.psi.creatures;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.CreatureStatistic;
 
+import java.util.List;
+
 public class NecropolisFactory
 {
 
     private static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
 
-    public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount )
+    public Creature create( final boolean aIsUpgraded, final int aTier, final int aAmount)
     {
         if( !aIsUpgraded )
         {
@@ -81,6 +83,11 @@ public class NecropolisFactory
                 default:
                     throw new IllegalArgumentException( EXCEPTION_MESSAGE );
             }
+        }
+    }
+    private void applyAllSkills( Creature creature, List<Skill> aList){
+        for (int i = 0; i<=aList.size(); i++){
+            aList.get(i).apply(creature);
         }
     }
 }

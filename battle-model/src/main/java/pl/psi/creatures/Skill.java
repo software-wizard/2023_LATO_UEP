@@ -1,5 +1,6 @@
 package pl.psi.creatures;
 
+import com.google.common.annotations.VisibleForTesting;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +19,6 @@ public class Skill extends AbstractCalculateDamageStrategy implements DamageCalc
         decorated = calculator;
     }
 
+    public void apply(Creature creature) {
+    }
 }
