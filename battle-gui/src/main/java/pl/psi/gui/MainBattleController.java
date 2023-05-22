@@ -1,5 +1,6 @@
 package pl.psi.gui;
 
+import javafx.geometry.Pos;
 import pl.psi.MapObjectIf;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
@@ -38,27 +39,27 @@ public class MainBattleController implements PropertyChangeListener
     private void refreshGui() throws FileNotFoundException {
         gridMap.getChildren()
             .clear();
+        gridMap.setAlignment(Pos.CENTER);
         for( int x = 0; x < 15; x++ )
         {
             for( int y = 0; y < 10; y++ )
             {
                 Point currentPoint = new Point( x, y );
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject( currentPoint );
-                final MapTile mapTile = new MapTile( "" );
+                final MapTile mapTile = new MapTile( "");
 
                 gameObject.ifPresent( (c) -> {mapTile.setName( c.toString() );
-                    mapTile.setBackground(Color.rgb(255,195,18));
-                    mapTile.setBackground(Color.rgb(150,203,196));
-//                    if (c.getHero().equals(hero1)) {
-//                        mapTile.setBackground(Color.IVORY);
-//                    } else if (c.getHero().equals(hero2)) {
-//                        mapTile.setBackground(Color.BLUEVIOLET);
-//                    }
-                } );
+                    if (c.getHero().equals(gameEngine.getHero1())) {
+                        mapTile.setBackground(Color.rgb(255,195,18));
+                    } else if (c.getHero().equals(gameEngine.getHero2())) {
+                        mapTile.setBackground(Color.rgb(150,203,196));
+                    }
+                });
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
                         mapTile.setGraphic(mapObject.getName());
+                        mapTile.setHpLabel(mapObject.getCurrentHp());
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }

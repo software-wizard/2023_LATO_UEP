@@ -134,6 +134,9 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     public boolean canAttackFromDistance() {
         return false;
     }
+    public boolean canAttack() {
+        return true;
+    }
 
     @Override
     public void attack(MapObjectIf defender) throws Exception {
