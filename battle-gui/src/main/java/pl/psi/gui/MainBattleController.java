@@ -41,6 +41,16 @@ public class MainBattleController implements PropertyChangeListener {
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
+
+
+                List<Point> points = new ArrayList<Point>();
+                points.add(currentPoint);
+
+//                for (Point point : points) {
+//                    System.out.println(point);
+//                }
+                Point randomPoint = getRandomPoint(points);
+
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
 

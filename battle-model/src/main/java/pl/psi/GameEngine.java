@@ -1,6 +1,7 @@
 package pl.psi;
 
 import lombok.Getter;
+import pl.psi.creatures.Creature;
 import pl.psi.warmachines.WarMachine;
 
 import java.beans.PropertyChangeListener;
@@ -77,6 +78,44 @@ public class GameEngine {
             }
         }
 
+    }
+
+    public boolean canAttack(final Point point) {
+        double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                .distance(point);
+        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+
+        if (canAttackFromDistance) {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0
+                    && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+        } else {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance < 2 && distance > 0;
+        }
+    }
+
+    public boolean canHeal(final Point point) {
+        double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                .distance(point);
+        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+
+        if (canAttackFromDistance) {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0
+                    && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+        } else {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance < 2 && distance > 0;
+        }
+    }
+
+    public boolean isCurrentMapObject(Point aPoint) {
+        return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
 
 //    public void performAction(final Point point){
@@ -183,4 +222,65 @@ public class GameEngine {
             mapObjectIf2.get(i).setHero(hero2);
         }
     }
+
+    public void attackRandomEnemy(){
+        if (turnQueue.getCurrentMapObject() instanceof WarMachine) {
+            WarMachine newWM = (WarMachine) turnQueue.getCurrentMapObject();
+            MapObjectIf defender = getRandomMapObject(mapObjectIf1, mapObjectIf2);
+            if (newWM.canHeal() && isEnemyUnit(turnQueue.getCurrentMapObject(), defender)) {
+                try {
+                    AttackerIF attacker = (AttackerIF) turnQueue.getCurrentMapObject();
+                    attacker.attack(defender);
+                    checkIfAlive(defender);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                pass();
+            }
+        }
+    }
+
+    public void healRandomAlly(){
+        if (turnQueue.getCurrentMapObject() instanceof AttackerIF) {
+            AttackerIF newAttacker = (AttackerIF) turnQueue.getCurrentMapObject();
+            MapObjectIf defender = getRandomMapObject(mapObjectIf1, mapObjectIf2);
+            if (newAttacker.canAttack() && isEnemyUnit(turnQueue.getCurrentMapObject(), defender)) {
+                try {
+                    AttackerIF attacker = (AttackerIF) turnQueue.getCurrentMapObject();
+                    attacker.attack(defender);
+                    checkIfAlive(defender);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                pass();
+            }
+        }
+    }
+
+//    public boolean isControllable(){
+//        if(turnQueue.getCurrentMapObject() instanceof WarMachine){
+//            boolean control = ((WarMachine) turnQueue.getCurrentMapObject()).isControllable();
+//            System.out.println("This is MO: " + turnQueue.getCurrentMapObject());
+//            System.out.println("This is control: " + control);
+//            return control;
+//        } else if (turnQueue.getCurrentMapObject() instanceof Creature) {
+//            boolean control = ((Creature) turnQueue.getCurrentMapObject()).isControllable();
+//            System.out.println("This is MO: " + turnQueue.getCurrentMapObject());
+//            System.out.println("This is control: " + control);
+//            return control;
+//        }
+//        return false;
+//    }
+
+    public MapObjectIf getRandomMapObject(List<MapObjectIf> mapObjectIf1, List<MapObjectIf> mapObjectIf2){
+        List<MapObjectIf> mapObjectIf = new ArrayList<MapObjectIf>();
+        mapObjectIf.addAll(mapObjectIf1);
+        mapObjectIf.addAll(mapObjectIf2);
+
+        Random rand = new Random();
+        int i = rand.nextInt(mapObjectIf.size());
+        return mapObjectIf.get(i);
+    }
+
+
 }
