@@ -25,8 +25,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Getter
     private Hero hero;
 
-    WarMachine() {
-
+    public WarMachine() {
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
@@ -67,6 +66,24 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     public boolean canAttack() {
         return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
     }
+
+    public boolean hasAssociatedSkill(int skill) {
+        if (skill > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int heroArtillerySkill = 1; //Ballista
+    private int heroBallisticSkills = 0; //Catapult
+    private int heroFirstAidSkill = 0; //First Aid Tent;
+
+
+    public boolean isControllable() {
+        return true;
+    }
+
 
     public boolean isAlive() {
         return getAmount() > 0;
