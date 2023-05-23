@@ -25,7 +25,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Getter
     private Hero hero;
 
-    WarMachine(){
+    WarMachine() {
 
     }
 
@@ -40,7 +40,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         HPcalculator = aHPcalculator;
     }
 
-//    WarMachine(Hero aHero){
+    //    WarMachine(Hero aHero){
 //        this.hero = aHero;
 //    }
     public void attack(final MapObjectIf aDefender) throws Exception {
@@ -54,18 +54,18 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         if (isAlive()) {
             final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
             ally.setCurrentHp(hp);
-            if ((ally.getCurrentHp() > ally.getMaxHp())){
+            if ((ally.getCurrentHp() > ally.getMaxHp())) {
                 ally.setCurrentHp(ally.getMaxHp());
             }
         }
     }
 
-    public boolean canHeal(){
+    public boolean canHeal() {
         return stats.getName().equals("First Aid Tent");
     }
 
-    public boolean canAttack(){
-        return !stats.getName().equals("First Aid Tent");
+    public boolean canAttack() {
+        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
     }
 
     public boolean isAlive() {
@@ -101,6 +101,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     public boolean canAttackFromDistance() {
         return true;
     }
+
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -128,7 +129,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return stats.getName();
     }
 
-    public int getHexSize() {return stats.getHexSize();}
+    public int getHexSize() {
+        return stats.getHexSize();
+    }
 
     public int getShotRange() {
         return stats.getShotRange();
@@ -164,10 +167,12 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
             return this;
         }
 
-        public WarMachine build() { return new WarMachine(statistic,
-                calculator,
-                HPcalculator,
-                amount); }
+        public WarMachine build() {
+            return new WarMachine(statistic,
+                    calculator,
+                    HPcalculator,
+                    amount);
+        }
     }
 
     @Override

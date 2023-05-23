@@ -17,17 +17,15 @@ import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.util.Optional;
 
-public class MainBattleController implements PropertyChangeListener
-{
+public class MainBattleController implements PropertyChangeListener {
     private final GameEngine gameEngine;
     @FXML
     private GridPane gridMap;
     @FXML
     private Button passButton;
 
-    public MainBattleController( final Hero aHero1, final Hero aHero2 )
-    {
-        gameEngine = new GameEngine( aHero1, aHero2 );
+    public MainBattleController(final Hero aHero1, final Hero aHero2) {
+        gameEngine = new GameEngine(aHero1, aHero2);
     }
 
     @FXML
@@ -38,21 +36,20 @@ public class MainBattleController implements PropertyChangeListener
 
     private void refreshGui() throws FileNotFoundException {
         gridMap.getChildren()
-            .clear();
+                .clear();
         gridMap.setAlignment(Pos.CENTER);
-        for( int x = 0; x < 15; x++ )
-        {
-            for( int y = 0; y < 10; y++ )
-            {
-                Point currentPoint = new Point( x, y );
-                Optional<MapObjectIf> gameObject = gameEngine.getMapObject( currentPoint );
-                final MapTile mapTile = new MapTile( "");
+        for (int x = 0; x < 15; x++) {
+            for (int y = 0; y < 10; y++) {
+                Point currentPoint = new Point(x, y);
+                Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
+                final MapTile mapTile = new MapTile("");
 
-                gameObject.ifPresent( (c) -> {mapTile.setName( c.toString() );
+                gameObject.ifPresent((c) -> {
+                    mapTile.setName(c.toString());
                     if (c.getHero().equals(gameEngine.getHero1())) {
-                        mapTile.setBackground(Color.rgb(255,195,18));
+                        mapTile.setBackground(Color.rgb(255, 195, 18));
                     } else if (c.getHero().equals(gameEngine.getHero2())) {
-                        mapTile.setBackground(Color.rgb(150,203,196));
+                        mapTile.setBackground(Color.rgb(150, 203, 196));
                     }
                 });
 
@@ -65,39 +62,30 @@ public class MainBattleController implements PropertyChangeListener
                     }
                 });
 
-                if( gameEngine.isCurrentMapObject( currentPoint ) )
-                {
-                    //mapTile.setBackground( Color.GREENYELLOW );
+                if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }
-                if( gameEngine.canMove( currentPoint ) )
-                {
-                    mapTile.setBackground( Color.GREY );
-                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-                        gameEngine.move( currentPoint );
-                    } );
+                if (gameEngine.canMove(currentPoint)) {
+                    mapTile.setBackground(Color.GREY);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        gameEngine.move(currentPoint);
+                    });
                 }
-                if( gameEngine.canAttack( currentPoint ) )
-                {
-                    //mapTile.setBackground( Color.INDIANRED );
-                    mapTile.setBorderColor( Color.INDIANRED );
-                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
+                if (gameEngine.canAttack(currentPoint)) {
+                    mapTile.setBorderColor(Color.INDIANRED);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         //gameEngine.performAction(currentPoint);
-                        gameEngine.attack( currentPoint );
-                        //gameEngine.heal(currentPoint);
-                    } );
+                        gameEngine.attack(currentPoint);
+                    });
                 }
-                if( gameEngine.canHeal( currentPoint ) )
-                {
-                    //mapTile.setBackground( Color.INDIANRED );
-                    mapTile.setBorderColor( Color.INDIANRED );
-                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
+                if (gameEngine.canHeal(currentPoint)) {
+                    mapTile.setBorderColor(Color.INDIANRED);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         //gameEngine.performAction(currentPoint);
-                        gameEngine.heal( currentPoint );
-                        //gameEngine.heal(currentPoint);
-                    } );
+                        gameEngine.heal(currentPoint);
+                    });
                 }
-                gridMap.add( mapTile, x, y );
+                gridMap.add(mapTile, x, y);
             }
         }
     }

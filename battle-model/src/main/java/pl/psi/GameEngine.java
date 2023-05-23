@@ -25,7 +25,7 @@ public class GameEngine {
     @Getter
     public Hero hero2;
 
-    public  GameEngine(final Hero aHero1, final Hero aHero2) {
+    public GameEngine(final Hero aHero1, final Hero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
 
@@ -42,9 +42,9 @@ public class GameEngine {
     }
 
     public void attack(final Point point) {
-        if(turnQueue.getCurrentMapObject() instanceof AttackerIF){
+        if (turnQueue.getCurrentMapObject() instanceof AttackerIF) {
             AttackerIF newAttacker = (AttackerIF) turnQueue.getCurrentMapObject();
-            if (newAttacker.canAttack()){
+            if (newAttacker.canAttack()) {
                 board.getMapObject(point)
                         .ifPresent(defender -> {
                             try {
@@ -61,21 +61,21 @@ public class GameEngine {
     }
 
     public void heal(final Point point) {
-        if(turnQueue.getCurrentMapObject() instanceof WarMachine){
+        if (turnQueue.getCurrentMapObject() instanceof WarMachine) {
             WarMachine newWM = (WarMachine) turnQueue.getCurrentMapObject();
-            if(newWM.canHeal()){
+            if (newWM.canHeal()) {
                 board.getMapObject(point)
                         .ifPresent(allyUnit -> {
                             try {
                                 ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
                                 checkIfAlive(allyUnit);
-                            }   catch (Exception e) {
+                            } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         });
                 pass();
             }
-            }
+        }
 
     }
 
@@ -88,7 +88,7 @@ public class GameEngine {
 //    }
 
     private void checkIfAlive(MapObjectIf defender) {
-        if(!(turnQueue.getCurrentMapObject().checkIfAlive(defender))){
+        if (!(turnQueue.getCurrentMapObject().checkIfAlive(defender))) {
             board.removeMapObject(defender);
             turnQueue.removeMapObject(defender);
         }
@@ -118,20 +118,20 @@ public class GameEngine {
 
     public boolean canAttack(final Point point) {
         //if(!turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
-            double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                    .distance(point);
-            boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+        double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                .distance(point);
+        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
 
-            if(canAttackFromDistance ){
-                return board.getMapObject(point)
-                        .isPresent()
-                        && distance <= 14 && distance > 0
-                        && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-            } else {
-                return board.getMapObject(point)
-                        .isPresent()
-                        && distance < 2 && distance > 0;
-            }
+        if (canAttackFromDistance) {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0
+                    && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+        } else {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance < 2 && distance > 0;
+        }
 //        }else {
 //            return false;
 //        }
@@ -139,46 +139,47 @@ public class GameEngine {
 
     public boolean canHeal(final Point point) {
         //if (turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
-            double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                    .distance(point);
-            boolean canAttackFromDistance = ((AttackerIF)turnQueue.getCurrentMapObject()).canAttackFromDistance();
+        double distance = board.getPosition(turnQueue.getCurrentMapObject())
+                .distance(point);
+        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
 
-            if(canAttackFromDistance){
-                return board.getMapObject(point)
-                        .isPresent()
-                        && distance <= 14 && distance > 0
-                        && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-            } else {
-                return board.getMapObject(point)
-                        .isPresent()
-                        && distance < 2 && distance > 0;
-            }
+        if (canAttackFromDistance) {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0
+                    && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+        } else {
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance < 2 && distance > 0;
+        }
 //        }else {
 //            return false;
 //        }
     }
+
     public boolean isCurrentMapObject(Point aPoint) {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
 
-    public boolean isEnemyUnit(MapObjectIf mapObject1, MapObjectIf mapObject2){
+    public boolean isEnemyUnit(MapObjectIf mapObject1, MapObjectIf mapObject2) {
 //        System.out.println("MO1 hero: " + mapObject1.getHero());
 //        System.out.println("MO2 hero: " + mapObject2.getHero());
 //        System.out.println(mapObject1.getHero() == mapObject2.getHero());
 //        System.out.println("--------------------------------------------");
 
-        if(mapObject1.getHero() != mapObject2.getHero()){
+        if (mapObject1.getHero() != mapObject2.getHero()) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public void setHeroesForLists(){
-        for (int i = 0; i < mapObjectIf1.size(); i++){
+    public void setHeroesForLists() {
+        for (int i = 0; i < mapObjectIf1.size(); i++) {
             mapObjectIf1.get(i).setHero(hero1);
         }
-        for (int i = 0; i < mapObjectIf2.size(); i++){
+        for (int i = 0; i < mapObjectIf2.size(); i++) {
             mapObjectIf2.get(i).setHero(hero2);
         }
     }

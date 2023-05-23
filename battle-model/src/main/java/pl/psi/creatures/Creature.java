@@ -73,8 +73,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
             aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
+        } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
@@ -84,7 +83,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return stats.getMaxHp();
     }
 
-     public void setCurrentHp(final int aCurrentHp) {
+    public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -134,6 +133,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     public boolean canAttackFromDistance() {
         return false;
     }
+
     public boolean canAttack() {
         return true;
     }
