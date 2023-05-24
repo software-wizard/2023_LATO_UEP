@@ -27,8 +27,7 @@ public class EconomyEngine {
     public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         board.move(aChoosenEconomyHero, aPoint);
     }
-<<<<<<< Updated upstream
-=======
+
     
     public Player getCurrentPlayer() {
         return turnQueue.getCurrentPlayer();
@@ -38,5 +37,4 @@ public class EconomyEngine {
         turnQueue.nextTurn();
     }
 
->>>>>>> Stashed changes
 }
