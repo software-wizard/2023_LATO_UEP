@@ -8,9 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.artifacts.Artifact;
@@ -173,6 +175,9 @@ public class EcoEqSceneController implements Initializable{
     @FXML
     ImageView spellbookImage;
 
+    @FXML
+    Label labelItemInfo;
+
     HashMap<String,TextField> eq_slots ;
     HashMap<String,ImageView> eq_slots_images ;
     ArrayList<TextField> backpack_slots;
@@ -322,9 +327,12 @@ public class EcoEqSceneController implements Initializable{
     private void takeOffArtifact(String artifactType){
         try {
             HashMap<String, Artifact> heroInventory = heroEq.getHeroInventory();
+            if (heroInventory.get(artifactType) == null){
+                throw new NullPointerException();
+            }
             heroEq.moveFromInventoryToBackpack(heroInventory.get(artifactType));
             refreshEq(heroEq);
-        }catch(IndexOutOfBoundsException e){
+        }catch(NullPointerException e){
             // Handle the exception by showing an alert dialog
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("No Item to Take Off");
@@ -333,6 +341,74 @@ public class EcoEqSceneController implements Initializable{
             alert.showAndWait();
         }
     }
+    private void showInfo(Artifact artifact){
+        labelItemInfo.setText(
+                    String.format(
+                            "Item name: %s" +
+                                    "\nItem type: %s" +
+                                    "\nItem price: %d" +
+                                    "\nItem knowledge: %d" +
+                                    "\nItem spellPower: %d" +
+                                    "\nItem spellDuration: %d" +
+                                    "\nItem magicResistance: %.2f" +
+                                    "\nItem necromancy: %.2f" +
+                                    "\nItem attack: %d" +
+                                    "\nItem defense: %d" +
+                                    "\nItem morale: %d" +
+                                    "\nItem luck: %d" +
+                                    "\nItem archery: %.2f"
+                            , artifact.getName()
+                            , artifact.getType()
+                            , artifact.getArtifactStatistics().getPrice()
+                            , artifact.getArtifactStatistics().getKnowledge()
+                            , artifact.getArtifactStatistics().getSpellPower()
+                            , artifact.getArtifactStatistics().getSpellDuration()
+                            , artifact.getArtifactStatistics().getMagicResistance()
+                            , artifact.getArtifactStatistics().getNecromancy()
+                            , artifact.getArtifactStatistics().getAttack()
+                            , artifact.getArtifactStatistics().getDefense()
+                            , artifact.getArtifactStatistics().getMorale()
+                            , artifact.getArtifactStatistics().getLuck()
+                            , artifact.getArtifactStatistics().getArchery()
+                    )
+            );
+    }
+    @FXML private void showInfoHelmet(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("helmet")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoCape(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("cape")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoNecklace(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("necklace")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoRightHand(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("rightHand")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoLeftHand(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("leftHand")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoTorso(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("torso")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoRing(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("ring")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoFeet(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("feet")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoMiscellaneous(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("miscellaneous")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoBallista(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("ballista")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoAmmoCart(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("ammoCart")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoFirstAidTent(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("firstAidTent")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoCatapult(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("catapult")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoSpellbook(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroInventory().get("spellbook")); } catch (NullPointerException e) {  } }
+    @FXML private void showInfoSlot1(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(0)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot2(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(1)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot3(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(2)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot4(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(3)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot5(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(4)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot6(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(5)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot7(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(6)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot8(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(7)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot9(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(8)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot10(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(9)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot11(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(10)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot12(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(11)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot13(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(12)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot14(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(13)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot15(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(14)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot16(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(15)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot17(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(16)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot18(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(17)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot19(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(18)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot20(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(19)); } catch (IndexOutOfBoundsException e) {  } }
+    @FXML private void showInfoSlot21(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(20)); } catch (IndexOutOfBoundsException e) { } }
+    @FXML private void showInfoSlot22(MouseEvent event) throws IOException { try { showInfo(heroEq.getHeroBackpack().get(21)); } catch (IndexOutOfBoundsException e) {  } }
 
     @FXML
     private void putOnSlot1(ActionEvent event) throws IOException {putOnArtifact(0);}
