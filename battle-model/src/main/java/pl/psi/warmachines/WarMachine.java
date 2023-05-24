@@ -1,21 +1,29 @@
-package WarMachines;
+package pl.psi.warmachines;
 
+import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
+import pl.psi.AttackerIF;
+import pl.psi.HealerIF;
+import pl.psi.Hero;
+import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Random;
 
 @Getter
-public class WarMachine implements PropertyChangeListener, MapObjectIf  {
+public class WarMachine implements PropertyChangeListener, MapObjectIf, AttackerIF, HealerIF {
     private WarMachineDamageCalculatorIF calculator;
+    private FirstAidTentIf HPcalculator;
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
+    @Setter
+    @Getter
+    private Hero hero;
 
     WarMachine(){
 
@@ -23,37 +31,34 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
 
     WarMachine(final WarMachineStatisticIf aStats,
                final WarMachineDamageCalculatorIF aCalculator,
+               final FirstAidTentIf aHPcalculator,
                final int aAmount) {
         stats = aStats;
         amount = aAmount;
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
+        HPcalculator = aHPcalculator;
     }
 
+//    WarMachine(Hero aHero){
+//        this.hero = aHero;
+//    }
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
-//            if (canCounterAttack(aDefender)) {
-//                counterAttack(aDefender);
-//            }
         }
     }
 
-    //THIS IS METHOD FOR TESTS - after should be removed
-//    public int attack(final WarMachine aDefender) throws Exception {
-////        if (isAlive()) {
-//        int damageINT;
-//            final int damage = getCalculator().calculateDamage(this, aDefender);
-//            damageINT = getCalculator().calculateDamage(this, aDefender);
-////            applyDamage(aDefender, damage);
-////            if (canCounterAttack(aDefender)) {
-////                counterAttack(aDefender);
-////            }
-////        }
-//        return damageINT;
-//    }
-
+    public void heal(MapObjectIf ally) throws Exception {
+        if (isAlive()) {
+            final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
+            ally.setCurrentHp(hp);
+            if ((ally.getCurrentHp() > ally.getMaxHp())){
+                ally.setCurrentHp(ally.getMaxHp());
+            }
+        }
+    }
 
     public boolean isAlive() {
         return getAmount() > 0;
@@ -84,18 +89,10 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
         return 0;
     }
 
-//    TODO chyba zadna maszyna nie może kontratakować - do wywalenia
-//    private boolean canCounterAttack(final Creature aDefender) {
-//        return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
-//    }
-
-//    private void counterAttack(final Creature aAttacker) {
-//        final int damage = aAttacker.getCalculator()
-//                .calculateDamage(aAttacker, this);
-//        applyDamage(this, damage);
-//        aAttacker.counterAttackCounter--;
-//    }
-
+    @Override
+    public boolean canAttackFromDistance() {
+        return true;
+    }
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -141,6 +138,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
     public static class Builder {
         private int amount = 1;
         private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
+        private FirstAidTentIf HPcalculator = new FirstAidTentHealPointsCalculator();
         private WarMachineStatisticIf statistic;
 
         public Builder statistic(final WarMachineStatisticIf aStatistic) {
@@ -160,6 +158,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf  {
 
         public WarMachine build() { return new WarMachine(statistic,
                 calculator,
+                HPcalculator,
                 amount); }
     }
 

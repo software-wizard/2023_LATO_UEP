@@ -18,13 +18,13 @@ class BoardTest
             .moveRange( 5 )
             .build() )
             .build();
-        final List< Creature > c1 = List.of( creature );
-        final List< Creature > c2 = List.of();
-        final Board board = new Board( c1, c2 );
+//        final List< Creature > c1 = List.of( creature );
+//        final List< Creature > c2 = List.of();
+        final Board board = new Board( List.of(creature), List.of() );
 
         board.move( creature, new Point( 3, 3 ) );
 
-        assertThat( board.getCreature( new Point( 3, 3 ) )
+        assertThat( board.getMapObject( new Point( 3, 3 ) )
             .isPresent() ).isTrue();
     }
 

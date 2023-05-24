@@ -10,7 +10,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
-import WarMachines.MapObjectIf;
+import pl.psi.AttackerIF;
+import pl.psi.Hero;
+import pl.psi.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
 
@@ -22,13 +24,17 @@ import lombok.Getter;
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
 @Getter
-public class Creature implements PropertyChangeListener, MapObjectIf {
+public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF {
     private CreatureStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
+
+    @Setter
+    @Getter
+    private Hero hero;
 
     Creature() {
     }
@@ -40,6 +46,10 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
     }
+
+//    Creature(Hero aHero){
+//        this.hero = aHero;
+//    }
 
     public void attack(final Creature aDefender) {
         if (isAlive()) {
@@ -118,6 +128,11 @@ public class Creature implements PropertyChangeListener, MapObjectIf {
 
     public int getMoveRange() {
         return stats.getMoveRange();
+    }
+
+    @Override
+    public boolean canAttackFromDistance() {
+        return false;
     }
 
     @Override
