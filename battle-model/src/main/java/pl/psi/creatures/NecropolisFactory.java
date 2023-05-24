@@ -85,9 +85,5 @@ public class NecropolisFactory
             }
         }
     }
-    private void applyAllSkills( Creature creature, List<Skill> aList){
-        for (int i = 0; i<=aList.size(); i++){
-            aList.get(i).apply(creature);
-        }
-    }
+
 }

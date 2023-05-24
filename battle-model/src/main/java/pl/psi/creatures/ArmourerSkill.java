@@ -5,7 +5,7 @@ import lombok.ToString;
 
 import java.util.Random;
 
-public class ArmourerSkill extends AbstractCalculateDamageStrategy implements DamageCalculatorIf{
+public class ArmourerSkill extends Skill implements DamageCalculatorIf{
     private final DamageCalculatorIf decorated;
 
     public ArmourerSkill(DamageCalculatorIf calculator) {
@@ -35,6 +35,7 @@ public class ArmourerSkill extends AbstractCalculateDamageStrategy implements Da
         return calculateOutcome(super.calculateDamage(aAttacker, aDefender));
     }
 
+    @Override
     public void apply(Creature creature) {
         creature.setCalculator(new ArmourerSkill(creature.getCalculator()));
     }
