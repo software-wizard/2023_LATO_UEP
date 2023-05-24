@@ -1,6 +1,8 @@
 package pl.psi.gui.launcher;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -11,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pl.psi.gui.inventory.EcoEqSceneController;
+import pl.psi.hero.HeroEquipment;
 import pl.psi.player.Player;
 
 
@@ -73,8 +77,17 @@ public class EcoMapSceneController {
 
     public void openEq(ActionEvent event) throws IOException {
 
+        HeroEquipment aHeroEq = new HeroEquipment();
+
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();
+
+        try {
+            EcoEqSceneController ecoEqSceneController = loaderInventory.getController();
+            ecoEqSceneController.refreshEq(aHeroEq);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         stageInventory = (Stage)((Node)event.getSource()).getScene().getWindow();
         sceneInventory = new  Scene(rootInventory);

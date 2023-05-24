@@ -87,25 +87,25 @@
             <TextField alignment="CENTER" editable="false" layoutX="14.0" layoutY="422.0" prefHeight="25.0" prefWidth="1128.0" text="Backpack" />
             <TextField alignment="CENTER" layoutX="12.0" layoutY="14.0" prefHeight="25.0" prefWidth="1128.0" text="Equipment" />
             <TextField id="textField_slot1" fx:id="textField_slot1" editable="false" layoutX="25.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot2" editable="false" layoutX="123.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot3" editable="false" layoutX="223.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot4" editable="false" layoutX="319.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot5" editable="false" layoutX="409.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot6" editable="false" layoutX="497.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot7" editable="false" layoutX="585.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot8" editable="false" layoutX="675.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot9" editable="false" layoutX="765.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot10" editable="false" layoutX="858.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot12" editable="false" layoutX="25.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot13" editable="false" layoutX="122.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot14" editable="false" layoutX="223.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot15" editable="false" layoutX="319.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot16" editable="false" layoutX="409.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot17" editable="false" layoutX="497.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot18" editable="false" layoutX="585.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot19" editable="false" layoutX="675.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot20" editable="false" layoutX="765.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot21" editable="false" layoutX="858.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot2" fx:id="textField_slot2" editable="false" layoutX="123.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot3" fx:id="textField_slot3" editable="false" layoutX="223.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot4" fx:id="textField_slot4" editable="false" layoutX="319.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot5" fx:id="textField_slot5" editable="false" layoutX="409.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot6" fx:id="textField_slot6" editable="false" layoutX="497.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot7" fx:id="textField_slot7" editable="false" layoutX="585.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot8" fx:id="textField_slot8" editable="false" layoutX="675.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot9" fx:id="textField_slot9" editable="false" layoutX="765.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot10" fx:id="textField_slot10" editable="false" layoutX="858.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot12" fx:id="textField_slot12" editable="false" layoutX="25.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot13" fx:id="textField_slot13" editable="false" layoutX="122.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot14" fx:id="textField_slot14" editable="false" layoutX="223.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot15" fx:id="textField_slot15" editable="false" layoutX="319.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot16" fx:id="textField_slot16" editable="false" layoutX="409.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot17" fx:id="textField_slot17" editable="false" layoutX="497.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot18" fx:id="textField_slot18" editable="false" layoutX="585.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot19" fx:id="textField_slot19" editable="false" layoutX="675.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot20" fx:id="textField_slot20" editable="false" layoutX="765.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot21" fx:id="textField_slot21" editable="false" layoutX="858.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="35.0" layoutY="775.0" mnemonicParsing="false" onAction="#putOnSlot12" text="Put on" />
             <Button layoutX="132.0" layoutY="775.0" mnemonicParsing="false" onAction="#putOnSlot13" text="Put on" />
             <Button layoutX="233.0" layoutY="775.0" mnemonicParsing="false" onAction="#putOnSlot14" text="Put on" />
@@ -127,19 +127,19 @@
             <Button layoutX="775.0" layoutY="605.0" mnemonicParsing="false" onAction="#putOnSlot9" text="Put on" />
             <Button layoutX="868.0" layoutY="605.0" mnemonicParsing="false" onAction="#putOnSlot10" text="Put on" />
             <Button layoutX="24.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeHelmet" text="Take off" />
-            <TextField id="textField_helmet" editable="false" layoutX="18.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_cape" editable="false" layoutX="120.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_necklace" editable="false" layoutX="220.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_rightHand" editable="false" layoutX="316.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_torso" editable="false" layoutX="497.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_ring" editable="false" layoutX="586.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_feet" editable="false" layoutX="674.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_miscellaneous" editable="false" layoutX="764.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_ballista" editable="false" layoutX="18.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_ammoCart" editable="false" layoutX="114.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
-            <TextField id="textField_slot11" editable="false" layoutX="955.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_helmet" fx:id="textField_helmet" editable="false" layoutX="18.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_cape" fx:id="textField_cape" editable="false" layoutX="120.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_necklace" fx:id="textField_necklace" editable="false" layoutX="220.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_rightHand" fx:id="textField_rightHand" editable="false" layoutX="316.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_torso" fx:id="textField_torso" editable="false" layoutX="497.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_ring" fx:id="textField_ring" editable="false" layoutX="586.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_feet" fx:id="textField_feet" editable="false" layoutX="674.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_miscellaneous" fx:id="textField_miscellaneous" editable="false" layoutX="764.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_ballista" fx:id="textField_ballista" editable="false" layoutX="18.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_ammoCart" fx:id="textField_ammoCart" editable="false" layoutX="114.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot11" fx:id="textField_slot11" editable="false" layoutX="955.0" layoutY="580.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="965.0" layoutY="605.0" mnemonicParsing="false" onAction="#putOnSlot11" text="Put on" />
-            <TextField id="textField_slot22" editable="false" layoutX="955.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_slot22" fx:id="textField_slot22" editable="false" layoutX="955.0" layoutY="750.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="965.0" layoutY="775.0" mnemonicParsing="false" onAction="#putOnSlot22" text="Put on" />
             <Button layoutX="126.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeCape" text="Take off" />
             <Button layoutX="226.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeNecklace" text="Take off" />
@@ -150,11 +150,11 @@
             <Button layoutX="770.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeMiscellaneous" text="Take off" />
             <Button layoutX="24.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeBallista" text="Take off" />
             <Button layoutX="120.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeAmmoCart" text="Take off" />
-            <TextField id="textField_firstAidTent" editable="false" layoutX="223.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_firstAidTent" fx:id="textField_firstAidTent" editable="false" layoutX="223.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="229.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeFirstAidTent" text="Take off" />
-            <TextField id="textField_catapult" editable="false" layoutX="321.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_catapult" fx:id="textField_catapult" editable="false" layoutX="321.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="325.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeCatapult" text="Take off" />
-            <TextField id="textField_spellBook" editable="false" layoutX="423.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_spellBook" fx:id="textField_spellbook" editable="false" layoutX="423.0" layoutY="333.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="429.0" layoutY="358.0" mnemonicParsing="false" onAction="#removeSpellbook" text="Take off" />
             <TextField alignment="CENTER" editable="false" layoutX="26.0" layoutY="466.0" prefHeight="15.0" prefWidth="71.0" text="Slot 1" />
             <TextField alignment="CENTER" editable="false" layoutX="120.0" layoutY="466.0" prefHeight="15.0" prefWidth="71.0" text="Slot 2" />
@@ -191,7 +191,7 @@
             <TextField alignment="CENTER" editable="false" layoutX="218.0" layoutY="220.0" prefHeight="25.0" prefWidth="82.0" text="FirstAidTent" />
             <TextField alignment="CENTER" editable="false" layoutX="322.0" layoutY="220.0" prefHeight="15.0" prefWidth="71.0" text="Catapult" />
             <TextField alignment="CENTER" editable="false" layoutX="423.0" layoutY="220.0" prefHeight="15.0" prefWidth="71.0" text="Spellbook" />
-            <TextField id="textField_leftHand" editable="false" layoutX="409.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
+            <TextField id="textField_leftHand" fx:id="textField_leftHand" editable="false" layoutX="409.0" layoutY="158.0" prefHeight="15.0" prefWidth="71.0" />
             <Button layoutX="415.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeLeftHand" text="Take off" />
             <TextField alignment="CENTER" editable="false" layoutX="409.0" layoutY="45.0" prefHeight="15.0" prefWidth="71.0" text="LeftHand" />
             <Button layoutX="1051.0" layoutY="208.0" mnemonicParsing="false" onAction="#switchToMap" text="BackToMap" />

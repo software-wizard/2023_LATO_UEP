@@ -32,7 +32,7 @@ public class HeroEquipment {
         this.heroInventory.put("ammoCart", null);
         this.heroInventory.put("firstAidTent", null);
         this.heroInventory.put("catapult", null);
-        this.heroInventory.put("spellBook", null);
+        this.heroInventory.put("spellbook", null);
     }
 
     public void addItemToBackpack(Artifact item){
