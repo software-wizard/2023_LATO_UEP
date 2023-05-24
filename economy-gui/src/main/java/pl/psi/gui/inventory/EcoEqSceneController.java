@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
@@ -189,90 +190,107 @@ public class EcoEqSceneController implements Initializable{
     }
 
 
-
-    @FXML
-    private void putOnSlot1(ActionEvent event) throws IOException {
-
+    private void putOnArtifact(Integer backpack_slots_ID){
+        try {
+            ArrayList<Artifact> heroBackpack = heroEq.getHeroBackpack();
+            heroEq.moveFromBackpackToInventory(heroBackpack.get(backpack_slots_ID));
+            refreshEq(heroEq);
+        }catch(IndexOutOfBoundsException e){
+            // Handle the exception by showing an alert dialog
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Item to Put On");
+            alert.setHeaderText(null);
+            alert.setContentText("There is no item to put on.");
+            alert.showAndWait();
+        }
+    }
+    private void takeOffArtifact(String artifactType){
+        try {
+            HashMap<String, Artifact> heroInventory = heroEq.getHeroInventory();
+            heroEq.moveFromInventoryToBackpack(heroInventory.get(artifactType));
+            refreshEq(heroEq);
+        }catch(IndexOutOfBoundsException e){
+            // Handle the exception by showing an alert dialog
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Item to Take Off");
+            alert.setHeaderText(null);
+            alert.setContentText("There is no item to take off.");
+            alert.showAndWait();
+        }
     }
 
     @FXML
-    private void putOnSlot2(ActionEvent event) throws IOException {
-        // Implement the action for the "Put on" button in slot 2
-    }
+    private void putOnSlot1(ActionEvent event) throws IOException {putOnArtifact(0);}
+    @FXML
+    private void putOnSlot2(ActionEvent event) throws IOException {putOnArtifact(1);}
+    @FXML
+    private void putOnSlot3(ActionEvent event) throws IOException {putOnArtifact(2);}
+    @FXML
+    private void putOnSlot4(ActionEvent event) throws IOException {putOnArtifact(3);}
 
     @FXML
-    private void putOnSlot3(ActionEvent event) throws IOException {
-        // Implement the action for the "Put on" button in slot 3
-    }
+    private void putOnSlot5(ActionEvent event) throws IOException {putOnArtifact(4);}
     @FXML
-    private void putOnSlot4(ActionEvent event) throws IOException {}
-
+    private void putOnSlot6(ActionEvent event) throws IOException {putOnArtifact(5);}
     @FXML
-    private void putOnSlot5(ActionEvent event) throws IOException {}
+    private void putOnSlot7(ActionEvent event) throws IOException {putOnArtifact(6);}
     @FXML
-    private void putOnSlot6(ActionEvent event) throws IOException {}
+    private void putOnSlot8(ActionEvent event) throws IOException {putOnArtifact(7);}
     @FXML
-    private void putOnSlot7(ActionEvent event) throws IOException {}
+    private void putOnSlot9(ActionEvent event) throws IOException {putOnArtifact(8);}
     @FXML
-    private void putOnSlot8(ActionEvent event) throws IOException {}
+    private void putOnSlot10(ActionEvent event) throws IOException {putOnArtifact(9);}
     @FXML
-    private void putOnSlot9(ActionEvent event) throws IOException {}
+    private void putOnSlot11(ActionEvent event) throws IOException{putOnArtifact(10);}
     @FXML
-    private void putOnSlot10(ActionEvent event) throws IOException {}
+    private void putOnSlot12(ActionEvent event) throws IOException {putOnArtifact(11);}
     @FXML
-    private void putOnSlot11(ActionEvent event) throws IOException{}
+    private void putOnSlot13(ActionEvent event) throws IOException {putOnArtifact(12);}
     @FXML
-    private void putOnSlot12(ActionEvent event) throws IOException {}
+    private void putOnSlot14(ActionEvent event) throws IOException {putOnArtifact(13);}
     @FXML
-    private void putOnSlot13(ActionEvent event) throws IOException {}
+    private void putOnSlot15(ActionEvent event) throws IOException {putOnArtifact(14);}
     @FXML
-    private void putOnSlot14(ActionEvent event) throws IOException {}
+    private void putOnSlot16(ActionEvent event) throws IOException {putOnArtifact(15);}
     @FXML
-    private void putOnSlot15(ActionEvent event) throws IOException {}
+    private void putOnSlot17(ActionEvent event) throws IOException {putOnArtifact(16);}
     @FXML
-    private void putOnSlot16(ActionEvent event) throws IOException {}
+    private void putOnSlot18(ActionEvent event) throws IOException {putOnArtifact(17);}
     @FXML
-    private void putOnSlot17(ActionEvent event) throws IOException {}
+    private void putOnSlot19(ActionEvent event) throws IOException {putOnArtifact(18);}
     @FXML
-    private void putOnSlot18(ActionEvent event) throws IOException {}
+    private void putOnSlot20(ActionEvent event) throws IOException {putOnArtifact(19);}
     @FXML
-    private void putOnSlot19(ActionEvent event) throws IOException {}
+    private void putOnSlot21(ActionEvent event) throws IOException {putOnArtifact(20);}
     @FXML
-    private void putOnSlot20(ActionEvent event) throws IOException {}
+    private void putOnSlot22(ActionEvent event) throws IOException {putOnArtifact(21);}
     @FXML
-    private void putOnSlot21(ActionEvent event) throws IOException {}
+    private void removeCape(ActionEvent event) throws IOException {takeOffArtifact("cape");}
     @FXML
-    private void putOnSlot22(ActionEvent event) throws IOException {}
-    // Define more dummy methods for the other buttons
+    private void removeNecklace(ActionEvent event) throws IOException {takeOffArtifact("necklace");}
     @FXML
-    private void removeCape(ActionEvent event) throws IOException {}
+    private void removeRightHand(ActionEvent event) throws IOException {takeOffArtifact("rightHand");}
     @FXML
-    private void removeNecklace(ActionEvent event) throws IOException {}
+    private void removeLeftHand(ActionEvent event) throws IOException {takeOffArtifact("leftHand");}
     @FXML
-    private void removeRightHand(ActionEvent event) throws IOException {}
+    private void removeTorso(ActionEvent event) throws IOException {takeOffArtifact("torso");}
     @FXML
-    private void removeLeftHand(ActionEvent event) throws IOException {}
+    private void removeRing(ActionEvent event) throws IOException {takeOffArtifact("ring");}
     @FXML
-    private void removeTorso(ActionEvent event) throws IOException {}
+    private void removeFeet(ActionEvent event) throws IOException {takeOffArtifact("feet");}
     @FXML
-    private void removeRing(ActionEvent event) throws IOException {}
+    private void removeMiscellaneous(ActionEvent event) throws IOException {takeOffArtifact("miscellaneous");}
     @FXML
-    private void removeFeet(ActionEvent event) throws IOException {}
+    private void removeBallista(ActionEvent event) throws IOException {takeOffArtifact("ballista");}
     @FXML
-    private void removeMiscellaneous(ActionEvent event) throws IOException {}
+    private void removeAmmoCart(ActionEvent event) throws IOException {takeOffArtifact("ammoCart");}
     @FXML
-    private void removeBallista(ActionEvent event) throws IOException {}
+    private void removeFirstAidTent(ActionEvent event) throws IOException {takeOffArtifact("firstAidTent");}
     @FXML
-    private void removeAmmoCart(ActionEvent event) throws IOException {}
+    private void removeCatapult(ActionEvent event) throws IOException {takeOffArtifact("catapult");}
     @FXML
-    private void removeFirstAidTent(ActionEvent event) throws IOException {}
+    private void removeSpellbook(ActionEvent event) throws IOException {takeOffArtifact("spellbook");}
     @FXML
-    private void removeCatapult(ActionEvent event) throws IOException {}
-    @FXML
-    private void removeSpellbook(ActionEvent event) throws IOException {}
-    @FXML
-    private void removeHelmet(ActionEvent event) throws IOException {
-        // Implement the action for the "Take off" button for the helmet
-    }
+    private void removeHelmet(ActionEvent event) throws IOException {takeOffArtifact("helmet");}
 
 }

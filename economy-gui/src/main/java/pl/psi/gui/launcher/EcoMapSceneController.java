@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.hero.HeroEquipment;
+import pl.psi.mapElements.Artifact;
 import pl.psi.player.Player;
 
 
@@ -78,6 +79,10 @@ public class EcoMapSceneController {
     public void openEq(ActionEvent event) throws IOException {
 
         HeroEquipment aHeroEq = new HeroEquipment();
+        aHeroEq.addItemToBackpack(new Artifact("helmet","skull helmet"));
+        aHeroEq.addItemToBackpack(new Artifact("torso","big torso"));
+        aHeroEq.addItemToBackpack(new Artifact("torso","wood torso"));
+        aHeroEq.addItemToBackpack(new Artifact("feet","sandały"));
 
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();
