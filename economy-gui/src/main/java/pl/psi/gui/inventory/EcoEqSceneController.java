@@ -1,6 +1,5 @@
 package pl.psi.gui.inventory;
 
-import com.google.common.collect.HashBiMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,11 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import pl.psi.EconomyEngine;
-import pl.psi.gui.launcher.EcoMapSceneController;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.mapElements.Artifact;
+import pl.psi.artifacts.Artifact;
 
 
 import java.io.IOException;
@@ -100,9 +99,84 @@ public class EcoEqSceneController implements Initializable{
     TextField textField_catapult;
     @FXML
     TextField textField_spellbook;
+    @FXML
+    ImageView slotImage1;
+    @FXML
+    ImageView slotImage2;
+    @FXML
+    ImageView slotImage3;
+    @FXML
+    ImageView slotImage4;
+    @FXML
+    ImageView slotImage5;
+    @FXML
+    ImageView slotImage6;
+    @FXML
+    ImageView slotImage7;
+    @FXML
+    ImageView slotImage8;
+    @FXML
+    ImageView slotImage9;
+    @FXML
+    ImageView slotImage10;
+    @FXML
+    ImageView slotImage11;
+    @FXML
+    ImageView slotImage12;
+    @FXML
+    ImageView slotImage13;
+    @FXML
+    ImageView slotImage14;
+    @FXML
+    ImageView slotImage15;
+    @FXML
+    ImageView slotImage16;
+    @FXML
+    ImageView slotImage17;
+    @FXML
+    ImageView slotImage18;
+    @FXML
+    ImageView slotImage19;
+    @FXML
+    ImageView slotImage20;
+    @FXML
+    ImageView slotImage21;
+    @FXML
+    ImageView slotImage22;
+
+    @FXML
+    ImageView helmetImage;
+    @FXML
+    ImageView capeImage;
+    @FXML
+    ImageView necklaceImage;
+    @FXML
+    ImageView rightHandImage;
+    @FXML
+    ImageView leftHandImage;
+    @FXML
+    ImageView torsoImage;
+    @FXML
+    ImageView ringImage;
+    @FXML
+    ImageView feetImage;
+    @FXML
+    ImageView miscellaneousImage;
+    @FXML
+    ImageView ballistaImage;
+    @FXML
+    ImageView ammoCartImage;
+    @FXML
+    ImageView firstAidTentImage;
+    @FXML
+    ImageView catapultImage;
+    @FXML
+    ImageView spellbookImage;
 
     HashMap<String,TextField> eq_slots ;
+    HashMap<String,ImageView> eq_slots_images ;
     ArrayList<TextField> backpack_slots;
+    ArrayList<ImageView> backpack_slots_images;
 
     HeroEquipment heroEq;
 
@@ -148,6 +222,44 @@ public class EcoEqSceneController implements Initializable{
         backpack_slots.add(textField_slot20);
         backpack_slots.add(textField_slot21);
         backpack_slots.add(textField_slot22);
+        eq_slots_images = new HashMap<>();
+        eq_slots_images.put("helmet", helmetImage);
+        eq_slots_images.put("cape", capeImage);
+        eq_slots_images.put("necklace", necklaceImage);
+        eq_slots_images.put("rightHand", rightHandImage);
+        eq_slots_images.put("leftHand", leftHandImage);
+        eq_slots_images.put("torso", torsoImage);
+        eq_slots_images.put("ring", ringImage);
+        eq_slots_images.put("feet", feetImage);
+        eq_slots_images.put("miscellaneous", miscellaneousImage);
+        eq_slots_images.put("ballista", ballistaImage);
+        eq_slots_images.put("ammoCart", ammoCartImage);
+        eq_slots_images.put("firstAidTent", firstAidTentImage);
+        eq_slots_images.put("catapult", catapultImage);
+        eq_slots_images.put("spellbook", spellbookImage);
+        backpack_slots_images = new ArrayList<>();
+        backpack_slots_images.add(slotImage1);
+        backpack_slots_images.add(slotImage2);
+        backpack_slots_images.add(slotImage3);
+        backpack_slots_images.add(slotImage4);
+        backpack_slots_images.add(slotImage5);
+        backpack_slots_images.add(slotImage6);
+        backpack_slots_images.add(slotImage7);
+        backpack_slots_images.add(slotImage8);
+        backpack_slots_images.add(slotImage9);
+        backpack_slots_images.add(slotImage10);
+        backpack_slots_images.add(slotImage11);
+        backpack_slots_images.add(slotImage12);
+        backpack_slots_images.add(slotImage13);
+        backpack_slots_images.add(slotImage14);
+        backpack_slots_images.add(slotImage15);
+        backpack_slots_images.add(slotImage16);
+        backpack_slots_images.add(slotImage17);
+        backpack_slots_images.add(slotImage18);
+        backpack_slots_images.add(slotImage19);
+        backpack_slots_images.add(slotImage20);
+        backpack_slots_images.add(slotImage21);
+        backpack_slots_images.add(slotImage22);
     }
 
     public void refreshEq(HeroEquipment aHeroEq){
@@ -160,8 +272,10 @@ public class EcoEqSceneController implements Initializable{
             try {
                 Artifact artifact = heroBackpack.get(i);
                 backpack_slots.get(i).setText(artifact.getName());
+                backpack_slots_images.get(i).setImage(artifact.getArtifactStatistics().getImage());
             } catch (IndexOutOfBoundsException e) {
                 backpack_slots.get(i).setText("empty");
+                backpack_slots_images.get(i).setImage(new Image(getClass().getResource("/emptyField.png").toString()) );
             }
 
         }
@@ -170,9 +284,10 @@ public class EcoEqSceneController implements Initializable{
             try {
                 Artifact artifact = heroInventory.get(key);
                 eq_slots.get(key).setText(artifact.getName());
-
+                eq_slots_images.get(key).setImage(artifact.getArtifactStatistics().getImage());
             } catch (NullPointerException e) {
                 eq_slots.get(key).setText("empty");
+                eq_slots_images.get(key).setImage(new Image(getClass().getResource("/emptyField.png").toString()) );
             }
         }
     }

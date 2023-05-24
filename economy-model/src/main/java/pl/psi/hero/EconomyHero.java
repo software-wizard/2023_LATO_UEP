@@ -6,7 +6,7 @@ import lombok.Getter;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.Castle;
-import pl.psi.mapElements.Artifact;
+import pl.psi.artifacts.Artifact;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.PlayerResources;
 import java.util.ArrayList;

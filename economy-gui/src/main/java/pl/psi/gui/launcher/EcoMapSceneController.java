@@ -1,8 +1,6 @@
 package pl.psi.gui.launcher;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -13,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import pl.psi.artifacts.ArtifactFactory;
+import pl.psi.artifacts.ArtifactStatistics;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.mapElements.Artifact;
+import pl.psi.artifacts.Artifact;
 import pl.psi.player.Player;
 
 
@@ -77,12 +77,13 @@ public class EcoMapSceneController {
     }
 
     public void openEq(ActionEvent event) throws IOException {
-
+        ArtifactFactory artifactFactory = new ArtifactFactory();
         HeroEquipment aHeroEq = new HeroEquipment();
-        aHeroEq.addItemToBackpack(new Artifact("helmet","skull helmet"));
-        aHeroEq.addItemToBackpack(new Artifact("torso","big torso"));
-        aHeroEq.addItemToBackpack(new Artifact("torso","wood torso"));
-        aHeroEq.addItemToBackpack(new Artifact("feet","sandały"));
+        aHeroEq.addItemToBackpack(artifactFactory.create("helmet","skull helmet"));
+        aHeroEq.addItemToBackpack(artifactFactory.create("cape","vampire's cowl"));
+        aHeroEq.addItemToBackpack(artifactFactory.create("necklace","pedant of courage"));
+        aHeroEq.addItemToBackpack(artifactFactory.create("rightHand","sword of hellfire"));
+        aHeroEq.addItemToBackpack(artifactFactory.create("leftHand","sentinel's shield"));
 
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();

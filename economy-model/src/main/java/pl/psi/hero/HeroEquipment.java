@@ -3,7 +3,7 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import pl.psi.mapElements.Artifact;
+import pl.psi.artifacts.Artifact;
 import java.util.ArrayList;
 import java.util.HashMap;
 @AllArgsConstructor

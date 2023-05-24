@@ -33,11 +33,13 @@
 -->
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -195,6 +197,44 @@
             <Button layoutX="415.0" layoutY="183.0" mnemonicParsing="false" onAction="#removeLeftHand" text="Take off" />
             <TextField alignment="CENTER" editable="false" layoutX="409.0" layoutY="45.0" prefHeight="15.0" prefWidth="71.0" text="LeftHand" />
             <Button layoutX="1051.0" layoutY="208.0" mnemonicParsing="false" onAction="#switchToMap" text="BackToMap" />
+            <ImageView fx:id="helmetImage" fitHeight="78.0" fitWidth="71.0" layoutX="18.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="capeImage" fitHeight="78.0" fitWidth="71.0" layoutX="121.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="necklaceImage" fitHeight="78.0" fitWidth="71.0" layoutX="220.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="rightHandImage" fitHeight="78.0" fitWidth="71.0" layoutX="319.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="leftHandImage" fitHeight="78.0" fitWidth="71.0" layoutX="409.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="torsoImage" fitHeight="78.0" fitWidth="71.0" layoutX="498.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ringImage" fitHeight="78.0" fitWidth="71.0" layoutX="589.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="feetImage" fitHeight="78.0" fitWidth="71.0" layoutX="677.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="miscellaneousImage" fitHeight="78.0" fitWidth="71.0" layoutX="765.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ballistaImage" fitHeight="78.0" fitWidth="71.0" layoutX="21.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ammoCartImage" fitHeight="78.0" fitWidth="71.0" layoutX="122.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="firstAidTentImage" fitHeight="78.0" fitWidth="71.0" layoutX="224.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="catapultImage" fitHeight="78.0" fitWidth="71.0" layoutX="322.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="spellbookImage" fitHeight="78.0" fitWidth="71.0" layoutX="423.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage1" fitHeight="78.0" fitWidth="71.0" layoutX="26.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage2" fitHeight="78.0" fitWidth="71.0" layoutX="123.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage3" fitHeight="78.0" fitWidth="71.0" layoutX="220.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage4" fitHeight="78.0" fitWidth="71.0" layoutX="316.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage5" fitHeight="78.0" fitWidth="71.0" layoutX="409.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage6" fitHeight="78.0" fitWidth="71.0" layoutX="498.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage7" fitHeight="78.0" fitWidth="71.0" layoutX="586.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage8" fitHeight="78.0" fitWidth="71.0" layoutX="677.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage9" fitHeight="78.0" fitWidth="71.0" layoutX="767.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage10" fitHeight="78.0" fitWidth="71.0" layoutX="858.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage11" fitHeight="78.0" fitWidth="71.0" layoutX="956.0" layoutY="491.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage12" fitHeight="78.0" fitWidth="71.0" layoutX="26.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage13" fitHeight="78.0" fitWidth="71.0" layoutX="123.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage14" fitHeight="78.0" fitWidth="71.0" layoutX="224.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage15" fitHeight="78.0" fitWidth="71.0" layoutX="322.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage16" fitHeight="78.0" fitWidth="71.0" layoutX="409.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage17" fitHeight="78.0" fitWidth="71.0" layoutX="498.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage18" fitHeight="78.0" fitWidth="71.0" layoutX="585.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage19" fitHeight="78.0" fitWidth="71.0" layoutX="677.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage20" fitHeight="78.0" fitWidth="71.0" layoutX="767.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage21" fitHeight="78.0" fitWidth="71.0" layoutX="859.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="slotImage22" fitHeight="78.0" fitWidth="71.0" layoutX="956.0" layoutY="661.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="labelItemInfo" layoutX="977.0" layoutY="71.0" prefHeight="128.0" prefWidth="152.0" />
+            <Label layoutX="994.0" layoutY="49.0" prefHeight="17.0" prefWidth="71.0" text="Item Info" />
       </children>
     </AnchorPane>
   </children>

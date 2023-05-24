@@ -10,7 +10,7 @@
 //import pl.psi.hero.Hero;
 //import pl.psi.hero.HeroEquipment;
 //import pl.psi.hero.HeroStatistics;
-//import pl.psi.mapElements.Artifact;
+//import pl.psi.artifacts.Artifact;
 //import pl.psi.mapElements.MapElement;
 //
 //import java.util.ArrayList;
