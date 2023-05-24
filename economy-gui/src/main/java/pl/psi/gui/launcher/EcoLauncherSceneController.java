@@ -55,6 +55,7 @@ public class EcoLauncherSceneController implements Initializable
 
     private String[] bonuses = {"bonus1", "bonus2", "bonus3", "bonus4"};
 
+    private EconomyEngine economyEngine;
 
     // Create a VBox to hold the choice boxes for each player
    public void addPlayers(ActionEvent event) throws Exception {
@@ -141,7 +142,7 @@ public class EcoLauncherSceneController implements Initializable
     public void switchToMap(ActionEvent event) throws IOException {
 
         //Ladowanie playerow do economyEngine
-        EconomyEngine economyEngine = new EconomyEngine(players, HashBiMap.create());
+        economyEngine = new EconomyEngine(players, HashBiMap.create());
 
         // economyEngine przekazywane przez konstrktor do castle/inventory/map
         // ecoBattleConverter przekazanie parametrów do konstruktora controlera
@@ -154,8 +155,13 @@ public class EcoLauncherSceneController implements Initializable
 
         try {
             EcoMapSceneController ecoMapSceneController = loader.getController();
-            ecoMapSceneController.displayName(players.get(0).getHeroName());
-            ecoMapSceneController.displayResources(players);
+            ecoMapSceneController.loadEconomyEngine(economyEngine);
+            //pobieranie danych z economyEngine i ładowanie ich na nowa scene za pierwszym razem
+            ecoMapSceneController.displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
+            ecoMapSceneController.displayName(economyEngine.getCurrentPlayer().getHeroName());
+            ecoMapSceneController.displayResources(economyEngine.getCurrentPlayer().getResources());
+
+            //do debugu
             ecoMapSceneController.displayAllPlayersWithProperties(players);
         } catch (Exception e) {
             e.printStackTrace();
