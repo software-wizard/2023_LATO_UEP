@@ -19,6 +19,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.gui.Scene1;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -142,12 +143,13 @@ public class EcoLauncherSceneController implements Initializable
         //Ladowanie playerow do economyEngine
         EconomyEngine economyEngine = new EconomyEngine(players, HashBiMap.create());
 
-
-
+        // economyEngine przekazywane przez konstrktor do castle/inventory/map
+        // ecoBattleConverter przekazanie parametrów do konstruktora controlera
 
         //String chosenHero = playerHeroChoiceBox.getValue();
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
+        // loader.setControler find method
         root = loader.load();
 
         try {
