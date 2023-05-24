@@ -3,7 +3,9 @@ package pl.psi.hero;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.creatures.Skill;
 
 public class EconomyHero
 {
@@ -11,6 +13,10 @@ public class EconomyHero
     private final Fraction fraction;
     private final List< EconomyCreature > creatureList;
     private int gold;
+    public int level;
+    public int manaMax;
+    @Getter
+    private List<Skill> skillList;
 
     public EconomyHero( final Fraction aFraction, final int aGold )
     {
@@ -52,11 +58,8 @@ public class EconomyHero
         gold -= aAmount;
     }
 
-
-    //TODO zrobić potem pobieranie skilli
-    public Iterable<Object> getSkills() {
-
-        return null;
+    public List<Skill> getSkills() {
+        return skillList;
     }
 
     public enum Fraction

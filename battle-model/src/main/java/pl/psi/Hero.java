@@ -16,13 +16,8 @@ public class Hero
 {
     @Getter
     private final List< Creature > creatures;
-    public int level;
-    public int manaMax;
-    @Getter
-    private List< Skill > skillList;
     public Hero( final List< Creature > aCreatures)
     {
         creatures = aCreatures;
     }
-
 }

@@ -48,9 +48,15 @@ public class EcoBattleConverter
             .forEach( ecoCreature -> creatures.add( factory.create( ecoCreature.isUpgraded(),
                 ecoCreature.getTier(), ecoCreature.getAmount() ) ) );
 
+        for (int i = 0; i<= aPlayer1.getSkills().size(); i++){
+            for (int j = 0; j <= creatures.size(); j++) {
+                aPlayer1.getSkills().get(i).apply(creatures.get(j));
+            }
+        }
 
         //najlepiej na końcu żeby zrobić dekoratorem opakowanie creature w hero-common chyba nejlepiej?
        // aPlayer1.getSkills().forEach(s  -> s.apply(aPlayer1.getCreatures()));
         return new Hero( creatures );
     }
+
 }
