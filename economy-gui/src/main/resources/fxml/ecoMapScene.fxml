@@ -84,7 +84,7 @@
                         <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
-                  <Button layoutX="77.0" layoutY="338.0" mnemonicParsing="false" onAction="#endTurn" text="End turn" />
+                  <Button layoutX="77.0" layoutY="338.0" mnemonicParsing="false" text="End turn" />
                   <Label fx:id="heroNameLabel" layoutX="69.0" layoutY="395.0" text="Hero name: xxx" />
                   <GridPane gridLinesVisible="true" layoutX="15.0" layoutY="545.0" prefHeight="30.0" prefWidth="207.0">
                     <columnConstraints>
@@ -124,7 +124,6 @@
                      </children>
                   </GridPane>
                   <Button layoutX="82.0" layoutY="370.0" mnemonicParsing="false" onAction="#openEq" text="Inventory" />
-                  <Label fx:id="currentPlayerLabel" layoutX="11.0" layoutY="98.0" text="Current player name: xxx" />
           </children>
         </AnchorPane>
       </items>
