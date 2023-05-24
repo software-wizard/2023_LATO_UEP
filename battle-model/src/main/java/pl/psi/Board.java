@@ -11,9 +11,6 @@ import com.google.common.collect.HashBiMap;
 import pl.psi.creatures.Creature;
 
 /*
-TODO Zdecydowanie wiecej testow na wszystko, sprawdzic wszystko
-dodatkowo mozna wygenerowac sobie poprzez wstrzykniecie dodatkowy konstruktor na którym
-tworzymy plansze np 5 na 5 i testujemy sobie wszystko, mozna zapiac w debug co sie chce
 TODO availablePointsToGo() ma sprawdzac czy dana kreatura moze sie gdzies poruszyc,
 w ten sposob  w move nie ma bramki logicznej - sprawdzic w testach i jak trzeba zapiac w debug
 */
@@ -26,16 +23,19 @@ public class Board
     public List<Point> getBoardTest() {
         return boardTest;
     }
-
+    // Generowac siatke  z odpowiednimi waganmi.
+    // iterowac po kazdym polu , jesli jest kreatura to dac odpowiednia wage
     public Board(final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
-        // Tworzymy boarda
-        for( int x = 0; x < 15; x++ ){
+        /*
+                for( int x = 0; x < 15; x++ ){
             for( int y = 0; y < 10; y++ )
             {
                 Point point = new Point(x,y);
                 boardTest.add(point);
             }
         }
+         */
+
         addCreatures(aCreatures1, 0);
         addCreatures(aCreatures2, MAX_WITDH);
     }
@@ -56,6 +56,7 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
+       /*
         ShortestPathAlgorythm  path = new ShortestPathAlgorythm(gridConstruction(availablePointsToGo(aCreature)));
         Point startingPoint = getPosition(aCreature);
         Point endPoint = aPoint;
@@ -66,6 +67,13 @@ public class Board
                 map.put(point, aCreature);
             }
         }
+        */
+        if (canMove(aCreature,aPoint)) {
+            //for (Point point : theRightPath) {
+                map.inverse().remove(aCreature);
+                map.put(aPoint, aCreature);
+            //}
+        }
     }
 
     boolean canMove( final Creature aCreature, final Point aPoint )
@@ -75,7 +83,8 @@ public class Board
             return false;
         }
         final Point oldPosition = getPosition( aCreature );
-        return aPoint.distance( oldPosition.getX(), oldPosition.getY() ) < aCreature.getMoveRange();
+        // Zmieniony dystans w point -> przeciazenie
+        return aPoint.distance( oldPosition, aPoint ) < aCreature.getMoveRange();
     }
 
     Point getPosition( Creature aCreature )
@@ -83,8 +92,9 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
+    /*
     public List<Point> availablePointsToGo(Creature aCretaure) {
-        List<Point> listOfPoints = new ArrayList<>();
+    List<Point> listOfPoints = new ArrayList<>();
         for (Point point : boardTest) {
             if (canMove(aCretaure, point)) {
                 listOfPoints.add(point);
@@ -125,16 +135,7 @@ public class Board
                 transposedGrid[j][i] = grid[i][j];
             }
         }
-
         return transposedGrid;
     }
-
-    /*
-    metoda przyjmuje pkt na ktorym jest, i move range - raczej juz nie przydatne
-    mozna wykreowac diagram
-    [/] waga jeden dla zwyklego pkt
-    [/] dla przeszdody jakas duza liczba
-    przeszkoda do przejscia = wieksza waga
-    dla algorymu jednostek latajacyhch inny diagram
      */
 }

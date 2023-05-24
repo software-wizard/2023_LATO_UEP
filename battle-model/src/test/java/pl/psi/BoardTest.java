@@ -28,6 +28,7 @@ class BoardTest
                 .isPresent() ).isTrue();
     }
 
+    /*
     @Test
     void availablePointsToGoShouldFindAllAvailablePoints()
     {
@@ -56,6 +57,6 @@ class BoardTest
         int[][] grid = board.gridConstruction(listOfPoints);
         assertThat(grid).isNotEmpty();
         assertThat(grid).hasDimensions(5,4);
-
     }
+     */
 }
