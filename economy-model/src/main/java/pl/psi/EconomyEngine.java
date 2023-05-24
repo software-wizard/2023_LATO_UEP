@@ -19,10 +19,6 @@ public class EconomyEngine {
         turnQueue.addObserver(board);
     }
 
-    // TODO ENDPOINT, engine dostarcza canMove, jak w battleEngine
-
-    // TODO getter Player
-
     // Fasade - easy for GUI
     public boolean canMove(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         return board.canMove(aChoosenEconomyHero, aPoint);
@@ -30,6 +26,15 @@ public class EconomyEngine {
 
     public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         board.move(aChoosenEconomyHero, aPoint);
+    }
+
+    
+    public Player getCurrentPlayer() {
+        return turnQueue.getCurrentPlayer();
+    }
+
+    public void endTurn() {
+        turnQueue.nextTurn();
     }
 
 }

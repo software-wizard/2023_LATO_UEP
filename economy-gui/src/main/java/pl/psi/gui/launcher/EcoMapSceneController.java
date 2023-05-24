@@ -16,7 +16,9 @@ import pl.psi.artifacts.ArtifactStatistics;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.artifacts.Artifact;
+import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
+import pl.psi.player.PlayerResources;
 
 
 public class EcoMapSceneController {
@@ -28,6 +30,10 @@ public class EcoMapSceneController {
     private Scene sceneInventory;
     private Parent rootInventory;
 
+    private EconomyEngine economyEngine;
+
+    @FXML
+    Label currentPlayerLabel;
     @FXML
     Label heroNameLabel;
     @FXML
@@ -45,9 +51,22 @@ public class EcoMapSceneController {
     @FXML
     Label gemsLabel;
 
+    public void loadEconomyEngine(EconomyEngine economyEngine) {
+        this.economyEngine = economyEngine;
+    }
+
+    public void refreshGui() {
+        displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
+        displayName(economyEngine.getCurrentPlayer().getHeroName());
+        displayResources(economyEngine.getCurrentPlayer().getResources());
+    }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
         heroNameLabel.setText("Hero name: " + heroName);
+    }
+
+    public void displayCurrentPlayerName(String playerName) {
+        currentPlayerLabel.setText("Current player name: " + playerName);
     }
 
     public void displayAllPlayersWithProperties(List<Player> players) {
@@ -56,14 +75,14 @@ public class EcoMapSceneController {
         }
     }
 
-    public void displayResources(List<Player> players) {
-        goldLabel.setText("Gold: "+ players.get(0).getResources().getGold());
-        woodLabel.setText("Wood: "+ players.get(0).getResources().getWood());
-        oreLabel.setText("Ore: "+ players.get(0).getResources().getOre());
-        crystalLabel.setText("Crystal: "+ players.get(0).getResources().getCrystal());
-        sulfurLabel.setText("Sulfur: "+ players.get(0).getResources().getSulfur());
-        mercuryLabel.setText("Mercury: "+ players.get(0).getResources().getMercury());
-        gemsLabel.setText("Gems: "+ players.get(0).getResources().getGems());
+    public void displayResources(PlayerResources playerResources) {
+        goldLabel.setText("Gold: "+ playerResources.getGold());
+        woodLabel.setText("Wood: "+ playerResources.getWood());
+        oreLabel.setText("Ore: "+ playerResources.getOre());
+        crystalLabel.setText("Crystal: "+ playerResources.getCrystal());
+        sulfurLabel.setText("Sulfur: "+ playerResources.getSulfur());
+        mercuryLabel.setText("Mercury: "+ playerResources.getMercury());
+        gemsLabel.setText("Gems: "+ playerResources.getGems());
     }
 
     public void switchToLauncher(ActionEvent event) throws IOException {
@@ -74,6 +93,11 @@ public class EcoMapSceneController {
         stage.setX( 5 );
         stage.setY( 5 );
         stage.show();
+    }
+
+    public void endTurn(ActionEvent event) throws IOException{
+        economyEngine.endTurn();
+        refreshGui();
     }
 
     public void openEq(ActionEvent event) throws IOException {
