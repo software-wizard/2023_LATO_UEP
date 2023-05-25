@@ -17,31 +17,21 @@ w ten sposob  w move nie ma bramki logicznej - sprawdzic w testach i jak trzeba 
 public class Board
 {
     private static final int MAX_WITDH = 14;
-    private List<Point> boardTest = new ArrayList<>();
+    private List<Point> boardGeneratedListOfPoints = new ArrayList<>();
     private final BiMap< Point, Creature > map = HashBiMap.create();
-
-    public List<Point> getBoardTest() {
-        return boardTest;
-    }
-    // Generowac siatke  z odpowiednimi waganmi.
-    // iterowac po kazdym polu , jesli jest kreatura to dac odpowiednia wage
     public Board(final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
-        /*
                 for( int x = 0; x < 15; x++ ){
             for( int y = 0; y < 10; y++ )
             {
                 Point point = new Point(x,y);
-                boardTest.add(point);
+                boardGeneratedListOfPoints.add(point);
             }
         }
-         */
 
         addCreatures(aCreatures1, 0);
         addCreatures(aCreatures2, MAX_WITDH);
     }
-    // Mamy stworzone do testow(bylo private ale do testowania robimy wszystko public zeby to sprawdzic)
-    @VisibleForTesting
-    void addCreatures( final List< Creature > aCreatures, final int aXPosition )
+    private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
     {
         for( int i = 0; i < aCreatures.size(); i++ )
         {
@@ -56,23 +46,16 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
-       /*
-        ShortestPathAlgorythm  path = new ShortestPathAlgorythm(gridConstruction(availablePointsToGo(aCreature)));
+        ShortestPathAlgorythm  path = new ShortestPathAlgorythm();
         Point startingPoint = getPosition(aCreature);
         Point endPoint = aPoint;
-        List<Point> theRightPath = path.findPath(startingPoint, endPoint);
+        List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
+                System.out.println("YOUR MOM" + point);
                 map.inverse().remove(aCreature);
                 map.put(point, aCreature);
             }
-        }
-        */
-        if (canMove(aCreature,aPoint)) {
-            //for (Point point : theRightPath) {
-                map.inverse().remove(aCreature);
-                map.put(aPoint, aCreature);
-            //}
         }
     }
 
@@ -84,7 +67,7 @@ public class Board
         }
         final Point oldPosition = getPosition( aCreature );
         // Zmieniony dystans w point -> przeciazenie
-        return aPoint.distance( oldPosition, aPoint ) < aCreature.getMoveRange();
+        return aPoint.distance( oldPosition, aPoint ) <= aCreature.getMoveRange();
     }
 
     Point getPosition( Creature aCreature )
@@ -92,12 +75,15 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
-    /*
+    // Musi w przyszłości sprawdzać
+    // 1. czy nie ma bloku
+    // 2. czy lata (inna logika)
+    // 3. czy nie zostało rzucone zaklęcie(sciana ognia np)
     public List<Point> availablePointsToGo(Creature aCretaure) {
     List<Point> listOfPoints = new ArrayList<>();
-        for (Point point : boardTest) {
+        for (Point point : boardGeneratedListOfPoints) {
             if (canMove(aCretaure, point)) {
-                listOfPoints.add(point);
+                listOfPoints.add(point); //podmienic 0 na max int
             }
         }
         return listOfPoints;
@@ -118,12 +104,12 @@ public class Board
 
         int[][] grid = new int[width][height];
         for (int i = 0; i < listOfPoints.size(); i++) {
-            Point point = listOfPoints.get(i);
-            grid[point.getX()][point.getY()] = 1;
+            Point aPoint = listOfPoints.get(i);
+            grid[aPoint.getX()][aPoint.getY()] = 1;
         }
-        return transposeGrid(grid);
+        return grid;
     }
-
+    /*
     private int[][] transposeGrid(int[][] grid) {
         int rows = grid.length;
         int cols = grid[0].length;

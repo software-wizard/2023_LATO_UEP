@@ -97,7 +97,7 @@ public class ShortestPathAlgorythm {
 
             for (Node neighbor : neighbors) {
                 // Skip if neighbor is already visited or is a wall
-                if (closedSet[neighbor.getX()][neighbor.getY()] || grid[neighbor.getX()][neighbor.getY()] == 100) {
+                if (closedSet[neighbor.getX()][neighbor.getY()] || grid[neighbor.getX()][neighbor.getY()] == 0) {
                     continue;
                 }
 
