@@ -9,8 +9,11 @@ public class AttackAndDefenseDamageCalculatorTest {
     WarMachine ballistaAttacker = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
     WarMachine ballistaDefender = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
 
+    WarMachine catapultAttacker = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
+    WarMachine catapultDefender = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
+
     @Test
-    void calculateDamageAttackLvl3DefendersDefenseLvl0() throws Exception {
+    void calculateDamageForBallistaAttackLvl3DefendersDefenseLvl0() throws Exception {
         /*
         hero's attack = 3
         hero's archery skill = 3
@@ -37,5 +40,29 @@ public class AttackAndDefenseDamageCalculatorTest {
         assertTrue(damageOutput>=163);
         assertTrue(damageOutput<=246);
 
+    }
+
+    @Test
+    void calculateDamageForCatapultAttackLvl3DefendersDefenseLvl0() throws Exception {
+        /*
+        hero's attack = 3
+        hero's ballistics skill = 0
+        hero's artillery skill = 0
+        defender's defense skill = 1
+        catapult's attack = 10+3
+
+        hero's ballistics skill is lvl 0, so catapult's dmg is either 0, 1 or 2
+        the difference between Catapult's attack (10 + hero's attack) and the defender's defense skill is 12
+        the dmg output has to be increased by 5% for each point (in this case 12*1.05=12.6)
+        so the final dmg outputs are either 0, 12 (1*12.6 rounded) or 25 (2*12,6 rounded)
+         */
+        catapultAttacker.attack(catapultDefender);
+
+        int damageOutput = catapultDefender.getMaxHp()-catapultDefender.getCurrentHp();
+
+        System.out.println("HP after attacking: "+ catapultDefender.getCurrentHp());
+        System.out.println("Damage output: "+(damageOutput));
+
+        assertTrue(damageOutput==0 || damageOutput==12 || damageOutput==25);
     }
 }
