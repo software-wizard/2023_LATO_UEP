@@ -78,12 +78,10 @@ public class MainBattleController implements PropertyChangeListener
                 }
                 if( gameEngine.canAttack( currentPoint ) )
                 {
-                    //mapTile.setBackground( Color.INDIANRED );
                     mapTile.setBorderColor( Color.INDIANRED );
                     mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
                         //gameEngine.performAction(currentPoint);
                         gameEngine.attack( currentPoint );
-                        //gameEngine.heal(currentPoint);
                     } );
                 }
                 if( gameEngine.canHeal( currentPoint ) )
