@@ -42,8 +42,9 @@ public class GameEngine {
         board.getMapObject(point)
                 .ifPresent(defender -> {
                     try {
-                        AttackerIF attacker = (AttackerIF) turnQueue.getCurrentMapObject();
-                        attacker.attack(defender);
+                        if (turnQueue.getCurrentMapObject() instanceof AttackerIF) {
+                            ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
+                        }
                         checkIfAlive(defender);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -108,7 +109,15 @@ public class GameEngine {
         if(!turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
             double distance = board.getPosition(turnQueue.getCurrentMapObject())
                     .distance(point);
-            boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+
+//            Can attack from distance?
+            boolean canAttackFromDistance;
+            if(turnQueue.getCurrentMapObject() instanceof AttackerIF){
+                canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+            } else {
+                canAttackFromDistance = false;
+            }
+
             if(canAttackFromDistance){
                 return board.getMapObject(point)
                         .isPresent()
@@ -128,7 +137,15 @@ public class GameEngine {
         if (turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
             double distance = board.getPosition(turnQueue.getCurrentMapObject())
                     .distance(point);
-            boolean canAttackFromDistance = ((AttackerIF)turnQueue.getCurrentMapObject()).canAttackFromDistance();
+
+//            Can attack from distance?
+            boolean canAttackFromDistance;
+            if(turnQueue.getCurrentMapObject() instanceof AttackerIF){
+                canAttackFromDistance = ((AttackerIF)turnQueue.getCurrentMapObject()).canAttackFromDistance();
+            } else {
+                canAttackFromDistance = false;
+            }
+
             if(canAttackFromDistance){
                 return board.getMapObject(point)
                         .isPresent()
@@ -139,7 +156,7 @@ public class GameEngine {
                         .isPresent()
                         && distance < 2 && distance > 0;
             }
-        }else {
+            } else {
             return false;
         }
     }
