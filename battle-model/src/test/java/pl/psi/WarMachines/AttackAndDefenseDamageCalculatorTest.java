@@ -12,6 +12,10 @@ public class AttackAndDefenseDamageCalculatorTest {
     WarMachine catapultAttacker = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
     WarMachine catapultDefender = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
 
+    /*
+    disclaimer - these tests are for FIXED hero's and defender's statistics
+    to do: rewrite these tests once hero's and defender's (hero 2) statistics are accessed by WarMachineDamageCalculator
+     */
     @Test
     void calculateDamageForBallistaAttackLvl3DefendersDefenseLvl0() throws Exception {
         /*
@@ -34,8 +38,8 @@ public class AttackAndDefenseDamageCalculatorTest {
 
         int damageOutput = ballistaDefender.getMaxHp()-ballistaDefender.getCurrentHp();
 
-        System.out.println("HP after attacking: "+ ballistaDefender.getCurrentHp());
-        System.out.println("Damage output: "+(damageOutput));
+        System.out.println("Test 1 HP after attacking: "+ ballistaDefender.getCurrentHp());
+        System.out.println("Test 1 Damage output: "+(damageOutput));
 
         assertTrue(damageOutput>=163);
         assertTrue(damageOutput<=246);
@@ -43,7 +47,7 @@ public class AttackAndDefenseDamageCalculatorTest {
     }
 
     @Test
-    void calculateDamageForCatapultAttackLvl3DefendersDefenseLvl0() throws Exception {
+    void calculateDamageForCatapultAttackLvl3DefendersDefenseLvl1() throws Exception {
         /*
         hero's attack = 3
         hero's ballistics skill = 0
@@ -60,9 +64,33 @@ public class AttackAndDefenseDamageCalculatorTest {
 
         int damageOutput = catapultDefender.getMaxHp()-catapultDefender.getCurrentHp();
 
-        System.out.println("HP after attacking: "+ catapultDefender.getCurrentHp());
-        System.out.println("Damage output: "+(damageOutput));
+        System.out.println("Test 2 HP after attacking: "+ catapultDefender.getCurrentHp());
+        System.out.println("Test 2 Damage output: "+(damageOutput));
 
         assertTrue(damageOutput==0 || damageOutput==12 || damageOutput==25);
     }
+    @Test
+    void calculateDamageForCatapultAttackLvl3DefendersDefenseLvl1ButWithBallista() throws Exception {
+        catapultAttacker.attack(ballistaDefender);
+
+        int damageOutput = ballistaDefender.getMaxHp()-ballistaDefender.getCurrentHp();
+
+        System.out.println("Test 3 HP after attacking: "+ ballistaDefender.getCurrentHp());
+        System.out.println("Test 3 Damage output: "+(damageOutput));
+
+        assertTrue(damageOutput==0 || damageOutput==12 || damageOutput==25);
+    }
+    @Test
+    void calculateDamageForBallistaAttackLvl3DefendersDefenseLvl0WithCatapult() throws Exception {
+        ballistaAttacker.attack(catapultDefender);
+
+        int damageOutput = catapultDefender.getMaxHp()-catapultDefender.getCurrentHp();
+
+        System.out.println("Test 4 HP after attacking: "+ catapultDefender.getCurrentHp());
+        System.out.println("Test 4 Damage output: "+(damageOutput));
+
+        assertTrue(damageOutput>=163);
+        assertTrue(damageOutput<=246);
+    }
+
 }
