@@ -16,7 +16,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
     FIRST_AID_TENT( "First Aid Tent", 0, 75, 0, 0, Range.closed(0,0), 1, 2,
             "Heals a small amount of hit points to a top creature in one of your stacks every round. The effect is very weak. First Aid skill gives you control over the tent and makes it heal more hit points, but the tent is extremely easy to destroy, rendering your First Aid skill useless for the rest of the battle - see note on Artillery above. The tent, however, can save you losing a few high-level creatures by topping up their hit points every round.",
             false ), //
-    CATAPULT( "Catapult", 0, 1000, 24, 10, Range.closed(0,0), 1, 2,
+    CATAPULT( "Catapult", 10, 1000, 24, 10, Range.closed(0,0), 1, 2,
             "Every hero has one all the time. Catapult is affected by Balistics skill, which unlike other war machine skills is very important to learn. Catapult is durable and comes under your control as you deveop Ballistics. If you are under seige and have powerful spells, destroy the enemy catapult so you can keep your walls and archer towers, turning the tides of battle in your favour. Ballistics secondary skills is essential for towns like Fortress who lack strong flyers and shooters, they must break through the drawbridge before enemy shooters have a good go at them.",
             false ); //
 
