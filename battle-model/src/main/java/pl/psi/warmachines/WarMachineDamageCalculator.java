@@ -11,7 +11,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
             damage = calculateDamageFromBallista(3, 0, 3, 0, WarMachineStatistic.BALLISTA.getAttack()+3);
         } else if (aAttacker.getStats().equals(WarMachineStatistic.CATAPULT)) {
             //todo real hero ballistics skill value must be used
-            damage = calculateFirstShotDamageFromCatapult(0) + calculateSecondShotDamageFromCatapult(0);
+            damage = calculateFirstShotDamageFromCatapult(0) + calculateSecondShotDamageFromCatapult(0, 3,1, WarMachineStatistic.CATAPULT.getAttack()+3);
         } else{
             throw new Exception("Only ballista and catapult can apply damage");
         }
@@ -19,7 +19,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
     }
 
     // Method uses given attack value to calculate damage which will be applied on creature attacked by ballista
-    private int calculateDamageFromBallista(int heroAttack, int heroArtillerySkill, int heroArcherySkill, int defenderDefenceSkill, int ballistaAttack){
+    private int calculateDamageFromBallista(int heroAttack, int heroArtillerySkill, int heroArcherySkill, int defenderDefenseSkill, int ballistaAttack){
 
         //Base damage (heroAttackPoints = 0)
         float lowerBoundary = 2;
@@ -71,20 +71,20 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
 
         int pointDifference;
 
-        if (ballistaAttack > defenderDefenceSkill) {
-            pointDifference = ballistaAttack - defenderDefenceSkill;
+        if (ballistaAttack > defenderDefenseSkill) {
+            pointDifference = ballistaAttack - defenderDefenseSkill;
             if (pointDifference>=60) {
                 damage *=3;
             } else {
-                damage = (float) ((float) damage*pointDifference*1.05);
+                damage = (float) (damage*pointDifference*1.05);
             }
 
-        } else if (ballistaAttack < defenderDefenceSkill) {
-            pointDifference = defenderDefenceSkill - ballistaAttack;
+        } else if (ballistaAttack < defenderDefenseSkill) {
+            pointDifference = defenderDefenseSkill - ballistaAttack;
             if (pointDifference>=28) {
                 damage *= 1.7;
             } else {
-                damage = (float) ((float) damage*pointDifference*0.975);
+                damage = (float) (damage*pointDifference*0.975);
             }
 
         }
@@ -96,7 +96,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         return ((Math.random() * (max - min)) + min);
     }
 
-    private int calculateFirstShotDamageFromCatapult(int heroBallisticSkills){
+    private int calculateFirstShotDamageFromCatapult(int heroBallisticSkills, int heroAttack, int defenderDefenseSkill, int catapultAttack){
         double probability = Math.random();
         int damage;
         switch (heroBallisticSkills){
@@ -123,14 +123,57 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
             default:
                 damage = 0;
         }
+
+
+        int pointDifference;
+
+        if (catapultAttack > defenderDefenseSkill) {
+            pointDifference = catapultAttack - defenderDefenseSkill;
+            if (pointDifference>=60) {
+                damage *=3;
+            } else {
+                damage = (int) (damage*pointDifference*1.05));
+            }
+
+        } else if (catapultAttack < defenderDefenseSkill) {
+            pointDifference = defenderDefenseSkill - catapultAttack;
+            if (pointDifference>=28) {
+                damage *= 1.7;
+            } else {
+                damage = (int) (damage*pointDifference*0.975);
+            }
+
+        }
+
+
         return damage;
     }
 
-    private int calculateSecondShotDamageFromCatapult(int heroBallisticSkills) {
+    private int calculateSecondShotDamageFromCatapult(int heroBallisticSkills, int heroAttack, int defenderDefenseSkill, int catapultAttack) {
         int damage = 0;
         if (heroBallisticSkills >= 2){
-            damage = calculateFirstShotDamageFromCatapult(heroBallisticSkills);
+            damage = calculateFirstShotDamageFromCatapult(heroBallisticSkills, heroAttack, defenderDefenseSkill, catapultAttack);
         }
+        int pointDifference;
+
+        if (catapultAttack > defenderDefenseSkill) {
+            pointDifference = catapultAttack - defenderDefenseSkill;
+            if (pointDifference>=60) {
+                damage *=3;
+            } else {
+                damage = (int) (damage*pointDifference*1.05);
+            }
+
+        } else if (catapultAttack < defenderDefenseSkill) {
+            pointDifference = defenderDefenseSkill - catapultAttack;
+            if (pointDifference>=28) {
+                damage *= 1.7;
+            } else {
+                damage = (int) (damage*pointDifference*0.975);
+            }
+
+        }
+
         return damage;
     }
 }
