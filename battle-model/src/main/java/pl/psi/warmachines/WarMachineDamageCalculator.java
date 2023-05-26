@@ -8,7 +8,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
         int damage;
         if (aAttacker.getStats().equals(WarMachineStatistic.BALLISTA)){
             //todo real hero artillery skill value and heroAttack value must be used
-            damage = calculateDamageFromBallista(3, 0, 3, 0, WarMachineStatistic.BALLISTA.getAttack() );
+            damage = calculateDamageFromBallista(3, 0, 3, 0, WarMachineStatistic.BALLISTA.getAttack()+3);
         } else if (aAttacker.getStats().equals(WarMachineStatistic.CATAPULT)) {
             //todo real hero ballistics skill value must be used
             damage = calculateFirstShotDamageFromCatapult(0) + calculateSecondShotDamageFromCatapult(0);
@@ -81,7 +81,12 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
 
         } else if (ballistaAttack < defenderDefenceSkill) {
             pointDifference = defenderDefenceSkill - ballistaAttack;
-            damage = (float) ((float) damage*pointDifference*0.975);
+            if (pointDifference>=28) {
+                damage *= 1.7;
+            } else {
+                damage = (float) ((float) damage*pointDifference*0.975);
+            }
+
         }
 
         return (int) damage;
