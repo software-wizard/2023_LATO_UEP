@@ -10,10 +10,6 @@ import com.google.common.collect.HashBiMap;
 
 import pl.psi.creatures.Creature;
 
-/*
-TODO availablePointsToGo() ma sprawdzac czy dana kreatura moze sie gdzies poruszyc,
-w ten sposob  w move nie ma bramki logicznej - sprawdzic w testach i jak trzeba zapiac w debug
-*/
 public class Board
 {
     private static final int MAX_WITDH = 14;
@@ -52,7 +48,7 @@ public class Board
         List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
-                System.out.println("YOUR MOM" + point);
+//                System.out.println("Creature moved through point: " + point);
                 map.inverse().remove(aCreature);
                 map.put(point, aCreature);
             }
@@ -75,7 +71,7 @@ public class Board
         return map.inverse()
             .get( aCreature );
     }
-    // Musi w przyszłości sprawdzać
+    //TODO:
     // 1. czy nie ma bloku
     // 2. czy lata (inna logika)
     // 3. czy nie zostało rzucone zaklęcie(sciana ognia np)
@@ -83,15 +79,15 @@ public class Board
     List<Point> listOfPoints = new ArrayList<>();
         for (Point point : boardGeneratedListOfPoints) {
             if (canMove(aCretaure, point)) {
-                listOfPoints.add(point); //podmienic 0 na max int
+                listOfPoints.add(point);
             }
         }
         return listOfPoints;
     }
-    public int[][] gridConstruction(List<Point> listOfPoints){
+    public int[][] gridConstruction(List<Point> availablePointsToGo){
         int width = 0;
         int height = 0;
-        for (Point point : listOfPoints) {
+        for (Point point : availablePointsToGo) {
             if (point.getX() > width) {
                 width = point.getX();
             }
@@ -103,8 +99,14 @@ public class Board
         height++;
 
         int[][] grid = new int[width][height];
-        for (int i = 0; i < listOfPoints.size(); i++) {
-            Point aPoint = listOfPoints.get(i);
+
+        for (int i = 0; i < grid.length; i++){
+            for (int y=0; y < grid[0].length; y++){
+                grid[i][y] = Integer.MAX_VALUE;
+            }
+        }
+        for (int i = 0; i < availablePointsToGo.size(); i++) {
+            Point aPoint = availablePointsToGo.get(i);
             grid[aPoint.getX()][aPoint.getY()] = 1;
         }
         return grid;
