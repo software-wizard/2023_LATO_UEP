@@ -11,7 +11,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
             damage = calculateDamageFromBallista(3, 0, 3, 0, WarMachineStatistic.BALLISTA.getAttack()+3);
         } else if (aAttacker.getStats().equals(WarMachineStatistic.CATAPULT)) {
             //todo real hero ballistics skill value must be used
-            damage = calculateFirstShotDamageFromCatapult(0) + calculateSecondShotDamageFromCatapult(0, 3,1, WarMachineStatistic.CATAPULT.getAttack()+3);
+            damage = calculateFirstShotDamageFromCatapult(0, 3,1, WarMachineStatistic.CATAPULT.getAttack()+3) + calculateSecondShotDamageFromCatapult(0, 3,1, WarMachineStatistic.CATAPULT.getAttack()+3);
         } else{
             throw new Exception("Only ballista and catapult can apply damage");
         }
@@ -132,7 +132,7 @@ public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF 
             if (pointDifference>=60) {
                 damage *=3;
             } else {
-                damage = (int) (damage*pointDifference*1.05));
+                damage = (int) (damage*pointDifference*1.05);
             }
 
         } else if (catapultAttack < defenderDefenseSkill) {
