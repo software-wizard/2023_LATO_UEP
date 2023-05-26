@@ -131,6 +131,16 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     }
 
     @Override
+    public boolean canAttack() {
+        return stats.canAttack();
+    }
+
+    @Override
+    public boolean canHeal() {
+        return stats.canHeal();
+    }
+
+    @Override
     public boolean canAttackFromDistance() {
         return false;
     }

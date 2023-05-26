@@ -1,5 +1,9 @@
 package pl.psi;
 
+import WarMachines.WarMachineStatistic;
+import com.google.common.base.Preconditions;
+import pl.psi.warmachines.WarMachine;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -106,19 +110,18 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        if(!turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
+        if (turnQueue.getCurrentMapObject().canAttack()) {
             double distance = board.getPosition(turnQueue.getCurrentMapObject())
                     .distance(point);
-
 //            Can attack from distance?
             boolean canAttackFromDistance;
-            if(turnQueue.getCurrentMapObject() instanceof AttackerIF){
+            if (turnQueue.getCurrentMapObject() instanceof AttackerIF) {
                 canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
             } else {
                 canAttackFromDistance = false;
             }
 
-            if(canAttackFromDistance){
+            if (canAttackFromDistance) {
                 return board.getMapObject(point)
                         .isPresent()
                         && distance <= 14 && distance > 0
@@ -128,13 +131,13 @@ public class GameEngine {
                         .isPresent()
                         && distance < 2 && distance > 0;
             }
-        }else {
+        } else {
             return false;
         }
     }
 
     public boolean canHeal(final Point point) {
-        if (turnQueue.getCurrentMapObject().getName().equals("First Aid Tent")){
+        if (turnQueue.getCurrentMapObject().canHeal()) {
             double distance = board.getPosition(turnQueue.getCurrentMapObject())
                     .distance(point);
 

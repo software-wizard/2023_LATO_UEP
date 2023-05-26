@@ -93,6 +93,16 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     public boolean canAttackFromDistance() {
         return true;
     }
+
+    public boolean canAttack() {
+        return stats.canAttack();
+    }
+
+    @Override
+    public boolean canHeal() {
+        return stats.canHeal();
+    }
+
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -104,6 +114,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     int getArmor() {
         return stats.getArmor();
     }
+
 
 //    @Override
 //    public void propertyChange(final PropertyChangeEvent evt) {
