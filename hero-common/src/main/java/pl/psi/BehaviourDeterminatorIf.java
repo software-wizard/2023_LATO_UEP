@@ -1,4 +1,4 @@
-package WarMachines;
+package pl.psi;
 
 public interface BehaviourDeterminatorIf {
     boolean canAttack();

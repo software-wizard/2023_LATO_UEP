@@ -3,7 +3,7 @@ package pl.psi;
 import java.util.List;
 import java.util.Optional;
 
-import WarMachines.WarMachineStatistic;
+import pl.psi.WarMachines.WarMachineStatistic;
 import org.junit.jupiter.api.Test;
 
 

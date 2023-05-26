@@ -1,6 +1,6 @@
 package pl.psi.warmachines;
 
-import WarMachines.WarMachineStatisticIf;
+import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;

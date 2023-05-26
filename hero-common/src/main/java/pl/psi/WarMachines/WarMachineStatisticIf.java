@@ -1,4 +1,4 @@
-package WarMachines;
+package pl.psi.WarMachines;
 
 import com.google.common.collect.Range;
 

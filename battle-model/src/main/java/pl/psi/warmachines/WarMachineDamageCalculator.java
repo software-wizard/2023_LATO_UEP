@@ -1,6 +1,6 @@
 package pl.psi.warmachines;
 
-import WarMachines.WarMachineStatistic;
+import pl.psi.WarMachines.WarMachineStatistic;
 import pl.psi.MapObjectIf;
 
 public class WarMachineDamageCalculator implements WarMachineDamageCalculatorIF {

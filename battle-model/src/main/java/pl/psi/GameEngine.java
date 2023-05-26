@@ -1,9 +1,5 @@
 package pl.psi;
 
-import WarMachines.WarMachineStatistic;
-import com.google.common.base.Preconditions;
-import pl.psi.warmachines.WarMachine;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;

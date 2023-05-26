@@ -1,6 +1,6 @@
 package pl.psi.creatures;
 
-import WarMachines.BehaviourDeterminatorIf;
+import pl.psi.BehaviourDeterminatorIf;
 import com.google.common.collect.Range;
 
 import lombok.Getter;
