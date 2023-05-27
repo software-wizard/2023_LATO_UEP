@@ -82,6 +82,12 @@ public class EconomyHero implements MapElement {
     public ArrayList<EconomyCreature> getCreatures() {
         return heroArmy;
     }
+
+    //TODO zrobić potem pobieranie skilli
+    public Iterable<Object> getSkills() {
+
+        return null;
+    }
 }
 
 
