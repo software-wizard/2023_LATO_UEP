@@ -2,12 +2,14 @@ package pl.psi.hero;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import pl.psi.converter.EcoBattleConverter;
 import pl.psi.creatures.Creature;
+import pl.psi.creatures.EconomyCreature;
 import pl.psi.creatures.EconomyNecropolisFactory;
 
 class EcoBattleConverterTest
@@ -16,7 +18,9 @@ class EcoBattleConverterTest
     @Test
     void shouldConvertCreaturesCorrectly()
     {
-        final EconomyHero ecoHero = new EconomyHero( EconomyHero.Fraction.NECROPOLIS, 1000 );
+        ArrayList<EconomyCreature> heroArmy = new ArrayList<>();
+
+        final EconomyHero ecoHero = new EconomyHero(HeroStatistics.builder().build(), heroArmy);
         final EconomyNecropolisFactory factory = new EconomyNecropolisFactory();
         ecoHero.addCreature( factory.create( false, 1, 1 ) );
         ecoHero.addCreature( factory.create( false, 2, 2 ) );
@@ -26,45 +30,45 @@ class EcoBattleConverterTest
         ecoHero.addCreature( factory.create( false, 6, 6 ) );
         ecoHero.addCreature( factory.create( false, 7, 7 ) );
 
-        final List< Creature > convertedCreatures = EcoBattleConverter.convert( ecoHero )
-            .getCreatures();
+        final List<Creature> convertedCreatures = EcoBattleConverter.convert( ecoHero )
+                .getCreatures();
 
         assertEquals( 7, convertedCreatures.size() );
 
         assertEquals( "Skeleton", convertedCreatures.get( 0 )
-            .getName() );
+                .getName() );
         assertEquals( 1, convertedCreatures.get( 0 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Walking Dead", convertedCreatures.get( 1 )
-            .getName() );
+                .getName() );
         assertEquals( 2, convertedCreatures.get( 1 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Wight", convertedCreatures.get( 2 )
-            .getName() );
+                .getName() );
         assertEquals( 3, convertedCreatures.get( 2 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Vampire", convertedCreatures.get( 3 )
-            .getName() );
+                .getName() );
         assertEquals( 4, convertedCreatures.get( 3 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Lich", convertedCreatures.get( 4 )
-            .getName() );
+                .getName() );
         assertEquals( 5, convertedCreatures.get( 4 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Black Knight", convertedCreatures.get( 5 )
-            .getName() );
+                .getName() );
         assertEquals( 6, convertedCreatures.get( 5 )
-            .getAmount() );
+                .getAmount() );
 
         assertEquals( "Bone Dragon", convertedCreatures.get( 6 )
-            .getName() );
+                .getName() );
         assertEquals( 7, convertedCreatures.get( 6 )
-            .getAmount() );
+                .getAmount() );
     }
 
 }

@@ -1,59 +1,83 @@
 package pl.psi.hero;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
+import pl.psi.mapElements.Castle;
+import pl.psi.artifacts.Artifact;
+import pl.psi.mapElements.MapElement;
+import pl.psi.player.PlayerResources;
+import java.util.ArrayList;
 
-public class EconomyHero
-{
 
-    private final Fraction fraction;
-    private final List< EconomyCreature > creatureList;
-    private int gold;
+@AllArgsConstructor
+@Builder
+@Getter
+public class EconomyHero implements MapElement {
 
-    public EconomyHero( final Fraction aFraction, final int aGold )
-    {
-        fraction = aFraction;
-        gold = aGold;
-        creatureList = new ArrayList<>();
+
+    // Metoda apply for EconomyArtifact
+
+    private HeroStatistics heroStatistics;
+
+    public static Castle.FractionType Fraction;
+    private HeroEquipment heroEquipment;
+    private ArrayList<EconomyCreature> heroArmy;
+
+
+    public EconomyHero(HeroStatistics aHeroStatistics,ArrayList<EconomyCreature> aHeroArmy,HeroEquipment aHeroEquipment) {
+        this.heroStatistics = aHeroStatistics;
+        this.heroEquipment = aHeroEquipment;
+        this.heroArmy = aHeroArmy;
     }
 
-    void addCreature( final EconomyCreature aCreature )
-    {
-        if( creatureList.size() >= 7 )
-        {
-            throw new IllegalStateException( "Hero has not empty slot for creature" );
+
+    @Override
+    public boolean isInteractive() {
+        return true;
+    }
+
+    @Override
+    public void apply(EconomyHero aEconomyHero) {
+        // TODO exchange army and so on?
+        // TODO battle if enemy hero
+    }
+
+    public void addCreaturesToArmy(RecruitmentBuilding building, int amount, PlayerResources resources){
+        int creaturesCost = building.getCreaturesToRecruit().getAmount()*building.getCreaturesToRecruit().getGoldCost();
+
+        if(creaturesCost<resources.getGold()){
+            EconomyCreature armyCreature = building.takeCreaturesFromBuilding(amount);
+            heroArmy.add(armyCreature);
+            resources.setGold(resources.getGold()-creaturesCost);
         }
-        creatureList.add( aCreature );
     }
 
-    public int getGold()
-    {
-        return gold;
+    @Override
+    public boolean shouldBeRemoveAfterAction() {
+        return false;
     }
 
-    public void addGold( final int aAmount )
-    {
-        gold += aAmount;
+    @Override
+    public void endOfTurn() {
+
     }
 
-    public List< EconomyCreature > getCreatures()
-    {
-        return List.copyOf( creatureList );
+    public void addArtifactToBackpack(Artifact aArtifact) {
+        //open gui
+        this.heroEquipment.addItemToBackpack(aArtifact);
     }
 
-    void substractGold( final int aAmount )
-    {
-        if( aAmount > gold )
-        {
-            throw new IllegalStateException( "Hero has not enought money" );
-        }
-        gold -= aAmount;
+    public ArrayList<EconomyCreature> addCreature(EconomyCreature economyCreature) {
+        heroArmy.add( economyCreature);
+        return heroArmy;
     }
 
-    public enum Fraction
-    {
-        NECROPOLIS;
+    public ArrayList<EconomyCreature> getCreatures() {
+        return heroArmy;
     }
 }
+
+
