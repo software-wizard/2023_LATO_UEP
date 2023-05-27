@@ -23,11 +23,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>pl.psi</groupId>
-            <artifactId>economyHero-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
