@@ -52,12 +52,12 @@ public class MainBattleController implements PropertyChangeListener {
                 gameObject.ifPresent((mapObject) -> {
                     try {
                         if(gameEngine.hero1.getMapObjectIfs().contains(mapObject)){
-                            mapTile.setBackground(Color.rgb(255, 195, 18));
+                            mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
                             mapTile.setAmountLabel(mapObject.getAmount());
                         } else {
-                            mapTile.setBackground(Color.rgb(150, 203, 196));
+                            mapTile.setBackground(Color.rgb(166, 206, 200));
                             mapTile.setMirrorGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
                             mapTile.setAmountLabel(mapObject.getAmount());

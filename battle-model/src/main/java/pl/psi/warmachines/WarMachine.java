@@ -95,15 +95,17 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     }
 
     private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
-        int hpToSubtract = aDamage % aDefender.getMaxHp();
-//        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
+        int hpToSubstract = aDamage % aDefender.getMaxHp();
+        int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubtract;
-        //            System.out.println("HP: " + hp);
-        //            System.out.println("War Machine is dead");
-        //            aDefender.setAmount(aDefender.getAmount() - 1);
-        aDefender.setCurrentHp(Math.max(hp, 0));
-//        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
+        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        if (hp <= 0) {
+            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setAmount(aDefender.getAmount() - 1);
+        } else {
+            aDefender.setCurrentHp(hp);
+        }
+        aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
     }
 
     public int getMaxHp() {
@@ -165,7 +167,8 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     }
 
     public boolean checkIfAlive(MapObjectIf defender) {
-        return defender.getCurrentHp() > 0;
+        return defender.getAmount() > 0;
+        //return defender.getCurrentHp() > 0;
     }
 
     public static class Builder {
