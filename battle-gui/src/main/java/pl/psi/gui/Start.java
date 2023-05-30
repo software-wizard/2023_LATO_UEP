@@ -48,7 +48,7 @@ public class Start extends Application
 
     private Hero createP2()
     {
-        final Hero ret = new Hero( List.of( new NecropolisFactory().create( true, 1, 5 ) ) );
+        final Hero ret = new Hero( List.of( new NecropolisFactory().create( true, 2, 5 ) ) );
         return ret;
     }
 
