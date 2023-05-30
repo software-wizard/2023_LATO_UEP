@@ -65,7 +65,7 @@ public class GameEngine {
     public void heal(final Point point) {
         //TODO      Preconditions.checkArgument(canHEAL() == TRUE);
         WarMachine newWM = (WarMachine) turnQueue.getCurrentMapObject();
-        if (newWM.canHeal()) { //TODO to też jest w sumie nie potrzebne skoro będziemy mieć preconditions
+        if (newWM.canHeal()) { //TODO niepotrzebne będzie
             board.getMapObject(point).ifPresent(allyUnit -> {
                 try {
                     ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
