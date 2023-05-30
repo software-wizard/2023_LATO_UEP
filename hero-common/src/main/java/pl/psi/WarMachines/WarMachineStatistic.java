@@ -47,7 +47,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
             return true;
         }
     }), //
-    CATAPULT("Catapult", 0, 1000, 24, 10, Range.closed(0, 0), 1, 2,
+    CATAPULT("Catapult", 10, 1000, 24, 10, Range.closed(0, 0), 1, 2,
             "Every hero has one all the time. Catapult is affected by Balistics skill, which unlike other war machine skills is very important to learn. Catapult is durable and comes under your control as you deveop Ballistics. If you are under seige and have powerful spells, destroy the enemy catapult so you can keep your walls and archer towers, turning the tides of battle in your favour. Ballistics secondary skills is essential for towns like Fortress who lack strong flyers and shooters, they must break through the drawbridge before enemy shooters have a good go at them.",
             false, new BehaviourDeterminatorIf() {
         @Override
