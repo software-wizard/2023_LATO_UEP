@@ -79,8 +79,7 @@ public class GameEngine {
     }
 
     public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                .distance(point);
+        double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
         boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
 
         if (canAttackFromDistance) {

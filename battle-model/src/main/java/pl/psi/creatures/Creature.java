@@ -31,11 +31,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
-
-    @Setter
-    @Getter
-    private Hero hero;
-
     Creature() {
     }
 
