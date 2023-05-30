@@ -2,7 +2,6 @@ package pl.psi;
 
 import java.util.List;
 
-import lombok.Setter;
 import pl.psi.warmachines.WarMachine;
 import pl.psi.creatures.Creature;
 
@@ -16,10 +15,7 @@ public class Hero
     @Getter
     private final List<Creature> creatures;
     @Getter
-    private List<WarMachine> warMachines;
-    @Setter
-    @Getter
-    private List<MapObjectIf> mapObjectIfs;
+    private  List<WarMachine> warMachines;
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
@@ -32,7 +28,6 @@ public class Hero
         creatures = aCreatures;
     }
 
-    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
-        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
-    }
+
+
 }
