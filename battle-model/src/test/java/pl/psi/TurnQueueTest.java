@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
-import WarMachines.WarMachineStatistic;
-import WarMachines.WarMachineStats;
+import pl.psi.WarMachines.WarMachineStatistic;
+import pl.psi.WarMachines.WarMachineStats;
 import org.junit.jupiter.api.Test;
 
 import pl.psi.creatures.Creature;

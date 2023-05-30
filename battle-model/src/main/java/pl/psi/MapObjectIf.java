@@ -1,7 +1,4 @@
 package pl.psi;
-
-//import pl.psi.creatures.Creature;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +21,8 @@ public interface MapObjectIf extends PropertyChangeListener {
     int getAmount();
     void setAmount(int a);
 
-    boolean canHeal();
     boolean canAttack();
+    boolean canHeal();
+
 }
 

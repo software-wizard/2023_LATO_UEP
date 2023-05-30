@@ -22,11 +22,11 @@ public class GameEngine {
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final TurnQueue turnQueue;
-    private List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
-    private List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
-    @Getter
+ 
+    private final List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
+    private final List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
+  
     public Hero hero1;
-    @Getter
     public Hero hero2;
 
     public GameEngine(final Hero aHero1, final Hero aHero2) {
@@ -46,68 +46,34 @@ public class GameEngine {
         board = new Board(mapObjectIf1, mapObjectIf2);
     }
 
-    public void attack(final Point point) {
-        AttackerIF newAttacker = (AttackerIF) turnQueue.getCurrentMapObject();
-        if (newAttacker.canAttack()) {
-            board.getMapObject(point).ifPresent(defender -> {
-                try {
-                    AttackerIF attacker = (AttackerIF) turnQueue.getCurrentMapObject();
-                    attacker.attack(defender);
-                    checkIfAlive(defender);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            pass();
-        }
+  public void attack(final Point point) {
+        board.getMapObject(point)
+                .ifPresent(defender -> {
+                    try {
+                        Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof AttackerIF, "Current map object is not an attacker");
+                        //Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack() == true, "Current map object is not an attacker");
+                        ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
+                        checkIfAlive(defender);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        pass();
     }
 
     public void heal(final Point point) {
-        //TODO      Preconditions.checkArgument(canHEAL() == TRUE);
-        WarMachine newWM = (WarMachine) turnQueue.getCurrentMapObject();
-        if (newWM.canHeal()) { //TODO niepotrzebne będzie
-            board.getMapObject(point).ifPresent(allyUnit -> {
-                try {
-                    ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
-                    checkIfAlive(allyUnit);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            pass();
-        }
-    }
-
-    public boolean canAttack(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
-        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
-
-        if (canAttackFromDistance) {
-            return board.getMapObject(point).isPresent() && distance <= 14 && distance > 0
-                    //&& isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-                    && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get()) && turnQueue.getCurrentMapObject().canAttack();
-        } else {
-            return board.getMapObject(point).isPresent() && distance < 2 && distance > 0 && turnQueue.getCurrentMapObject().canAttack();
-        }
-    }
-
-    public boolean canHeal(final Point point) {
-        double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
-        boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
-
-        if (canAttackFromDistance) {
-            return board.getMapObject(point).isPresent() && distance <= 14 && distance > 0
-                    //&& !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
-                    //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
-                    && turnQueue.getCurrentMapObject().canHeal();
-        } else {
-            return board.getMapObject(point).isPresent() && distance < 2 && distance > 0 && board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp() && turnQueue.getCurrentMapObject().canHeal();
-        }
-    }
-
-    public boolean isCurrentMapObject(Point aPoint) {
-        return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
+        board.getMapObject(point)
+                .ifPresent(allyUnit -> {
+                    try {
+                        Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof HealerIF, "Current map object is not a healer");
+                        //Preconditions.checkArgument(turnQueue.getCurrentMapObject().canHeal() == true, "Current map object is not an healer");
+                        ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
+                        checkIfAlive(allyUnit);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+        pass();
     }
 
     private void checkIfAlive(MapObjectIf defender) {
@@ -139,13 +105,45 @@ public class GameEngine {
         turnQueue.addObserver(aObserver);
     }
 
-    public MapObjectIf getRandomMapObject(List<MapObjectIf> mapObjectIf1, List<MapObjectIf> mapObjectIf2) {
-        List<MapObjectIf> mapObjectIf = new ArrayList<MapObjectIf>();
-        mapObjectIf.addAll(mapObjectIf1);
-        mapObjectIf.addAll(mapObjectIf2);
+    public boolean canAttack(final Point point) {
+        if (turnQueue.getCurrentMapObject().canAttack()) {
+            double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
+            boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
 
-        Random rand = new Random();
-        int i = rand.nextInt(mapObjectIf.size());
-        return mapObjectIf.get(i);
+            if (canAttackFromDistance) {
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance <= 14 && distance > 0
+                        && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+            } else {
+                return board.getMapObject(point)
+                        .isPresent()
+                        && distance < 2 && distance > 0;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean canHeal(final Point point) {
+        if (turnQueue.getCurrentMapObject().canHeal()) {
+            double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
+            return board.getMapObject(point)
+                    .isPresent()
+                    && distance <= 14 && distance > 0
+                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isCurrentMapObject(Point aPoint) {
+        return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
+    }
+
+    }
+
+    public boolean canPerformAction() {
+        return turnQueue.getCurrentMapObject() instanceof ActionPerformerIf;
     }
 }

@@ -67,16 +67,8 @@ public class MainBattleController implements PropertyChangeListener {
                     }
                 });
 
-//                gameObject.ifPresent((mapObject) -> {
-//                    try {
-//                        mapTile.setMirrorGraphic(mapObject.getName());
-//                        mapTile.setHpLabel(mapObject.getCurrentHp());
-//                    } catch (FileNotFoundException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                });
-
-                if (gameEngine.isCurrentMapObject(currentPoint)) {
+                if( gameEngine.isCurrentMapObject( currentPoint ) )
+                {
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }
                 if (gameEngine.canMove(currentPoint)) {
@@ -86,18 +78,20 @@ public class MainBattleController implements PropertyChangeListener {
                     });
                 }
 
-                if (gameEngine.canAttack(currentPoint)) {
-                    mapTile.setBorderColor(Color.RED);
-                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        gameEngine.attack(currentPoint);
-                    });
-                }
-
-                if (gameEngine.canHeal(currentPoint)) {
-                    mapTile.setBorderColor(Color.BLUEVIOLET);
-                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        gameEngine.heal(currentPoint);
-                    });
+                if(gameEngine.canPerformAction()){
+                  
+                   if (gameEngine.canHeal(currentPoint)) {
+                       mapTile.setBorderColor(Color.RED);
+                       mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.attack(currentPoint);
+                       });
+                    } 
+                  if (gameEngine.canAttack(currentPoint)) {
+                        mapTile.setBorderColor(Color.BLUEVIOLET);
+                        mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.heal(currentPoint);
+                        });
+                    }
                 }
 
                 gridMap.add(mapTile, x, y);
