@@ -1,6 +1,6 @@
 package pl.psi;
 
-public interface HealerIF extends ActionPerformerIf{
+public interface HealerIF {
     void heal(MapObjectIf ally) throws Exception;
 
     public boolean canHeal();

@@ -1,6 +1,6 @@
 package pl.psi.warmachines;
 
-import pl.psi.WarMachines.WarMachineStatisticIf;
+import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
@@ -124,16 +124,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return true;
     }
 
-    @Override
-    public boolean canAttack() {
-        return stats.canAttack();
-    }
-
-    @Override
-    public boolean canHeal() {
-        return stats.canHeal();
-    }
-  
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -145,7 +135,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     int getArmor() {
         return stats.getArmor();
     }
-
 
 //    @Override
 //    public void propertyChange(final PropertyChangeEvent evt) {

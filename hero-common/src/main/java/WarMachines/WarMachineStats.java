@@ -1,4 +1,4 @@
-package pl.psi.WarMachines;
+package WarMachines;
 
 import com.google.common.collect.Range;
 import lombok.Builder;
@@ -17,14 +17,4 @@ public class WarMachineStats implements WarMachineStatisticIf{
     private final String description;
     private final boolean isUpgraded;
     private final int hexSize;
-
-    @Override
-    public boolean canAttack() {
-        return false;
-    }
-
-    @Override
-    public boolean canHeal() {
-        return false;
-    }
 }

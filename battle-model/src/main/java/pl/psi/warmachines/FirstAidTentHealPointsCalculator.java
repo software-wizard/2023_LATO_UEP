@@ -1,6 +1,6 @@
 package pl.psi.warmachines;
 
-import pl.psi.WarMachines.WarMachineStatistic;
+import WarMachines.WarMachineStatistic;
 import pl.psi.MapObjectIf;
 
 public class FirstAidTentHealPointsCalculator implements FirstAidTentIf{

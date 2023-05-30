@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import pl.psi.warmachines.WarMachine;
-import pl.psi.WarMachines.WarMachineStatistic;
+import WarMachines.WarMachineStatistic;
 import pl.psi.Hero;
 
 import javafx.application.Application;

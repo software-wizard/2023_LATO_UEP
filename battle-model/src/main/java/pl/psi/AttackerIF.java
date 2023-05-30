@@ -1,6 +1,6 @@
 package pl.psi;
 
-public interface AttackerIF extends ActionPerformerIf {
+public interface AttackerIF {
     void attack(MapObjectIf defender) throws Exception;
 
     boolean canAttackFromDistance();
