@@ -16,7 +16,9 @@ class MapTile extends StackPane
 {
     private final Rectangle rect;
     private final Label label;
+    private Label hpLabel;
     private Label amountLabel;
+    private Rectangle hpRect;
     private Rectangle amountRect;
 
     MapTile( final String aName ) throws FileNotFoundException {

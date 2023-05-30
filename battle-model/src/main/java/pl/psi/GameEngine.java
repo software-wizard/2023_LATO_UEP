@@ -98,7 +98,9 @@ public class GameEngine {
         if (canAttackFromDistance) {
             return board.getMapObject(point).isPresent() && distance <= 14 && distance > 0
                     //&& !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
-                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get()) && board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp() && turnQueue.getCurrentMapObject().canHeal();
+                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
+                    //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
+                    && turnQueue.getCurrentMapObject().canHeal();
         } else {
             return board.getMapObject(point).isPresent() && distance < 2 && distance > 0 && board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp() && turnQueue.getCurrentMapObject().canHeal();
         }
