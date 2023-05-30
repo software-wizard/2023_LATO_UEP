@@ -21,12 +21,8 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Setter
     private int amount;
     private int currentHp;
-    @Setter
-    @Getter
-    private Hero hero;
 
-    WarMachine(){
-
+    public WarMachine() {
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
@@ -40,7 +36,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         HPcalculator = aHPcalculator;
     }
 
-//    WarMachine(Hero aHero){
+    //    WarMachine(Hero aHero){
 //        this.hero = aHero;
 //    }
     public void attack(final MapObjectIf aDefender) throws Exception {
@@ -54,11 +50,45 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         if (isAlive()) {
             final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
             ally.setCurrentHp(hp);
-            if ((ally.getCurrentHp() > ally.getMaxHp())){
+            if ((ally.getCurrentHp() > ally.getMaxHp())) {
                 ally.setCurrentHp(ally.getMaxHp());
             }
         }
     }
+
+//    public boolean canHeal() {
+//        return false;
+//    }
+//
+//    public boolean canAttack() {
+//        return true;
+//    }
+
+    public boolean canHeal() {
+        boolean canHeal = stats.getName().equals("First Aid Tent");
+        return canHeal;
+    }
+    public boolean canAttack() {
+        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
+    }
+
+    public boolean hasAssociatedSkill(int skill) {
+        if (skill > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private int heroArtillerySkill = 1; //Ballista
+    private int heroBallisticSkills = 0; //Catapult
+    private int heroFirstAidSkill = 0; //First Aid Tent;
+
+
+    public boolean isControllable() {
+        return true;
+    }
+
 
     public boolean isAlive() {
         return getAmount() > 0;
@@ -103,7 +133,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     public boolean canHeal() {
         return stats.canHeal();
     }
-
+  
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -132,7 +162,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return stats.getName();
     }
 
-    public int getHexSize() {return stats.getHexSize();}
+    public int getHexSize() {
+        return stats.getHexSize();
+    }
 
     public int getShotRange() {
         return stats.getShotRange();
@@ -168,10 +200,12 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
             return this;
         }
 
-        public WarMachine build() { return new WarMachine(statistic,
-                calculator,
-                HPcalculator,
-                amount); }
+        public WarMachine build() {
+            return new WarMachine(statistic,
+                    calculator,
+                    HPcalculator,
+                    amount);
+        }
     }
 
     @Override

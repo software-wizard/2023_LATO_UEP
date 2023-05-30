@@ -1,12 +1,17 @@
 package pl.psi;
 
 import com.google.common.base.Preconditions;
+import lombok.Getter;
+import pl.psi.creatures.Creature;
+import pl.psi.warmachines.WarMachine;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Stream;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -17,11 +22,12 @@ public class GameEngine {
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final TurnQueue turnQueue;
+ 
     private final List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
     private final List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
-
-    protected Hero hero1;
-    protected Hero hero2;
+  
+    public Hero hero1;
+    public Hero hero2;
 
     public GameEngine(final Hero aHero1, final Hero aHero2) {
         hero1 = aHero1;
@@ -33,17 +39,19 @@ public class GameEngine {
         mapObjectIf2.addAll(aHero2.getCreatures());
         mapObjectIf2.addAll(aHero2.getWarMachines());
 
-        setHeroesForLists();
+        hero1.setMapObjectIfs(mapObjectIf1);
+        hero2.setMapObjectIfs(mapObjectIf2);
 
         turnQueue = new TurnQueue(mapObjectIf1, mapObjectIf2);
         board = new Board(mapObjectIf1, mapObjectIf2);
     }
 
-    public void attack(final Point point) {
+  public void attack(final Point point) {
         board.getMapObject(point)
                 .ifPresent(defender -> {
                     try {
                         Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof AttackerIF, "Current map object is not an attacker");
+                        //Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack() == true, "Current map object is not an attacker");
                         ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
                         checkIfAlive(defender);
                     } catch (Exception e) {
@@ -58,6 +66,7 @@ public class GameEngine {
                 .ifPresent(allyUnit -> {
                     try {
                         Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof HealerIF, "Current map object is not a healer");
+                        //Preconditions.checkArgument(turnQueue.getCurrentMapObject().canHeal() == true, "Current map object is not an healer");
                         ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
                         checkIfAlive(allyUnit);
                     } catch (Exception e) {
@@ -66,14 +75,6 @@ public class GameEngine {
                 });
         pass();
     }
-
-//    public void performAction(final Point point){
-//        if()){
-//            heal(point);
-//        }else {
-//            attack(point);
-//        }
-//    }
 
     private void checkIfAlive(MapObjectIf defender) {
         if (!(turnQueue.getCurrentMapObject().checkIfAlive(defender))) {
@@ -106,19 +107,14 @@ public class GameEngine {
 
     public boolean canAttack(final Point point) {
         if (turnQueue.getCurrentMapObject().canAttack()) {
-            double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                    .distance(point);
-
-//            Can attack from distance?
-            boolean canAttackFromDistance;
-            Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof AttackerIF, "Current map object is not an attacker");
-            canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
+            double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
+            boolean canAttackFromDistance = ((AttackerIF) turnQueue.getCurrentMapObject()).canAttackFromDistance();
 
             if (canAttackFromDistance) {
                 return board.getMapObject(point)
                         .isPresent()
                         && distance <= 14 && distance > 0
-                        && isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+                        && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
             } else {
                 return board.getMapObject(point)
                         .isPresent()
@@ -131,12 +127,11 @@ public class GameEngine {
 
     public boolean canHeal(final Point point) {
         if (turnQueue.getCurrentMapObject().canHeal()) {
-            double distance = board.getPosition(turnQueue.getCurrentMapObject())
-                    .distance(point);
+            double distance = board.getPosition(turnQueue.getCurrentMapObject()).distance(point);
             return board.getMapObject(point)
                     .isPresent()
                     && distance <= 14 && distance > 0
-                    && !isEnemyUnit(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
         } else {
             return false;
         }
@@ -146,21 +141,6 @@ public class GameEngine {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
 
-    public boolean isEnemyUnit(MapObjectIf mapObject1, MapObjectIf mapObject2) {
-//        System.out.println("MO1 hero: " + mapObject1.getHero());
-//        System.out.println("MO2 hero: " + mapObject2.getHero());
-//        System.out.println(mapObject1.getHero() == mapObject2.getHero());
-//        System.out.println("--------------------------------------------");
-        return mapObject1.getHero() != mapObject2.getHero();
-    }
-
-    public void setHeroesForLists() {
-        for (MapObjectIf mapObjectIf : mapObjectIf1) {
-            mapObjectIf.setHero(hero1);
-        }
-        for (MapObjectIf mapObjectIf : mapObjectIf2) {
-            mapObjectIf.setHero(hero2);
-        }
     }
 
     public boolean canPerformAction() {

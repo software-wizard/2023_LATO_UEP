@@ -41,6 +41,7 @@ public class Start extends Application
             primaryStage.setScene( scene );
             primaryStage.setX( 5 );
             primaryStage.setY( 5 );
+            primaryStage.setFullScreen(true);
             primaryStage.show();
         }
         catch( final IOException aE )
