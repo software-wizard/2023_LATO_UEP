@@ -7,8 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Affine;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -16,8 +16,8 @@ class MapTile extends StackPane
 {
     private final Rectangle rect;
     private final Label label;
-    private Label hpLabel;
-    private Rectangle hpRect;
+    private Label amountLabel;
+    private Rectangle amountRect;
 
     MapTile( final String aName ) throws FileNotFoundException {
         rect = new Rectangle( 60, 60 );
@@ -54,6 +54,23 @@ class MapTile extends StackPane
         imageView.setFitWidth(rect.getWidth());
         label.setGraphic(imageView);
     }
+    public void setMirrorGraphic(String mapObjectName) throws FileNotFoundException {
+        Image image = loadImage(mapObjectName);
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(rect.getHeight());
+        imageView.setFitWidth(rect.getWidth());
+
+        Affine mirrorTransform = new Affine();
+        mirrorTransform.appendScale(-1, 1); //OX symmetry
+        mirrorTransform.appendTranslation(-rect.getWidth(), 0);
+
+        ImageView mirrorImageView = new ImageView(image);
+        mirrorImageView.setFitHeight(rect.getHeight());
+        mirrorImageView.setFitWidth(rect.getWidth());
+        mirrorImageView.getTransforms().add(mirrorTransform);
+
+        label.setGraphic(mirrorImageView);
+    }
 
     private Image loadImage(String mapObjectName) throws FileNotFoundException {
         FileInputStream inputStream = new FileInputStream("battle-gui/src/main/resources/MapObjects/" + mapObjectName + ".png");
@@ -78,5 +95,25 @@ class MapTile extends StackPane
 
         String hpText = Integer.toString(mapObjectHp);
         hpLabel.setText(hpText);
+    }
+
+    public void setAmountLabel(Integer mapObjectAmount){
+        amountLabel = new Label();
+        amountLabel.setTextFill(Color.WHITE);
+        amountLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 8px;");
+        amountLabel.setAlignment(Pos.TOP_CENTER);
+        amountLabel.setPrefWidth(30);
+        amountLabel.setPrefHeight(10);
+
+        amountRect = new Rectangle(30, 10);
+        amountRect.setFill(Color.LIGHTSEAGREEN);
+        amountRect.setOpacity(0.8);
+
+        StackPane.setAlignment(amountRect, Pos.TOP_RIGHT);
+        StackPane.setAlignment(amountLabel, Pos.TOP_RIGHT);
+        getChildren().addAll(amountRect, amountLabel);
+
+        String amountText = Integer.toString(mapObjectAmount);
+        amountLabel.setText(amountText);
     }
 }

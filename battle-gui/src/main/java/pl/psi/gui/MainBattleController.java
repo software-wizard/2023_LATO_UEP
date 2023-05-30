@@ -15,7 +15,10 @@ import javafx.scene.paint.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class MainBattleController implements PropertyChangeListener {
     private final GameEngine gameEngine;
@@ -41,36 +44,37 @@ public class MainBattleController implements PropertyChangeListener {
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
-
-
                 List<Point> points = new ArrayList<Point>();
                 points.add(currentPoint);
-
-//                for (Point point : points) {
-//                    System.out.println(point);
-//                }
-                Point randomPoint = getRandomPoint(points);
-
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
 
-                gameObject.ifPresent((c) -> {
-                    mapTile.setName(c.toString());
-                    if (c.getHero().equals(gameEngine.getHero1())) {
-                        mapTile.setBackground(Color.rgb(255, 195, 18));
-                    } else if (c.getHero().equals(gameEngine.getHero2())) {
-                        mapTile.setBackground(Color.rgb(150, 203, 196));
-                    }
-                });
-
                 gameObject.ifPresent((mapObject) -> {
                     try {
-                        mapTile.setGraphic(mapObject.getName());
-                        mapTile.setHpLabel(mapObject.getCurrentHp());
+                        if(gameEngine.hero1.getMapObjectIfs().contains(mapObject)){
+                            mapTile.setBackground(Color.rgb(255, 195, 18));
+                            mapTile.setGraphic(mapObject.getName());
+                            mapTile.setHpLabel(mapObject.getCurrentHp());
+                            mapTile.setAmountLabel(mapObject.getAmount());
+                        } else {
+                            mapTile.setBackground(Color.rgb(150, 203, 196));
+                            mapTile.setMirrorGraphic(mapObject.getName());
+                            mapTile.setHpLabel(mapObject.getCurrentHp());
+                            mapTile.setAmountLabel(mapObject.getAmount());
+                        }
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                 });
+
+//                gameObject.ifPresent((mapObject) -> {
+//                    try {
+//                        mapTile.setMirrorGraphic(mapObject.getName());
+//                        mapTile.setHpLabel(mapObject.getCurrentHp());
+//                    } catch (FileNotFoundException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                });
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
@@ -81,20 +85,21 @@ public class MainBattleController implements PropertyChangeListener {
                         gameEngine.move(currentPoint);
                     });
                 }
+
                 if (gameEngine.canAttack(currentPoint)) {
-                    mapTile.setBorderColor(Color.INDIANRED);
+                    mapTile.setBorderColor(Color.RED);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        //gameEngine.performAction(currentPoint);
                         gameEngine.attack(currentPoint);
                     });
                 }
+
                 if (gameEngine.canHeal(currentPoint)) {
-                    mapTile.setBorderColor(Color.INDIANRED);
+                    mapTile.setBorderColor(Color.BLUEVIOLET);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        //gameEngine.performAction(currentPoint);
                         gameEngine.heal(currentPoint);
                     });
                 }
+
                 gridMap.add(mapTile, x, y);
             }
         }

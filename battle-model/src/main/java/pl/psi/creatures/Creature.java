@@ -134,6 +134,10 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return false;
     }
 
+    public boolean canHeal() {
+        return false;
+    }
+
     public boolean canAttack() {
         return true;
     }

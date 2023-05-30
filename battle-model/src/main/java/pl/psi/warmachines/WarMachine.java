@@ -21,9 +21,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Setter
     private int amount;
     private int currentHp;
-    @Setter
-    @Getter
-    private Hero hero;
 
     public WarMachine() {
     }
@@ -59,10 +56,18 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         }
     }
 
-    public boolean canHeal() {
-        return stats.getName().equals("First Aid Tent");
-    }
+//    public boolean canHeal() {
+//        return false;
+//    }
+//
+//    public boolean canAttack() {
+//        return true;
+//    }
 
+    public boolean canHeal() {
+        boolean canHeal = stats.getName().equals("First Aid Tent");
+        return canHeal;
+    }
     public boolean canAttack() {
         return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
     }
