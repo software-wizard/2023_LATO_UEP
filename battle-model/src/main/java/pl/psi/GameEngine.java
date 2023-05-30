@@ -162,4 +162,8 @@ public class GameEngine {
             mapObjectIf.setHero(hero2);
         }
     }
+
+    public boolean canPerformAction() {
+        return turnQueue.getCurrentMapObject() instanceof ActionPerformerIf;
+    }
 }

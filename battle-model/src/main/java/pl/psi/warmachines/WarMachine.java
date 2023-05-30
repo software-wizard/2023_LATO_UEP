@@ -94,6 +94,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return true;
     }
 
+    @Override
     public boolean canAttack() {
         return stats.canAttack();
     }

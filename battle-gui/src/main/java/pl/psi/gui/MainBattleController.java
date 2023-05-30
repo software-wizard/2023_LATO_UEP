@@ -66,7 +66,6 @@ public class MainBattleController implements PropertyChangeListener
 
                 if( gameEngine.isCurrentMapObject( currentPoint ) )
                 {
-                    //mapTile.setBackground( Color.GREENYELLOW );
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }
                 if( gameEngine.canMove( currentPoint ) )
@@ -76,23 +75,19 @@ public class MainBattleController implements PropertyChangeListener
                         gameEngine.move( currentPoint );
                     } );
                 }
-                if( gameEngine.canAttack( currentPoint ) )
-                {
-                    mapTile.setBorderColor( Color.INDIANRED );
-                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-                        //gameEngine.performAction(currentPoint);
-                        gameEngine.attack( currentPoint );
-                    } );
-                }
-                if( gameEngine.canHeal( currentPoint ) )
-                {
-                    //mapTile.setBackground( Color.INDIANRED );
-                    mapTile.setBorderColor( Color.INDIANRED );
-                    mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
-                        //gameEngine.performAction(currentPoint);
-                        gameEngine.heal( currentPoint );
-                        //gameEngine.heal(currentPoint);
-                    } );
+
+                if(gameEngine.canPerformAction()){
+                    if (gameEngine.canHeal(currentPoint)) {
+                        mapTile.setBorderColor(Color.INDIANRED);
+                        mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.heal(currentPoint);
+                        });
+                    } if (gameEngine.canAttack(currentPoint)) {
+                        mapTile.setBorderColor(Color.INDIANRED);
+                        mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.attack(currentPoint);
+                        });
+                    }
                 }
                 gridMap.add( mapTile, x, y );
             }
