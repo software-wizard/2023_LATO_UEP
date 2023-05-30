@@ -4,10 +4,10 @@ public class EconomyCreature
 {
 
     private final CreatureStatistic stats;
-    private final int amount;
+    private int amount;
     private final int goldCost;
 
-    EconomyCreature( final CreatureStatistic aStats, final int aAmount, final int aGoldCost )
+    public EconomyCreature( final CreatureStatistic aStats, int aAmount, final int aGoldCost )
     {
         stats = aStats;
         amount = aAmount;
@@ -37,5 +37,9 @@ public class EconomyCreature
     public int getTier()
     {
         return stats.getTier();
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

@@ -3,6 +3,7 @@ package pl.psi.creatures;
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.Test;
 import pl.psi.TurnQueue;
+import pl.psi.spells.Spell;
 
 import java.util.List;
 
@@ -176,5 +177,19 @@ public class CreatureTest {
         turnQueue.next();
         turnQueue.next();
         assertThat(selfHealAfterEndOfTurnCreature.getCurrentHp()).isEqualTo(100);
+    }
+
+    @Test
+    void creatureShouldTakeSpellDamage() {
+        final Creature defender = new Creature.Builder().statistic(CreatureStats.builder()
+                    .maxHp(100)
+                    .build())
+                .build();
+        final Spell spell = new Spell.SpellBuilder()
+                .damage(10, 20)
+                .build();
+
+        defender.applySpellDamage(spell);
+        assertThat(defender.getCurrentHp()).isEqualTo(70);
     }
 }
