@@ -3,7 +3,7 @@ package pl.psi;
 import java.util.List;
 import java.util.Optional;
 
-import WarMachines.WarMachineStatistic;
+import pl.psi.WarMachines.WarMachineStatistic;
 import org.junit.jupiter.api.Test;
 
 
@@ -113,5 +113,13 @@ public class GameEngineTest
         assertTrue(gameEngine.canHeal(new Point(3,5)));
         assertFalse(gameEngine.canHeal(new Point(11,1)));
         assertFalse(gameEngine.canHeal(new Point(11,3)));
+    }
+
+    @Test
+    void canPerformAction() {
+        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        GameEngine gameEngine = new GameEngine(new Hero(List.of(), List.of(ballista)),
+                new Hero(List.of(), List.of()));
+        assertTrue(gameEngine.canPerformAction());
     }
 }

@@ -21,5 +21,9 @@ public interface MapObjectIf extends PropertyChangeListener {
     Hero getHero();
 
     void setHero(Hero hero);
+
+    boolean canAttack();
+
+    boolean canHeal();
 }
 
