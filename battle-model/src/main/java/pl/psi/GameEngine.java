@@ -2,9 +2,11 @@ package pl.psi;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.List;
 import java.util.Optional;
 
 import pl.psi.creatures.Creature;
+import pl.psi.spells.Spell;
 
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
@@ -15,8 +17,10 @@ public class GameEngine {
     private final TurnQueue turnQueue;
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
+    private final Hero hero1;
 
     public  GameEngine(final Hero aHero1, final Hero aHero2) {
+        hero1 = aHero1;
         turnQueue = new TurnQueue(aHero1.getCreatures(), aHero2.getCreatures());
         board = new Board(aHero1.getCreatures(), aHero2.getCreatures());
     }
@@ -26,6 +30,10 @@ public class GameEngine {
                 .ifPresent(defender -> turnQueue.getCurrentCreature()
                         .attack(defender));
         pass();
+    }
+
+    public List<Spell> getSpells(){
+        return hero1.getSpellBook().getSpells();
     }
 
     public boolean canMove(final Point aPoint) {

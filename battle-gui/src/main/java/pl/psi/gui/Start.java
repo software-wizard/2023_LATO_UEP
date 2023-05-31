@@ -49,6 +49,7 @@ public class Start extends Application
     private Hero createP2()
     {
         final Hero ret = new Hero( List.of( new NecropolisFactory().create( true, 2, 5 ) ) );
+        ret.addSpell(new Spell(10,10,10));
         return ret;
     }
 

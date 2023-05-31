@@ -93,6 +93,8 @@ public class MainBattleController implements PropertyChangeListener
                     Stage stage = new Stage();
                     stage.setTitle("Spell Book");
                     stage.setScene(new Scene(root, 250, 450));
+
+                    gameEngine.getSpells().forEach();
                     stage.show();
                 }catch (final IOException aE){
                     aE.printStackTrace();

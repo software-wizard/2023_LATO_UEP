@@ -14,7 +14,8 @@ public class Hero
 {
     @Getter
     private final List< Creature > creatures;
-
+@Getter
+    private final SpellBook spellBook;
     public Hero( final List< Creature > aCreatures )
     {
         creatures = aCreatures;
