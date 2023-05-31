@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import pl.psi.WarMachines.WarMachineStatistic;
 import pl.psi.WarMachines.WarMachineStats;
 import org.junit.jupiter.api.Test;

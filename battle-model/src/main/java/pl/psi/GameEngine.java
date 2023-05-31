@@ -43,7 +43,7 @@ public class GameEngine {
         board.getMapObject(point)
                 .ifPresent(defender -> {
                     try {
-                        Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof AttackerIF, "Current map object is not an attacker");
+                        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack(), "Current map object is not an attacker");
                         ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
                         checkIfAlive(defender);
                     } catch (Exception e) {
@@ -57,7 +57,7 @@ public class GameEngine {
         board.getMapObject(point)
                 .ifPresent(allyUnit -> {
                     try {
-                        Preconditions.checkArgument(turnQueue.getCurrentMapObject() instanceof HealerIF, "Current map object is not a healer");
+                        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canHeal(), "Current map object is not a healer");
                         ((HealerIF) turnQueue.getCurrentMapObject()).heal(allyUnit);
                         checkIfAlive(allyUnit);
                     } catch (Exception e) {
