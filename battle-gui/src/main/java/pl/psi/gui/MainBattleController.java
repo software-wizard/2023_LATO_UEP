@@ -67,15 +67,6 @@ public class MainBattleController implements PropertyChangeListener {
                     }
                 });
 
-//                gameObject.ifPresent((mapObject) -> {
-//                    try {
-//                        mapTile.setMirrorGraphic(mapObject.getName());
-//                        mapTile.setHpLabel(mapObject.getCurrentHp());
-//                    } catch (FileNotFoundException e) {
-//                        throw new RuntimeException(e);
-//                    }
-//                });
-
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }

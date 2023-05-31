@@ -64,6 +64,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
 //        return true;
 //    }
 
+
+    // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
+    // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
     public boolean canHeal() {
         boolean canHeal = stats.getName().equals("First Aid Tent");
         return canHeal;
