@@ -89,6 +89,18 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
+
+//        todo sth is wrong with dealing damage, amount subtraction isn't working properly
+
+//        int hpToSubtract = aDamage % aDefender.getMaxHp();
+////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
+//
+//        int hp = aDefender.getCurrentHp() - hpToSubtract;
+//        //            System.out.println("HP: " + hp);
+//        //            System.out.println("War Machine is dead");
+//        //            aDefender.setAmount(aDefender.getAmount() - 1);
+//        aDefender.setCurrentHp(Math.max(hp, 0));
+////        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
     public int getMaxHp() {
