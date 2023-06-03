@@ -1,5 +1,4 @@
 package pl.psi.WarMachines;
-
 import org.junit.jupiter.api.Test;
 import pl.psi.warmachines.WarMachine;
 import static org.junit.jupiter.api.Assertions.*;

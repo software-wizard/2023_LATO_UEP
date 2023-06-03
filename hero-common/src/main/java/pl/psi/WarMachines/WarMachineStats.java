@@ -17,7 +17,6 @@ public class WarMachineStats implements WarMachineStatisticIf{
     private final String description;
     private final boolean isUpgraded;
     private final int hexSize;
-
     @Override
     public boolean canAttack() {
         return false;
