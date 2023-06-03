@@ -41,11 +41,10 @@ public class MainBattleController implements PropertyChangeListener {
         gridMap.getChildren()
                 .clear();
         gridMap.setAlignment(Pos.CENTER);
+
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
-                List<Point> points = new ArrayList<Point>();
-                points.add(currentPoint);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
 
@@ -77,18 +76,20 @@ public class MainBattleController implements PropertyChangeListener {
                     });
                 }
 
-                if (gameEngine.canAttack(currentPoint)) {
-                    mapTile.setBorderColor(Color.RED);
-                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        gameEngine.attack(currentPoint);
-                    });
-                }
+                if(gameEngine.canPerformAction()) {
+                    if (gameEngine.canAttack(currentPoint)) {
+                        mapTile.setBorderColor(Color.RED);
+                        mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.attack(currentPoint);
+                        });
+                    }
 
-                if (gameEngine.canHeal(currentPoint)) {
-                    mapTile.setBorderColor(Color.BLUEVIOLET);
-                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                        gameEngine.heal(currentPoint);
-                    });
+                    if (gameEngine.canHeal(currentPoint)) {
+                        mapTile.setBorderColor(Color.BLUEVIOLET);
+                        mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                            gameEngine.heal(currentPoint);
+                        });
+                    }
                 }
 
                 gridMap.add(mapTile, x, y);

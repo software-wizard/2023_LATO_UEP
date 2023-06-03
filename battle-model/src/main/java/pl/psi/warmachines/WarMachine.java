@@ -22,7 +22,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     private int amount;
     private int currentHp;
 
-    public WarMachine() {
+    WarMachine() {
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
@@ -36,9 +36,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         HPcalculator = aHPcalculator;
     }
 
-    //    WarMachine(Hero aHero){
-//        this.hero = aHero;
-//    }
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
@@ -56,6 +53,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         }
     }
 
+    //todo uncomment when tent is ready
 //    public boolean canHeal() {
 //        return false;
 //    }
@@ -67,31 +65,13 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
 
     // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
     // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
-    public boolean canHeal() {
-        boolean canHeal = stats.getName().equals("First Aid Tent");
-        return canHeal;
-    }
-    public boolean canAttack() {
-        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
-    }
-
-    public boolean hasAssociatedSkill(int skill) {
-        if (skill > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private int heroArtillerySkill = 1; //Ballista
-    private int heroBallisticSkills = 0; //Catapult
-    private int heroFirstAidSkill = 0; //First Aid Tent;
-
-
-    public boolean isControllable() {
-        return true;
-    }
-
+//    public boolean canHeal() {
+//        boolean canHeal = stats.getName().equals("First Aid Tent");
+//        return canHeal;
+//    }
+//    public boolean canAttack() {
+//        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
+//    }
 
     public boolean isAlive() {
         return getAmount() > 0;
@@ -129,6 +109,16 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return true;
     }
 
+    @Override
+    public boolean canAttack() {
+        return stats.canAttack();
+    }
+
+    @Override
+    public boolean canHeal() {
+        return stats.canHeal();
+    }
+
     Range<Integer> getDamage() {
         return stats.getDamage();
     }
@@ -156,9 +146,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return stats.getName();
     }
 
-    public int getHexSize() {
-        return stats.getHexSize();
-    }
+    public int getHexSize() {return stats.getHexSize();}
 
     public int getShotRange() {
         return stats.getShotRange();

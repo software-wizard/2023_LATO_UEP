@@ -41,7 +41,6 @@ public class Start extends Application
             primaryStage.setScene( scene );
             primaryStage.setX( 5 );
             primaryStage.setY( 5 );
-            primaryStage.setFullScreen(true);
             primaryStage.show();
         }
         catch( final IOException aE )
@@ -52,7 +51,7 @@ public class Start extends Application
 
     private Hero createP2()
     {
-        Creature creature1 = new NecropolisFactory().create( false, 5, 5);
+        Creature creature1 = new NecropolisFactory().create( false, 1, 2);
         WarMachine warMachine1 = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
 
         final Hero ret = new Hero(List.of(creature1), List.of(warMachine1));

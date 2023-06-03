@@ -42,10 +42,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         calculator = aCalculator;
     }
 
-//    Creature(Hero aHero){
-//        this.hero = aHero;
-//    }
-
     public void attack(final Creature aDefender) {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
@@ -124,17 +120,27 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return stats.getMoveRange();
     }
 
+//    public boolean canAttack() {
+//        return true;
+//    }
+//
+//    public boolean canHeal() {
+//        return false;
+//    }
+
+    @Override
+    public boolean canAttack() {
+        return stats.canAttack();
+    }
+
+    @Override
+    public boolean canHeal() {
+        return stats.canHeal();
+    }
+
     @Override
     public boolean canAttackFromDistance() {
         return false;
-    }
-
-    public boolean canHeal() {
-        return false;
-    }
-
-    public boolean canAttack() {
-        return true;
     }
 
     @Override
