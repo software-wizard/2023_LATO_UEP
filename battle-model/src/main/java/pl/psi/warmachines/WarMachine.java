@@ -1,12 +1,11 @@
 package pl.psi.warmachines;
 
-import WarMachines.WarMachineStatisticIf;
+import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
 import pl.psi.AttackerIF;
 import pl.psi.HealerIF;
-import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
 

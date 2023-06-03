@@ -1,7 +1,7 @@
 //package pl.psi;
 //
 //import pl.psi.warmachines.WarMachine;
-//import WarMachines.WarMachineStats;
+//import pl.psi.WarMachines.WarMachines.WarMachineStats;
 //import org.junit.jupiter.api.Test;
 //import pl.psi.creatures.Creature;
 //import pl.psi.creatures.CreatureStats;

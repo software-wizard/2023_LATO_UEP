@@ -1,9 +1,6 @@
 package pl.psi.warmachines;
 
 import WarMachines.WarMachineStatistic;
-import WarMachines.WarMachineStatisticIf;
-import pl.psi.MapObjectIf;
-import pl.psi.creatures.Creature;
 
 public class FirstAidTent extends WarMachine{
     @Override

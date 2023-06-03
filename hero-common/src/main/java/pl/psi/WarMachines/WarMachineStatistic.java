@@ -1,11 +1,9 @@
-package WarMachines;
+package pl.psi.WarMachines;
 
-import WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 
 import lombok.Getter;
 import pl.psi.BehaviourDeterminatorIf;
-
 @Getter
 public enum WarMachineStatistic implements WarMachineStatisticIf
 {
