@@ -1,7 +1,5 @@
 package pl.psi.warmachines;
 
-import WarMachines.WarMachineStatistic;
-
 public class FirstAidTent extends WarMachine{
     @Override
     public boolean canHeal() {

@@ -1,7 +1,7 @@
 package pl.psi;
 
 import pl.psi.warmachines.WarMachine;
-import WarMachines.WarMachineStatistic;
+import pl.psi.WarMachines.WarMachineStatistic;
 import pl.psi.WarMachines.WarMachineStats;
 import org.junit.jupiter.api.Test;
 
