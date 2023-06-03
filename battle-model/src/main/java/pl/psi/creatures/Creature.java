@@ -31,11 +31,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
-
-    @Setter
-    @Getter
-    private Hero hero;
-
     Creature() {
     }
 
@@ -46,10 +41,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         currentHp = stats.getMaxHp();
         calculator = aCalculator;
     }
-
-//    Creature(Hero aHero){
-//        this.hero = aHero;
-//    }
 
     public void attack(final Creature aDefender) {
         if (isAlive()) {
@@ -73,8 +64,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
             aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
+        } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
@@ -84,7 +74,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return stats.getMaxHp();
     }
 
-     public void setCurrentHp(final int aCurrentHp) {
+    public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -129,6 +119,14 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     public int getMoveRange() {
         return stats.getMoveRange();
     }
+
+//    public boolean canAttack() {
+//        return true;
+//    }
+//
+//    public boolean canHeal() {
+//        return false;
+//    }
 
     @Override
     public boolean canAttack() {
