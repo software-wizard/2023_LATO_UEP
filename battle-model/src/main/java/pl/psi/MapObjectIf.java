@@ -2,6 +2,9 @@ package pl.psi;
 
 //import pl.psi.creatures.Creature;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.beans.PropertyChangeListener;
 
 public interface MapObjectIf extends PropertyChangeListener {
@@ -18,12 +21,10 @@ public interface MapObjectIf extends PropertyChangeListener {
 
     int getMoveRange();
 
-    Hero getHero();
-
-    void setHero(Hero hero);
-
-    boolean canAttack();
+    int getAmount();
+    void setAmount(int a);
 
     boolean canHeal();
+    boolean canAttack();
 }
 

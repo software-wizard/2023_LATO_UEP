@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.psi.AttackerIF;
 import pl.psi.HealerIF;
-import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 //import pl.psi.TurnQueue;
 
@@ -21,12 +20,8 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Setter
     private int amount;
     private int currentHp;
-    @Setter
-    @Getter
-    private Hero hero;
 
-    WarMachine(){
-
+    WarMachine() {
     }
 
     WarMachine(final WarMachineStatisticIf aStats,
@@ -40,9 +35,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         HPcalculator = aHPcalculator;
     }
 
-//    WarMachine(Hero aHero){
-//        this.hero = aHero;
-//    }
     public void attack(final MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
@@ -54,26 +46,60 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         if (isAlive()) {
             final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
             ally.setCurrentHp(hp);
-            if ((ally.getCurrentHp() > ally.getMaxHp())){
+            if ((ally.getCurrentHp() > ally.getMaxHp())) {
                 ally.setCurrentHp(ally.getMaxHp());
             }
         }
     }
+
+    //todo uncomment when tent is ready
+//    public boolean canHeal() {
+//        return false;
+//    }
+//
+//    public boolean canAttack() {
+//        return true;
+//    }
+
+
+    // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
+    // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
+//    public boolean canHeal() {
+//        boolean canHeal = stats.getName().equals("First Aid Tent");
+//        return canHeal;
+//    }
+//    public boolean canAttack() {
+//        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
+//    }
 
     public boolean isAlive() {
         return getAmount() > 0;
     }
 
     private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
-        int hpToSubtract = aDamage % aDefender.getMaxHp();
-//        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
+        int hpToSubstract = aDamage % aDefender.getMaxHp();
+        int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
-        int hp = aDefender.getCurrentHp() - hpToSubtract;
-        //            System.out.println("HP: " + hp);
-        //            System.out.println("War Machine is dead");
-        //            aDefender.setAmount(aDefender.getAmount() - 1);
-        aDefender.setCurrentHp(Math.max(hp, 0));
-//        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
+        int hp = aDefender.getCurrentHp() - hpToSubstract;
+        if (hp <= 0) {
+            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setAmount(aDefender.getAmount() - 1);
+        } else {
+            aDefender.setCurrentHp(hp);
+        }
+        aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
+
+//        todo sth is wrong with dealing damage, amount subtraction isn't working properly
+
+//        int hpToSubtract = aDamage % aDefender.getMaxHp();
+////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
+//
+//        int hp = aDefender.getCurrentHp() - hpToSubtract;
+//        //            System.out.println("HP: " + hp);
+//        //            System.out.println("War Machine is dead");
+//        //            aDefender.setAmount(aDefender.getAmount() - 1);
+//        aDefender.setCurrentHp(Math.max(hp, 0));
+////        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
     public int getMaxHp() {
@@ -116,7 +142,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return stats.getArmor();
     }
 
-
 //    @Override
 //    public void propertyChange(final PropertyChangeEvent evt) {
 //        if (TurnQueue.END_OF_TURN.equals(evt.getPropertyName())) {
@@ -144,7 +169,8 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     }
 
     public boolean checkIfAlive(MapObjectIf defender) {
-        return defender.getCurrentHp() > 0;
+        return defender.getAmount() > 0;
+        //return defender.getCurrentHp() > 0;
     }
 
     public static class Builder {
@@ -168,10 +194,12 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
             return this;
         }
 
-        public WarMachine build() { return new WarMachine(statistic,
-                calculator,
-                HPcalculator,
-                amount); }
+        public WarMachine build() {
+            return new WarMachine(statistic,
+                    calculator,
+                    HPcalculator,
+                    amount);
+        }
     }
 
     @Override

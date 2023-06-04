@@ -4,7 +4,6 @@ import com.google.common.collect.Range;
 
 import lombok.Getter;
 import pl.psi.BehaviourDeterminatorIf;
-
 @Getter
 public enum WarMachineStatistic implements WarMachineStatisticIf
 {
@@ -74,7 +73,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf
     private final String description;
     private final boolean isUpgraded;
     private final BehaviourDeterminatorIf behaviour;
-    
+
     WarMachineStatistic(final String aName, final int aAttack, final int aMaxHp,
                         final int aShotRange, final int aArmor, final Range<Integer> aDamage, final int aTier, final int aHexSize,
                         final String aDescription, final boolean aIsUpgraded, final BehaviourDeterminatorIf aBehaviour )
