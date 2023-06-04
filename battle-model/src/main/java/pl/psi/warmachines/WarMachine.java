@@ -4,16 +4,14 @@ import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
-import pl.psi.AttackerIF;
 import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
-//import pl.psi.TurnQueue;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 @Getter
-public class WarMachine implements PropertyChangeListener, MapObjectIf, AttackerIF, HealerIF {
+public class WarMachine implements PropertyChangeListener, MapObjectIf {
     private WarMachineDamageCalculatorIF calculator;
     private FirstAidTentIf HPcalculator;
     private WarMachineStatisticIf stats;
@@ -35,22 +33,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         HPcalculator = aHPcalculator;
     }
 
-    public void attack(final MapObjectIf aDefender) throws Exception {
-        if (isAlive()) {
-            final int damage = getCalculator().calculateDamage(this, aDefender);
-            applyDamage(aDefender, damage);
-        }
-    }
-
-    public void heal(MapObjectIf ally) throws Exception {
-        if (isAlive()) {
-            final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
-            ally.setCurrentHp(hp);
-            if ((ally.getCurrentHp() > ally.getMaxHp())) {
-                ally.setCurrentHp(ally.getMaxHp());
-            }
-        }
-    }
 
     //todo uncomment when tent is ready
 //    public boolean canHeal() {
@@ -76,7 +58,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return getAmount() > 0;
     }
 
-    private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
+    protected void applyDamage(final MapObjectIf aDefender, final int aDamage) {
         int hpToSubstract = aDamage % aDefender.getMaxHp();
         int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
@@ -113,11 +95,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
     @Override
     public int getMoveRange() {
         return 0;
-    }
-
-    @Override
-    public boolean canAttackFromDistance() {
-        return true;
     }
 
     @Override
