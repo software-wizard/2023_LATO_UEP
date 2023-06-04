@@ -95,10 +95,10 @@ public class GameEngineTest
     @Test
     void canHeal() {
         Creature zombie = new Creature.Builder().statistic(CreatureStatistic.ZOMBIE).build();
-        WarMachine firstAidTent = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).build();
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         Creature skeleton = new Creature.Builder().statistic(CreatureStatistic.SKELETON).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
 
         GameEngine gameEngine = new GameEngine(new Hero(List.of(zombie), List.of(firstAidTent, ballista)),
                 new Hero(List.of(skeleton), List.of(catapult)));
