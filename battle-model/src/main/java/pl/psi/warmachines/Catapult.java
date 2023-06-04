@@ -21,4 +21,9 @@ public class Catapult extends WarMachine implements AttackerIF {
     public boolean canAttackFromDistance() {
         return true;
     }
+
+    @Override
+    public boolean canAttack() {
+        return true;
+    }
 }

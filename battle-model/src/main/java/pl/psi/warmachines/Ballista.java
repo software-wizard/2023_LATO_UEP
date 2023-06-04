@@ -22,4 +22,10 @@ public class Ballista extends WarMachine implements AttackerIF {
     public boolean canAttackFromDistance() {
         return true;
     }
+
+    @Override
+    public boolean canAttack() {
+        return true;
+    }
+
 }

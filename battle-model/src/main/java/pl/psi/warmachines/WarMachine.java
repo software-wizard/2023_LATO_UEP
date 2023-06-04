@@ -98,14 +98,15 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     }
 
     @Override
-    public boolean canAttack() {
-        return stats.canAttack();
+    public boolean canHeal() {
+        return false;
     }
 
     @Override
-    public boolean canHeal() {
-        return stats.canHeal();
+    public boolean canAttack() {
+        return false;
     }
+
 
     Range<Integer> getDamage() {
         return stats.getDamage();

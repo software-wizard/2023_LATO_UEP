@@ -22,6 +22,6 @@ public class WarMachineFactory {
             case FIRST_AID_TENT:
                 return new FirstAidTent(amount);
         }
-        throw new IllegalArgumentException( "Cannot recognize Warmachine by name" );
+        throw new IllegalArgumentException( "Cannot recognize WarMachine by name" );
     }
 }
