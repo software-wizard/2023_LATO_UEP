@@ -118,6 +118,7 @@ public class GameEngine {
             return board.getMapObject(point)
                     .isPresent()
                     && distance < 2 && distance > 0
+                    && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     && turnQueue.getCurrentMapObject().canAttack();
         }
     }
