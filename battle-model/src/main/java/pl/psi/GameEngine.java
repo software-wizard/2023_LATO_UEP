@@ -24,9 +24,9 @@ public class GameEngine {
     private final TurnQueue turnQueue;
     private List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
     private List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
-    @Getter
+
     public Hero hero1;
-    @Getter
+
     public Hero hero2;
 
     public GameEngine(final Hero aHero1, final Hero aHero2) {
@@ -115,6 +115,7 @@ public class GameEngine {
             return board.getMapObject(point)
                     .isPresent()
                     && distance < 2 && distance > 0
+                    && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     && turnQueue.getCurrentMapObject().canAttack();
         }
     }
@@ -133,9 +134,60 @@ public class GameEngine {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
     }
     public boolean canPerformAction(){
-        return true;
+        return turnQueue.getCurrentMapObject() instanceof ActionPerformerIf;
     }
 
+    public MapObjectIf getRandomMapObject(List<MapObjectIf> aMapObjectIfs1, List<MapObjectIf> aMapObjectIfs2, Point point){
+        if(hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())){
+            return hero2.getRandomMapObject(aMapObjectIfs2);
+        }else {
+            return hero1.getRandomMapObject(aMapObjectIfs1);
+        }
+    }
+    public void attackRandomMapObject(){
+        if(turnQueue.getCurrentMapObject().canAttack()){
+
+            MapObjectIf mo1 = hero1.getRandomMapObject(mapObjectIf1);
+            MapObjectIf mo2 = hero1.getRandomMapObject(mapObjectIf2);
+            if(hero1.isEnemy(turnQueue.getCurrentMapObject(), mo1)){
+                try {
+                    ((AttackerIF) turnQueue.getCurrentMapObject()).attack(mo1);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (hero1.isEnemy(turnQueue.getCurrentMapObject(), mo2)) {
+                try {
+                    ((AttackerIF) turnQueue.getCurrentMapObject()).attack(mo2);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
+        pass();
+    }
+    public void healRandomMapObject(){
+        if(turnQueue.getCurrentMapObject().canHeal()){
+
+            MapObjectIf mo1 = hero1.getRandomMapObject(mapObjectIf1);
+            MapObjectIf mo2 = hero1.getRandomMapObject(mapObjectIf2);
+            if(hero1.isEnemy(turnQueue.getCurrentMapObject(), mo1)){
+                try {
+                    ((HealerIF) turnQueue.getCurrentMapObject()).heal(mo1);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            } else if (hero1.isEnemy(turnQueue.getCurrentMapObject(), mo2)) {
+                try {
+                    ((HealerIF) turnQueue.getCurrentMapObject()).heal(mo2);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        }
+        pass();
+    }
 
 
 //todo Another version - check if it's better

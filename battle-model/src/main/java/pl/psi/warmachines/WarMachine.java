@@ -61,9 +61,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
 //        return true;
 //    }
 
-
-    // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
-    // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
 //    public boolean canHeal() {
 //        boolean canHeal = stats.getName().equals("First Aid Tent");
 //        return canHeal;
@@ -82,14 +79,14 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
 
         int hp = aDefender.getCurrentHp() - hpToSubstract;
         if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setCurrentHp(aDefender.getMaxHp() + hp); // - (-) sth gives us +, so hp will be higher than max
             aDefender.setAmount(aDefender.getAmount() - 1);
         } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
 
-//        todo sth is wrong with dealing damage, amount subtraction isn't working properly
+//        todo sth is wrong with dealing damage, amount subtraction isn't working properly, smt currentHp > maxHp
 
 //        int hpToSubtract = aDamage % aDefender.getMaxHp();
 ////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
@@ -130,6 +127,16 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf, Attacker
         return stats.canHeal();
     }
 
+    public boolean canPerformAction(){
+        if((stats.canAttack() == false) && (stats.canHeal() == false)){
+            return false;
+        } else{
+            return true;
+        }
+    }
+    public boolean isControllable(){
+        return true;
+    }
     Range<Integer> getDamage() {
         return stats.getDamage();
     }

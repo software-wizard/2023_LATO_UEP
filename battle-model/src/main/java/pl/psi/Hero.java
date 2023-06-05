@@ -1,6 +1,7 @@
 package pl.psi;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.Setter;
 import pl.psi.warmachines.WarMachine;
@@ -34,5 +35,10 @@ public class Hero
 
     public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
         return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
+    }
+
+    public MapObjectIf getRandomMapObject(List<MapObjectIf> aMapObjectIfs){
+        int i = (int) Math.random() * 10;
+        return aMapObjectIfs.get(i);
     }
 }
