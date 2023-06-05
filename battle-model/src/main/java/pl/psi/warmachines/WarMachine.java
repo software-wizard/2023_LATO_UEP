@@ -105,13 +105,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     }
 
 
-    public boolean canPerformAction(){
-        if((stats.canAttack() == false) && (stats.canHeal() == false)){
-            return false;
-        } else{
-            return true;
-        }
-    }
     public boolean isControllable(){
         return true;
     }
