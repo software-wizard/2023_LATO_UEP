@@ -2,6 +2,7 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import pl.psi.creatures.Creature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Board {
     private List<Point> boardGeneratedListOfPoints = new ArrayList<>();
     private final BiMap<Point, MapObjectIf> map = HashBiMap.create();
 
-    public Board(final List<MapObjectIf> mapObjectIfs1, final List<MapObjectIf> mapObjectIfs2) {
+    public Board(final List<? extends MapObjectIf> mapObjectIfs1, final List<? extends MapObjectIf> mapObjectIfs2) {
         for (int x = 0; x < 15; x++) {
             for (int y = 0; y < 10; y++) {
                 Point point = new Point(x, y);
@@ -27,7 +28,7 @@ public class Board {
         addMapObject(mapObjectIfs2, MAX_WITDH);
     }
 
-    private void addMapObject(final List<MapObjectIf> mapObjectIfs, final int aXPosition) {
+    private void addMapObject(final List<? extends MapObjectIf> mapObjectIfs, final int aXPosition) {
         for (int i = 0; i < mapObjectIfs.size(); i++) {
             map.put(new Point(aXPosition, i * 2 + 1), mapObjectIfs.get(i));
         }
@@ -41,11 +42,15 @@ public class Board {
         return Optional.ofNullable(map.get(aPoint));
     }
 
+    public Optional<Object> getCreature(Point point) {
+        return getMapObject(point).filter(Creature.class::isInstance).map(Creature.class::cast);
+    }
+
     void move(final MapObjectIf mapObjectIf, final Point aPoint) {
         ShortestPathAlgorythm path = new ShortestPathAlgorythm();
         Point startingPoint = getPosition(mapObjectIf);
         Point endPoint = aPoint;
-        List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
+        List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(mapObjectIf)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
                 map.inverse().remove(mapObjectIf);
@@ -70,11 +75,11 @@ public class Board {
             return new Point(0, 0);
         }
     }
-
     //TODO:
     // 1. czy nie ma bloku
     // 2. czy lata (inna logika)
     // 3. czy nie zostało rzucone zaklęcie(sciana ognia np)
+
     public List<Point> availablePointsToGo(MapObjectIf mapObjectIf) {
         List<Point> listOfPoints = new ArrayList<>();
         for (Point point : boardGeneratedListOfPoints) {
