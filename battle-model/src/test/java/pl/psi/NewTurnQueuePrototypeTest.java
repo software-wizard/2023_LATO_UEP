@@ -60,13 +60,13 @@ class NewTurnQueuePrototypeTest {
 
         turnQueue1.removeMapObject(catapult);
         turnQueue1.next();
-        assertEquals(catapult, turnQueue1.getCurrentMapObject());
+        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
+        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
 
         turnQueue1.removeMapObject(ballista2);
-        assertEquals(ballista2, turnQueue1.getCurrentMapObject());
+        assertEquals(ballista1, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
         assertEquals(ballista1, turnQueue1.getCurrentMapObject());

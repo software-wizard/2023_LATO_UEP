@@ -13,6 +13,5 @@ public interface WarMachineStatisticIf {
     String getDescription();
     boolean isUpgraded();
     int getHexSize();
-    boolean canAttack();
-    boolean canHeal();
+
 }

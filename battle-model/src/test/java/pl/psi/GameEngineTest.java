@@ -11,6 +11,7 @@ import pl.psi.creatures.CastleCreatureFactory;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.CreatureStatistic;
 import pl.psi.warmachines.WarMachine;
+import pl.psi.warmachines.WarMachineFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,33 +33,36 @@ public class GameEngineTest
 
     @Test
     void attack() throws Exception {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
         assertEquals(250, ballista.getCurrentHp());
         assertEquals(1000, catapult.getCurrentHp());
-        ballista.attack(catapult);
+        // cast to attacker and attack
+        ((AttackerIF) ballista).attack(catapult);
         assertTrue(catapult.getCurrentHp() < 1000);
     }
 
     @Test
     void heal() throws Exception {
-        WarMachine firstAidTent = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         assertEquals(250, ballista.getCurrentHp());
-        catapult.attack(ballista);
-        catapult.attack(ballista);
+        ((AttackerIF) catapult).attack(ballista);
+        ((AttackerIF) catapult).attack(ballista);
         assertTrue(ballista.getCurrentHp() < 250);
-        firstAidTent.heal(ballista);
-        firstAidTent.heal(ballista);
+        ((HealerIF) firstAidTent).heal(ballista);
+        ((HealerIF) firstAidTent).heal(ballista);
+        ((HealerIF) firstAidTent).heal(ballista);
+        ((HealerIF) firstAidTent).heal(ballista);
         assertEquals(250, ballista.getCurrentHp());
     }
 
     @Test
     void canAttack() {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         Creature skeleton = new Creature.Builder().statistic(CreatureStatistic.SKELETON).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
 
         //currentMapObject will be taken from queue created by this game engine instance
         //currentMapObject will perform attack
@@ -91,10 +95,10 @@ public class GameEngineTest
     @Test
     void canHeal() {
         Creature zombie = new Creature.Builder().statistic(CreatureStatistic.ZOMBIE).build();
-        WarMachine firstAidTent = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).build();
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         Creature skeleton = new Creature.Builder().statistic(CreatureStatistic.SKELETON).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
 
         GameEngine gameEngine = new GameEngine(new Hero(List.of(zombie), List.of(firstAidTent, ballista)),
                 new Hero(List.of(skeleton), List.of(catapult)));
@@ -117,7 +121,7 @@ public class GameEngineTest
 
     @Test
     void canPerformAction() {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         GameEngine gameEngine = new GameEngine(new Hero(List.of(), List.of(ballista)),
                 new Hero(List.of(), List.of()));
         assertTrue(gameEngine.canPerformAction());
