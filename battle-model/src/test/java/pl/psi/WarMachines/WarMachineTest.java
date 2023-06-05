@@ -1,13 +1,47 @@
 package pl.psi.WarMachines;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import pl.psi.AttackerIF;
 import pl.psi.warmachines.WarMachine;
+import pl.psi.warmachines.WarMachineFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WarMachineTest {
+    // Changed all WarMachine.Builder() to WarMachineFactory().create()
 
-//    @Test
+    @Test
+    void shouldLoseHP() throws Exception {
+        WarMachine ammoCart = new WarMachineFactory().create(WarMachineStatistic.AMMO_CART, 1, 1);
+        assertEquals(100, ammoCart.getCurrentHp());
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
+        ((AttackerIF) ballista).attack(ammoCart);
+        assertTrue(ammoCart.getCurrentHp() < 100);
+        System.out.println("Ammo cart hp after first attack: " + ammoCart.getCurrentHp());
+        ((AttackerIF) ballista).attack(ammoCart);
+        System.out.println("Ammo cart hp after second attack: " + ammoCart.getCurrentHp());
+    }
+
+    @Test
+    void getCurrentHp() throws Exception {
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
+        assertEquals(1000, catapult.getCurrentHp());
+        assertEquals(1, catapult.getAmount());
+
+        ((AttackerIF) ballista).attack(catapult);
+        assertTrue(catapult.getCurrentHp() < 1000);
+        assertEquals(1, catapult.getAmount());
+
+        for (int i = 0; i < 7; i++) {
+            ((AttackerIF) ballista).attack(catapult);
+        }
+
+        assertEquals(0, catapult.getAmount());
+    }
+
+    //    @Test
 //    void attackTEST() throws Exception {
 //        int avgDamage = 0;
 //        for (int i = 0; i < 10000; i++) {
@@ -36,32 +70,4 @@ class WarMachineTest {
 //            }
 //        }
 //    }
-
-    @Test
-    void shouldLoseHP() throws Exception {
-        WarMachine ammoCart = new WarMachine.Builder().statistic(WarMachineStatistic.AMMO_CART).amount(1).build();
-        assertEquals(100, ammoCart.getCurrentHp());
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
-        ballista.attack(ammoCart);
-        assertTrue(ammoCart.getCurrentHp() < 100);
-        System.out.println("Ammo cart hp after first attack: " + ammoCart.getCurrentHp());
-        ballista.attack(ammoCart);
-        System.out.println("Ammo cart hp after second attack: " + ammoCart.getCurrentHp());
-    }
-
-    @Test
-    void getCurrentHp() throws Exception {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
-        assertEquals(1000, catapult.getCurrentHp());
-
-        ballista.attack(catapult);
-        assertTrue(catapult.getCurrentHp() < 1000);
-
-        for (int i = 0; i < 1000; i++) {
-            ballista.attack(catapult);
-        }
-
-        assertEquals(0, catapult.getCurrentHp());
-    }
 }

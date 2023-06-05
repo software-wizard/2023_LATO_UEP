@@ -1,14 +1,17 @@
 package pl.psi.WarMachines;
 import org.junit.jupiter.api.Test;
+import pl.psi.AttackerIF;
 import pl.psi.warmachines.WarMachine;
+import pl.psi.warmachines.WarMachineFactory;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AttackAndDefenseDamageCalculatorTest {
-    WarMachine ballistaAttacker = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
-    WarMachine ballistaDefender = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build();
+    WarMachine ballistaAttacker = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
+    WarMachine ballistaDefender = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
 
-    WarMachine catapultAttacker = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
-    WarMachine catapultDefender = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build();
+    WarMachine catapultAttacker = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
+    WarMachine catapultDefender = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
 
     /*
     disclaimer - these tests are for FIXED hero's and defender's statistics
@@ -32,7 +35,7 @@ public class AttackAndDefenseDamageCalculatorTest {
         so the final boundaries are 163.8-245.7
         */
 
-        ballistaAttacker.attack(ballistaDefender);
+        ((AttackerIF) ballistaAttacker).attack(ballistaDefender);
 
         int damageOutput = ballistaDefender.getMaxHp()-ballistaDefender.getCurrentHp();
 
@@ -58,7 +61,7 @@ public class AttackAndDefenseDamageCalculatorTest {
         the dmg output has to be increased by 5% for each point (in this case 12*1.05=12.6)
         so the final dmg outputs are either 0, 12 (1*12.6 rounded) or 25 (2*12,6 rounded)
          */
-        catapultAttacker.attack(catapultDefender);
+        ((AttackerIF) catapultAttacker).attack(catapultDefender);
 
         int damageOutput = catapultDefender.getMaxHp()-catapultDefender.getCurrentHp();
 
@@ -69,7 +72,7 @@ public class AttackAndDefenseDamageCalculatorTest {
     }
     @Test
     void calculateDamageForCatapultAttackLvl3DefendersDefenseLvl1ButWithBallista() throws Exception {
-        catapultAttacker.attack(ballistaDefender);
+        ((AttackerIF) catapultAttacker).attack(ballistaDefender);
 
         int damageOutput = ballistaDefender.getMaxHp()-ballistaDefender.getCurrentHp();
 
@@ -80,7 +83,7 @@ public class AttackAndDefenseDamageCalculatorTest {
     }
     @Test
     void calculateDamageForBallistaAttackLvl3DefendersDefenseLvl0WithCatapult() throws Exception {
-        ballistaAttacker.attack(catapultDefender);
+        ((AttackerIF) ballistaAttacker).attack(catapultDefender);
 
         int damageOutput = catapultDefender.getMaxHp()-catapultDefender.getCurrentHp();
 
