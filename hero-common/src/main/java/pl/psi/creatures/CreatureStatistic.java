@@ -48,7 +48,50 @@ public enum CreatureStatistic implements CreatureStatisticIf
         true ), //
     GHOST_DRAGON( "Ghost Dragon", 19, 17, 200, 14, Range.closed( 25, 50 ), 7,
         "When situation seems hopeless, take a chance on the best enemy stack! If you'll get lucky, half their hit points will be gone instantly!! Ageing ability makes ghost dragons as dangerous as other lvl7 creatures.\nSpecial: -1 to enemy morale ; 20% chance to age enemy (halve hit points of all stack members).\n",
+        true ), //
+    // RAMPART FRACTION
+    CENTAUR( "Centaur", 5, 3, 8, 6, Range.closed( 2, 3 ), 1,
+        "Centaurs and Centaur Captains are the best and the most expensive lvl 1 units.",
+        false ), //
+    DWARF( "Dwarf", 6, 7, 20, 3, Range.closed( 2, 4 ), 2,
+        "Real slowdown for your hero. Good defenders. Good for garrison shooter defence. Toughest lvl 2 units.", false ), //
+    WOOD_ELF( "Wood Elf", 9, 5, 15, 6, Range.closed( 3, 5 ), 3,
+        "The only shooter for Rampart. Elves are offensive units and need a good defence.",
+        false ), //
+    PEGASUS( "Pegasus", 9, 8, 30, 8, Range.closed( 5, 9 ), 4,
+        "If you're short on money, 1 Pegasus is better than 3 Centaurs and more useful than 2 Dwarves.",
+        false ), //
+    DENDROID_GUARD( "Dendroid Guard", 9, 12, 55, 3, Range.closed( 10, 14 ), 5,
+        "Way too slow for hero's army, but excellent for garrison - Dendroid's roots will hold flies in place while Elves do their job from a very nice close-up.\n Worst lvl 5 unit but maximum population is the highest among lvl 5.\n",
+        false ), //
+    UNICORN( "Unicorn", 15, 14, 90, 7, Range.closed( 18, 22 ), 6,
+        "Note that Unicorn's aura does not affect the Unicorn itself.\n Unit surrounded by few stacks of Unicorns cold be almost invinsible to magic!\n Unicorns are good for any combat situations.\n",
+        false ), //
+    GREEN_DRAGON( "Green Dragon", 18, 18, 180, 10, Range.closed( 25, 50 ), 7,
+        "A little weaker, cheaper and slower than Red Dragon, otherways indentical.",
+        false ), //
+    CENTAUR_CAPTAIN( "Centaur Captain", 6, 3, 10, 8, Range.closed( 2, 3 ), 1,
+        "Haliberdier kills Centaur Captain in 1 on 1 combat, but speed makes Centaur Captains better.\n Centaur Captains are better attackers than defenders, so attack before attacked. Good upgrade.\n",
+        true ), //
+    BATTLE_DWARF( "Battle Dwarf", 7, 7, 20, 5, Range.closed( 2, 4 ), 2,
+        "Now your hero can take them, speed will do until the endgame.\nResists about 2 out of 5 spells!\n",
+        true ), //
+    GRAND_ELF( "Grand Elf", 9, 5, 15, 7, Range.closed( 3, 5 ), 3,
+        "Awesome upgrade - doubles the attack and costs only 25 gold extra!",
+        true ), //
+    SILVER_PEGASUS( "Silver Pegasus", 10, 9, 30, 12, Range.closed( 5, 9 ), 4,
+        "Weakest non-shooting lvl 4 unit, but really fast and annoying to enemy spellcasters.\nHighest pop among lvl 4.\n",
+        true ), //
+    DENDROID_SOLDIER( "Dendroid Soldier", 9, 12, 65, 4, Range.closed( 10, 14 ), 5,
+        "Really hard to identify the upgrade by picture, but if you look closer, Dendroid Soldiers have a few extra branches and bigger feet :)\n Bad upgrade: 1sp and 10hp for 75 gold! Too slow for hero, excellent for garrison.\n",
+        true ), //
+    WAR_UNICORN( "War Unicorn", 15, 14, 110, 9, Range.closed( 18, 22 ), 6,
+        "Good upgrade makes unicorn an excellent lvl 6 unit with a very small price",
+        true ), //
+    GOLD_DRAGON( "Gold Dragon", 27, 27, 250, 16, Range.closed( 40, 50 ), 7,
+        "While equal in price to Black Dragon, Gold Dragon has less immunity and hit points, but has more attack, defence and speed.\n Has a little weak spot for powerful enemy earth spellcasters - lvl 5 implosion.\n",
         true );//
+
 
     private final String name;
     private final int attack;

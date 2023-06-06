@@ -12,7 +12,7 @@ import java.util.Random;
 
 import lombok.Setter;
 import pl.psi.TurnQueue;
-import pl.psi.spells.Spell;
+//import pl.psi.spells.Spell;
 
 import com.google.common.collect.Range;
 
@@ -70,12 +70,14 @@ public class Creature implements PropertyChangeListener {
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
     }
 
+   /*
     public void applySpellDamage(final Spell aSpell){
         if(this.isAlive()) {
             final int hp = this.currentHp - aSpell.getDamage();
             this.setCurrentHp(hp);
         }
     }
+    */
 
     public int getMaxHp() {
         return stats.getMaxHp();

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.psi.creatures.NecropolisFactory;
+import pl.psi.creatures.RampartFactory;
 
 public class Start extends Application
 {
@@ -54,7 +55,7 @@ public class Start extends Application
 
     private Hero createP1()
     {
-        final Hero ret = new Hero( List.of( new NecropolisFactory().create( false, 1, 5 ) ) );
+        final Hero ret = new Hero( List.of( new RampartFactory().create( false, 1, 5 ) ) );
         return ret;
     }
 
