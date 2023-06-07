@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.castle;
 
 public class Launcher {
 

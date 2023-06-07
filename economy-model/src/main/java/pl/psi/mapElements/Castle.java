@@ -97,10 +97,20 @@ public class Castle implements MapElement {
     private final EconomyHero owner = null;
 
     public Castle(FractionType fractionType) {
-        buildingsOwned = TownFactory.createBuildingsOwned(fractionType);
-        buildingsToBuy = TownFactory.createBuildingsToBuy(fractionType);
+        buildingsOwned = TownStarter.createBuildingsOwned(fractionType);
+        buildingsToBuy = TownStarter.createBuildingsToBuy(fractionType);
     }
-    // nie nazywac tego fabryka
+
+    //pole w building zamiast int id, enum z "nazwą" budynku
+    public void buildBuilding(ArrayList<Building> buildingsToBuy, ArrayList<Building> buildingsOwned, int buildingID){
+        ArrayList<Building> buildingsToBuyCopy = new ArrayList<>(buildingsToBuy);
+        for(Building building: buildingsToBuyCopy){
+            if(building.getId()==buildingID){
+                buildingsOwned.add(building);
+                buildingsToBuy.remove(building);
+            }
+        }
+    }
 
     @Override
     public boolean isInteractive() {
@@ -119,7 +129,8 @@ public class Castle implements MapElement {
 
     @Override
     public void endOfTurn() {
-
     }
+
+
 
 }

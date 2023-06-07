@@ -1,8 +1,10 @@
 package pl.psi.mapElements;
 
+import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 import pl.psi.player.PlayerResources;
 
+@Getter
 public class Resource implements MapElement {
 
     private final pl.psi.ResourceType resourceType;

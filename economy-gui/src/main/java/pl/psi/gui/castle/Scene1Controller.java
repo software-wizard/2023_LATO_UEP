@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.castle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +21,29 @@ import java.util.ArrayList;
 public class Scene1Controller {
 
     @FXML
+    private Text goldCount;
+
+    @FXML
     private Text unit1Count;
+
+    @FXML
+    private Text unit2Count;
+
+    @FXML
+    private Text unit3Count;
+
+    @FXML
+    private Text unit4Count;
+
+    @FXML
+    private Text unit5Count;
+
+    @FXML
+    private Text unit6Count;
+
+    @FXML
+    private Text unit7Count;
+
 
     @FXML
     private ImageView image;
@@ -29,11 +51,23 @@ public class Scene1Controller {
     @FXML
     private ImageView image2;
 
+    private ArrayList<Text> unitCounts;
+    public void addUnitCountTextsToList() {
+        unitCounts = new ArrayList<>();
+        unitCounts.add(unit1Count);
+        unitCounts.add(unit2Count);
+        unitCounts.add(unit3Count);
+        unitCounts.add(unit4Count);
+        unitCounts.add(unit5Count);
+        unitCounts.add(unit6Count);
+        unitCounts.add(unit7Count);
+    }
+
     static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
     static PlayerResources resources = PlayerResources.builder()
             .wood(100)
             .ore(50)
-            .gold(5000)
+            .gold(50000)
             .mercury(10)
             .sulfur(20)
             .crystal(30)
@@ -54,7 +88,11 @@ public class Scene1Controller {
 
     public static void buyCreatures(int currentBuyingUnit, int amount){
         hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(currentBuyingUnit), amount, resources);
-        System.out.println(hero.getHeroArmy().get(0).getName()+" "+hero.getHeroArmy().get(0).getAmount());
+        for (int i = 0; i<hero.getHeroArmy().size(); i++){
+            if(hero.getHeroArmy().get(i).getName() != null){
+                System.out.println(hero.getHeroArmy().get(i).getName()+" "+hero.getHeroArmy().get(i).getAmount());
+            }
+        }
     }
 
     @FXML
@@ -63,6 +101,9 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 1);
         setCurrentBuyingUnit(1);
+        addUnitCountTextsToList();
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
 
@@ -72,6 +113,8 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 2);
         setCurrentBuyingUnit(2);
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
     @FXML
@@ -80,6 +123,8 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 3);
         setCurrentBuyingUnit(3);
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
     @FXML
@@ -88,6 +133,8 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 4);
         setCurrentBuyingUnit(4);
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
     @FXML
@@ -96,6 +143,8 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 5);
         setCurrentBuyingUnit(5);
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
     @FXML
@@ -104,6 +153,8 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 6);
         setCurrentBuyingUnit(6);
+        refreshUnitAmounts();
+        refreshResourceAmounts();
     }
 
     @FXML
@@ -112,6 +163,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 7);
         setCurrentBuyingUnit(7);
+        refreshResourceAmounts();
     }
 
     void showRecruitingScene(String goldCost, int creatureNumber){
@@ -126,11 +178,27 @@ public class Scene1Controller {
             Scene2Controller controller = fxmlLoader.getController();
             controller.setUnitCost(goldCost);
             controller.setVisible(creatureNumber);
+            controller.setRefreshScene1Function(this::refreshUnitAmounts);
 
         }catch(Exception e){
             System.out.println("exception");
         }
     }
+
+    public void refreshUnitAmounts(){
+        int x;
+        if(!hero.getHeroArmy().isEmpty()){
+            for (int i = 0; i < hero.getHeroArmy().size(); i++) {
+                x = hero.getHeroArmy().get(i).getTier();
+                unitCounts.get(x-1).setText(String.valueOf(hero.getHeroArmy().get(i).getAmount()));
+            }
+        }
+    }
+
+    public void refreshResourceAmounts(){
+        goldCount.setText(String.valueOf(resources.getGold()));
+    }
+
 
     public void EnterFort(MouseEvent mouseEvent) {
     }

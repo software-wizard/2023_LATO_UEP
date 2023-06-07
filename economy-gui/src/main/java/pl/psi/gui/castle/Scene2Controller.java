@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.castle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-//import pl.psi.gui.Scene1Controller;
+import pl.psi.gui.castle.Scene1Controller;
 
 public class Scene2Controller {
     @FXML
@@ -47,6 +47,7 @@ public class Scene2Controller {
     void recruitCreatures(MouseEvent event) {
         String recruitAmount = recruitAmountField.getCharacters().toString();
         Scene1Controller.buyCreatures(Scene1Controller.getCurrentBuyingUnit(), Integer.parseInt(recruitAmount));
+//tu ma się odpalać setRefreshScene
     }
 
 
@@ -67,5 +68,7 @@ public class Scene2Controller {
 
     }
 
+    public void setRefreshScene1Function(Runnable refreshUnitAmounts) {
+    }
 }
 

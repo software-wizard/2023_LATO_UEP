@@ -1,4 +1,4 @@
-package pl.psi.gui;
+package pl.psi.gui.castle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

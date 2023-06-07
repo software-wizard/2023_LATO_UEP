@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="352.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.psi.gui.Scene2Controller">
+<AnchorPane prefHeight="352.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.psi.gui.castle.Scene2Controller">
    <children>
       <ImageView fitHeight="440.0" fitWidth="520.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Imagess/Recruiting.png" />
+            <Image url="@../../../Images/Recruiting.png" />
          </image>
       </ImageView>
       <Text fx:id="unitCost" fill="WHITE" layoutX="118.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER">
@@ -46,49 +46,49 @@
       </Text>
       <ImageView fx:id="recruitingUnit1" fitHeight="142.0" fitWidth="332.0" layoutX="196.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit1.png" />
+            <Image url="@../../../Images/unit1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="142.0" fitWidth="110.0" layoutX="266.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit1up.png" />
+            <Image url="@../../../Images/unit1up.png" />
          </image>
       </ImageView>
       <Button fx:id="purchaseButton" blendMode="DARKEN" layoutX="226.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#recruitCreatures" prefHeight="35.0" prefWidth="70.0" />
       <Button blendMode="DARKEN" layoutX="309.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#exitWindow" prefHeight="36.0" prefWidth="71.0" />
       <ImageView fx:id="recruitingUnit2" fitHeight="142.0" fitWidth="129.0" layoutX="196.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit2.png" />
+            <Image url="@../../../Images/unit2.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="142.0" fitWidth="110.0" layoutX="267.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit2up.png" />
+            <Image url="@../../../Images/unit2up.png" />
          </image>
       </ImageView>
       <ImageView fx:id="recruitingUnit3" fitHeight="142.0" fitWidth="129.0" layoutX="195.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit3.png" />
+            <Image url="@../../../Images/unit3.png" />
          </image>
       </ImageView>
       <ImageView fx:id="recruitingUnit4" fitHeight="142.0" fitWidth="332.0" layoutX="195.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit4.png" />
+            <Image url="@../../../Images/unit4.png" />
          </image>
       </ImageView>
       <ImageView fx:id="recruitingUnit5" fitHeight="142.0" fitWidth="332.0" layoutX="197.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit5.png" />
+            <Image url="@../../../Images/unit5.png" />
          </image>
       </ImageView>
       <ImageView fx:id="recruitingUnit6" fitHeight="142.0" fitWidth="332.0" layoutX="197.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit6.png" />
+            <Image url="@../../../Images/unit6.png" />
          </image>
       </ImageView>
       <ImageView fx:id="recruitingUnit7" fitHeight="142.0" fitWidth="332.0" layoutX="202.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
-            <Image url="@../../../Imagess/unit7.png" />
+            <Image url="@../../../Images/unit7.png" />
          </image>
       </ImageView>
    </children>

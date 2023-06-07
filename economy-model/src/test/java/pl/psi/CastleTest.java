@@ -1,6 +1,7 @@
 package pl.psi;
 
 import org.junit.jupiter.api.Test;
+import pl.psi.buildings.Building;
 import pl.psi.buildings.HallBuilding;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
@@ -14,6 +15,7 @@ import pl.psi.player.PlayerResources;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CastleTest {
 
@@ -48,7 +50,7 @@ public class CastleTest {
         PlayerResources resources = PlayerResources.builder()
                 .wood(100)
                 .ore(50)
-                .gold(5000)
+                .gold(15000)
                 .mercury(10)
                 .sulfur(20)
                 .crystal(30)
@@ -58,10 +60,18 @@ public class CastleTest {
         EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
 
         economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 12, resources);
-
         assertEquals(12, economyHero.getHeroArmy().get(0).getAmount());
         assertEquals(8, ((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1)).getCreaturesToRecruit().getAmount());
-        assertEquals(3800, resources.getGold());
+        assertEquals(14280, resources.getGold());
+
+        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(2), 1, resources);
+        assertEquals(1, economyHero.getHeroArmy().get(1).getAmount());
+
+        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1), 2, resources);
+        assertEquals(14, economyHero.getHeroArmy().get(0).getAmount());
+
+        economyHero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(2), 4, resources);
+        assertEquals(5, economyHero.getHeroArmy().get(1).getAmount());
     }
 
     @Test
@@ -83,4 +93,32 @@ public class CastleTest {
         hall.buyBuilding(0);
         assertEquals(3, building.getId());
     }
+
+    @Test
+    void shouldBuildingBuildingsWork(){
+        Castle currentCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        currentCastle.buildBuilding(currentCastle.getBuildingsToBuy(), currentCastle.getBuildingsOwned(), 7);
+        assertTrue(currentCastle.getBuildingsToBuy().isEmpty());
+    }
+
+    @Test
+    void shouldBuyingBuildingsWork(){
+        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        PlayerResources resources = PlayerResources.builder()
+                .wood(100)
+                .ore(50)
+                .gold(7000)
+                .mercury(10)
+                .sulfur(20)
+                .crystal(30)
+                .gems(5)
+                .build();
+        ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
+        EconomyHero economyHero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
+
+        economyHero.buyBuilding(7, resources, playerCastle);
+        assertEquals(2000, resources.getGold());
+        assertTrue(playerCastle.getBuildingsToBuy().isEmpty());
+    }
+
 }
