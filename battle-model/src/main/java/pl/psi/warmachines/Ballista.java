@@ -15,6 +15,7 @@ public class Ballista extends WarMachine implements AttackerIF {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
+            // defender.applyDamage(damage); todo
         }
     }
 
