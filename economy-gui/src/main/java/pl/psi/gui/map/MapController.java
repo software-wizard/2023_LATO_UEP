@@ -32,11 +32,10 @@ public class MapController implements PropertyChangeListener {
                 .clear();
         for( int x = 0; x < 5; x++ )
         {
-            for( int y = 0; y < 0; y++ )
+            for( int y = 0; y < 5; y++ )
             {
 //                Point currentPoint = new Point( x, y);
                 final MapTile mapTile = new MapTile( "" );
-                mapTile.setBackground(Color.RED);
                 gridMap.add( mapTile, x, y );
             }
         }
