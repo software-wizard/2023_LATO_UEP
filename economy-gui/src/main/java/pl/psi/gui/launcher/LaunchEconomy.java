@@ -10,3 +10,4 @@ public class LaunchEconomy
         EconomyStart.main( args );
     }
 }
+
