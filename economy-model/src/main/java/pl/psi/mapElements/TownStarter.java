@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static pl.psi.ResourceType.GOLD;
 
-public class TownFactory {
+public class TownStarter {
     public static ArrayList<Building> createBuildingsOwned(Castle.FractionType fraction) {
 
         ArrayList<Building> buildings = new ArrayList<Building>();
@@ -20,9 +20,8 @@ public class TownFactory {
                 buildings.add(new RecruitmentBuilding("Graveyard", Building.Type.RECRUITMENT, 2, 2, fraction));
                 buildings.add(new RecruitmentBuilding("Tomb of souls", Building.Type.RECRUITMENT, 3, 3, fraction));
                 buildings.add(new RecruitmentBuilding("Estate", Building.Type.RECRUITMENT, 4, 4, fraction));
-                buildings.add(new RecruitmentBuilding("Mausoleum", Building.Type.RECRUITMENT, 4, 5, fraction));
-                buildings.add(new RecruitmentBuilding("Hall of Darkness", Building.Type.RECRUITMENT, 4, 6, fraction));
-                buildings.add(new RecruitmentBuilding("Dragon vault", Building.Type.RECRUITMENT, 4, 7, fraction));
+                buildings.add(new RecruitmentBuilding("Mausoleum", Building.Type.RECRUITMENT, 5, 5, fraction));
+                buildings.add(new RecruitmentBuilding("Hall of Darkness", Building.Type.RECRUITMENT, 6, 6, fraction));
                 return buildings;
             case TOWER:
                 buildings.add(new HallBuilding("Hall", Building.Type.HALL, 0, fraction));
@@ -38,6 +37,7 @@ public class TownFactory {
         switch (fraction)
         {
             case NECROPOLIS:
+                buildings.add(new RecruitmentBuilding("Dragon vault", Building.Type.RECRUITMENT, 7, new Resource(GOLD, 5000), 7, fraction));
                 return buildings;
             case TOWER:
                 buildings.add(new RecruitmentBuilding("Golem factory", Building.Type.RECRUITMENT, 3, new Resource(GOLD, 1500), 3, fraction));

@@ -18,3 +18,4 @@ public class PlayerResources {
     private int gems;
 
 }
+// adnotacja @value
