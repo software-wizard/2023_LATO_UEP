@@ -1,16 +1,17 @@
-package pl.psi.creatures;
+package pl.psi.WarMachines;
 
 import com.google.common.collect.Range;
 
-public interface CreatureStatisticIf {
+public interface WarMachineStatisticIf {
     String getName();
     int getAttack();
     int getArmor();
     int getMaxHp();
-    int getMoveRange();
+    int getShotRange();
     Range< Integer > getDamage();
     int getTier();
     String getDescription();
     boolean isUpgraded();
+    int getHexSize();
 
 }

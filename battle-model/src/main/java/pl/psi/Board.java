@@ -1,90 +1,91 @@
 package pl.psi;
 
-import java.util.ArrayList;
-import java.util.*;
-import java.util.Optional;
-
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-import pl.psi.creatures.Creature;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-public class Board
-{
+/**
+ * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ */
+public class Board {
     private static final int MAX_WITDH = 14;
     private List<Point> boardGeneratedListOfPoints = new ArrayList<>();
-    private final BiMap< Point, Creature > map = HashBiMap.create();
-    public Board(final List< Creature > aCreatures1, final List< Creature > aCreatures2 ) {
-                for( int x = 0; x < 15; x++ ){
-            for( int y = 0; y < 10; y++ )
-            {
-                Point point = new Point(x,y);
+    private final BiMap<Point, MapObjectIf> map = HashBiMap.create();
+
+    public Board(final List<MapObjectIf> mapObjectIfs1, final List<MapObjectIf> mapObjectIfs2) {
+        for (int x = 0; x < 15; x++) {
+            for (int y = 0; y < 10; y++) {
+                Point point = new Point(x, y);
                 boardGeneratedListOfPoints.add(point);
             }
         }
 
-        addCreatures(aCreatures1, 0);
-        addCreatures(aCreatures2, MAX_WITDH);
+        addMapObject(mapObjectIfs1, 0);
+        addMapObject(mapObjectIfs2, MAX_WITDH);
     }
-    private void addCreatures( final List< Creature > aCreatures, final int aXPosition )
-    {
-        for( int i = 0; i < aCreatures.size(); i++ )
-        {
-            map.put( new Point( aXPosition, i * 2 + 1), aCreatures.get( i ) );
+
+    private void addMapObject(final List<MapObjectIf> mapObjectIfs, final int aXPosition) {
+        for (int i = 0; i < mapObjectIfs.size(); i++) {
+            map.put(new Point(aXPosition, i * 2 + 1), mapObjectIfs.get(i));
         }
     }
 
-    Optional< Creature > getCreature( final Point aPoint )
-    {
-        return Optional.ofNullable( map.get( aPoint ) );
+    public void removeMapObject(MapObjectIf mapObjectIf) {
+        map.remove(getPosition(mapObjectIf));
     }
 
-    void move( final Creature aCreature, final Point aPoint )
-    {
-        ShortestPathAlgorythm  path = new ShortestPathAlgorythm();
-        Point startingPoint = getPosition(aCreature);
+    Optional<MapObjectIf> getMapObject(final Point aPoint) {
+        return Optional.ofNullable(map.get(aPoint));
+    }
+
+    void move(final MapObjectIf mapObjectIf, final Point aPoint) {
+        ShortestPathAlgorythm path = new ShortestPathAlgorythm();
+        Point startingPoint = getPosition(mapObjectIf);
         Point endPoint = aPoint;
         List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
-//                System.out.println("Creature moved through point: " + point);
-                map.inverse().remove(aCreature);
-                map.put(point, aCreature);
+                map.inverse().remove(mapObjectIf);
+                map.put(point, mapObjectIf);
             }
         }
     }
 
-    boolean canMove( final Creature aCreature, final Point aPoint )
-    {
-        if( map.containsKey( aPoint ) )
-        {
+    boolean canMove(final MapObjectIf mapObjectIf, final Point aPoint) {
+        if (map.containsKey(aPoint)) {
             return false;
         }
-        final Point oldPosition = getPosition( aCreature );
-        // Zmieniony dystans w point -> przeciazenie
-        return aPoint.distance( oldPosition, aPoint ) <= aCreature.getMoveRange();
+        final Point oldPosition = getPosition(mapObjectIf);
+        return aPoint.distance(oldPosition, aPoint) <= mapObjectIf.getMoveRange();
     }
 
-    Point getPosition( Creature aCreature )
-    {
-        return map.inverse()
-            .get( aCreature );
+    Point getPosition(MapObjectIf mapObjectIf) {
+        if ((map.inverse().get(mapObjectIf)) != null) {
+            return map.inverse()
+                    .get(mapObjectIf);
+        } else {
+            return new Point(0, 0);
+        }
     }
+
     //TODO:
     // 1. czy nie ma bloku
     // 2. czy lata (inna logika)
     // 3. czy nie zostało rzucone zaklęcie(sciana ognia np)
-    public List<Point> availablePointsToGo(Creature aCretaure) {
-    List<Point> listOfPoints = new ArrayList<>();
+    public List<Point> availablePointsToGo(MapObjectIf mapObjectIf) {
+        List<Point> listOfPoints = new ArrayList<>();
         for (Point point : boardGeneratedListOfPoints) {
-            if (canMove(aCretaure, point)) {
+            if (canMove(mapObjectIf, point)) {
                 listOfPoints.add(point);
             }
         }
         return listOfPoints;
     }
-    public int[][] gridConstruction(List<Point> availablePointsToGo){
+
+    public int[][] gridConstruction(List<Point> availablePointsToGo) {
         int width = 0;
         int height = 0;
         for (Point point : availablePointsToGo) {
@@ -100,8 +101,8 @@ public class Board
 
         int[][] grid = new int[width][height];
 
-        for (int i = 0; i < grid.length; i++){
-            for (int y=0; y < grid[0].length; y++){
+        for (int i = 0; i < grid.length; i++) {
+            for (int y = 0; y < grid[0].length; y++) {
                 grid[i][y] = Integer.MAX_VALUE;
             }
         }
