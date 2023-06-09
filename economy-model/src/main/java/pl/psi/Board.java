@@ -2,6 +2,7 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 
@@ -11,10 +12,12 @@ import java.util.*;
 
 public class Board implements PropertyChangeListener {
     private final BiMap<Point, MapElement> map = HashBiMap.create();
+    @Getter
     private final BiMap<Point, EconomyHero> mapHero = HashBiMap.create();
-    private final Map<Point, MapElement> mapElements;
+    @Getter
+    private final BiMap<Point, MapElement> mapElements;
 
-    public Board(Map<Point, MapElement> aMapElements) {
+    public Board(BiMap<Point, MapElement> aMapElements) {
         mapElements = aMapElements;
 
         // Set elements like heroes, mountains, gold and so on, on the board.
