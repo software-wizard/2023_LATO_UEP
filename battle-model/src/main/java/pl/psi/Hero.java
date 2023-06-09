@@ -12,6 +12,7 @@ import lombok.Getter;
 /**
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
+
 public class Hero
 {
     @Getter

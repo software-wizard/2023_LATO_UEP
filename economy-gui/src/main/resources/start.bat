@@ -1,1 +1,1 @@
-java\bin\javaw.exe -cp economy-gui-${project.version}.jar;lib/* pl.psi.gui.LaunchEconomy
+java\bin\javaw.exe -cp economy-gui-${project.version}.jar;lib/* pl.psi.gui.launcher.LaunchEconomy
