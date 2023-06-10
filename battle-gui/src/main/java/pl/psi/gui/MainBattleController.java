@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -24,11 +23,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.Objects;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.FileNotFoundException;
 import java.util.Optional;
-import java.util.Random;
 
 public class MainBattleController implements PropertyChangeListener {
     private final GameEngine gameEngine;
@@ -87,7 +82,14 @@ public class MainBattleController implements PropertyChangeListener {
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }
 
-                if(gameEngine.canPerformAction()) {
+                if (gameEngine.canMove(currentPoint)) {
+                    mapTile.setBackground(Color.GREY);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        gameEngine.move(currentPoint);
+                    });
+                }
+
+                if(gameEngine.canPerformAction() && gameEngine.isAutonomous()) {
                     if (gameEngine.canAttack(currentPoint)) {
                         mapTile.setBorderColor(Color.RED);
                         mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -104,6 +106,20 @@ public class MainBattleController implements PropertyChangeListener {
                 }
 
                 gridMap.add(mapTile, x, y);
+            }
+        }
+
+        //todo repair skipping first object from queue from hero2
+        if(gameEngine.canPerformAction() && !gameEngine.isAutonomous()){
+            Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
+
+            if (gameEngine.canAttack(randPoint)){
+                System.out.println("-------------Random Attack-------------");
+                gameEngine.attack(randPoint);
+            }
+            if (gameEngine.canHeal(randPoint)){
+                System.out.println("-------------Random Heal-------------");
+                gameEngine.heal(randPoint);
             }
         }
     }

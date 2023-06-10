@@ -25,4 +25,7 @@ public class FirstAidTent extends WarMachine implements HealerIF {
         return true;
     }
 
+    @Override
+    public boolean isAutonomous(){return false;}
+
 }

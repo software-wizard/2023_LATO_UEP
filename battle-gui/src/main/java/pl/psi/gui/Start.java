@@ -54,8 +54,10 @@ public class Start extends Application
     {
         Creature creature1 = new NecropolisFactory().create( true, 2, 5 );
         WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 2);
+        WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 2, 2);
+        WarMachine warMachine3 = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 2);
 
-        final Hero ret = new Hero(List.of(creature1), List.of(warMachine1));
+        final Hero ret = new Hero(List.of(creature1), List.of(warMachine1, warMachine2, warMachine3));
         return ret;
     }
 
