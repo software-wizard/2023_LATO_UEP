@@ -48,7 +48,6 @@ public class Board
         List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
-//                System.out.println("Creature moved through point: " + point);
                 map.inverse().remove(aCreature);
                 map.put(point, aCreature);
             }
@@ -62,7 +61,6 @@ public class Board
             return false;
         }
         final Point oldPosition = getPosition( aCreature );
-        // Zmieniony dystans w point -> przeciazenie
         return aPoint.distance( oldPosition, aPoint ) <= aCreature.getMoveRange();
     }
 
