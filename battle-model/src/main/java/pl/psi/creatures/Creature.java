@@ -139,7 +139,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return false;
     }
 
-    public boolean isAutonomous() { return true; }
+    public boolean isControllable() { return true; }
 
     @Override
     public void attack(MapObjectIf defender) throws Exception {

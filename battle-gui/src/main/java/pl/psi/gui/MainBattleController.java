@@ -89,7 +89,7 @@ public class MainBattleController implements PropertyChangeListener {
                     });
                 }
 
-                if(gameEngine.canPerformAction() && gameEngine.isAutonomous()) {
+                if(gameEngine.canPerformAction() && gameEngine.isControllable()) {
                     if (gameEngine.canAttack(currentPoint)) {
                         mapTile.setBorderColor(Color.RED);
                         mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -110,7 +110,7 @@ public class MainBattleController implements PropertyChangeListener {
         }
 
         //todo repair skipping first object from queue from hero2
-        if(gameEngine.canPerformAction() && !gameEngine.isAutonomous()){
+        if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
             Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
 
             if (gameEngine.canAttack(randPoint)){

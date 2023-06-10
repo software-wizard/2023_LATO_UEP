@@ -28,5 +28,5 @@ public class Catapult extends WarMachine implements AttackerIF {
     }
 
     @Override
-    public boolean isAutonomous(){return false;}
+    public boolean isControllable(){return false;}
 }

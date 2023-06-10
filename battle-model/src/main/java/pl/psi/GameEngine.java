@@ -147,8 +147,8 @@ public class GameEngine {
         return board.getPosition(mapObjectIf);
     }
 
-    public boolean isAutonomous(){
-        return turnQueue.getCurrentMapObject().isAutonomous();
+    public boolean isControllable(){
+        return turnQueue.getCurrentMapObject().isControllable();
     }
 
     public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs){
