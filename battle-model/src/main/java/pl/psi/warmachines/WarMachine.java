@@ -104,7 +104,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return false;
     }
 
-    public boolean isAutonomous(){
+    public boolean isControllable(){
         return true;
     }
     Range<Integer> getDamage() {
