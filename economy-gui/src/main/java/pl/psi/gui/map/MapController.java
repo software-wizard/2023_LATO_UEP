@@ -1,6 +1,7 @@
 package pl.psi.gui.map;
 
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.EconomyEngine;
@@ -35,13 +36,14 @@ public class MapController implements PropertyChangeListener {
 
         gridMap.getChildren()
                 .clear();
-        for( int x = 0; x < 100; x++ )
+        for( int x = 0; x < 60; x++ )
         {
-            for( int y = 0; y < 80; y++ )
+            for( int y = 0; y < 30; y++ )
             {
                 Point currentPoint = new Point( x, y );
                 final MapTile mapTile = new MapTile( "" );
 
+                // Draw map
                 Optional<MapElement> mapElement = Optional.ofNullable(economyEngine.getMapElement(currentPoint));
                 Optional<EconomyHero> economyHero = Optional.ofNullable(economyEngine.getEconomyHero(currentPoint));
 
@@ -54,9 +56,19 @@ public class MapController implements PropertyChangeListener {
                     }
                 }));
 
+                // Draw heroes
                 economyHero.ifPresent(economyHeroToGUI -> {
                     mapTile.setName("Hero");
                 });
+
+                if (economyEngine.canMove(currentPoint, economyEngine.getCurrentPlayer().getEconomyHero())) {
+                    mapTile.setBackground(Color.BLUEVIOLET);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        economyEngine.move(currentPoint, economyEngine.getCurrentPlayer().getEconomyHero());
+                        // TODO observer does not work?
+                        refreshGui();
+                    });
+                }
 
                 gridMap.add( mapTile, x, y );
             }
