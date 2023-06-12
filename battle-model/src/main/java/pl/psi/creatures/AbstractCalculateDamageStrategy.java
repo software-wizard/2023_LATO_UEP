@@ -11,10 +11,6 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
     public static final double ATTACK_BONUS = 0.05;
     private final Random rand;
 
-    protected AbstractCalculateDamageStrategy(){
-        this(new Random());
-    }
-
     protected AbstractCalculateDamageStrategy( final Random aRand )
     {
         rand = aRand;
@@ -56,11 +52,7 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
         {
             oneCreatureDamageToDeal = 0;
         }
-        return calculateOutcome((int)(aAttacker.getAmount() * oneCreatureDamageToDeal));
-    }
-
-    public int calculateOutcome(int i){
-        return i;
+        return (int)(aAttacker.getAmount() * oneCreatureDamageToDeal);
     }
 
     protected int getArmor( final Creature aDefender )

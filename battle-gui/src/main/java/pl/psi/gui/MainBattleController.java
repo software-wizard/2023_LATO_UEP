@@ -2,13 +2,6 @@ package pl.psi.gui;
 
 import javafx.geometry.Pos;
 import pl.psi.MapObjectIf;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -21,12 +14,9 @@ import javafx.scene.paint.Color;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.util.Objects;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileNotFoundException;
 import java.util.Optional;
 import java.util.Random;
 
@@ -37,30 +27,23 @@ public class MainBattleController implements PropertyChangeListener {
     @FXML
     private Button passButton;
 
-    @FXML
-    private Button spellButton;
-
-
-
-    public MainBattleController( final Hero aHero1, final Hero aHero2 )
-    {
-        gameEngine = new GameEngine( aHero1, aHero2 );
+    public MainBattleController(final Hero aHero1, final Hero aHero2) {
+        gameEngine = new GameEngine(aHero1, aHero2);
     }
+
     @FXML
     private void initialize() throws FileNotFoundException {
         refreshGui();
-        initializeSpellBook();
         gameEngine.addObserver(this);
     }
 
     private void refreshGui() throws FileNotFoundException {
         gridMap.getChildren()
-            .clear();
+                .clear();
         gridMap.setAlignment(Pos.CENTER);
-        for( int x = 0; x < 15; x++ )
-        {
-            for( int y = 0; y < 10; y++ )
-            {
+
+        for (int x = 0; x < 15; x++) {
+            for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
@@ -86,6 +69,12 @@ public class MainBattleController implements PropertyChangeListener {
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
                 }
+                if (gameEngine.canMove(currentPoint)) {
+                    mapTile.setBackground(Color.GREY);
+                    mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+                        gameEngine.move(currentPoint);
+                    });
+                }
 
                 if(gameEngine.canPerformAction()) {
                     if (gameEngine.canAttack(currentPoint)) {
@@ -106,24 +95,6 @@ public class MainBattleController implements PropertyChangeListener {
                 gridMap.add(mapTile, x, y);
             }
         }
-    }
-
-    private void initializeSpellBook(){
-        spellButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Parent root;
-                try{
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/spell-book-gui2.fxml")));
-                    Stage stage = new Stage();
-                    stage.setTitle("Spell Book");
-                    stage.setScene(new Scene(root, 250, 450));
-                    stage.show();
-                }catch (final IOException aE){
-                    aE.printStackTrace();
-                }
-            }
-        });
     }
 
     @Override
