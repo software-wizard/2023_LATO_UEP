@@ -1,12 +1,17 @@
 package pl.psi.warmachines;
 
+import lombok.Setter;
 import pl.psi.AttackerIF;
+import pl.psi.ControlIndicator;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
 public class Catapult extends WarMachine implements AttackerIF {
+    @Setter
+    private boolean canBeControlledByPlayer;
     public Catapult(int amount) {
         super(WarMachineStatistic.CATAPULT, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
+        canBeControlledByPlayer = new ControlIndicator().indicateControl(WarMachineStatistic.CATAPULT);
     }
 
     @Override
@@ -28,5 +33,7 @@ public class Catapult extends WarMachine implements AttackerIF {
     }
 
     @Override
-    public boolean isControllable(){return false;}
+    public boolean isControllable() {
+        return canBeControlledByPlayer;
+    }
 }

@@ -1,12 +1,17 @@
 package pl.psi.warmachines;
 
+import lombok.Setter;
+import pl.psi.ControlIndicator;
 import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
 public class FirstAidTent extends WarMachine implements HealerIF {
+    @Setter
+    private boolean canBeControlledByPlayer;
     public FirstAidTent(int amount) {
         super(WarMachineStatistic.FIRST_AID_TENT, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
+        canBeControlledByPlayer = new ControlIndicator().indicateControl(WarMachineStatistic.FIRST_AID_TENT);
     }
 
     @Override
@@ -26,6 +31,8 @@ public class FirstAidTent extends WarMachine implements HealerIF {
     }
 
     @Override
-    public boolean isControllable(){return false;}
+    public boolean isControllable() {
+        return canBeControlledByPlayer;
+    }
 
 }

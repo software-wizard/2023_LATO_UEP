@@ -101,8 +101,7 @@ public class GameEngine {
                 .distance(point);
             return board.getMapObject(point)
                     .isPresent()
-                    && turnQueue.getCurrentMapObject().canHeal()
-                    && distance <= 14 && distance > 0
+                    && distance > 0
                     && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
                     ;
@@ -145,10 +144,6 @@ public class GameEngine {
 
     public Point getMapObjectPosition(MapObjectIf mapObjectIf){
         return board.getPosition(mapObjectIf);
-    }
-
-    public boolean isControllable(){
-        return turnQueue.getCurrentMapObject().isControllable();
     }
 
     public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs){
@@ -194,6 +189,19 @@ public class GameEngine {
 
         }
     }
+
+    public boolean isControllable() {
+        return turnQueue.getCurrentMapObject().isControllable();
+    }
+
+    public boolean isTurnQueueEmpty() {
+        return turnQueue.isTurnQueueEmpty();
+    }
+
+    public void endOfTurn() {
+        turnQueue.endOfTurn();
+    }
+
 
 //    public boolean canHeal(final Point point) {
 //        if (turnQueue.getCurrentMapObject().canHeal()) {
