@@ -144,8 +144,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return false;
     }
 
-    public boolean isControllable() { return true; }
-
     @Override
     public void attack(MapObjectIf defender) throws Exception {
         System.out.println("Creature is attacking");
