@@ -3,15 +3,14 @@ package pl.psi;
 import lombok.Value;
 
 /**
- * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ * TODO:
  */
 @Value
 public class Point
 {
     private final int x;
     private final int y;
-
-    public Point( final int aX, final int aY )
+    public Point( final int aX, final int aY)
     {
         x = aX;
         y = aY;
@@ -27,5 +26,15 @@ public class Point
         px -= getX();
         py -= getY();
         return Math.sqrt( px * px + py * py );
+    }
+    public double distance( Point startingPoint, Point goalPoint )
+    {
+        return Math.abs(startingPoint.getX() - goalPoint.getX()) + Math.abs(startingPoint.getY() - goalPoint.getY());
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 }

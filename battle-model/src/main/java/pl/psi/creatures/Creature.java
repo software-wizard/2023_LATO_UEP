@@ -120,13 +120,9 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return stats.getMoveRange();
     }
 
-//    public boolean canAttack() {
-//        return true;
-//    }
-//
-//    public boolean canHeal() {
-//        return false;
-//    }
+    public void setCalculator(DamageCalculatorIf calculator) {
+        this.calculator = calculator;
+    }
 
     @Override
     public boolean canAttack() {

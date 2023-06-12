@@ -1,86 +1,48 @@
 package pl.psi;
 
+import lombok.Getter;
+import pl.psi.hero.EconomyHero;
+import pl.psi.mapElements.MapElement;
+import pl.psi.player.Player;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.LinkedList;
+import java.util.Map;
 
-import pl.psi.creatures.EconomyCreature;
-import pl.psi.hero.CreatureShop;
-import pl.psi.hero.EconomyHero;
+@Getter
+public class EconomyEngine {
 
-public class EconomyEngine
-{
-    public static final String HERO_BOUGHT_CREATURE = "HERO_BOUGHT_CREATURE";
-    public static final String ACTIVE_HERO_CHANGED = "ACTIVE_HERO_CHANGED";
-    public static final String NEXT_ROUND = "NEXT_ROUND";
-    private final EconomyHero hero1;
-    private final EconomyHero hero2;
-    private final CreatureShop creatureShop = new CreatureShop();
-    private final PropertyChangeSupport observerSupport;
-    private EconomyHero activeHero;
-    private int roundNumber;
+    private final Board board;
+    private final TurnQueue turnQueue;
+    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
-    public EconomyEngine( final EconomyHero aHero1, final EconomyHero aHero2 )
-    {
-        hero1 = aHero1;
-        hero2 = aHero2;
-        activeHero = hero1;
-        roundNumber = 1;
-        observerSupport = new PropertyChangeSupport( this );
+    public EconomyEngine(LinkedList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
+        this.board = new Board(aMapElements);
+        this.turnQueue = new TurnQueue(aPlayers);
+        turnQueue.addObserver(board);
     }
 
-    public void buy( final EconomyCreature aEconomyCreature )
-    {
-        creatureShop.buy( activeHero, aEconomyCreature );
-        observerSupport.firePropertyChange( HERO_BOUGHT_CREATURE, null, null );
+    // Fasade - easy for GUI
+    public boolean canMove(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
+        return board.canMove(aChoosenEconomyHero, aPoint);
     }
 
-    public EconomyHero getActiveHero()
-    {
-        return activeHero;
+    public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
+        board.move(aChoosenEconomyHero, aPoint);
     }
 
-    public void pass()
-    {
-        if( activeHero == hero1 )
-        {
-            activeHero = hero2;
-            observerSupport.firePropertyChange( ACTIVE_HERO_CHANGED, hero1, activeHero );
-        }
-        else
-        {
-            activeHero = hero1;
-            observerSupport.firePropertyChange( ACTIVE_HERO_CHANGED, hero2, activeHero );
-            endTurn();
-        }
+    public void addObserver(final PropertyChangeListener aObserver) {
+        observerSupport.addPropertyChangeListener(aObserver);
+        turnQueue.addObserver(aObserver);
+    }
+    
+    public Player getCurrentPlayer() {
+        return turnQueue.getCurrentPlayer();
     }
 
-    private void endTurn()
-    {
-        roundNumber += 1;
-        hero1.addGold( 2000 * roundNumber );
-        hero2.addGold( 2000 * roundNumber );
-        observerSupport.firePropertyChange( NEXT_ROUND, roundNumber - 1, roundNumber );
+    public void endTurn() {
+        turnQueue.nextTurn();
     }
 
-    public int getRoundNumber()
-    {
-        return roundNumber;
-    }
-
-    public void addObserver( final String aPropertyName, final PropertyChangeListener aObserver )
-    {
-        observerSupport.addPropertyChangeListener( aPropertyName, aObserver );
-    }
-
-    public EconomyHero getPlayer1()
-    {
-        // TODO make copy
-        return hero1;
-    }
-
-    public EconomyHero getPlayer2()
-    {
-        // TODO make copy
-        return hero2;
-    }
 }
