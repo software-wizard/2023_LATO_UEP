@@ -14,6 +14,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import pl.psi.EconomyEngine;
+import pl.psi.gui.launcher.EcoMapSceneController;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.artifacts.Artifact;
 
@@ -185,6 +187,8 @@ public class EcoEqSceneController implements Initializable{
 
     HeroEquipment heroEq;
 
+    EconomyEngine economyEngine;
+
 
 
     @Override
@@ -267,8 +271,9 @@ public class EcoEqSceneController implements Initializable{
         backpack_slots_images.add(slotImage22);
     }
 
-    public void refreshEq(HeroEquipment aHeroEq){
+    public void refreshEq(HeroEquipment aHeroEq,EconomyEngine aEconomyEngine){
         heroEq = aHeroEq;
+        economyEngine = aEconomyEngine;
         HashMap<String, Artifact> heroInventory = aHeroEq.getHeroInventory();
         ArrayList<Artifact> heroBackpack = aHeroEq.getHeroBackpack();
 
@@ -300,6 +305,13 @@ public class EcoEqSceneController implements Initializable{
     public void switchToMap(ActionEvent event) throws IOException {
         FXMLLoader loaderMap = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         rootMap = loaderMap.load();
+        try {
+            EcoMapSceneController ecoMapSceneController = loaderMap.getController();
+            ecoMapSceneController.loadEconomyEngine(economyEngine);
+            ecoMapSceneController.refreshGui();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         stageMap = (Stage)((Node)event.getSource()).getScene().getWindow();
         sceneMap = new  Scene(rootMap);
@@ -314,7 +326,7 @@ public class EcoEqSceneController implements Initializable{
         try {
             ArrayList<Artifact> heroBackpack = heroEq.getHeroBackpack();
             heroEq.moveFromBackpackToInventory(heroBackpack.get(backpack_slots_ID));
-            refreshEq(heroEq);
+            refreshEq(heroEq,economyEngine);
         }catch(IndexOutOfBoundsException e){
             // Handle the exception by showing an alert dialog
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -331,7 +343,7 @@ public class EcoEqSceneController implements Initializable{
                 throw new NullPointerException();
             }
             heroEq.moveFromInventoryToBackpack(heroInventory.get(artifactType));
-            refreshEq(heroEq);
+            refreshEq(heroEq,economyEngine);
         }catch(NullPointerException e){
             // Handle the exception by showing an alert dialog
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

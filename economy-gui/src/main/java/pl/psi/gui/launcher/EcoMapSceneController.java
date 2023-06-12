@@ -114,7 +114,7 @@ public class EcoMapSceneController {
 
         try {
             EcoEqSceneController ecoEqSceneController = loaderInventory.getController();
-            ecoEqSceneController.refreshEq(aHeroEq);
+            ecoEqSceneController.refreshEq(aHeroEq,economyEngine);
         } catch (Exception e) {
             e.printStackTrace();
         }
