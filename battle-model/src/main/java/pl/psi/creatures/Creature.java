@@ -130,6 +130,11 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     }
 
     @Override
+    public boolean isControllable() {
+        return true;
+    }
+
+    @Override
     public boolean canHeal() {
         return false;
     }

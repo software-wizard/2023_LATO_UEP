@@ -29,4 +29,10 @@ public class Ballista extends WarMachine implements AttackerIF {
         return true;
     }
 
+    @Override
+    public boolean isControllable() {
+        return true;
+    }
+
+
 }

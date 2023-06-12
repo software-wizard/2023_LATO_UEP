@@ -150,6 +150,19 @@ public class GameEngine {
         }
     }
 
+    public boolean isControllable() {
+        return turnQueue.getCurrentMapObject().isControllable();
+    }
+
+    public boolean isTurnQueueEmpty() {
+        return turnQueue.isTurnQueueEmpty();
+    }
+
+    public void endOfTurn() {
+        turnQueue.endOfTurn();
+    }
+
+
 //    public boolean canHeal(final Point point) {
 //        if (turnQueue.getCurrentMapObject().canHeal()) {
 //            double distance = board.getPosition(turnQueue.getCurrentMapObject())

@@ -25,4 +25,9 @@ public class FirstAidTent extends WarMachine implements HealerIF {
         return true;
     }
 
+    @Override
+    public boolean isControllable() {
+        return true;
+    }
+
 }
