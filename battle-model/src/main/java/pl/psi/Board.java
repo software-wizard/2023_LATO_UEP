@@ -42,9 +42,35 @@ public class Board
 
     void move( final Creature aCreature, final Point aPoint )
     {
-        ShortestPathAlgorythm  path = new ShortestPathAlgorythm();
+        //ShortestPathAlgorythm  path = new ShortestPathAlgorythm();
         Point startingPoint = getPosition(aCreature);
         Point endPoint = aPoint;
+        int[][] grid = gridConstruction(availablePointsToGo(aCreature));
+        IMovementOfCreatures path;
+        if (true){
+            path = new MovementOfWalkingCreatures();
+            List<Point> theRightPath = path.move(grid,startingPoint,endPoint);
+            if (theRightPath != null) {
+                for (Point point : theRightPath) {
+                    map.inverse().remove(aCreature);
+                    map.put(point, aCreature);
+                }
+            }
+        } else if (false) {
+            path = new MovementOfFlyingCreatures();
+            List<Point> theRightPath = path.move(grid,startingPoint,endPoint);
+            if (theRightPath != null) {
+                for (Point point : theRightPath) {
+                    map.inverse().remove(aCreature);
+                    map.put(point, aCreature);
+                }
+            }
+        } /*else if (false) {
+            path = new MovementOfTeleportingCreatures();
+
+        }
+        */
+        /*
         List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
@@ -52,6 +78,7 @@ public class Board
                 map.put(point, aCreature);
             }
         }
+         */
     }
 
     boolean canMove( final Creature aCreature, final Point aPoint )
