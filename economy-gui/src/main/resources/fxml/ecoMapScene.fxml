@@ -126,6 +126,7 @@
                   <Button layoutX="82.0" layoutY="370.0" mnemonicParsing="false" onAction="#openEq" text="Inventory" />
                   <Label fx:id="currentPlayerLabel" layoutX="11.0" layoutY="98.0" text="Current player name: xxx" />
                   <Label fx:id="currentDayLabel" layoutX="14.0" layoutY="124.0" text="Current day: xxx" />
+                  <Button fx:id="battleButton" layoutX="51.0" layoutY="497.0" mnemonicParsing="false" onAction="#goToBattle" text="Go to battle" />
           </children>
         </AnchorPane>
       </items>

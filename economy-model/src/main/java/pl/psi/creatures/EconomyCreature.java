@@ -1,5 +1,8 @@
 package pl.psi.creatures;
 
+import lombok.Builder;
+
+@Builder
 public class EconomyCreature
 {
 

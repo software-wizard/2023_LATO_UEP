@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import pl.psi.artifacts.ArtifactFactory;
 import pl.psi.artifacts.ArtifactStatistics;
+import pl.psi.converter.EcoBattleConverter;
+import pl.psi.gui.LaunchBattle;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.artifacts.Artifact;
@@ -105,6 +107,12 @@ public class EcoMapSceneController {
 
     public void displayCurrentDay(int day) {
         currentDayLabel.setText("Current day: " + day);
+    }
+
+    public void goToBattle(ActionEvent event) throws IOException {
+        EcoBattleConverter converter = new EcoBattleConverter();
+        converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(),economyEngine.getCurrentPlayer().getEconomyHero());
+
     }
 
     public void openEq(ActionEvent event) throws IOException {

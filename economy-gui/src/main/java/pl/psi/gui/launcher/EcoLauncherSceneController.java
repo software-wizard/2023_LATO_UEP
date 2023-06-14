@@ -19,6 +19,11 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.creatures.CreatureStats;
+import pl.psi.creatures.EconomyCreature;
+import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroStatistics;
+import pl.psi.mapElements.Castle;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -90,6 +95,34 @@ public class EcoLauncherSceneController implements Initializable
                                    .crystal(1000)
                                    .gems(1000)
                                    .build())
+                           /*
+                           .economyHero(EconomyHero.builder()
+                                   .heroStatistics(HeroStatistics.builder()
+                                           .moveRange(1)
+                                           .experience(1)
+                                           .level(1)
+                                           .mana(1)
+                                           .maxMana(1)
+                                           .build())
+                                   .fraction(Castle.FractionType.NECROPOLIS)
+                                   .heroArmy(EconomyCreature.builder()
+                                           .stats(CreatureStats.builder()
+                                                   .name("Skeleton")
+                                                   .attack(1)
+                                                   .armor(1)
+                                                   .maxHp(1)
+                                                   .moveRange(1)
+                                                   //tu dodac trzeba damage range
+                                                   .tier(1)
+                                                   .description("Skeleton")
+                                                   .isUpgraded(false)
+                                                   .build())
+                                           .amount(1)
+                                           .goldCost(1)
+                                           .build())
+                                   .build())
+
+                            */
                            .build();
                    players.add(player);
                }
