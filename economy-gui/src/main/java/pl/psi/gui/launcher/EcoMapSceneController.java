@@ -35,6 +35,8 @@ public class EcoMapSceneController {
     @FXML
     Label currentPlayerLabel;
     @FXML
+    Label currentDayLabel;
+    @FXML
     Label heroNameLabel;
     @FXML
     Label goldLabel;
@@ -59,6 +61,7 @@ public class EcoMapSceneController {
         displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
+        displayCurrentDay(economyEngine.getCurrentDay());
     }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
@@ -98,6 +101,10 @@ public class EcoMapSceneController {
     public void endTurn(ActionEvent event) throws IOException{
         economyEngine.endTurn();
         refreshGui();
+    }
+
+    public void displayCurrentDay(int day) {
+        currentDayLabel.setText("Current day: " + day);
     }
 
     public void openEq(ActionEvent event) throws IOException {

@@ -155,10 +155,11 @@ public class EcoLauncherSceneController implements Initializable
         try {
             EcoMapSceneController ecoMapSceneController = loader.getController();
             ecoMapSceneController.loadEconomyEngine(economyEngine);
+            ecoMapSceneController.refreshGui();
             //pobieranie danych z economyEngine i ładowanie ich na nowa scene za pierwszym razem
-            ecoMapSceneController.displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
-            ecoMapSceneController.displayName(economyEngine.getCurrentPlayer().getHeroName());
-            ecoMapSceneController.displayResources(economyEngine.getCurrentPlayer().getResources());
+//            ecoMapSceneController.displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
+//            ecoMapSceneController.displayName(economyEngine.getCurrentPlayer().getHeroName());
+//            ecoMapSceneController.displayResources(economyEngine.getCurrentPlayer().getResources());
 
             //do debugu
             ecoMapSceneController.displayAllPlayersWithProperties(players);
