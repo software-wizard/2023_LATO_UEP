@@ -57,7 +57,7 @@ public class TurnQueue {
         observerSupport.firePropertyChange(NEXT_MAP_OBJECT, oldMapObject, currentMapObject);
     }
 
-    private void endOfTurn() {
+    public void endOfTurn() {
         roundNumber++;
         initQueue();
         observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
@@ -70,5 +70,9 @@ public class TurnQueue {
     public void removeMapObject(MapObjectIf mapObjectIf){
         mapObjectIfs.remove(mapObjectIf);
         mapObjectsQueue.remove(mapObjectIf);
+    }
+
+    public boolean isTurnQueueEmpty() {
+        return mapObjectsQueue.isEmpty();
     }
 }
