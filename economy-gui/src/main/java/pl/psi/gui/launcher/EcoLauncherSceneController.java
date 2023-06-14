@@ -95,7 +95,6 @@ public class EcoLauncherSceneController implements Initializable
                                    .crystal(1000)
                                    .gems(1000)
                                    .build())
-                           /*
                            .economyHero(EconomyHero.builder()
                                    .heroStatistics(HeroStatistics.builder()
                                            .moveRange(1)
@@ -105,25 +104,25 @@ public class EcoLauncherSceneController implements Initializable
                                            .maxMana(1)
                                            .build())
                                    .fraction(Castle.FractionType.NECROPOLIS)
-                                   .heroArmy(EconomyCreature.builder()
-                                           .stats(CreatureStats.builder()
-                                                   .name("Skeleton")
-                                                   .attack(1)
-                                                   .armor(1)
-                                                   .maxHp(1)
-                                                   .moveRange(1)
-                                                   //tu dodac trzeba damage range
-                                                   .tier(1)
-                                                   .description("Skeleton")
-                                                   .isUpgraded(false)
-                                                   .build())
-                                           .amount(1)
-                                           .goldCost(1)
-                                           .build())
+                                   .heroArmy(null)
                                    .build())
-
-                            */
                            .build();
+
+//                   player.getEconomyHero().getHeroArmy().add(EconomyCreature.builder()
+//                           .creatureStats(CreatureStats.builder()
+//                                   .name("Skeleton")
+//                                   .attack(1)
+//                                   .armor(1)
+//                                   .maxHp(1)
+//                                   .moveRange(1)
+//                                   .damage(null)
+//                                   .tier(1)
+//                                   .description("Skeleton")
+//                                   .isUpgraded(false)
+//                                   .build())
+//                                   .amount(1)
+//                                   .goldCost(1)
+//                                   .build());
                    players.add(player);
                }
            }
