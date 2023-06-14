@@ -15,6 +15,28 @@ public class Mine implements MapElement {
     }
 
     @Override
+    public String getIcon() {
+        switch (resourceType) {
+            case GOLD:
+                return "Gold_Mine";
+            case WOOD:
+                return "Sawmill";
+            case ORE:
+                return "Alchemist's_Lab";
+            case MERCURY:
+                return "Gold_Mine";
+            case SULFUR:
+                return "Gold_Mine";
+            case CRYSTAL:
+                return "Gold_Mine";
+            case GEMS:
+                return "Gold_Mine";
+            default:
+                return null;
+        }
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }

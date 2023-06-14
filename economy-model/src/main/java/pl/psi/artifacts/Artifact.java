@@ -22,6 +22,12 @@ public class Artifact implements MapElement {
         this.name=aName;
         this.artifactStatistics=aArtifactStatistics;
     }
+
+    @Override
+    public String getIcon() {
+        return null;
+    }
+
     @Override
     public boolean isInteractive() {
         return true;

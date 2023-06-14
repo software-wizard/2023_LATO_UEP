@@ -34,8 +34,8 @@ public class MapController implements PropertyChangeListener {
 
     private void refreshGui() {
 
-        gridMap.getChildren()
-                .clear();
+        gridMap.getChildren().clear();
+
         for( int x = 0; x < 60; x++ )
         {
             for( int y = 0; y < 30; y++ )
@@ -53,20 +53,32 @@ public class MapController implements PropertyChangeListener {
                         mapTile.setBackground(Color.GRAY);
                     } else {
                         mapTile.setBackground(Color.GREEN);
+
+                        try {
+                            if (mapElementToGUI.getIcon()!=null) {
+                                mapTile.setGraphic(mapElementToGUI.getIcon());
+                            }
+                        } catch (FileNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
                 }));
 
                 // Draw heroes
                 economyHero.ifPresent(economyHeroToGUI -> {
-                    mapTile.setName("Hero");
+                    try {
+                        mapTile.setHeroGraphic("Dragon"); // TODO
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
 
                 if (economyEngine.canMove(currentPoint, economyEngine.getCurrentPlayer().getEconomyHero())) {
                     mapTile.setBackground(Color.BLUEVIOLET);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         economyEngine.move(currentPoint, economyEngine.getCurrentPlayer().getEconomyHero());
-                        // TODO observer does not work?
-                        refreshGui();
+
                     });
                 }
 

@@ -6,6 +6,7 @@ import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.Player;
 
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
@@ -38,6 +39,7 @@ public class EconomyEngine {
 
     public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         board.move(aChoosenEconomyHero, aPoint);
+        observerSupport.firePropertyChange(new PropertyChangeEvent(this, "", null, null)); // TODO value like END_OF_TURN if observer must know what operation
     }
 
     public void addObserver(final PropertyChangeListener aObserver) {

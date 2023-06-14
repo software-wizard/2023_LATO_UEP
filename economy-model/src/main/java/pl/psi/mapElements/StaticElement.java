@@ -8,6 +8,11 @@ Class for bariers like mountains or rivers.
 public class StaticElement implements MapElement {
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return false;
     }

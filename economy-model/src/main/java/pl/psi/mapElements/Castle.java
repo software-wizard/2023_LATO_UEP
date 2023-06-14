@@ -113,6 +113,11 @@ public class Castle implements MapElement {
     }
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }
