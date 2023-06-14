@@ -2,6 +2,7 @@ package pl.psi.player;
 
 import lombok.Builder;
 import lombok.Getter;
+import pl.psi.hero.EconomyHero;
 
 import java.util.Objects;
 
@@ -16,12 +17,16 @@ public class Player {
     private String heroName;
     private String bonus;
 
-    public Player(String aName, PlayerResources aResources, String town, String heroName, String bonus) {
+    private EconomyHero economyHero;
+
+    public Player(String aName, PlayerResources aResources, String town, String heroName, String bonus,
+                  EconomyHero aEconomyHero) {
         this.name = aName;
         this.resources = aResources;
         this.town = town;
         this.heroName = heroName;
         this.bonus = bonus;
+        this.economyHero = aEconomyHero;
     }
 
     @Override

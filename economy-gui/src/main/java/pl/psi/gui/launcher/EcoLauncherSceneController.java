@@ -81,12 +81,15 @@ public class EcoLauncherSceneController implements Initializable
 
                // If the user entered both a name and an age, create a new player and add it to the list
                if (nameResult.isPresent()) {
-                   Player player = new Player(nameResult.get(), PlayerResources.builder().
-                           wood(1000).
-                           ore(1000).
-                           gold(1000).
-                           crystal(1000).
-                           gems(1000).build(), null, null, null);
+                   Player player = Player.builder()
+                           .resources(PlayerResources.builder()
+                                   .wood(1000)
+                                   .ore(1000)
+                                   .gold(1000)
+                                   .crystal(1000)
+                                   .gems(1000)
+                                   .build())
+                           .build();
                    players.add(player);
                }
            }
