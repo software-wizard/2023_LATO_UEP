@@ -10,6 +10,11 @@ public class LearningStone implements MapElement {
     private ArrayList<EconomyHero> visitedEconomyHeroes = new ArrayList<EconomyHero>();
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }

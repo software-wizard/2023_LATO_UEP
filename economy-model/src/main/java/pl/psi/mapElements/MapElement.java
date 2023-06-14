@@ -4,7 +4,7 @@ import pl.psi.hero.EconomyHero;
 
 public interface MapElement {
 
-//    void getIcon();
+    String getIcon();
 
     boolean isInteractive();
     boolean shouldBeRemoveAfterAction();

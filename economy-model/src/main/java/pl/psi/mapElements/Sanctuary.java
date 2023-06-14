@@ -7,6 +7,11 @@ public class Sanctuary implements MapElement {
     // TODO
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }

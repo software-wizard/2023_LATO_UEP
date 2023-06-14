@@ -16,6 +16,11 @@ public class Resource implements MapElement {
     }
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }

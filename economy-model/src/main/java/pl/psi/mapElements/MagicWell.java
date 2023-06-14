@@ -10,6 +10,11 @@ public class MagicWell implements MapElement {
     private ArrayList<EconomyHero> currentTurnVisitedEconomyHeroes = new ArrayList<>();
 
     @Override
+    public String getIcon() {
+        return null;
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }
