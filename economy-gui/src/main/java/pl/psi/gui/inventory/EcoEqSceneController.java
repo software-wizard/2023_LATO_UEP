@@ -14,8 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import pl.psi.EconomyEngine;
-import pl.psi.gui.launcher.EcoMapSceneController;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.artifacts.Artifact;
 
@@ -186,7 +184,7 @@ public class EcoEqSceneController implements Initializable{
     ArrayList<ImageView> backpack_slots_images;
 
     HeroEquipment heroEq;
-    private EconomyEngine economyEngine;
+
 
 
     @Override
@@ -269,11 +267,7 @@ public class EcoEqSceneController implements Initializable{
         backpack_slots_images.add(slotImage22);
     }
 
-    public void loadEconomyEngine(EconomyEngine economyEngine) {
-        this.economyEngine = economyEngine;
-    }
     public void refreshEq(HeroEquipment aHeroEq){
-
         heroEq = aHeroEq;
         HashMap<String, Artifact> heroInventory = aHeroEq.getHeroInventory();
         ArrayList<Artifact> heroBackpack = aHeroEq.getHeroBackpack();
@@ -313,10 +307,6 @@ public class EcoEqSceneController implements Initializable{
         stageMap.setX( 5 );
         stageMap.setY( 5 );
         stageMap.show();
-
-        EcoMapSceneController ecoMapSceneController = loaderMap.getController();
-        ecoMapSceneController.loadEconomyEngine(economyEngine);
-        ecoMapSceneController.refreshGui();
     }
 
 

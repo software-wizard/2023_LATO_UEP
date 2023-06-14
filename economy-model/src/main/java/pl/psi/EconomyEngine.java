@@ -45,7 +45,4 @@ public class EconomyEngine {
         turnQueue.nextTurn();
     }
 
-    public int getCurrentDay() {
-        return turnQueue.getDay();
-    }
 }

@@ -35,8 +35,6 @@ public class EcoMapSceneController {
     @FXML
     Label currentPlayerLabel;
     @FXML
-    Label currentDayLabel;
-    @FXML
     Label heroNameLabel;
     @FXML
     Label goldLabel;
@@ -61,7 +59,6 @@ public class EcoMapSceneController {
         displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
-        displayCurrentDay(economyEngine.getCurrentDay());
     }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
@@ -77,8 +74,6 @@ public class EcoMapSceneController {
             System.out.println(player.getName() + " " + player.getTown() + " " + player.getHeroName() + " " + player.getBonus());
         }
     }
-
-
 
     public void displayResources(PlayerResources playerResources) {
         goldLabel.setText("Gold: "+ playerResources.getGold());
@@ -105,10 +100,6 @@ public class EcoMapSceneController {
         refreshGui();
     }
 
-    public void displayCurrentDay(int day) {
-        currentDayLabel.setText("Current day: " + day);
-    }
-
     public void openEq(ActionEvent event) throws IOException {
         ArtifactFactory artifactFactory = new ArtifactFactory();
         HeroEquipment aHeroEq = new HeroEquipment();
@@ -124,8 +115,6 @@ public class EcoMapSceneController {
         try {
             EcoEqSceneController ecoEqSceneController = loaderInventory.getController();
             ecoEqSceneController.refreshEq(aHeroEq);
-            ecoEqSceneController.loadEconomyEngine(economyEngine);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
