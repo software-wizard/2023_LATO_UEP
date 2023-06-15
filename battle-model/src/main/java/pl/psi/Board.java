@@ -48,28 +48,15 @@ public class Board
         int[][] grid = gridConstruction(availablePointsToGo(aCreature));
         IMovementOfCreatures path;
         if (true){
-            path = new MovementOfWalkingCreatures();
-            List<Point> theRightPath = path.move(grid,startingPoint,endPoint);
-            if (theRightPath != null) {
-                for (Point point : theRightPath) {
-                    map.inverse().remove(aCreature);
-                    map.put(point, aCreature);
-                }
-            }
+            path = new MovementOfWalkingCreatures(aCreature,map);
+            path.move(grid,startingPoint,endPoint);
         } else if (false) {
-            path = new MovementOfFlyingCreatures();
-            List<Point> theRightPath = path.move(grid,startingPoint,endPoint);
-            if (theRightPath != null) {
-                for (Point point : theRightPath) {
-                    map.inverse().remove(aCreature);
-                    map.put(point, aCreature);
-                }
-            }
-        } /*else if (false) {
-            path = new MovementOfTeleportingCreatures();
-
+            path = new MovementOfFlyingCreatures(aCreature,map);
+            path.move(grid,startingPoint,endPoint);
+        } else if (false) {
+            path = new MovementOfTeleportingCreatures(aCreature, map);
+            path.move(grid,startingPoint,endPoint);
         }
-        */
         /*
         List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(aCreature)), startingPoint, endPoint);
         if (theRightPath != null) {
