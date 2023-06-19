@@ -1,35 +1,31 @@
 package pl.psi.map;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import pl.psi.Point;
+import pl.psi.mapElements.MagicWell;
 import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.StaticElement;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 
 public class MapWriter {
     public static void main(String[] args) {
-//        BiMap<Point, MapElement> mapElements = HashBiMap.create();
+        BiMap<Point, MapElement> mapElements = HashBiMap.create();
+        mapElements.put(new Point(8, 2), new StaticElement());
+        mapElements.put(new Point(8, 3), new StaticElement());
+        mapElements.put(new Point(9, 3), new StaticElement());
+        mapElements.put(new Point(9, 2), new StaticElement());
+//        mapElements.put(new Point(12, 2), new MagicWell());
 
-//        Gson gson = new GsonBuilder().create();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(MapElement.class, new MapElementAdapter())
-                .create();
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        Map<Point, MapElement> map = new HashMap<>();
-        map.put(new Point(10, 20), new StaticElement());
-
-        String json = gson.toJson(map);
-
-        try (FileWriter writer = new FileWriter("economy-model/src/main/resources/maps/testMap.json")) {
-            writer.write(json);
+        try {
+            objectMapper.writeValue(new File("economy-model/src/main/resources/maps/testMap.json"), mapElements);
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 }

@@ -49,13 +49,10 @@ public class Map extends Application {
         players.add(Player.builder()
                 .economyHero(EconomyHero.builder()
                         .heroStatistics(HeroStatistics.builder()
-                                .moveRange(7)
+                                .moveRange(8)
                                 .build())
                         .build())
                 .build());
-        players.get(0).getEconomyHero().setPlayer(players.get(0));
-        // TODO - jak to lepiej rozwiązać, przekazanie referencji potrzebne, by sprawdzić, dla danego herosa jest dany player, np. kolor
-
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
         mapElements.put(new Point(8, 2), new StaticElement());
         mapElements.put(new Point(8, 3), new StaticElement());

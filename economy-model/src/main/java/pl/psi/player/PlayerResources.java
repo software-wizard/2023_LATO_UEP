@@ -3,7 +3,6 @@ package pl.psi.player;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 @Getter
 @Setter
@@ -19,3 +18,4 @@ public class PlayerResources {
     private int gems;
 
 }
+// adnotacja @value
