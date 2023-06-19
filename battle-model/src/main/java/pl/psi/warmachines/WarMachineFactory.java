@@ -11,9 +11,6 @@ public class WarMachineFactory {
     public WarMachine create(WarMachineStatistic aName, int aSkillLevel, final int amount )
     {
         switch(aName) {
-            case AMMO_CART:
-                return new AmmoCart(amount);
-
             case BALLISTA:
                 return new Ballista(amount);
             case CATAPULT:

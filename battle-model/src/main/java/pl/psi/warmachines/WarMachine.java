@@ -34,16 +34,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     }
 
 
-    //todo uncomment when tent is ready
-//    public boolean canHeal() {
-//        return false;
-//    }
-//
-//    public boolean canAttack() {
-//        return true;
-//    }
-
-
     // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
     // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
 //    public boolean canHeal() {

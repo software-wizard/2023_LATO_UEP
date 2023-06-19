@@ -27,8 +27,6 @@ public class ControlIndicator {
                 return heroArtillerySkillLevel > 0;
             case CATAPULT:
                 return heroBallisticsSkillLevel > 0;
-            case AMMO_CART:
-                throw new IllegalArgumentException("Ammo cart cannot be controlled by player");
             default:
                 return false;
         }
