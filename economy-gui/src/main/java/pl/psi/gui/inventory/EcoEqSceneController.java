@@ -307,7 +307,7 @@ public class EcoEqSceneController implements Initializable{
         rootMap = loaderMap.load();
         try {
             EcoMapSceneController ecoMapSceneController = loaderMap.getController();
-            ecoMapSceneController.loadEconomyEngine(economyEngine);
+            ecoMapSceneController.loadMapGUI(economyEngine);
             ecoMapSceneController.refreshGui();
         } catch (Exception e) {
             e.printStackTrace();

@@ -19,8 +19,6 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
-import pl.psi.creatures.CreatureStats;
-import pl.psi.creatures.EconomyCreature;
 import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.Castle;
@@ -97,7 +95,7 @@ public class EcoLauncherSceneController implements Initializable
                                    .build())
                            .economyHero(EconomyHero.builder()
                                    .heroStatistics(HeroStatistics.builder()
-                                           .moveRange(1)
+                                           .moveRange(7)
                                            .experience(1)
                                            .level(1)
                                            .mana(1)
@@ -133,7 +131,6 @@ public class EcoLauncherSceneController implements Initializable
        playerChoiceBoxes.setPadding(new Insets(10));
 
        // Loop through the list of players and create a ChoiceBox for each one
-       //TODO ogarnac settery do miast, nazw herosow itd
        for (Player player : players) {
            HBox playerChoiceBox = new HBox();
            playerChoiceBox.setSpacing(10);
@@ -179,23 +176,14 @@ public class EcoLauncherSceneController implements Initializable
         //Ladowanie playerow do economyEngine
         economyEngine = new EconomyEngine(players, HashBiMap.create());
 
-        // economyEngine przekazywane przez konstrktor do castle/inventory/map
-        // ecoBattleConverter przekazanie parametrów do konstruktora controlera
-
-        //String chosenHero = playerHeroChoiceBox.getValue();
-
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         // loader.setControler find method
         root = loader.load();
 
         try {
             EcoMapSceneController ecoMapSceneController = loader.getController();
-            ecoMapSceneController.loadEconomyEngine(economyEngine);
+            ecoMapSceneController.loadMapGUI(economyEngine);
             ecoMapSceneController.refreshGui();
-            //pobieranie danych z economyEngine i ładowanie ich na nowa scene za pierwszym razem
-//            ecoMapSceneController.displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
-//            ecoMapSceneController.displayName(economyEngine.getCurrentPlayer().getHeroName());
-//            ecoMapSceneController.displayResources(economyEngine.getCurrentPlayer().getResources());
 
             //do debugu
             ecoMapSceneController.displayAllPlayersWithProperties(players);

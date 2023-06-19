@@ -1,8 +1,17 @@
 package pl.psi.gui.launcher;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,15 +19,24 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import pl.psi.Point;
+import pl.psi.ResourceType;
 import pl.psi.artifacts.ArtifactFactory;
-import pl.psi.artifacts.ArtifactStatistics;
 import pl.psi.converter.EcoBattleConverter;
-import pl.psi.gui.LaunchBattle;
 import pl.psi.gui.inventory.EcoEqSceneController;
+import pl.psi.gui.map.MapTile;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.artifacts.Artifact;
 import pl.psi.EconomyEngine;
+import pl.psi.map.MapElementAdapter;
+import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.Mine;
+import pl.psi.mapElements.Resource;
+import pl.psi.mapElements.StaticElement;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -55,7 +73,9 @@ public class EcoMapSceneController {
     @FXML
     Label gemsLabel;
 
-    public void loadEconomyEngine(EconomyEngine economyEngine) {
+    @FXML
+    private GridPane gridMap;
+    public void loadMapGUI(EconomyEngine economyEngine) {
         this.economyEngine = economyEngine;
     }
 
@@ -64,8 +84,15 @@ public class EcoMapSceneController {
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
         displayCurrentDay(economyEngine.getCurrentDay());
+
+
+        //displayMap(economyEngine.getCurrentPlayer().getMap());
     }
-    //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
+
+    public void displayMap(Map<Point, MapElement> map) {
+        gridMap.getChildren().clear();
+        //...
+    }
     public void displayName(String heroName) {
         heroNameLabel.setText("Hero name: " + heroName);
     }
@@ -112,7 +139,11 @@ public class EcoMapSceneController {
     public void goToBattle(ActionEvent event) throws IOException {
         EcoBattleConverter converter = new EcoBattleConverter();
         converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(),economyEngine.getCurrentPlayer().getEconomyHero());
+    }
 
+    public void goToMap(ActionEvent event) throws IOException {
+        EcoBattleConverter converter = new EcoBattleConverter();
+        converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(),economyEngine.getCurrentPlayer().getEconomyHero());
     }
 
     public void openEq(ActionEvent event) throws IOException {
@@ -142,4 +173,5 @@ public class EcoMapSceneController {
         stageInventory.show();
 
     }
+
 }
