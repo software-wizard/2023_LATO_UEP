@@ -9,11 +9,13 @@ import pl.psi.MapObjectIf;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 
 @Getter
 public class WarMachine implements PropertyChangeListener, MapObjectIf {
     private WarMachineDamageCalculatorIF calculator;
     private FirstAidTentIf HPcalculator;
+    @Getter
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
@@ -146,6 +148,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         //return defender.getCurrentHp() > 0;
     }
 
+    public void setControllable() {
+    }
+
     public static class Builder {
         private int amount = 1;
         private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
@@ -178,5 +183,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Override
     public String toString() {
         return getName() + System.lineSeparator() + getCurrentHp();
+    }
+
+    public HashMap<String, Integer> getSkill() {
+        return null;
     }
 }

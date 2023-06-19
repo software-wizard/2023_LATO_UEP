@@ -12,12 +12,12 @@ public class WarMachineFactory {
     {
         switch(aName) {
             case BALLISTA:
-                return new Ballista(amount);
+                return new Ballista(amount, aSkillLevel);
             case CATAPULT:
-                return new Catapult(amount);
+                return new Catapult(amount, aSkillLevel);
 
             case FIRST_AID_TENT:
-                return new FirstAidTent(amount);
+                return new FirstAidTent(amount, aSkillLevel);
         }
         throw new IllegalArgumentException( "Cannot recognize WarMachine by name" );
     }

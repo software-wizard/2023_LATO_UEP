@@ -5,33 +5,52 @@ import pl.psi.WarMachines.WarMachineStatistic;
 import pl.psi.warmachines.WarMachine;
 import pl.psi.warmachines.WarMachineFactory;
 
+import java.util.HashMap;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControlIndicatorTest {
 
     @Test
     void indicateControl() {
-        ControlIndicator controlIndicator = new ControlIndicator();
+        HashMap<String, Integer> skills = new HashMap<>();
+        skills.put("artillery", 1);
+        skills.put("ballistics", 1);
+        skills.put("firstAid", 1);
+        ControlIndicator controlIndicator = new ControlIndicator(skills);
         assertTrue(controlIndicator.indicateControl(WarMachineStatistic.BALLISTA));
         assertTrue(controlIndicator.indicateControl(WarMachineStatistic.CATAPULT));
         assertTrue(controlIndicator.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
 
-        controlIndicator.setHeroBallisticsSkillLevel(0);
-        controlIndicator.setHeroArtillerySkillLevel(0);
-        controlIndicator.setHeroFirstAidSkillLevel(0);
+        HashMap<String, Integer> skills2 = new HashMap<>();
+        skills.put("artillery", 0);
+        skills.put("ballistics", 0);
+        skills.put("firstAid", 0);
+        ControlIndicator controlIndicator1 = new ControlIndicator(skills2);
 
-        assertFalse(controlIndicator.indicateControl(WarMachineStatistic.BALLISTA));
-        assertFalse(controlIndicator.indicateControl(WarMachineStatistic.CATAPULT));
-        assertFalse(controlIndicator.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
+        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.BALLISTA));
+        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.CATAPULT));
+        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
     }
 
     @Test
     void isControllable() {
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
+        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
+        Hero hero = new Hero(List.of(), List.of(ballista, firstAidTent));
+        for (WarMachine warMachine : hero.getWarMachines()) {
+            assertTrue(warMachine.isControllable());
+        }
+    }
+
+    @Test
+    void isNotControllable(){
         WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 0, 1);
         WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 0, 1);
-        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 0, 1);
-        assertTrue(catapult.isControllable());
-        assertTrue(ballista.isControllable());
-        assertTrue(firstAidTent.isControllable());
+        Hero hero = new Hero(List.of(), List.of(catapult, ballista));
+        for (WarMachine warMachine : hero.getWarMachines()) {
+            assertFalse(warMachine.isControllable());
+        }
     }
 }
