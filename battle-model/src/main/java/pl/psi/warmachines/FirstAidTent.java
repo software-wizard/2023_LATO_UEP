@@ -6,12 +6,17 @@ import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
+import java.util.HashMap;
+
 public class FirstAidTent extends WarMachine implements HealerIF {
     @Setter
     private boolean canBeControlledByPlayer;
-    public FirstAidTent(int amount) {
+    private final int firstAidSkillLevel;
+
+    public FirstAidTent(int amount, int firstAidSkillLevel) {
         super(WarMachineStatistic.FIRST_AID_TENT, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
-        canBeControlledByPlayer = new ControlIndicator().indicateControl(WarMachineStatistic.FIRST_AID_TENT);
+        this.firstAidSkillLevel = firstAidSkillLevel;
+        canBeControlledByPlayer = false;
     }
 
     @Override
@@ -33,6 +38,17 @@ public class FirstAidTent extends WarMachine implements HealerIF {
     @Override
     public boolean isControllable() {
         return canBeControlledByPlayer;
+    }
+
+    public HashMap<String, Integer> getSkill(){
+        HashMap<String, Integer> skill = new HashMap<>();
+        skill.put("firstAid", firstAidSkillLevel);
+        return skill;
+    }
+
+    @Override
+    public void setControllable() {
+        canBeControlledByPlayer = true;
     }
 
 }

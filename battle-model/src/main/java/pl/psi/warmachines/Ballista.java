@@ -1,18 +1,19 @@
 package pl.psi.warmachines;
 
-import lombok.Setter;
 import pl.psi.AttackerIF;
-import pl.psi.ControlIndicator;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
-public class Ballista extends WarMachine implements AttackerIF {
-    @Setter
-    private boolean canBeControlledByPlayer;
+import java.util.HashMap;
 
-    public Ballista(int amount) {
+public class Ballista extends WarMachine implements AttackerIF {
+    private boolean canBeControlledByPlayer;
+    private final int artillerySkillLevel;
+
+    public Ballista(int amount, int artillerySkillLevel) {
         super(WarMachineStatistic.BALLISTA, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
-        canBeControlledByPlayer = new ControlIndicator().indicateControl(WarMachineStatistic.BALLISTA);
+        this.artillerySkillLevel = artillerySkillLevel;
+        canBeControlledByPlayer = false;
     }
 
     @Override
@@ -38,6 +39,20 @@ public class Ballista extends WarMachine implements AttackerIF {
     public boolean isControllable() {
         return canBeControlledByPlayer;
     }
+
+    @Override
+    public HashMap<String, Integer> getSkill(){
+        HashMap<String, Integer> skill = new HashMap<>();
+        skill.put("artillery", artillerySkillLevel);
+        return skill;
+    }
+
+    @Override
+    public void setControllable() {
+        canBeControlledByPlayer = true;
+    }
+
+
 
 
 }

@@ -27,5 +27,7 @@ public interface MapObjectIf extends PropertyChangeListener {
     boolean canHeal();
     boolean canAttack();
     boolean isControllable();
+
+    int getArmor();
 }
 

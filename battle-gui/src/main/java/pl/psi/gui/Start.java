@@ -53,8 +53,8 @@ public class Start extends Application
     private Hero createP2()
     {
         Creature creature1 = new NecropolisFactory().create( true, 2, 5 );
-        WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 2);
-        WarMachine  warMachine2 = new WarMachineFactory().create(WarMachineStatistic.AMMO_CART, 1, 1);
+        WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 2, 2);
+        WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 0, 1);
 
         return new Hero(List.of(creature1), List.of(warMachine1, warMachine2));
     }
@@ -63,7 +63,7 @@ public class Start extends Application
     {
         Creature creature1 = new NecropolisFactory().create( false, 2, 1);
         WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 2);
-        WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 2, 1);
+        WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 3, 1);
 
         return new Hero(List.of(creature1), List.of(warMachine1, warMachine2));
     }

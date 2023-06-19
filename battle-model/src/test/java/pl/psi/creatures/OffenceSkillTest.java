@@ -20,7 +20,7 @@ public class OffenceSkillTest {
 
     @Test
     @Disabled
-    void shouldIncreaseDamageBy10perCent() {
+    void shouldIncreaseDamageBy10perCent() throws Exception {
 
         // Initialize the mocks
         MockitoAnnotations.initMocks(this);

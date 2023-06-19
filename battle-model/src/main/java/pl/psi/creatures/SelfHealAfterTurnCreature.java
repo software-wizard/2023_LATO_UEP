@@ -35,7 +35,7 @@ class SelfHealAfterTurnCreature extends Creature {
     }
 
     @Override
-    public void attack(final Creature aDefender) {
+    public void attack(final Creature aDefender) throws Exception {
         decorated.attack(aDefender);
     }
 
@@ -60,7 +60,7 @@ class SelfHealAfterTurnCreature extends Creature {
     }
 
     @Override
-    int getArmor() {
+    public int getArmor() {
         return decorated.getArmor();
     }
 

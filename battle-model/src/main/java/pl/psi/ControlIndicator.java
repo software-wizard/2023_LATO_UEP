@@ -1,22 +1,17 @@
 package pl.psi;
 
-import lombok.Setter;
 import pl.psi.WarMachines.WarMachineStatistic;
+
+import java.util.HashMap;
 
 public class ControlIndicator {
 
-    @Setter
     private int heroArtillerySkillLevel;
-    @Setter
     private int heroBallisticsSkillLevel;
-    @Setter
     private int heroFirstAidSkillLevel;
 
-    public ControlIndicator() {
-        // TODO: In future, these values should be read from hero's skills
-        this.heroArtillerySkillLevel = 3;
-        this.heroBallisticsSkillLevel = 3;
-        this.heroFirstAidSkillLevel = 3;
+    public ControlIndicator(HashMap<String, Integer> skills) {
+        updateSkills(skills);
     }
 
     public boolean indicateControl(WarMachineStatistic name) {
@@ -27,10 +22,20 @@ public class ControlIndicator {
                 return heroArtillerySkillLevel > 0;
             case CATAPULT:
                 return heroBallisticsSkillLevel > 0;
-            case AMMO_CART:
-                throw new IllegalArgumentException("Ammo cart cannot be controlled by player");
             default:
                 return false;
+        }
+    }
+
+    private void updateSkills(HashMap<String, Integer> skills) {
+        if (skills.get("artillery") != null) {
+            this.heroArtillerySkillLevel = skills.get("artillery");
+        }
+        if (skills.get("ballistics") != null) {
+            this.heroBallisticsSkillLevel = skills.get("ballistics");
+        }
+        if (skills.get("firstAid") != null){
+            this.heroFirstAidSkillLevel =  skills.get("firstAid");
         }
     }
 }
