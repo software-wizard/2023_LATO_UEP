@@ -113,7 +113,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return stats.getAttack();
     }
 
-    int getArmor() {
+    public int getArmor() {
         return stats.getArmor();
     }
 

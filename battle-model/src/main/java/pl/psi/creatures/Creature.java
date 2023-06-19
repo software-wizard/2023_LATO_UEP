@@ -11,7 +11,6 @@ import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 import pl.psi.AttackerIF;
-import pl.psi.Hero;
 import pl.psi.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
@@ -42,7 +41,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         calculator = aCalculator;
     }
 
-    public void attack(final Creature aDefender) {
+    public void attack(final Creature aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
@@ -56,7 +55,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return getAmount() > 0;
     }
 
-    private void applyDamage(final Creature aDefender, final int aDamage) {
+    private void applyDamage(final MapObjectIf aDefender, final int aDamage) {
         int hpToSubstract = aDamage % aDefender.getMaxHp();
         int amountToSubstract = Math.round(aDamage / aDefender.getMaxHp());
 
@@ -82,7 +81,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
     }
 
-    private void counterAttack(final Creature aAttacker) {
+    private void counterAttack(final Creature aAttacker) throws Exception {
         final int damage = aAttacker.getCalculator()
                 .calculateDamage(aAttacker, this);
         applyDamage(this, damage);
@@ -97,7 +96,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         return stats.getAttack();
     }
 
-    int getArmor() {
+    public int getArmor() {
         return stats.getArmor();
     }
 
@@ -145,13 +144,16 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     }
 
     @Override
-    public void attack(MapObjectIf defender) throws Exception {
-        System.out.println("Creature is attacking");
+    public void attack(MapObjectIf aDefender) throws Exception {
+        if (isAlive()) {
+            final int damage = getCalculator().calculateDamage(this, aDefender);
+            applyDamage(aDefender, damage);
+        }
     }
 
     @Override
     public boolean checkIfAlive(MapObjectIf defender) {
-        return true;
+        return defender.getAmount() > 0;
     }
 
     public static class Builder {
