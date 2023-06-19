@@ -83,13 +83,7 @@ public class MainBattleController implements PropertyChangeListener {
                     }
                 });
 
-                if(!gameEngine.isControllable()) {
-                    if (gameEngine.isTurnQueueEmpty()) {
-                        gameEngine.endOfTurn();
-                    } else {
-                        gameEngine.pass();
-                    }
-                }
+                gameEngine.verifyControllability();
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);

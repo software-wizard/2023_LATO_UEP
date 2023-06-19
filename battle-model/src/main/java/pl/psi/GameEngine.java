@@ -154,14 +154,15 @@ public class GameEngine {
         return turnQueue.getCurrentMapObject().isControllable();
     }
 
-    public boolean isTurnQueueEmpty() {
-        return turnQueue.isTurnQueueEmpty();
+    public void verifyControllability() {
+        if(!isControllable()) {
+            if (turnQueue.isTurnQueueEmpty()) {
+                turnQueue.endOfTurn();
+            } else {
+                pass();
+            }
+        }
     }
-
-    public void endOfTurn() {
-        turnQueue.endOfTurn();
-    }
-
 
 //    public boolean canHeal(final Point point) {
 //        if (turnQueue.getCurrentMapObject().canHeal()) {
