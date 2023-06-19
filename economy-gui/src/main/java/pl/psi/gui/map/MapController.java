@@ -5,7 +5,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.EconomyEngine;
-import pl.psi.MapObjectIf;
 import pl.psi.Point;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
@@ -68,7 +67,7 @@ public class MapController implements PropertyChangeListener {
                 // Draw heroes
                 economyHero.ifPresent(economyHeroToGUI -> {
                     try {
-                        mapTile.setHeroGraphic("Dragon"); // TODO
+                        mapTile.setHeroGraphic("Dragon");
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }

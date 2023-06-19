@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 
+import java.awt.*;
 import java.util.Objects;
 
 @Getter
@@ -18,31 +19,17 @@ public class Player {
     private String bonus;
 
     private EconomyHero economyHero;
+    private Color color;
 
     public Player(String aName, PlayerResources aResources, String town, String heroName, String bonus,
-                  EconomyHero aEconomyHero) {
+                  EconomyHero aEconomyHero, Color aColor) {
         this.name = aName;
         this.resources = aResources;
         this.town = town;
         this.heroName = heroName;
         this.bonus = bonus;
         this.economyHero = aEconomyHero;
-    }
-
-    @Override
-    public boolean equals(Object o) { // TODO is ok?
-
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) o;
-
-        return Objects.equals(this.getName(), player.getName());
+        this.color = aColor;
     }
 
     public void setTown(String chosenTown) {
