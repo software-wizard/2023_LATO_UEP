@@ -72,22 +72,22 @@ class TurnQueueTest
     void removeMapObject() {
         WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
         WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
-        WarMachine ammoCart = new WarMachine.Builder().statistic(WarMachineStatistic.AMMO_CART).build();
-        TurnQueue turnQueue1 = new TurnQueue(List.of(ballista, catapult), List.of(ammoCart));
+        WarMachine firstAidTent = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).build();
+        TurnQueue turnQueue1 = new TurnQueue(List.of(ballista, catapult), List.of(firstAidTent));
         assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
         assertEquals(catapult, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
+        assertEquals(firstAidTent, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
         assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.removeMapObject(catapult);
         turnQueue1.next();
-        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
+        assertEquals(firstAidTent, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
         assertEquals(ballista, turnQueue1.getCurrentMapObject());
@@ -96,13 +96,13 @@ class TurnQueueTest
         assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
+        assertEquals(firstAidTent, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
+        assertEquals(firstAidTent, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
-        assertEquals(ammoCart, turnQueue1.getCurrentMapObject());
+        assertEquals(firstAidTent, turnQueue1.getCurrentMapObject());
 
     }
 }

@@ -30,10 +30,8 @@ class ControlIndicatorTest {
         WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 0, 1);
         WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 0, 1);
         WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 0, 1);
-        WarMachine ammoCart = new WarMachineFactory().create(WarMachineStatistic.AMMO_CART, 0, 1);
         assertTrue(catapult.isControllable());
         assertTrue(ballista.isControllable());
         assertTrue(firstAidTent.isControllable());
-        assertFalse(ammoCart.isControllable());
     }
 }

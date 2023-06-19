@@ -13,14 +13,14 @@ class WarMachineTest {
 
     @Test
     void shouldLoseHP() throws Exception {
-        WarMachine ammoCart = new WarMachineFactory().create(WarMachineStatistic.AMMO_CART, 1, 1);
-        assertEquals(100, ammoCart.getCurrentHp());
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 1);
+        assertEquals(1000, catapult.getCurrentHp());
         WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
-        ((AttackerIF) ballista).attack(ammoCart);
-        assertTrue(ammoCart.getCurrentHp() < 100);
-        System.out.println("Ammo cart hp after first attack: " + ammoCart.getCurrentHp());
-        ((AttackerIF) ballista).attack(ammoCart);
-        System.out.println("Ammo cart hp after second attack: " + ammoCart.getCurrentHp());
+        ((AttackerIF) ballista).attack(catapult);
+        assertTrue(catapult.getCurrentHp() < 1000);
+        System.out.println("Catapult hp after first attack: " + catapult.getCurrentHp());
+        ((AttackerIF) ballista).attack(catapult);
+        System.out.println("Catapult cart hp after second attack: " + catapult.getCurrentHp());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package pl.psi.WarMachines;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
@@ -26,17 +27,6 @@ public class WarMachineFactoryTest {
                         new Hero(List.of( creatureFactory.create( 1, false, 5 )), List.of(warMachineFactory.create(WarMachineStatistic.CATAPULT, 1, 1))));
 
         gameEngine.attack( new Point( 1, 1 ) );
-
-    }
-    @Test
-    void createWarMachineWithWarMachineFactoryAmmoCart()
-    {
-
-        WarMachine ammoCart = warMachineFactory.create(WarMachineStatistic.AMMO_CART,1,1);
-        assertNotNull(ammoCart);
-        assertEquals(ammoCart.getStats(), WarMachineStatistic.AMMO_CART);
-        assertEquals(ammoCart.getAmount(), 1);
-        assertEquals(ammoCart.getMaxHp(), WarMachineStatistic.AMMO_CART.getMaxHp());
 
     }
 
