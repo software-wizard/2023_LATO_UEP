@@ -1,5 +1,6 @@
 package pl.psi.mapElements;
 
+import lombok.Getter;
 import pl.psi.ResourceType;
 import pl.psi.hero.EconomyHero;
 import pl.psi.player.Player;
@@ -8,6 +9,7 @@ import pl.psi.player.PlayerResources;
 public class Mine implements MapElement {
 
     private final ResourceType resourceType;
+    @Getter
     private Player currentOwner = null;
 
     public Mine(ResourceType aResourceType) {
@@ -22,15 +24,15 @@ public class Mine implements MapElement {
             case WOOD:
                 return "Sawmill";
             case ORE:
-                return "Alchemist's_Lab";
+                return "Ore_Pit";
             case MERCURY:
-                return "Gold_Mine";
+                return "Alchemist's_Lab";
             case SULFUR:
-                return "Gold_Mine";
+                return "Sulfur_Dune";
             case CRYSTAL:
-                return "Gold_Mine";
+                return "Crystal_Cavern";
             case GEMS:
-                return "Gold_Mine";
+                return "Gem_Pond";
             default:
                 return null;
         }

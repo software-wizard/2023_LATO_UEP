@@ -4,6 +4,7 @@ import com.google.common.collect.BiMap;
 import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
+import pl.psi.mapElements.Mine;
 import pl.psi.player.Player;
 
 import java.beans.PropertyChangeEvent;
@@ -39,7 +40,7 @@ public class EconomyEngine {
 
     public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         board.move(aChoosenEconomyHero, aPoint);
-        observerSupport.firePropertyChange(new PropertyChangeEvent(this, "", null, null)); // TODO value like END_OF_TURN if observer must know what operation
+        observerSupport.firePropertyChange(new PropertyChangeEvent(this, "", null, null));
     }
 
     public void addObserver(final PropertyChangeListener aObserver) {
