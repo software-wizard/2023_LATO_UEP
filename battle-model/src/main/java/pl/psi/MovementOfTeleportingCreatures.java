@@ -1,12 +1,11 @@
 package pl.psi;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import pl.psi.creatures.Creature;
 
 public class MovementOfTeleportingCreatures implements IMovementOfCreatures{
     private Creature creature;
-    private BiMap< Point, Creature> map = HashBiMap.create();
+    private BiMap< Point, Creature> map;
     public MovementOfTeleportingCreatures(Creature aCreature, BiMap aMap) {
         creature = aCreature;
         map = aMap;
