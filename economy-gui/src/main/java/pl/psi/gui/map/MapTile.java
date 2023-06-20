@@ -18,7 +18,7 @@ public class MapTile extends StackPane  {
 
     MapTile( final String aName )
     {
-        rect = new Rectangle( 30, 30 );
+        rect = new Rectangle( 50, 50 );
         rect.setFill( Color.WHITE );
         getChildren().add( rect );
         label = new Label( aName );

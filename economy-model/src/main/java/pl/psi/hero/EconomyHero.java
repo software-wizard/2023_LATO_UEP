@@ -10,6 +10,7 @@ import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.Castle;
 import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.Resource;
+import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 import java.util.ArrayList;
@@ -34,6 +35,10 @@ public class EconomyHero implements MapElement {
         fraction = aFraction;
         heroArmy = aHeroArmy;
         heroEquipment = new HeroEquipment();
+    }
+
+    public void setPlayer(Player aPlayer) {
+        this.heroStatistics.setPlayer(aPlayer);
     }
 
     public EconomyHero(HeroStatistics aStats, ArrayList<EconomyCreature> aCreatures, HeroEquipment aEq) {
