@@ -10,9 +10,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
+import pl.psi.AttackerIF;
+import pl.psi.Hero;
+import pl.psi.MapObjectIf;
 import lombok.Setter;
 import pl.psi.TurnQueue;
-import pl.psi.spells.Spell;
 
 import com.google.common.collect.Range;
 
@@ -22,14 +24,13 @@ import lombok.Getter;
  * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
  */
 @Getter
-public class Creature implements PropertyChangeListener {
+public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF {
     private CreatureStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
     private int counterAttackCounter = 1;
     private DamageCalculatorIf calculator;
-
     Creature() {
     }
 
@@ -63,25 +64,17 @@ public class Creature implements PropertyChangeListener {
         if (hp <= 0) {
             aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
             aDefender.setAmount(aDefender.getAmount() - 1);
-        }
-        else{
+        } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
-    }
-
-    public void applySpellDamage(final Spell aSpell){
-        if(this.isAlive()) {
-            final int hp = this.currentHp - aSpell.getDamage();
-            this.setCurrentHp(hp);
-        }
     }
 
     public int getMaxHp() {
         return stats.getMaxHp();
     }
 
-    protected void setCurrentHp(final int aCurrentHp) {
+    public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
@@ -129,6 +122,31 @@ public class Creature implements PropertyChangeListener {
 
     public void setCalculator(DamageCalculatorIf calculator) {
         this.calculator = calculator;
+    }
+
+    @Override
+    public boolean canAttack() {
+        return true;
+    }
+
+    @Override
+    public boolean canHeal() {
+        return false;
+    }
+
+    @Override
+    public boolean canAttackFromDistance() {
+        return false;
+    }
+
+    @Override
+    public void attack(MapObjectIf defender) throws Exception {
+        System.out.println("Creature is attacking");
+    }
+
+    @Override
+    public boolean checkIfAlive(MapObjectIf defender) {
+        return true;
     }
 
     public static class Builder {

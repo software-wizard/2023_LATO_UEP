@@ -4,6 +4,9 @@ import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 import pl.psi.player.Player;
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -12,6 +15,7 @@ public class EconomyEngine {
 
     private final Board board;
     private final TurnQueue turnQueue;
+    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
     public EconomyEngine(LinkedList<Player> aPlayers, Map<Point, MapElement> aMapElements) {
         this.board = new Board(aMapElements);
@@ -28,6 +32,10 @@ public class EconomyEngine {
         board.move(aChoosenEconomyHero, aPoint);
     }
 
+    public void addObserver(final PropertyChangeListener aObserver) {
+        observerSupport.addPropertyChangeListener(aObserver);
+        turnQueue.addObserver(aObserver);
+    }
     
     public Player getCurrentPlayer() {
         return turnQueue.getCurrentPlayer();

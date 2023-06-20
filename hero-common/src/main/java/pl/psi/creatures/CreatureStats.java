@@ -20,4 +20,5 @@ public class CreatureStats implements CreatureStatisticIf{
     private final int tier;
     private final String description;
     private final boolean isUpgraded;
+
 }
