@@ -19,6 +19,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.hero.EconomyHero;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 

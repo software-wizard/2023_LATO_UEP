@@ -2,7 +2,6 @@ package pl.psi.map;
 
 import com.google.gson.*;
 import pl.psi.mapElements.MapElement;
-
 import java.lang.reflect.Type;
 
 public class MapElementAdapter implements JsonSerializer<MapElement>, JsonDeserializer<MapElement> {
@@ -24,7 +23,7 @@ public class MapElementAdapter implements JsonSerializer<MapElement>, JsonDeseri
             Class<?> clazz = Class.forName(className);
             return context.deserialize(data, clazz);
         } catch (ClassNotFoundException e) {
-            throw new JsonParseException("Nie można zdeserializować obiektu MapElement.", e);
+            throw new JsonParseException("", e);
         }
     }
 }

@@ -26,7 +26,6 @@ public class EconomyEngine {
         turnQueue.addObserver(board);
     }
 
-    // Fasade - easy for GUI
     public MapElement getMapElement(Point aPoint) {
         return board.getMapElements().get(aPoint);
     }
