@@ -10,12 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.artifacts.ArtifactFactory;
-import pl.psi.artifacts.ArtifactStatistics;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.artifacts.Artifact;
 import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
@@ -92,9 +91,14 @@ public class EcoMapSceneController {
         root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoLauncherScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new  Scene(root);
+
+        Screen screen = Screen.getPrimary();
+        stage.setX(screen.getVisualBounds().getMinX());
+        stage.setY(screen.getVisualBounds().getMinY());
+        stage.setWidth(screen.getVisualBounds().getWidth());
+        stage.setHeight(screen.getVisualBounds().getHeight());
+
         stage.setScene( scene );
-        stage.setX( 5 );
-        stage.setY( 5 );
         stage.show();
     }
 

@@ -59,4 +59,8 @@ public class EconomyEngine {
         return turnQueue.getDay();
     }
 
+    public int getMapSize() {
+        return this.board.getMapSize();
+    }
+
 }

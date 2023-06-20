@@ -35,9 +35,9 @@ public class MapController implements PropertyChangeListener {
 
         gridMap.getChildren().clear();
 
-        for( int x = 0; x < 60; x++ )
+        for( int x = 0; x < economyEngine.getMapSize(); x++ )
         {
-            for( int y = 0; y < 30; y++ )
+            for( int y = 0; y < economyEngine.getMapSize(); y++ )
             {
                 Point currentPoint = new Point( x, y );
                 final MapTile mapTile = new MapTile( "" );

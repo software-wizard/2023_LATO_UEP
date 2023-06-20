@@ -11,7 +11,7 @@ public class LearningStone implements MapElement {
 
     @Override
     public String getIcon() {
-        return null;
+        return "Learning_Stone";
     }
 
     @Override

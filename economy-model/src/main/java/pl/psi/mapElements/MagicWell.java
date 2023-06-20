@@ -11,7 +11,7 @@ public class MagicWell implements MapElement {
 
     @Override
     public String getIcon() {
-        return null;
+        return "Magic_Well";
     }
 
     @Override

@@ -11,6 +11,9 @@ import java.beans.PropertyChangeListener;
 import java.util.*;
 
 public class Board implements PropertyChangeListener {
+
+    @Getter
+    private int MapSize = 25;
     private final BiMap<Point, MapElement> map = HashBiMap.create();
     @Getter
     private final BiMap<Point, EconomyHero> mapHero = HashBiMap.create();

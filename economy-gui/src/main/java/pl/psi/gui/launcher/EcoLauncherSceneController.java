@@ -17,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
 import pl.psi.hero.EconomyHero;
@@ -49,11 +50,11 @@ public class EcoLauncherSceneController implements Initializable
     LinkedList<Player> players = new LinkedList<>();
 
     //placeholdery z tablicami z danymi do choiceboxow
-    private String[] towns = {"Necropolis", "Rampart", "Tower", "Bydgoszcz"};
+    private String[] towns = {"Necropolis", "Tower"};
 
-    private String[] heroes = {"Christian", "Edric", "Bonus BGC", "Valeska"};
+    private String[] heroes = {"Christian", "Edric"};
 
-    private String[] bonuses = {"bonus1", "bonus2", "bonus3", "bonus4"};
+    private String[] bonuses = {"bonus1", "bonus2"};
 
     private EconomyEngine economyEngine;
 
@@ -85,11 +86,13 @@ public class EcoLauncherSceneController implements Initializable
                    Player player = Player.builder().
                            name(nameResult.get()).
                            resources(PlayerResources.builder()
-                                   .wood(1000)
-                                   .ore(1000)
-                                   .gold(1000)
-                                   .crystal(1000)
-                                   .gems(1000)
+                                   .wood(30)
+                                   .ore(20)
+                                   .gold(30000)
+                                   .crystal(20)
+                                   .gems(20)
+                                   .mercury(20)
+                                   .sulfur(20)
                                    .build())
                            .build();
                    players.add(player);
@@ -145,16 +148,9 @@ public class EcoLauncherSceneController implements Initializable
    }
     public void switchToMap(ActionEvent event) throws IOException {
 
-        //Ladowanie playerow do economyEngine
         economyEngine = new EconomyEngine(players, HashBiMap.create());
 
-        // economyEngine przekazywane przez konstrktor do castle/inventory/map
-        // ecoBattleConverter przekazanie parametrów do konstruktora controlera
-
-        //String chosenHero = playerHeroChoiceBox.getValue();
-
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
-        // loader.setControler find method
         root = loader.load();
 
         try {
@@ -173,10 +169,15 @@ public class EcoLauncherSceneController implements Initializable
         }
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new  Scene(root);
+        scene = new Scene(root);
+
+        Screen screen = Screen.getPrimary();
+        stage.setX(screen.getVisualBounds().getMinX());
+        stage.setY(screen.getVisualBounds().getMinY());
+        stage.setWidth(screen.getVisualBounds().getWidth());
+        stage.setHeight(screen.getVisualBounds().getHeight());
+
         stage.setScene( scene );
-        stage.setX( 5 );
-        stage.setY( 5 );
         stage.show();
     }
 

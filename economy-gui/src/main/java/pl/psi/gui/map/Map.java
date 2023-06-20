@@ -13,14 +13,11 @@ import pl.psi.ResourceType;
 import pl.psi.gui.Start;
 import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroStatistics;
-import pl.psi.mapElements.MapElement;
-import pl.psi.mapElements.Mine;
-import pl.psi.mapElements.Resource;
-import pl.psi.mapElements.StaticElement;
+import pl.psi.mapElements.*;
 import pl.psi.player.Player;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Map extends Application {
 
@@ -54,17 +51,63 @@ public class Map extends Application {
                         .build())
                 .build());
         players.get(0).getEconomyHero().setPlayer(players.get(0));
+
+        players.add(Player.builder()
+                .economyHero(EconomyHero.builder()
+                        .heroStatistics(HeroStatistics.builder()
+                                .moveRange(7)
+                                .build())
+                        .build())
+                .build());
+        players.get(1).getEconomyHero().setPlayer(players.get(1));
         // TODO - jak to lepiej rozwiązać, przekazanie referencji potrzebne, by sprawdzić, dla danego herosa jest dany player, np. kolor
 
         BiMap<Point, MapElement> mapElements = HashBiMap.create();
-        mapElements.put(new Point(8, 2), new StaticElement());
-        mapElements.put(new Point(8, 3), new StaticElement());
-        mapElements.put(new Point(9, 3), new StaticElement());
-        mapElements.put(new Point(9, 2), new StaticElement());
-        mapElements.put(new Point(5, 5), players.get(0).getEconomyHero());
-        mapElements.put(new Point(1, 2), new StaticElement());
-        mapElements.put(new Point(3, 2), new Resource(ResourceType.GOLD, 5));
-        mapElements.put(new Point(3, 1), new Mine(ResourceType.GOLD));
+        mapElements.put(new Point(0, 0), players.get(0).getEconomyHero());
+        mapElements.put(new Point(24, 24), players.get(1).getEconomyHero());
+
+        Random rand = new Random();
+        List<String> elements = Arrays.asList("LearningStone", "MagicWell",
+                "Mine", "Resource", "StaticElement", "Resource");
+
+        for (int i = 0; i < 35; i++) {
+
+            Point currentPoint = null;
+            boolean isEmpty = false;
+            while (!isEmpty) {
+                int x = rand.nextInt(25);
+                int y = rand.nextInt(25);
+                if (mapElements.get(new Point(x, y)) == null) {
+                    isEmpty = true;
+                }
+                currentPoint = new Point(x, y);
+            }
+
+            String randomElement = elements.get(rand.nextInt(elements.size()));
+            System.out.println(randomElement);
+            System.out.println(currentPoint);
+            switch (randomElement) {
+                case "LearningStone":
+                    mapElements.put(currentPoint, new LearningStone());
+                    break;
+                case "MagicWell":
+                    mapElements.put(currentPoint, new MagicWell());
+                    break;
+                case "Mine":
+                    ResourceType[] values = ResourceType.values();
+                    int length = values.length;
+                    int randIndex = new Random().nextInt(length);
+
+                    mapElements.put(currentPoint, new Mine(values[randIndex]));
+                    break;
+                case "Resource":
+                    mapElements.put(currentPoint, new Resource(ResourceType.GOLD, 1000));
+                    break;
+                case "StaticElement":
+                    mapElements.put(currentPoint, new StaticElement());
+                    break;
+            }
+        }
 
         EconomyEngine economyEngine = new EconomyEngine(players, mapElements);
 
