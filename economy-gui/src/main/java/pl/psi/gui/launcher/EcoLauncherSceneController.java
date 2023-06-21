@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,8 +21,11 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.Point;
 import pl.psi.artifacts.Artifact;
 import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroStatistics;
+import pl.psi.mapElements.MapElement;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.player.Player;
@@ -82,8 +86,6 @@ public class EcoLauncherSceneController implements Initializable
                nameDialog.setContentText("Enter player " + i + " name:");
                Optional<String> nameResult = nameDialog.showAndWait();
 
-
-
                // If the user entered both a name and an age, create a new player and add it to the list
                if (nameResult.isPresent()) {
                    Player player = Player.builder().
@@ -96,8 +98,12 @@ public class EcoLauncherSceneController implements Initializable
                                    .gems(20)
                                    .mercury(20)
                                    .sulfur(20)
-                                   .build()).
-                           economyHero(EconomyHero.builder()
+                                   .build())
+                           .economyHero(EconomyHero.builder()
+                                   .heroStatistics(HeroStatistics.builder()
+                                           .moveRange(7)
+                                           .build())
+
                                    .heroEquipment(new HeroEquipment()).build())
                            .build();
 
@@ -111,7 +117,7 @@ public class EcoLauncherSceneController implements Initializable
        playerChoiceBoxes.setPadding(new Insets(10));
 
        // Loop through the list of players and create a ChoiceBox for each one
-       //TODO ogarnac settery do miast, nazw herosow itd
+
        for (Player player : players) {
            HBox playerChoiceBox = new HBox();
            playerChoiceBox.setSpacing(10);
@@ -138,14 +144,6 @@ public class EcoLauncherSceneController implements Initializable
               players.get(players.indexOf(player)).setBonus(chosenBonus);
           });
 
-          player.getResources().setGold(1000);
-            player.getResources().setWood(1000);
-            player.getResources().setOre(100);
-            player.getResources().setMercury(10);
-            player.getResources().setSulfur(10);
-            player.getResources().setCrystal(10);
-            player.getResources().setGems(10);
-
            playerChoiceBox.getChildren().addAll(choiceBoxTown, choiceBoxHero, choiceBoxBonus);
 
            Label label = new Label(player.getName() + " options:");
@@ -154,7 +152,7 @@ public class EcoLauncherSceneController implements Initializable
    }
     public void switchToMap(ActionEvent event) throws IOException {
 
-        economyEngine = new EconomyEngine(players, HashBiMap.create());
+        economyEngine = new EconomyEngine(players);
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         root = loader.load();
