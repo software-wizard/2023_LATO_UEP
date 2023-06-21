@@ -105,7 +105,7 @@ public class EcoLauncherSceneController implements Initializable
        playerChoiceBoxes.setPadding(new Insets(10));
 
        // Loop through the list of players and create a ChoiceBox for each one
-       //TODO ogarnac settery do miast, nazw herosow itd
+
        for (Player player : players) {
            HBox playerChoiceBox = new HBox();
            playerChoiceBox.setSpacing(10);
@@ -131,14 +131,6 @@ public class EcoLauncherSceneController implements Initializable
             String chosenBonus = choiceBoxBonus.getValue();
               players.get(players.indexOf(player)).setBonus(chosenBonus);
           });
-
-          player.getResources().setGold(1000);
-            player.getResources().setWood(1000);
-            player.getResources().setOre(100);
-            player.getResources().setMercury(10);
-            player.getResources().setSulfur(10);
-            player.getResources().setCrystal(10);
-            player.getResources().setGems(10);
 
            playerChoiceBox.getChildren().addAll(choiceBoxTown, choiceBoxHero, choiceBoxBonus);
 

@@ -10,10 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.artifacts.ArtifactFactory;
 import pl.psi.gui.inventory.EcoEqSceneController;
+import pl.psi.gui.map.MapController;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
@@ -52,15 +55,28 @@ public class EcoMapSceneController {
     @FXML
     Label gemsLabel;
 
+
+    @FXML
+    AnchorPane mapPane;
+
+
     public void loadEconomyEngine(EconomyEngine economyEngine) {
         this.economyEngine = economyEngine;
     }
 
-    public void refreshGui() {
+    public void refreshGui() throws IOException {
         displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
         displayCurrentDay(economyEngine.getCurrentDay());
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/map.fxml"));
+        loader.setController( new MapController(economyEngine) );
+        Scene scene = new Scene( loader.load());
+//        scene.getStylesheets().add("fxml/map.css");
+
+        Node panePropably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
+        mapPane.getChildren().add(panePropably);
     }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
