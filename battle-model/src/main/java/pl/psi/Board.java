@@ -47,7 +47,7 @@ public class Board {
     }
 
     void move(final MapObjectIf mapObjectIf, final Point aPoint) {
-        ShortestPathAlgorythm path = new ShortestPathAlgorythm();
+        //ShortestPathAlgorythm path = new ShortestPathAlgorythm();
         Point startingPoint = getPosition(mapObjectIf);
         Point endPoint = aPoint;
         /*List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(mapObjectIf)), startingPoint, endPoint);

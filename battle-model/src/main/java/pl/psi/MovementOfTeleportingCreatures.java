@@ -4,9 +4,9 @@ import com.google.common.collect.BiMap;
 import pl.psi.creatures.Creature;
 
 public class MovementOfTeleportingCreatures implements IMovementOfCreatures{
-    private Creature creature;
-    private BiMap< Point, Creature> map;
-    public MovementOfTeleportingCreatures(Creature aCreature, BiMap aMap) {
+    private MapObjectIf creature;
+    private BiMap< Point, MapObjectIf> map;
+    public MovementOfTeleportingCreatures(MapObjectIf aCreature, BiMap aMap) {
         creature = aCreature;
         map = aMap;
     }
