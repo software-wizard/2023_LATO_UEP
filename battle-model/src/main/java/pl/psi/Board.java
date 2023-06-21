@@ -50,13 +50,26 @@ public class Board {
         ShortestPathAlgorythm path = new ShortestPathAlgorythm();
         Point startingPoint = getPosition(mapObjectIf);
         Point endPoint = aPoint;
-        List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(mapObjectIf)), startingPoint, endPoint);
+        /*List<Point> theRightPath = path.findPath(gridConstruction(availablePointsToGo(mapObjectIf)), startingPoint, endPoint);
         if (theRightPath != null) {
             for (Point point : theRightPath) {
                 map.inverse().remove(mapObjectIf);
                 map.put(point, mapObjectIf);
             }
+        }*/
+        int[][] grid = gridConstruction(availablePointsToGo(mapObjectIf));
+        IMovementOfCreatures path;
+        if (true){
+            path = new MovementOfWalkingCreatures(mapObjectIf,map);
+            path.move(grid,startingPoint,endPoint);
+        } else if (false) {
+            path = new MovementOfFlyingCreatures(mapObjectIf,map);
+            path.move(grid,startingPoint,endPoint);
+        } else if (false) {
+            path = new MovementOfTeleportingCreatures(mapObjectIf, map);
+            path.move(grid,startingPoint,endPoint);
         }
+
     }
 
     boolean canMove(final MapObjectIf mapObjectIf, final Point aPoint) {
@@ -89,8 +102,7 @@ public class Board {
         }
         return listOfPoints;
     }
-
-    public int[][] gridConstruction(List<Point> availablePointsToGo) {
+    public int[][] gridConstruction(List<Point> availablePointsToGo){
         int width = 0;
         int height = 0;
         for (Point point : availablePointsToGo) {
@@ -106,8 +118,8 @@ public class Board {
 
         int[][] grid = new int[width][height];
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int y = 0; y < grid[0].length; y++) {
+        for (int i = 0; i < grid.length; i++){
+            for (int y=0; y < grid[0].length; y++){
                 grid[i][y] = Integer.MAX_VALUE;
             }
         }
