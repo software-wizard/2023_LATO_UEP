@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.Point;
 import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroStatistics;
+import pl.psi.mapElements.MapElement;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -79,8 +83,6 @@ public class EcoLauncherSceneController implements Initializable
                nameDialog.setContentText("Enter player " + i + " name:");
                Optional<String> nameResult = nameDialog.showAndWait();
 
-
-
                // If the user entered both a name and an age, create a new player and add it to the list
                if (nameResult.isPresent()) {
                    Player player = Player.builder().
@@ -93,6 +95,11 @@ public class EcoLauncherSceneController implements Initializable
                                    .gems(20)
                                    .mercury(20)
                                    .sulfur(20)
+                                   .build())
+                           .economyHero(EconomyHero.builder()
+                                   .heroStatistics(HeroStatistics.builder()
+                                           .moveRange(7)
+                                           .build())
                                    .build())
                            .build();
                    players.add(player);
@@ -140,7 +147,7 @@ public class EcoLauncherSceneController implements Initializable
    }
     public void switchToMap(ActionEvent event) throws IOException {
 
-        economyEngine = new EconomyEngine(players, HashBiMap.create());
+        economyEngine = new EconomyEngine(players);
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         root = loader.load();
