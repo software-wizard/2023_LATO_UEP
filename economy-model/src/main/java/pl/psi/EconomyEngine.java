@@ -80,7 +80,9 @@ public class EconomyEngine {
 
         return aMapElements;
     }
-
+    public EconomyHero getEcoHero(){
+        return turnQueue.getCurrentPlayer().getEconomyHero();
+    }
     public MapElement getMapElement(Point aPoint) {
         return board.getMapElements().get(aPoint);
     }

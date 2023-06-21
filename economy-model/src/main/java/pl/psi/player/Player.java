@@ -31,6 +31,9 @@ public class Player {
         this.economyHero = aEconomyHero;
         this.color = aColor;
     }
+    public EconomyHero getEconomyHero(){
+        return economyHero;
+    }
 
     public void setTown(String chosenTown) {
         this.town = chosenTown;

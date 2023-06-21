@@ -14,9 +14,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.psi.Hero;
 import pl.psi.artifacts.ArtifactFactory;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.gui.map.MapController;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
@@ -128,13 +130,9 @@ public class EcoMapSceneController {
     }
 
     public void openEq(ActionEvent event) throws IOException {
-        ArtifactFactory artifactFactory = new ArtifactFactory();
-        HeroEquipment aHeroEq = new HeroEquipment();
-        aHeroEq.addItemToBackpack(artifactFactory.create("helmet","skull helmet"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("cape","vampire's cowl"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("necklace","pedant of courage"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("rightHand","sword of hellfire"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("leftHand","sentinel's shield"));
+
+        EconomyHero ecoHero = economyEngine.getEcoHero();
+        HeroEquipment aHeroEq = ecoHero.getHeroEquipment();
 
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();

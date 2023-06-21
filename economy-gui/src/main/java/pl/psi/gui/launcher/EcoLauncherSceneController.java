@@ -22,9 +22,12 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
 import pl.psi.Point;
+import pl.psi.artifacts.Artifact;
 import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.MapElement;
+import pl.psi.hero.HeroEquipment;
+import pl.psi.hero.HeroStatistics;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -100,8 +103,10 @@ public class EcoLauncherSceneController implements Initializable
                                    .heroStatistics(HeroStatistics.builder()
                                            .moveRange(7)
                                            .build())
-                                   .build())
+
+                                   .heroEquipment(new HeroEquipment()).build())
                            .build();
+
                    players.add(player);
                }
            }
