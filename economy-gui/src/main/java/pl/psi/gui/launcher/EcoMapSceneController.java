@@ -75,10 +75,10 @@ public class EcoMapSceneController {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/map.fxml"));
         loader.setController( new MapController(economyEngine) );
         Scene scene = new Scene( loader.load());
-//        scene.getStylesheets().add("fxml/map.css");
 
-        Node panePropably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
-        mapPane.getChildren().add(panePropably);
+        // set size to node casting to Pane
+        Node paneProbably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
+        mapPane.getChildren().add(paneProbably);
     }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {

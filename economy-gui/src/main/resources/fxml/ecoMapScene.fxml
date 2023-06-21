@@ -51,7 +51,7 @@
       <items>
         <AnchorPane prefHeight="575.0" prefWidth="632.0" fx:id="mapPane">
         </AnchorPane>
-          
+
         <AnchorPane prefHeight="575.0" prefWidth="307.0">
           <children>
             <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="ControlPanel" textAlignment="CENTER" wrapText="false" />
