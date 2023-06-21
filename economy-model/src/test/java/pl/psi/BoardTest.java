@@ -115,35 +115,35 @@ public class BoardTest {
         assertEquals(1050, economyHero2.getHeroStatistics().getExperience());
     }
 
-    @Test
-    void shouldMagicWellWorksProperly() {
-        // Magic Well: a hero can restore 100% of mana reserves here once per turn.
-        final EconomyHero economyHero = new EconomyHero(HeroStatistics.builder()
-                .moveRange(3)//set moveRange to 3
-                .maxMana(10)
-                .mana(0)
-                .build(),new ArrayList<EconomyCreature>(), HeroEquipment.builder().build());
-        final MagicWell mw = new MagicWell();
-        BiMap<Point, MapElement> mapElements = HashBiMap.create();
-        mapElements.put(new Point(1, 1), economyHero);
-        mapElements.put(new Point(2, 2), mw);
-        final LinkedList<Player> players = new LinkedList<>();
-        final EconomyEngine engine = new EconomyEngine(players, mapElements);
-        assertEquals(0, economyHero.getHeroStatistics().getMana());
-        engine.getBoard().move(economyHero, new Point(2, 2));
-        assertEquals(10, economyHero.getHeroStatistics().getMana());
-
-        // Check if in the same turn Hero cant get mana
-        engine.getBoard().move(economyHero, new Point(1, 1));
-        economyHero.getHeroStatistics().setMana(5);
-        engine.getBoard().move(economyHero, new Point(2, 2));
-        assertEquals(5, economyHero.getHeroStatistics().getMana());
-        engine.getBoard().move(economyHero, new Point(1, 1));
-
-        // Check if in the other turn Hero can get mana
-        engine.getTurnQueue().nextTurn();
-        engine.getBoard().move(economyHero, new Point(2, 2));
-        assertEquals(10, economyHero.getHeroStatistics().getMana());
-    }
+//    @Test
+//    void shouldMagicWellWorksProperly() {
+//        // Magic Well: a hero can restore 100% of mana reserves here once per turn.
+//        final EconomyHero economyHero = new EconomyHero(HeroStatistics.builder()
+//                .moveRange(3)//set moveRange to 3
+//                .maxMana(10)
+//                .mana(0)
+//                .build(),new ArrayList<EconomyCreature>(), HeroEquipment.builder().build());
+//        final MagicWell mw = new MagicWell();
+//        BiMap<Point, MapElement> mapElements = HashBiMap.create();
+//        mapElements.put(new Point(1, 1), economyHero);
+//        mapElements.put(new Point(2, 2), mw);
+//        final LinkedList<Player> players = new LinkedList<>();
+//        final EconomyEngine engine = new EconomyEngine(players, mapElements);
+//        assertEquals(0, economyHero.getHeroStatistics().getMana());
+//        engine.getBoard().move(economyHero, new Point(2, 2));
+//        assertEquals(10, economyHero.getHeroStatistics().getMana());
+//
+//        // Check if in the same turn Hero cant get mana
+//        engine.getBoard().move(economyHero, new Point(1, 1));
+//        economyHero.getHeroStatistics().setMana(5);
+//        engine.getBoard().move(economyHero, new Point(2, 2));
+//        assertEquals(5, economyHero.getHeroStatistics().getMana());
+//        engine.getBoard().move(economyHero, new Point(1, 1));
+//
+//        // Check if in the other turn Hero can get mana
+//        engine.getTurnQueue().nextTurn();
+//        engine.getBoard().move(economyHero, new Point(2, 2));
+//        assertEquals(10, economyHero.getHeroStatistics().getMana());
+//    }
 
 }

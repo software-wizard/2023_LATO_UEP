@@ -20,8 +20,17 @@ public class EconomyEngine {
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
     public EconomyEngine(LinkedList<Player> aPlayers) {
+
+        this.board = new Board(getMapElements(aPlayers));
+        this.turnQueue = new TurnQueue(aPlayers);
+        turnQueue.addObserver(board);
+
+    }
+
+    private BiMap<Point, MapElement> getMapElements(LinkedList<Player> aPlayers) {
         BiMap<Point, MapElement> aMapElements = HashBiMap.create();
         aMapElements.put(new Point(0, 0), aPlayers.get(0).getEconomyHero());
+        aMapElements.put(new Point(24, 24), aPlayers.get(1).getEconomyHero());
 
         Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
         aMapElements.put(new Point(2, 2), castle1);
@@ -69,9 +78,7 @@ public class EconomyEngine {
             }
         }
 
-        this.board = new Board(aMapElements);
-        this.turnQueue = new TurnQueue(aPlayers);
-        turnQueue.addObserver(board);
+        return aMapElements;
     }
 
     public MapElement getMapElement(Point aPoint) {
