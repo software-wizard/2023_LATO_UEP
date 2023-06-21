@@ -66,6 +66,11 @@ public class Map extends Application {
         mapElements.put(new Point(0, 0), players.get(0).getEconomyHero());
         mapElements.put(new Point(24, 24), players.get(1).getEconomyHero());
 
+        Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
+
+        mapElements.put(new Point(2, 2), castle1);
+
+
         Random rand = new Random();
         List<String> elements = Arrays.asList("LearningStone", "MagicWell",
                 "Mine", "Resource", "StaticElement", "Resource");

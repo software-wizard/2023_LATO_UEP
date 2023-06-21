@@ -91,6 +91,7 @@ public class Castle implements MapElement {
 
     public enum FractionType {
         TOWER,
+        RAMPART,
         NECROPOLIS;
     }
 
@@ -101,7 +102,7 @@ public class Castle implements MapElement {
         buildingsToBuy = TownStarter.createBuildingsToBuy(fractionType);
     }
 
-    //pole w building zamiast int id, enum z "nazwą" budynku
+
     public void buildBuilding(ArrayList<Building> buildingsToBuy, ArrayList<Building> buildingsOwned, int buildingID){
         ArrayList<Building> buildingsToBuyCopy = new ArrayList<>(buildingsToBuy);
         for(Building building: buildingsToBuyCopy){
@@ -124,7 +125,15 @@ public class Castle implements MapElement {
 
     @Override
     public void apply(EconomyHero aEconomyHero) {
+//        switch (aEconomyHero.getFraction()) {
+//            case NECROPOLIS:
+//                NecroLauncher.main(new String[0]);
 
+//                break;
+//            case RAMPART:
+//                EveryCastleLauncher.main(new String[0]);
+//                break;
+//        }
     }
 
     @Override

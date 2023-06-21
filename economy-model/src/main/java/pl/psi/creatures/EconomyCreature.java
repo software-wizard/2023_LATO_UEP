@@ -14,6 +14,8 @@ public class EconomyCreature
         goldCost = aGoldCost;
     }
 
+
+
     public int getAmount()
     {
         return amount;

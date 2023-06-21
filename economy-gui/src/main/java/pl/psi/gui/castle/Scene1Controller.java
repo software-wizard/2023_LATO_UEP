@@ -20,6 +20,12 @@ import java.util.ArrayList;
 
 public class Scene1Controller {
 
+    //    private EconomyHero hero;
+//
+//    public void setEconomyHero(EconomyHero economyHero) {
+//        this.hero = economyHero;
+//    }
+
     @FXML
     private Text goldCount;
 
