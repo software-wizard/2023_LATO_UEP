@@ -20,7 +20,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
+import pl.psi.artifacts.Artifact;
 import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroEquipment;
+import pl.psi.hero.HeroStatistics;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -93,8 +96,11 @@ public class EcoLauncherSceneController implements Initializable
                                    .gems(20)
                                    .mercury(20)
                                    .sulfur(20)
-                                   .build())
+                                   .build()).
+                           economyHero(EconomyHero.builder()
+                                   .heroEquipment(new HeroEquipment()).build())
                            .build();
+
                    players.add(player);
                }
            }

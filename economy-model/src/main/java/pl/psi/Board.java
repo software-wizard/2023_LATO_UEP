@@ -81,7 +81,7 @@ public class Board implements PropertyChangeListener {
                 .get( aMapElement );
     }
 
-    Point getHeroPosition( EconomyHero aEconomyHero)
+    public Point getHeroPosition( EconomyHero aEconomyHero)
     {
         return mapHero.inverse()
                 .get(aEconomyHero);
