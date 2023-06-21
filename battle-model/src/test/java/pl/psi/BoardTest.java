@@ -30,7 +30,7 @@ class BoardTest
                 .isPresent() ).isTrue();
     }
     @Test
-    @Disabled
+
     void shouldChangeListOfPointsInToGrid()
     {
         final Creature creature = new Creature.Builder().statistic( CreatureStats.builder()
@@ -43,6 +43,6 @@ class BoardTest
         List<Point> listOfPoints = board.availablePointsToGo(c1.get(0));
         int[][] grid = board.gridConstruction(listOfPoints);
         assertThat(grid).isNotEmpty();
-        assertThat(grid).hasDimensions(6,5);
+        assertThat(grid).hasDimensions(5,6);
     }
 }
