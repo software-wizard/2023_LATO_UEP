@@ -29,8 +29,16 @@ public class EconomyEngine {
 
     private BiMap<Point, MapElement> getMapElements(LinkedList<Player> aPlayers) {
         BiMap<Point, MapElement> aMapElements = HashBiMap.create();
+
+        // Create Players
         aMapElements.put(new Point(0, 0), aPlayers.get(0).getEconomyHero());
         aMapElements.put(new Point(24, 24), aPlayers.get(1).getEconomyHero());
+
+//        Player.builder()
+//                .economyHero(EconomyHero.builder()
+//                        .heroArmy(List.of())
+//                        .build())
+//                .build();
 
         Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
         aMapElements.put(new Point(2, 2), castle1);
