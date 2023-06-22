@@ -23,25 +23,15 @@ public class Hero
     @Setter
     @Getter
     private List<MapObjectIf> mapObjectIfs;
-    private HashMap<String, Integer> skills = new HashMap<>();
+//    private final HashMap<String, Integer> skills = new HashMap<>();
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
         creatures = aCreatures;
         warMachines = aWarMachine;
-        loadSkills();
-        indicateControl();
+//        loadSkills();
     }
 
-    private void indicateControl() {
-        ControlIndicator controlIndicator = new ControlIndicator(skills);
-        for (WarMachine warMachine : warMachines) {
-            if (controlIndicator.indicateControl((WarMachineStatistic) warMachine.getStats())){
-                warMachine.setControllable();
-            }
-
-        }
-    }
 
     public Hero( final List< Creature > aCreatures)
     {
@@ -52,9 +42,9 @@ public class Hero
         return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
     }
 
-    private void loadSkills(){
-        for (WarMachine warMachine : warMachines) {
-            skills.putAll(warMachine.getSkill());
-        }
-    }
+//    private void loadSkills(){
+//        for (WarMachine warMachine : warMachines) {
+//            skills.putAll(warMachine.getSkill());
+//        }
+//    }
 }

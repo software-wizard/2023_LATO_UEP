@@ -148,9 +148,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         //return defender.getCurrentHp() > 0;
     }
 
-    public void setControllable() {
-    }
-
     public static class Builder {
         private int amount = 1;
         private WarMachineDamageCalculatorIF calculator = new WarMachineDamageCalculator();
