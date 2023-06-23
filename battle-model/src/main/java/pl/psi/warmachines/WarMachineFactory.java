@@ -19,6 +19,6 @@ public class WarMachineFactory {
             case FIRST_AID_TENT:
                 return new FirstAidTent(amount, aSkillLevel);
         }
-        throw new IllegalArgumentException( "Cannot recognize WarMachine by name" );
+        throw new IllegalArgumentException( "Cannot recognize War Machine by name" );
     }
 }
