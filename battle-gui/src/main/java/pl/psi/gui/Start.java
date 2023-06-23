@@ -52,7 +52,7 @@ public class Start extends Application
 
     private Hero createP2()
     {
-        Creature creature1 = new NecropolisFactory().create( true, 2, 5 );
+        Creature creature1 = new NecropolisFactory().create( true, 2, 3);
         WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 2, 2);
         WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 0, 1);
 

@@ -38,6 +38,7 @@ public class Catapult extends WarMachine implements AttackerIF {
         return ballisticSkillLevel > 0;
     }
 
+    @Override
     public HashMap<String, Integer> getSkill(){
         HashMap<String, Integer> skill = new HashMap<>();
         skill.put(BALLISTICS, ballisticSkillLevel);
