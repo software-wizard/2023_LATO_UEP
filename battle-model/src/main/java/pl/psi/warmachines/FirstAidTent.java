@@ -28,7 +28,7 @@ public class FirstAidTent extends WarMachine implements HealerIF {
 
     @Override
     public boolean canHeal() {
-        return firstAidSkillLevel > 0;
+        return true;
     }
 
 
