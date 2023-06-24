@@ -54,6 +54,7 @@ public class GameEngine {
                         Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack(), "Current map object is not an attacker");
                         ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
                         checkIfAlive(defender);
+                        checkIfAlive(turnQueue.getCurrentMapObject());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

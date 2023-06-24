@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
 
+import com.google.common.base.Preconditions;
 import pl.psi.AttackerIF;
 import pl.psi.MapObjectIf;
 import lombok.Setter;
@@ -41,12 +42,14 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         calculator = aCalculator;
     }
 
-    public void attack(final Creature aDefender) throws Exception {
+    @Override
+    public void attack(MapObjectIf aDefender) throws Exception {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
             if (canCounterAttack(aDefender)) {
-                counterAttack(aDefender);
+                Preconditions.checkArgument(aDefender instanceof Creature);
+                counterAttack((Creature) aDefender);
             }
         }
     }
@@ -69,15 +72,17 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
     }
 
+    @Override
     public int getMaxHp() {
         return stats.getMaxHp();
     }
 
+    @Override
     public void setCurrentHp(final int aCurrentHp) {
         currentHp = aCurrentHp;
     }
 
-    private boolean canCounterAttack(final Creature aDefender) {
+    private boolean canCounterAttack(final MapObjectIf aDefender) {
         return aDefender.getCounterAttackCounter() > 0 && aDefender.getCurrentHp() > 0;
     }
 
@@ -141,14 +146,6 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
     @Override
     public boolean canAttackFromDistance() {
         return false;
-    }
-
-    @Override
-    public void attack(MapObjectIf aDefender) throws Exception {
-        if (isAlive()) {
-            final int damage = getCalculator().calculateDamage(this, aDefender);
-            applyDamage(aDefender, damage);
-        }
     }
 
     @Override

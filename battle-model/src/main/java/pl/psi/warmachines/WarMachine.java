@@ -4,7 +4,6 @@ import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
-import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
 
 import java.beans.PropertyChangeEvent;
@@ -15,11 +14,11 @@ import java.util.HashMap;
 public class WarMachine implements PropertyChangeListener, MapObjectIf {
     private WarMachineDamageCalculatorIF calculator;
     private FirstAidTentIf HPcalculator;
-    @Getter
     private WarMachineStatisticIf stats;
     @Setter
     private int amount;
     private int currentHp;
+    private final int counterAttackCounter = 0;
 
     WarMachine() {
     }
@@ -146,9 +145,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     public boolean checkIfAlive(MapObjectIf defender) {
         return defender.getAmount() > 0;
         //return defender.getCurrentHp() > 0;
-    }
-
-    public void setControllable() {
     }
 
     public static class Builder {

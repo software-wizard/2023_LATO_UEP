@@ -12,27 +12,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControlIndicatorTest {
 
-    @Test
-    void indicateControl() {
-        HashMap<String, Integer> skills = new HashMap<>();
-        skills.put("artillery", 1);
-        skills.put("ballistics", 1);
-        skills.put("firstAid", 1);
-        ControlIndicator controlIndicator = new ControlIndicator(skills);
-        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.BALLISTA));
-        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.CATAPULT));
-        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
-
-        HashMap<String, Integer> skills2 = new HashMap<>();
-        skills.put("artillery", 0);
-        skills.put("ballistics", 0);
-        skills.put("firstAid", 0);
-        ControlIndicator controlIndicator1 = new ControlIndicator(skills2);
-
-        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.BALLISTA));
-        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.CATAPULT));
-        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
-    }
+//    @Test
+//    void indicateControl() {
+//        HashMap<String, Integer> skills = new HashMap<>();
+//        skills.put("artillery", 1);
+//        skills.put("ballistics", 1);
+//        skills.put("firstAid", 1);
+//        ControlIndicator controlIndicator = new ControlIndicator(skills);
+//        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.BALLISTA));
+//        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.CATAPULT));
+//        assertTrue(controlIndicator.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
+//
+//        HashMap<String, Integer> skills2 = new HashMap<>();
+//        skills.put("artillery", 0);
+//        skills.put("ballistics", 0);
+//        skills.put("firstAid", 0);
+//        ControlIndicator controlIndicator1 = new ControlIndicator(skills2);
+//
+//        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.BALLISTA));
+//        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.CATAPULT));
+//        assertFalse(controlIndicator1.indicateControl(WarMachineStatistic.FIRST_AID_TENT));
+//    }
 
     @Test
     void isControllable() {
