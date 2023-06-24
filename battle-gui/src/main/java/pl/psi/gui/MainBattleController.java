@@ -63,7 +63,7 @@ public class MainBattleController implements PropertyChangeListener {
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
-                        if(gameEngine.hero1.getMapObjectIfs().contains(mapObject)){
+                        if(gameEngine.getMapObjectIf1().contains(mapObject)){
                             mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
