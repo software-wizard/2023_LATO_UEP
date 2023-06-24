@@ -1,6 +1,7 @@
 package pl.psi;
 
 import com.google.common.base.Preconditions;
+import lombok.Getter;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -15,8 +16,9 @@ public class GameEngine {
     private final Board board;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final TurnQueue turnQueue;
-    private List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
-    private List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
+    @Getter
+    protected List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
+    protected List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
 
     public Hero hero1;
 
@@ -32,11 +34,26 @@ public class GameEngine {
         mapObjectIf2.addAll(aHero2.getCreatures());
         mapObjectIf2.addAll(aHero2.getWarMachines());
 
-        hero1.setMapObjectIfs(mapObjectIf1);
-        hero2.setMapObjectIfs(mapObjectIf2);
-
         turnQueue = new TurnQueue(mapObjectIf1, mapObjectIf2);
         board = new Board(mapObjectIf1, mapObjectIf2);
+    }
+
+    public boolean isEnemy(MapObjectIf attacker, MapObjectIf defender){
+        if(mapObjectIf1.contains(attacker)){
+            if (mapObjectIf1.contains(defender)){
+                return false;
+            }else {
+                return true;
+            }
+        } else if (mapObjectIf2.contains(attacker)) {
+            if (mapObjectIf2.contains(defender)){
+                return false;
+            }else {
+                return true;
+            }
+        }else {
+            return false;
+        }
     }
 
     public void attack(final Point point) {
@@ -102,7 +119,7 @@ public class GameEngine {
             return board.getMapObject(point)
                     .isPresent()
                     && distance > 0
-                    && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
+                    && !isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
                     && turnQueue.getCurrentMapObject().canHeal();
         }
@@ -130,12 +147,12 @@ public class GameEngine {
                 return board.getMapObject(point)
                         .isPresent()
                         && distance > 0
-                        && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+                        && isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
             } else {
                 return board.getMapObject(point)
                         .isPresent()
                         && distance < 2 && distance > 0
-                        && hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
+                        && isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get());
             }
         } else {
             return false;
@@ -157,7 +174,7 @@ public class GameEngine {
         MapObjectIf mo;
         if(turnQueue.getCurrentMapObject().canAttack()){
 
-            if(hero1.getMapObjectIfs().contains(turnQueue.getCurrentMapObject())){
+            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
                 mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
             }else {
                 mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
@@ -167,7 +184,7 @@ public class GameEngine {
 
         }else {
 
-            if(hero1.getMapObjectIfs().contains(turnQueue.getCurrentMapObject())){
+            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
 
                 do{
                     mo = getRandomMapObject(turnQueue.getMapObjectIfs1());

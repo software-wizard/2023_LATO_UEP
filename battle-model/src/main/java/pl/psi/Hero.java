@@ -19,9 +19,8 @@ public class Hero
     private final List<Creature> creatures;
     @Getter
     private List<WarMachine> warMachines;
-    @Setter
-    @Getter
-    private List<MapObjectIf> mapObjectIfs;
+//    @Getter
+//    private List<MapObjectIf> mapObjectIfs;
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
@@ -34,12 +33,7 @@ public class Hero
         creatures = aCreatures;
     }
 
-    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
-        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
-    }
-
-    public MapObjectIf getRandomMapObject(List<MapObjectIf> aMapObjectIfs){
-        int i = (int) Math.random() * 10;
-        return aMapObjectIfs.get(i);
-    }
+//    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
+//        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
+//    }
 }
