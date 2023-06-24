@@ -104,7 +104,7 @@ public class GameEngine {
                     && distance > 0
                     && !hero1.isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
-                    ;
+                    && turnQueue.getCurrentMapObject().canHeal();
         }
 
     public boolean isCurrentMapObject(Point aPoint) {
@@ -159,13 +159,11 @@ public class GameEngine {
 
             if(hero1.getMapObjectIfs().contains(turnQueue.getCurrentMapObject())){
                 mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
-                System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for attack: " + mo);
-                return mo;
             }else {
                 mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
-                System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for attack: " + mo);
-                return mo;
             }
+            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for attack: " + mo);
+            return mo;
 
         }else {
 
@@ -175,17 +173,15 @@ public class GameEngine {
                     mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
                 }while (turnQueue.getCurrentMapObject().equals(mo));
 
-                System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for heal: " + mo);
-                return mo;
             }else {
 
                 do{
                     mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
                 }while (turnQueue.getCurrentMapObject().equals(mo));
 
-                System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for heal: " + mo);
-                return mo;
             }
+            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for heal: " + mo);
+            return mo;
 
         }
     }

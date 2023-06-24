@@ -21,6 +21,7 @@ import javafx.scene.paint.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.io.FileNotFoundException;
 import java.util.Optional;
@@ -78,13 +79,14 @@ public class MainBattleController implements PropertyChangeListener {
                     }
                 });
 
-                if(!gameEngine.isControllable()) {
-                    if (gameEngine.isTurnQueueEmpty()) {
-                        gameEngine.endOfTurn();
-                    } else {
-                        gameEngine.pass();
-                    }
-                }
+//                if(!gameEngine.isControllable()) {
+//                    if (gameEngine.isTurnQueueEmpty()) {
+//                        gameEngine.endOfTurn();
+//                    } else {
+//                        gameEngine.pass();
+//                    }
+//                }
+                // dać ewentualnie do gameEngine
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
@@ -112,21 +114,19 @@ public class MainBattleController implements PropertyChangeListener {
                         });
                     }
                 }
-
                 gridMap.add(mapTile, x, y);
             }
         }
 
-        //todo repair skipping first object from queue from hero2
+        //repair skipping first object from queue
+        //wywalic z kontrolera, do kolejki np
         if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
             Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
 
             if (gameEngine.canAttack(randPoint)){
-                System.out.println("-------------Random Attack-------------");
                 gameEngine.attack(randPoint);
             }
             if (gameEngine.canHeal(randPoint)){
-                System.out.println("-------------Random Heal-------------");
                 gameEngine.heal(randPoint);
             }
         }

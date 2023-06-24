@@ -14,9 +14,9 @@ public class ControlIndicator {
 
     public ControlIndicator() {
         // TODO: In future, these values should be read from hero's skills
-        this.heroArtillerySkillLevel = 3;
-        this.heroBallisticsSkillLevel = 3;
-        this.heroFirstAidSkillLevel = 3;
+        this.heroArtillerySkillLevel = 0;
+        this.heroBallisticsSkillLevel = 0;
+        this.heroFirstAidSkillLevel = 0;
     }
 
     public boolean indicateControl(WarMachineStatistic name) {
