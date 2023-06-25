@@ -3,6 +3,7 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import pl.psi.artifacts.Artifact;
 import pl.psi.buildings.Building;
 import pl.psi.buildings.RecruitmentBuilding;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 public class EconomyHero implements MapElement {
 

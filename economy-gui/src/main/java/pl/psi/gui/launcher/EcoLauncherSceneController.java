@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.*;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,12 +21,10 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.EconomyEngine;
 import pl.psi.Point;
-import pl.psi.artifacts.Artifact;
 import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroStatistics;
-import pl.psi.mapElements.MapElement;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.hero.HeroStatistics;
+import pl.psi.mapElements.MapElement;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
@@ -38,18 +35,6 @@ public class EcoLauncherSceneController implements Initializable
     private Scene scene;
     private Parent root;
 
-    @FXML
-    private ChoiceBox<String> playerTownChoiceBox;
-    @FXML
-    private ChoiceBox<String> playerHeroChoiceBox;
-    @FXML
-    private ChoiceBox<String> playerBonusChoiceBox;
-    @FXML
-    private ChoiceBox<String> computerTownChoiceBox;
-    @FXML
-    private ChoiceBox<String> computerHeroChoiceBox;
-    @FXML
-    private ChoiceBox<String> computerBonusChoiceBox;
 
     @FXML
     private VBox playerChoiceBoxes;
@@ -63,7 +48,6 @@ public class EcoLauncherSceneController implements Initializable
 
     private String[] bonuses = {"bonus1", "bonus2"};
 
-    private EconomyEngine economyEngine;
 
     // Create a VBox to hold the choice boxes for each player
    public void addPlayers(ActionEvent event) throws Exception {
@@ -89,24 +73,8 @@ public class EcoLauncherSceneController implements Initializable
                // If the user entered both a name and an age, create a new player and add it to the list
                if (nameResult.isPresent()) {
                    Player player = Player.builder().
-                           name(nameResult.get()).
-                           resources(PlayerResources.builder()
-                                   .wood(30)
-                                   .ore(20)
-                                   .gold(30000)
-                                   .crystal(20)
-                                   .gems(20)
-                                   .mercury(20)
-                                   .sulfur(20)
-                                   .build())
-                           .economyHero(EconomyHero.builder()
-                                   .heroStatistics(HeroStatistics.builder()
-                                           .moveRange(7)
-                                           .build())
-
-                                   .heroEquipment(new HeroEquipment()).build())
+                           name(nameResult.get())
                            .build();
-
                    players.add(player);
                }
            }
@@ -152,19 +120,17 @@ public class EcoLauncherSceneController implements Initializable
    }
     public void switchToMap(ActionEvent event) throws IOException {
 
-        economyEngine = new EconomyEngine(players);
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/ecoMapScene.fxml"));
         root = loader.load();
 
         try {
+
+            EconomyEngine economyEngine = new EconomyEngine(players);
+
             EcoMapSceneController ecoMapSceneController = loader.getController();
             ecoMapSceneController.loadEconomyEngine(economyEngine);
             ecoMapSceneController.refreshGui();
-            //pobieranie danych z economyEngine i ładowanie ich na nowa scene za pierwszym razem
-//            ecoMapSceneController.displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
-//            ecoMapSceneController.displayName(economyEngine.getCurrentPlayer().getHeroName());
-//            ecoMapSceneController.displayResources(economyEngine.getCurrentPlayer().getResources());
 
             //do debugu
             ecoMapSceneController.displayAllPlayersWithProperties(players);
@@ -187,12 +153,5 @@ public class EcoLauncherSceneController implements Initializable
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        playerTownChoiceBox.getItems().addAll(towns);
-        playerHeroChoiceBox.getItems().addAll(heroes);
-        playerBonusChoiceBox.getItems().addAll(bonuses);
-
-        computerTownChoiceBox.getItems().addAll(towns);
-        computerHeroChoiceBox.getItems().addAll(heroes);
-        computerBonusChoiceBox.getItems().addAll(bonuses);
     }
 }

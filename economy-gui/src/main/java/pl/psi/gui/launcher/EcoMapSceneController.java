@@ -1,6 +1,7 @@
 package pl.psi.gui.launcher;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import pl.psi.Hero;
 import pl.psi.artifacts.ArtifactFactory;
+import pl.psi.converter.EcoBattleConverter;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.gui.map.MapController;
 import pl.psi.hero.EconomyHero;
@@ -103,6 +105,17 @@ public class EcoMapSceneController {
         sulfurLabel.setText("Sulfur: "+ playerResources.getSulfur());
         mercuryLabel.setText("Mercury: "+ playerResources.getMercury());
         gemsLabel.setText("Gems: "+ playerResources.getGems());
+    }
+
+    public void goToBattle(ActionEvent event) throws IOException {
+
+        try {
+            EcoBattleConverter converter = new EcoBattleConverter();
+            converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(), economyEngine.getCurrentPlayer().getEconomyHero());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void switchToLauncher(ActionEvent event) throws IOException {

@@ -2,43 +2,112 @@ package pl.psi;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import pl.psi.creatures.EconomyCreature;
+import pl.psi.creatures.EconomyNecropolisFactory;
 import pl.psi.hero.EconomyHero;
+import pl.psi.hero.HeroStatistics;
 import pl.psi.mapElements.*;
 import pl.psi.player.Player;
+import pl.psi.player.PlayerResources;
 
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.List;
 
 @Getter
+@Setter
+@Builder
+@AllArgsConstructor
 public class EconomyEngine {
 
     private final Board board;
     private final TurnQueue turnQueue;
+    private EconomyEngine economyEngine;
+    private final LinkedList<Player> aPlayers;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
     public EconomyEngine(LinkedList<Player> aPlayers) {
 
-        this.board = new Board(getMapElements(aPlayers));
-        this.turnQueue = new TurnQueue(aPlayers);
+        LinkedList<Player> newPlayers = buildPlayers(aPlayers);
+
+        this.aPlayers = newPlayers;
+        this.board = new Board(getMapElements(newPlayers));
+        this.turnQueue = new TurnQueue(newPlayers);
         turnQueue.addObserver(board);
 
     }
 
+
+
+    public LinkedList<Player> buildPlayers(LinkedList<Player> aPlayers) {
+
+        try {
+        EconomyCreature c1 = new EconomyNecropolisFactory().create(false,1,10);
+
+            for (int i=0; i < aPlayers.size(); i++) {
+
+            PlayerResources playerResources = PlayerResources.builder()
+                    .wood(1000)
+                    .ore(1000)
+                    .gold(1000)
+                    .crystal(1000)
+                    .gems(1000)
+                    .build();
+
+            EconomyHero economyHero = EconomyHero.builder()
+                    .heroStatistics(HeroStatistics.builder()
+                            .player(aPlayers.get(i))
+                            .moveRange(7)
+                            .experience(1)
+                            .level(1)
+                            .mana(1)
+                            .maxMana(1)
+                            .build())
+                    .fraction(Castle.FractionType.NECROPOLIS)
+                    .heroArmy(new ArrayList<>())
+                    .build();
+
+            economyHero.getHeroArmy().add(c1);
+
+            Player aPlayer = Player.builder()
+                    .name(aPlayers.get(i).getName())
+                    .resources(playerResources)
+                    .economyHero(economyHero)
+                    .town(aPlayers.get(i).getTown())
+                    .heroName(aPlayers.get(i).getHeroName())
+                    .bonus(aPlayers.get(i).getBonus())
+                    .color(Color.yellow)
+                    .build();
+
+            aPlayers.set(i, aPlayer);
+
+        }
+
+    } catch (Exception e) {
+
+        e.printStackTrace();
+    }
+
+        return  aPlayers;
+    }
+
+
     private BiMap<Point, MapElement> getMapElements(LinkedList<Player> aPlayers) {
         BiMap<Point, MapElement> aMapElements = HashBiMap.create();
 
-        // Create Players
+//        // Create Players
         aMapElements.put(new Point(0, 0), aPlayers.get(0).getEconomyHero());
         aMapElements.put(new Point(24, 24), aPlayers.get(1).getEconomyHero());
-
-//        Player.builder()
-//                .economyHero(EconomyHero.builder()
-//                        .heroArmy(List.of())
-//                        .build())
-//                .build();
+//        for (int i=0; i < aPlayers.size(); i++) {
+//            aMapElements.put(new Point(i, i), aPlayers.get(i).getEconomyHero());
+//        }
 
         Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
         aMapElements.put(new Point(2, 2), castle1);
