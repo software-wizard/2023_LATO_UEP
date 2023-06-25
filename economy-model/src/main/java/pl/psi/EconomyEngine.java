@@ -103,11 +103,12 @@ public class EconomyEngine {
         BiMap<Point, MapElement> aMapElements = HashBiMap.create();
 
 //        // Create Players
-        aMapElements.put(new Point(0, 0), aPlayers.get(0).getEconomyHero());
-        aMapElements.put(new Point(24, 24), aPlayers.get(1).getEconomyHero());
-//        for (int i=0; i < aPlayers.size(); i++) {
-//            aMapElements.put(new Point(i, i), aPlayers.get(i).getEconomyHero());
-//        }
+//        aMapElements.put(new Point(0, 0), aPlayers.get(0).getEconomyHero());
+//        aMapElements.put(new Point(24, 24), aPlayers.get(1).getEconomyHero());
+        for (int i=0; i < aPlayers.size(); i++) {
+            Random rand = new Random();
+            aMapElements.put(new Point(rand.nextInt(24), rand.nextInt(24)), aPlayers.get(i).getEconomyHero());
+        }
 
         Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
         aMapElements.put(new Point(2, 2), castle1);
