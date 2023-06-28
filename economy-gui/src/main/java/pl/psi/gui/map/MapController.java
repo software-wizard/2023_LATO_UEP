@@ -67,7 +67,7 @@ public class MapController implements PropertyChangeListener {
                 // Draw heroes
                 economyHero.ifPresent(economyHeroToGUI -> {
                     try {
-                        mapTile.setHeroGraphic("Dragon");
+                        mapTile.setHeroGraphic("Hero_Christian");
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
                     }
