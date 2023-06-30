@@ -63,6 +63,7 @@ public class GameEngine {
                         Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack(), "Current map object is not an attacker");
                         ((AttackerIF) turnQueue.getCurrentMapObject()).attack(defender);
                         checkIfAlive(defender);
+                        checkIfAlive(turnQueue.getCurrentMapObject());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -207,14 +208,15 @@ public class GameEngine {
         return turnQueue.getCurrentMapObject().isControllable();
     }
 
-    public boolean isTurnQueueEmpty() {
-        return turnQueue.isTurnQueueEmpty();
+    public void verifyControllability() {
+        if(!isControllable()) {
+            if (turnQueue.isTurnQueueEmpty()) {
+                turnQueue.endOfTurn();
+            } else {
+                pass();
+            }
+        }
     }
-
-    public void endOfTurn() {
-        turnQueue.endOfTurn();
-    }
-
 
 //    public boolean canHeal(final Point point) {
 //        if (turnQueue.getCurrentMapObject().canHeal()) {

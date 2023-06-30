@@ -4,11 +4,11 @@ import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
-import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 
 @Getter
 public class WarMachine implements PropertyChangeListener, MapObjectIf {
@@ -18,6 +18,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Setter
     private int amount;
     private int currentHp;
+    private final int counterAttackCounter = 0;
 
     WarMachine() {
     }
@@ -34,15 +35,8 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     }
 
 
-    //todo uncomment when tent is ready
-//    public boolean canHeal() {
-//        return false;
-//    }
-//
-//    public boolean canAttack() {
-//        return true;
-//    }
-
+    // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
+    // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
 //    public boolean canHeal() {
 //        boolean canHeal = stats.getName().equals("First Aid Tent");
 //        return canHeal;
@@ -118,7 +112,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return stats.getAttack();
     }
 
-    int getArmor() {
+    public int getArmor() {
         return stats.getArmor();
     }
 
@@ -185,5 +179,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Override
     public String toString() {
         return getName() + System.lineSeparator() + getCurrentHp();
+    }
+
+    public HashMap<String, Integer> getSkill() {
+        return null;
     }
 }

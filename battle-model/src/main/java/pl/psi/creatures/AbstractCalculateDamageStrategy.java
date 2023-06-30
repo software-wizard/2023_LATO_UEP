@@ -1,5 +1,7 @@
 package pl.psi.creatures;
 
+import pl.psi.MapObjectIf;
+
 import java.util.Random;
 
 abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
@@ -21,7 +23,7 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
     }
 
     @Override
-    public int calculateDamage( final Creature aAttacker, final Creature aDefender )
+    public int calculateDamage( final Creature aAttacker, final MapObjectIf aDefender )
     {
         final int armor = getArmor( aDefender );
 
@@ -63,7 +65,7 @@ abstract class AbstractCalculateDamageStrategy implements DamageCalculatorIf
         return i;
     }
 
-    protected int getArmor( final Creature aDefender )
+    protected int getArmor( final MapObjectIf aDefender )
     {
         return aDefender.getArmor();
     }

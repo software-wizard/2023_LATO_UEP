@@ -1,17 +1,18 @@
 package pl.psi.warmachines;
 
-import lombok.Setter;
 import pl.psi.AttackerIF;
-import pl.psi.ControlIndicator;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
+import java.util.HashMap;
+
 public class Catapult extends WarMachine implements AttackerIF {
-    @Setter
-    private boolean canBeControlledByPlayer;
-    public Catapult(int amount) {
+    public static final String BALLISTICS = "ballistics";
+    private final int ballisticSkillLevel;
+
+    public Catapult(int amount, int ballisticSkillLevel) {
         super(WarMachineStatistic.CATAPULT, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
-        canBeControlledByPlayer = new ControlIndicator().indicateControl(WarMachineStatistic.CATAPULT);
+        this.ballisticSkillLevel = ballisticSkillLevel;
     }
 
     @Override
@@ -34,6 +35,14 @@ public class Catapult extends WarMachine implements AttackerIF {
 
     @Override
     public boolean isControllable() {
-        return canBeControlledByPlayer;
+        return ballisticSkillLevel > 0;
     }
+
+    @Override
+    public HashMap<String, Integer> getSkill(){
+        HashMap<String, Integer> skill = new HashMap<>();
+        skill.put(BALLISTICS, ballisticSkillLevel);
+        return skill;
+    }
+
 }

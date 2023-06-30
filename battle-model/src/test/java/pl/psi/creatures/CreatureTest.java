@@ -17,7 +17,7 @@ public class CreatureTest {
     private static final Range<Integer> NOT_IMPORTANT_DMG = Range.closed(0, 0);
 
     @Test
-    void creatureShouldAttackProperly() {
+    void creatureShouldAttackProperly() throws Exception {
         // given
         final Creature angel = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
@@ -40,7 +40,7 @@ public class CreatureTest {
     }
 
     @Test
-    void creatureShouldNotHealCreatureEvenHasLowerAttackThanDefenderArmor() {
+    void creatureShouldNotHealCreatureEvenHasLowerAttackThanDefenderArmor() throws Exception {
         final Creature angel = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -62,7 +62,7 @@ public class CreatureTest {
     }
 
     @Test
-    void defenderShouldCounterAttack() {
+    void defenderShouldCounterAttack() throws Exception {
         final Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -83,7 +83,7 @@ public class CreatureTest {
     }
 
     @Test
-    void defenderShouldNotCounterAttackWhenIsDie() {
+    void defenderShouldNotCounterAttackWhenIsDie() throws Exception {
         final Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -105,7 +105,7 @@ public class CreatureTest {
     }
 
     @Test
-    void defenderShouldCounterAttackOnlyOncePerTurn() {
+    void defenderShouldCounterAttackOnlyOncePerTurn() throws Exception {
         final Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -129,7 +129,7 @@ public class CreatureTest {
     }
 
     @Test
-    void counterAttackCounterShouldResetAfterEndOfTurn() {
+    void counterAttackCounterShouldResetAfterEndOfTurn() throws Exception {
         final Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(NOT_IMPORTANT_DMG)
@@ -155,7 +155,7 @@ public class CreatureTest {
     }
 
     @Test
-    void creatureShouldHealAfterEndOfTurn() {
+    void creatureShouldHealAfterEndOfTurn() throws Exception {
         final Creature attacker = new Creature.Builder().statistic(CreatureStats.builder()
                         .maxHp(100)
                         .damage(Range.closed(10, 10))

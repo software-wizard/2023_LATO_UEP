@@ -1,6 +1,7 @@
 package pl.psi.creatures;
 
 import com.google.common.annotations.VisibleForTesting;
+import pl.psi.MapObjectIf;
 
 import java.util.Random;
 
@@ -18,7 +19,7 @@ public class OffenceSkill extends AbstractCalculateDamageStrategy implements Dam
     }
 
     @Override
-    public int calculateDamage(Creature aAttacker, Creature aDefender) {
+    public int calculateDamage(Creature aAttacker, MapObjectIf aDefender) {
         return calculateOutcome(super.calculateDamage(aAttacker, aDefender));
     }
 
