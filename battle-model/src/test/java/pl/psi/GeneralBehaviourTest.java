@@ -31,13 +31,7 @@ class GeneralBehaviourTest {
         assertFalse(firstAidTent.canAttack());
         assertTrue(firstAidTent.canHeal());
     }
-
-    @Test
-    void ammoCartBehaviour() {
-        WarMachine ammoCart = new WarMachineFactory().create(WarMachineStatistic.AMMO_CART, 1, 1);
-        assertFalse(ammoCart.canAttack());
-        assertFalse(ammoCart.canHeal());
-    }
+    
 
     @Test
     void creatureBehaviour(){

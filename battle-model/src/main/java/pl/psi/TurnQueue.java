@@ -1,11 +1,10 @@
 package pl.psi;
 
+import lombok.Getter;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,12 +17,19 @@ public class TurnQueue {
     public static final String NEXT_MAP_OBJECT = "NEXT_CREATURE";
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final Collection<MapObjectIf> mapObjectIfs;
+    @Getter
+    private Collection<MapObjectIf> mapObjectIfs1;
+    @Getter
+    private Collection<MapObjectIf> mapObjectIfs2;
+
     private MapObjectIf currentMapObject;
     private final Queue<MapObjectIf> mapObjectsQueue;
     private int roundNumber;
 
     public TurnQueue(final Collection<MapObjectIf> aMapObjectList1,
                      final Collection<MapObjectIf> aMapObjectList2) {
+        mapObjectIfs1 = aMapObjectList1;
+        mapObjectIfs2 = aMapObjectList2;
         mapObjectIfs = Stream.concat(aMapObjectList1.stream(), aMapObjectList2.stream())
                 .collect(Collectors.toList());
         mapObjectsQueue = new LinkedList<>();
@@ -40,13 +46,6 @@ public class TurnQueue {
         return currentMapObject;
     }
 
-    public MapObjectIf getRandomMapObject() {
-        MapObjectIf[] array = mapObjectIfs.toArray(new MapObjectIf[0]);
-        Random random = new Random();
-        int randomIndex = random.nextInt(array.length);
-        return array[randomIndex];
-    }
-
     public void next() {
         MapObjectIf oldMapObject = currentMapObject;
 
@@ -57,7 +56,7 @@ public class TurnQueue {
         observerSupport.firePropertyChange(NEXT_MAP_OBJECT, oldMapObject, currentMapObject);
     }
 
-    private void endOfTurn() {
+    public void endOfTurn() {
         roundNumber++;
         initQueue();
         observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
@@ -70,5 +69,16 @@ public class TurnQueue {
     public void removeMapObject(MapObjectIf mapObjectIf){
         mapObjectIfs.remove(mapObjectIf);
         mapObjectsQueue.remove(mapObjectIf);
+
+        if (mapObjectIfs1.contains(mapObjectIf)){
+            mapObjectIfs1.remove(mapObjectIf);
+        }else if(mapObjectIfs2.contains(mapObjectIf)){
+            mapObjectIfs2.remove(mapObjectIf);
+        }
+
+    }
+
+    public boolean isTurnQueueEmpty() {
+        return mapObjectsQueue.isEmpty();
     }
 }

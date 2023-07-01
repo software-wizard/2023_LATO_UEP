@@ -11,17 +11,14 @@ public class WarMachineFactory {
     public WarMachine create(WarMachineStatistic aName, int aSkillLevel, final int amount )
     {
         switch(aName) {
-            case AMMO_CART:
-                return new AmmoCart(amount);
-
             case BALLISTA:
-                return new Ballista(amount);
+                return new Ballista(amount, aSkillLevel);
             case CATAPULT:
-                return new Catapult(amount);
+                return new Catapult(amount, aSkillLevel);
 
             case FIRST_AID_TENT:
-                return new FirstAidTent(amount);
+                return new FirstAidTent(amount, aSkillLevel);
         }
-        throw new IllegalArgumentException( "Cannot recognize WarMachine by name" );
+        throw new IllegalArgumentException( "Cannot recognize War Machine by name" );
     }
 }

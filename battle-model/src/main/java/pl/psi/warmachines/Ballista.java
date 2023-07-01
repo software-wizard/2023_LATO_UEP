@@ -4,10 +4,15 @@ import pl.psi.AttackerIF;
 import pl.psi.MapObjectIf;
 import pl.psi.WarMachines.WarMachineStatistic;
 
-public class Ballista extends WarMachine implements AttackerIF {
+import java.util.HashMap;
 
-    public Ballista(int amount) {
+public class Ballista extends WarMachine implements AttackerIF {
+    public static final String ARTILLERY = "artillery";
+    private final int artillerySkillLevel;
+
+    public Ballista(int amount, int artillerySkillLevel) {
         super(WarMachineStatistic.BALLISTA, new WarMachineDamageCalculator(), new FirstAidTentHealPointsCalculator(), amount);
+        this.artillerySkillLevel = artillerySkillLevel;
     }
 
     @Override
@@ -15,6 +20,7 @@ public class Ballista extends WarMachine implements AttackerIF {
         if (isAlive()) {
             final int damage = getCalculator().calculateDamage(this, aDefender);
             applyDamage(aDefender, damage);
+            // defender.applyDamage(damage); todo
         }
     }
 
@@ -27,5 +33,18 @@ public class Ballista extends WarMachine implements AttackerIF {
     public boolean canAttack() {
         return true;
     }
+
+    @Override
+    public boolean isControllable() {
+        return artillerySkillLevel > 0;
+    }
+
+    @Override
+    public HashMap<String, Integer> getSkill(){
+        HashMap<String, Integer> skill = new HashMap<>();
+        skill.put(ARTILLERY, artillerySkillLevel);
+        return skill;
+    }
+
 
 }

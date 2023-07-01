@@ -26,8 +26,8 @@ public class GameEngineTest
     {
         final CastleCreatureFactory creatureFactory = new CastleCreatureFactory();
         final GameEngine gameEngine =
-                new GameEngine(new Hero( List.of( creatureFactory.create( 1, false, 5 )), List.of(new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).amount(1).build())),
-                        new Hero(List.of( creatureFactory.create( 1, false, 5 )), List.of(new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).amount(1).build())));
+                new GameEngine(new Hero( List.of( creatureFactory.create( 1, false, 5 )), List.of(new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1))),
+                        new Hero(List.of( creatureFactory.create( 1, false, 5 )), List.of(new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1))));
 
         gameEngine.attack( new Point( 1, 1) );
     }
@@ -60,7 +60,6 @@ public class GameEngineTest
     }
 
     @Test
-    @Disabled
     void canAttack() {
         WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 1);
         Creature skeleton = new Creature.Builder().statistic(CreatureStatistic.SKELETON).build();
@@ -71,31 +70,32 @@ public class GameEngineTest
         GameEngine gameEngine = new GameEngine(new Hero(List.of(), List.of(catapult)),
                 new Hero(List.of(skeleton), List.of(ballista)));
         // (3,1) is default attacker position in game engine
-        assertTrue(gameEngine.isCurrentMapObject(new Point(3,1)));
-        assertEquals(Optional.of(catapult), gameEngine.getMapObject(new Point(3,1)));
-        assertEquals(Optional.of(skeleton), gameEngine.getMapObject(new Point(11,1)));
-        assertEquals(Optional.of(ballista), gameEngine.getMapObject(new Point(11,3)));
-        assertTrue(gameEngine.canAttack(new Point(11,3)));
-        assertFalse(gameEngine.canAttack(new Point(3,1)));
-        assertTrue(gameEngine.canAttack(new Point(11,1)));
+        assertTrue(gameEngine.isCurrentMapObject(new Point(0,1)));
+
+        assertEquals(Optional.of(catapult), gameEngine.getMapObject(new Point(0,1)));
+        assertEquals(Optional.of(skeleton), gameEngine.getMapObject(new Point(14,1)));
+        assertEquals(Optional.of(ballista), gameEngine.getMapObject(new Point(14,3)));
+
+        assertTrue(gameEngine.canAttack(new Point(14,3)));
+        assertFalse(gameEngine.canAttack(new Point(0,1)));
+        assertTrue(gameEngine.canAttack(new Point(14,1)));
         assertFalse(gameEngine.canAttack(new Point(3,3)));
 
         gameEngine.pass();
-        assertTrue(gameEngine.isCurrentMapObject(new Point(11,1)));
-        assertFalse(gameEngine.canAttack(new Point(11,1)));
-        assertFalse(gameEngine.canAttack(new Point(11,3)));
+        assertTrue(gameEngine.isCurrentMapObject(new Point(14,1)));
+        assertFalse(gameEngine.canAttack(new Point(14,1)));
+        assertFalse(gameEngine.canAttack(new Point(14,3)));
         assertFalse(gameEngine.canAttack(new Point(3,1)));
 
         gameEngine.pass();
-        assertTrue(gameEngine.isCurrentMapObject(new Point(11,3)));
-        assertTrue(gameEngine.canAttack(new Point(3, 1)));
-        assertFalse(gameEngine.canAttack(new Point(11, 1)));
-        assertFalse(gameEngine.canAttack(new Point(11, 3)));
+        assertTrue(gameEngine.isCurrentMapObject(new Point(14,3)));
+        assertTrue(gameEngine.canAttack(new Point(0, 1)));
+        assertFalse(gameEngine.canAttack(new Point(14, 1)));
+        assertFalse(gameEngine.canAttack(new Point(14, 3)));
     }
 
 
     @Test
-    @Disabled
     void canHeal() {
         Creature zombie = new Creature.Builder().statistic(CreatureStatistic.ZOMBIE).build();
         WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
@@ -105,21 +105,22 @@ public class GameEngineTest
 
         GameEngine gameEngine = new GameEngine(new Hero(List.of(zombie), List.of(firstAidTent, ballista)),
                 new Hero(List.of(skeleton), List.of(catapult)));
-        assertEquals(Optional.of(zombie), gameEngine.getMapObject(new Point(3,1)));
-        assertEquals(Optional.of(firstAidTent), gameEngine.getMapObject(new Point(3,3)));
-        assertEquals(Optional.of(ballista), gameEngine.getMapObject(new Point(3,5)));
-        assertEquals(Optional.of(skeleton), gameEngine.getMapObject(new Point(11,1)));
-        assertEquals(Optional.of(catapult), gameEngine.getMapObject(new Point(11,3)));
-        assertTrue(gameEngine.isCurrentMapObject(new Point(3,1)));
-        assertFalse(gameEngine.canHeal(new Point(3,1)));
+
+        assertEquals(Optional.of(zombie), gameEngine.getMapObject(new Point(0,1)));
+        assertEquals(Optional.of(firstAidTent), gameEngine.getMapObject(new Point(0,3)));
+        assertEquals(Optional.of(ballista), gameEngine.getMapObject(new Point(0,5)));
+        assertEquals(Optional.of(skeleton), gameEngine.getMapObject(new Point(14,1)));
+        assertEquals(Optional.of(catapult), gameEngine.getMapObject(new Point(14,3)));
+        assertTrue(gameEngine.isCurrentMapObject(new Point(0,1)));
+        assertFalse(gameEngine.canHeal(new Point(14,1)));
 
         gameEngine.pass();
-        assertTrue(gameEngine.isCurrentMapObject(new Point(3,3)));
-        assertTrue(gameEngine.canHeal(new Point(3,1)));
-        assertFalse(gameEngine.canHeal(new Point(3,3)));
-        assertTrue(gameEngine.canHeal(new Point(3,5)));
-        assertFalse(gameEngine.canHeal(new Point(11,1)));
-        assertFalse(gameEngine.canHeal(new Point(11,3)));
+        assertTrue(gameEngine.isCurrentMapObject(new Point(0,3)));
+        assertTrue(gameEngine.canHeal(new Point(0,1)));
+        assertFalse(gameEngine.canHeal(new Point(0,3)));
+        assertTrue(gameEngine.canHeal(new Point(0,5)));
+        assertFalse(gameEngine.canHeal(new Point(14,1)));
+        assertFalse(gameEngine.canHeal(new Point(14,3)));
     }
 
     @Test
