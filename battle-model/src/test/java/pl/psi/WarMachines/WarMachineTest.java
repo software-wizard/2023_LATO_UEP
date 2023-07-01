@@ -3,6 +3,8 @@ package pl.psi.WarMachines;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.psi.AttackerIF;
+import pl.psi.MapObjectIf;
+import pl.psi.creatures.NecropolisFactory;
 import pl.psi.warmachines.WarMachine;
 import pl.psi.warmachines.WarMachineFactory;
 
@@ -72,20 +74,20 @@ class WarMachineTest {
 //    }
     @Test //Test works for ArtillerySkill = 0 and ArcherySkill = 3
     void shouldSubtractAmount() throws Exception {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 2);
         MapObjectIf dreadKnight = new NecropolisFactory().create( true, 6, 5);
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 5);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 3);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 1);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
