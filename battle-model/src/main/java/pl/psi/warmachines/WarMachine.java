@@ -55,14 +55,14 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
 
         int hp = aDefender.getCurrentHp() - hpToSubstract;
         if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setCurrentHp(aDefender.getMaxHp() + hp); // - (-) sth gives us +, so hp will be higher than max
             aDefender.setAmount(aDefender.getAmount() - 1);
         } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
 
-//        todo sth is wrong with dealing damage, amount subtraction isn't working properly
+//        todo sth is wrong with dealing damage, amount subtraction isn't working properly, smt currentHp > maxHp
 
 //        int hpToSubtract = aDamage % aDefender.getMaxHp();
 ////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());

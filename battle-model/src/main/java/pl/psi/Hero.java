@@ -1,7 +1,9 @@
 package pl.psi;
 
-import lombok.Getter;
+import java.util.List;
+import java.util.Map;
 import lombok.Setter;
+import lombok.Getter;
 import pl.psi.creatures.Creature;
 import pl.psi.warmachines.WarMachine;
 
@@ -17,10 +19,11 @@ public class Hero
     private final List<Creature> creatures;
     @Getter
     private List<WarMachine> warMachines;
-    @Setter
-    @Getter
-    private List<MapObjectIf> mapObjectIfs;
+
+//    @Getter
+//    private List<MapObjectIf> mapObjectIfs;
 //    private final HashMap<String, Integer> skills = new HashMap<>();
+
 
     public Hero( final List< Creature > aCreatures, final List<WarMachine> aWarMachine)
     {
@@ -47,9 +50,8 @@ public class Hero
         creatures = aCreatures;
     }
 
-    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
-        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
-    }
+//    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
+//        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
 
 //    private void loadSkills(){
 //        for (WarMachine warMachine : warMachines) {

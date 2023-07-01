@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
 import pl.psi.GameEngine;
 import pl.psi.Hero;
 import pl.psi.Point;
@@ -22,13 +21,10 @@ import javafx.scene.paint.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.FileNotFoundException;
 import java.util.Optional;
-import java.util.Random;
 
 public class MainBattleController implements PropertyChangeListener {
     private final GameEngine gameEngine;
@@ -67,7 +63,7 @@ public class MainBattleController implements PropertyChangeListener {
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
-                        if(gameEngine.hero1.getMapObjectIfs().contains(mapObject)){
+                        if(gameEngine.getMapObjectIf1().contains(mapObject)){
                             mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
@@ -96,7 +92,7 @@ public class MainBattleController implements PropertyChangeListener {
                     });
                 }
 
-                if(gameEngine.canPerformAction()) {
+                if(gameEngine.canPerformAction() && gameEngine.isControllable()) {
                     if (gameEngine.canAttack(currentPoint)) {
                         mapTile.setBorderColor(Color.RED);
                         mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -111,8 +107,20 @@ public class MainBattleController implements PropertyChangeListener {
                         });
                     }
                 }
-
                 gridMap.add(mapTile, x, y);
+            }
+        }
+
+        //repair skipping first object from queue
+        //wywalic z kontrolera, do kolejki np
+        if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
+            Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
+
+            if (gameEngine.canAttack(randPoint)){
+                gameEngine.attack(randPoint);
+            }
+            if (gameEngine.canHeal(randPoint)){
+                gameEngine.heal(randPoint);
             }
         }
     }
