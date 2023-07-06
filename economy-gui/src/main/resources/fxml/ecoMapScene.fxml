@@ -49,21 +49,12 @@
   <children>
     <SplitPane dividerPositions="0.7561247216035635" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
-        <AnchorPane prefHeight="575.0" prefWidth="632.0">
-          <children>
-            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;" text="Map" textAlignment="CENTER" wrapText="false">
-              <font>
-                <Font size="18.0" fx:id="x1" />
-              </font>
-              <textFill>
-                <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-              </textFill>
-            </Label>
-          </children>
+        <AnchorPane prefHeight="575.0" prefWidth="632.0" fx:id="mapPane">
         </AnchorPane>
+
         <AnchorPane prefHeight="575.0" prefWidth="307.0">
           <children>
-            <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="ControlPanel" textAlignment="CENTER" textFill="$x2" wrapText="false" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="ControlPanel" textAlignment="CENTER" wrapText="false" />
                   <Button layoutX="47.0" layoutY="162.0" mnemonicParsing="false" onAction="#switchToLauncher" text="Go back to launcher" />
                   <GridPane gridLinesVisible="true" layoutX="77.0" layoutY="226.0" prefHeight="90.0" prefWidth="66.0">
                     <columnConstraints>

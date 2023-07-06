@@ -86,7 +86,7 @@ public class Castle implements MapElement {
     private Consumer<String> fireMethod;
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
-    void addObserver(PropertyChangeListener listener){
+    public void addObserver(PropertyChangeListener listener){
         observerSupport.addPropertyChangeListener(listener);
     }
 
@@ -124,7 +124,7 @@ public class Castle implements MapElement {
 
     @Override
     public String getIcon() {
-        return null;
+        return "Castle";
     }
 
     @Override

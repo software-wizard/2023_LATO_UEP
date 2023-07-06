@@ -58,11 +58,6 @@
             <artifactId>hero-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>pl.psi</groupId>
-            <artifactId>spells</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
     </dependencies>
 

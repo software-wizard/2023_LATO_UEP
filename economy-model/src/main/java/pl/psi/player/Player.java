@@ -2,12 +2,14 @@ package pl.psi.player;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import pl.psi.hero.EconomyHero;
 
 import java.awt.*;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Builder
 public class Player {
 
@@ -30,17 +32,5 @@ public class Player {
         this.bonus = bonus;
         this.economyHero = aEconomyHero;
         this.color = aColor;
-    }
-
-    public void setTown(String chosenTown) {
-        this.town = chosenTown;
-    }
-
-    public void setHeroName(String chosenHero) {
-        this.heroName = chosenHero;
-    }
-
-    public void setBonus(String chosenBonus) {
-        this.bonus = chosenBonus;
     }
 }

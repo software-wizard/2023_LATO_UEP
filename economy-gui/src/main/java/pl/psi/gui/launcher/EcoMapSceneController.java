@@ -1,6 +1,7 @@
 package pl.psi.gui.launcher;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -10,10 +11,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.psi.Hero;
 import pl.psi.artifacts.ArtifactFactory;
+import pl.psi.converter.EcoBattleConverter;
 import pl.psi.gui.inventory.EcoEqSceneController;
+import pl.psi.gui.map.MapController;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroEquipment;
 import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
@@ -52,15 +59,32 @@ public class EcoMapSceneController {
     @FXML
     Label gemsLabel;
 
+
+    @FXML
+    AnchorPane mapPane;
+
+
     public void loadEconomyEngine(EconomyEngine economyEngine) {
         this.economyEngine = economyEngine;
     }
 
-    public void refreshGui() {
+    public void refreshGui() throws IOException {
         displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
         displayCurrentDay(economyEngine.getCurrentDay());
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/map.fxml"));
+        loader.setController( new MapController(economyEngine) );
+        Scene scene = new Scene( loader.load());
+
+        // set size to node casting to Pane
+        Node paneProbably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
+//        paneProbably.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+//            mapPane.setPrefSize(newValue.getWidth(), newValue.getHeight());
+//        });
+
+        mapPane.getChildren().add(paneProbably);
     }
     //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
     public void displayName(String heroName) {
@@ -85,6 +109,17 @@ public class EcoMapSceneController {
         sulfurLabel.setText("Sulfur: "+ playerResources.getSulfur());
         mercuryLabel.setText("Mercury: "+ playerResources.getMercury());
         gemsLabel.setText("Gems: "+ playerResources.getGems());
+    }
+
+    public void goToBattle(ActionEvent event) throws IOException {
+
+        try {
+            EcoBattleConverter converter = new EcoBattleConverter();
+            converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(), economyEngine.getCurrentPlayer().getEconomyHero());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void switchToLauncher(ActionEvent event) throws IOException {
@@ -112,13 +147,9 @@ public class EcoMapSceneController {
     }
 
     public void openEq(ActionEvent event) throws IOException {
-        ArtifactFactory artifactFactory = new ArtifactFactory();
-        HeroEquipment aHeroEq = new HeroEquipment();
-        aHeroEq.addItemToBackpack(artifactFactory.create("helmet","skull helmet"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("cape","vampire's cowl"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("necklace","pedant of courage"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("rightHand","sword of hellfire"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("leftHand","sentinel's shield"));
+
+        EconomyHero ecoHero = economyEngine.getEcoHero();
+        HeroEquipment aHeroEq = ecoHero.getHeroEquipment();
 
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();
