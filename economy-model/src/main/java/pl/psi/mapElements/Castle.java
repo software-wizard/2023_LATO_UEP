@@ -71,6 +71,7 @@
 package pl.psi.mapElements;
 import pl.psi.buildings.Building;
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -133,7 +134,7 @@ public class Castle implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         fireMethod.accept("OPEN_CASTLE");
         observerSupport.firePropertyChange("OPEN_CASTLE", null, null);
     }

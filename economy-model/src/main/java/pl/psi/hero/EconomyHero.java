@@ -24,8 +24,6 @@ import java.util.ArrayList;
 public class EconomyHero implements MapElement {
 
 
-    // Metoda apply for EconomyArtifact
-
     private HeroStatistics heroStatistics;
 
     public Castle.FractionType fraction; // @Q - why static?!
@@ -37,10 +35,6 @@ public class EconomyHero implements MapElement {
         fraction = aFraction;
         heroArmy = aHeroArmy;
         heroEquipment = new HeroEquipment();
-    }
-
-    public void setPlayer(Player aPlayer) {
-        this.heroStatistics.setPlayer(aPlayer);
     }
 
     public EconomyHero(HeroStatistics aStats, ArrayList<EconomyCreature> aCreatures, HeroEquipment aEq) {
@@ -58,7 +52,7 @@ public class EconomyHero implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
     }

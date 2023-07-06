@@ -1,6 +1,7 @@
 package pl.psi.mapElements;
 
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class MagicWell implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         if (!currentTurnVisitedEconomyHeroes.contains(aEconomyHero)) {
             aEconomyHero.getHeroStatistics().setMana(aEconomyHero.getHeroStatistics().getMaxMana());
             currentTurnVisitedEconomyHeroes.add(aEconomyHero);
