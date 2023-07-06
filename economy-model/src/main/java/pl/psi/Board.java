@@ -67,9 +67,32 @@ public class Board implements PropertyChangeListener {
     {
         if( canMove(aEconomyHero, aPoint ) )
         {
-            if (map.get(aPoint)!=null) {
-                map.get(aPoint).apply(aEconomyHero, getPlayer(aEconomyHero));
+            for(int i = -1; i<=1; i++)
+            {
+                for(int j = -1; j<=1; j++)
+                {
+                    if(mapHero.containsKey(new Point(aPoint.getX() + i, aPoint.getY() + j)))
+                    {
+                        if(aEconomyHero != mapHero.get(new Point(aPoint.getX() + i, aPoint.getY() + j)))
+                        {
+                            System.out.println("O Bogowie, walka! "+i+" "+j);
+                            try {
+                                //TODO: jak zaimportowac klase EcoBattleConverter z innego modulu?
+//                                EcoBattleConverter converter = new EcoBattleConverter();
+//                                converter.startBattle(aEconomyHero, mapHero.get(new Point(aPoint.getX() + i, aPoint.getY() + j)));
 
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (map.get(aPoint)!=null) {
+
+                map.get(aPoint).apply(aEconomyHero, getPlayer(aEconomyHero));
+                
                 if (map.get(aPoint).shouldBeRemoveAfterAction()) {
                     map.inverse().remove(map.get(aPoint));
                 }
@@ -88,6 +111,13 @@ public class Board implements PropertyChangeListener {
         if( map.containsKey( aPoint ) )
         {
             if (!map.get(aPoint).isInteractive()) {
+                return false;
+            }
+        }
+
+        if( mapHero.containsKey( aPoint ) )
+        {
+            if (!mapHero.get(aPoint).isInteractive()) {
                 return false;
             }
         }
