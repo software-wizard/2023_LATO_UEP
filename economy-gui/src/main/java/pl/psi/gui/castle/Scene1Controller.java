@@ -80,7 +80,7 @@ public class Scene1Controller {
             .gems(5)
             .build();
     static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
+    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), Castle.FractionType.NECROPOLIS, HeroEquipment.builder().build(), army);
 
     static int currentBuyingUnit;
 
@@ -105,7 +105,7 @@ public class Scene1Controller {
     void EnterRecruitment1(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(1);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 1);
+        showRecruitingScene(goldCost, 1, hero.fraction);
         setCurrentBuyingUnit(1);
         addUnitCountTextsToList();
         refreshUnitAmounts();
@@ -117,7 +117,7 @@ public class Scene1Controller {
     void EnterRecruitment2(MouseEvent event)  {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(2);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 2);
+        showRecruitingScene(goldCost, 2, hero.fraction);
         setCurrentBuyingUnit(2);
         refreshUnitAmounts();
         refreshResourceAmounts();
@@ -127,7 +127,7 @@ public class Scene1Controller {
     void EnterRecruitment3(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(3);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 3);
+        showRecruitingScene(goldCost, 3, hero.fraction);
         setCurrentBuyingUnit(3);
         refreshUnitAmounts();
         refreshResourceAmounts();
@@ -137,7 +137,7 @@ public class Scene1Controller {
     void EnterRecruitment4(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(4);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 4);
+        showRecruitingScene(goldCost, 4, hero.fraction);
         setCurrentBuyingUnit(4);
         refreshUnitAmounts();
         refreshResourceAmounts();
@@ -147,7 +147,7 @@ public class Scene1Controller {
     void EnterRecruitment5(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(5);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 5);
+        showRecruitingScene(goldCost, 5, hero.fraction);
         setCurrentBuyingUnit(5);
         refreshUnitAmounts();
         refreshResourceAmounts();
@@ -157,7 +157,7 @@ public class Scene1Controller {
     void EnterRecruitment6(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(6);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 6);
+        showRecruitingScene(goldCost, 6, hero.fraction);
         setCurrentBuyingUnit(6);
         refreshUnitAmounts();
         refreshResourceAmounts();
@@ -167,15 +167,20 @@ public class Scene1Controller {
     void EnterRecruitment7(MouseEvent event) {
         RecruitmentBuilding building = (RecruitmentBuilding) playerCastle.getBuildingsOwned().get(7);
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
-        showRecruitingScene(goldCost, 7);
+        showRecruitingScene(goldCost, 7, hero.fraction);
         setCurrentBuyingUnit(7);
         refreshResourceAmounts();
     }
 
-    void showRecruitingScene(String goldCost, int creatureNumber){
+    void showRecruitingScene(String goldCost, int creatureNumber, Castle.FractionType type){
         try{
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Scene1.class.getResource("Scene2.fxml"));
+            String filePath = "";
+            if(type.equals(Castle.FractionType.NECROPOLIS)){
+                filePath = "Scene2Necropolis.fxml";
+            }else if (type.equals(Castle.FractionType.RAMPART)) {
+                filePath = "Scene2Rampart.fxml";
+            }
+            FXMLLoader fxmlLoader = new FXMLLoader(Scene1.class.getResource(filePath));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("Recruiting");
@@ -207,8 +212,35 @@ public class Scene1Controller {
 
 
     public void EnterFort(MouseEvent mouseEvent) {
+        showUnitsScene(hero.fraction);
+    }
+
+    void showUnitsScene(Castle.FractionType type){
+
+        try{
+            String filePath = "";
+            if(type.equals(Castle.FractionType.NECROPOLIS)){
+                filePath = "Scene3Necropolis.fxml";
+            }else if (type.equals(Castle.FractionType.RAMPART)) {
+                filePath = "Scene3Rampart.fxml";
+            }
+            FXMLLoader fxmlLoader = new FXMLLoader(Scene1.class.getResource(filePath));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Recruiting");
+            stage.setScene(scene);
+            stage.show();
+//            Scene2Controller controller = fxmlLoader.getController();
+//            controller.setUnitCost(goldCost);
+//            controller.setVisible(creatureNumber);
+//            controller.setRefreshScene1Function(this::refreshUnitAmounts);
+
+        }catch(Exception e){
+            System.out.println("exception");
+        }
     }
 
     public void EnterHall(MouseEvent mouseEvent) {
     }
+
 }

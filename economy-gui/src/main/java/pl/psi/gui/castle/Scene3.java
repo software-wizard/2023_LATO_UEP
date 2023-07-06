@@ -11,7 +11,7 @@ public class Scene3 extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Scene3.class.getResource("Scene3.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Scene3.class.getResource("Scene3Rampart.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Heroes III");
         stage.setScene(scene);

@@ -83,7 +83,7 @@ public class Scene3Controller {
     }
 
 
-    static Castle playerCastle = new Castle(Castle.FractionType.RAMPART);
+    static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
     static PlayerResources resources = PlayerResources.builder()
             .wood(100)
             .ore(50)

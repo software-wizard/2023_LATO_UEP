@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import pl.psi.EconomyEngine;
 import pl.psi.Point;
+import pl.psi.gui.castle.CastleLauncher;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 
@@ -45,6 +46,7 @@ public class MapController implements PropertyChangeListener {
                 // Draw map
                 Optional<MapElement> mapElement = Optional.ofNullable(economyEngine.getMapElement(currentPoint));
                 Optional<EconomyHero> economyHero = Optional.ofNullable(economyEngine.getEconomyHero(currentPoint));
+
 
                 mapTile.setBackground(Color.GREEN);
                 mapElement.ifPresent((mapElementToGUI -> {
@@ -89,5 +91,11 @@ public class MapController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         refreshGui();
+        if(evt.getPropertyName().equals("OPEN_CASTLE")){
+            openCastle();
+            CastleLauncher.main(new String[0]);}
+    }
+
+    private void openCastle(){
     }
 }

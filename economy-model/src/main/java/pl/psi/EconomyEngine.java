@@ -21,6 +21,9 @@ public class EconomyEngine {
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
 
     public EconomyEngine(LinkedList<Player> aPlayers, BiMap<Point, MapElement> aMapElements) {
+
+//        aMapElements.values().setFireMethod(this::fireEvent);
+
         this.board = new Board(aMapElements);
         this.turnQueue = new TurnQueue(aPlayers);
         turnQueue.addObserver(board);
@@ -39,12 +42,17 @@ public class EconomyEngine {
 
     public void move(final Point aPoint, final EconomyHero aChoosenEconomyHero) {
         board.move(aChoosenEconomyHero, aPoint);
-        observerSupport.firePropertyChange(new PropertyChangeEvent(this, "", null, null));
+        fireEvent("");
+    }
+
+    private void fireEvent(String aType) {
+        observerSupport.firePropertyChange(new PropertyChangeEvent(this, aType, null, null));
     }
 
     public void addObserver(final PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aObserver);
         turnQueue.addObserver(aObserver);
+
     }
     
     public Player getCurrentPlayer() {

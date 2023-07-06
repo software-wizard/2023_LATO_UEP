@@ -72,7 +72,10 @@ package pl.psi.mapElements;
 import pl.psi.buildings.Building;
 import pl.psi.hero.EconomyHero;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 
 public class Castle implements MapElement {
@@ -80,6 +83,12 @@ public class Castle implements MapElement {
 
     private ArrayList<Building> buildingsToBuy = new ArrayList<>();
     private ArrayList<Building> buildingsOwned = new ArrayList<>();
+    private Consumer<String> fireMethod;
+    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
+
+    void addObserver(PropertyChangeListener listener){
+        observerSupport.addPropertyChangeListener(listener);
+    }
 
     public ArrayList<Building> getBuildingsToBuy() {
         return buildingsToBuy;
@@ -125,15 +134,8 @@ public class Castle implements MapElement {
 
     @Override
     public void apply(EconomyHero aEconomyHero) {
-//        switch (aEconomyHero.getFraction()) {
-//            case NECROPOLIS:
-//                NecroLauncher.main(new String[0]);
-
-//                break;
-//            case RAMPART:
-//                EveryCastleLauncher.main(new String[0]);
-//                break;
-//        }
+        fireMethod.accept("OPEN_CASTLE");
+        observerSupport.firePropertyChange("OPEN_CASTLE", null, null);
     }
 
     @Override
@@ -144,6 +146,8 @@ public class Castle implements MapElement {
     @Override
     public void endOfTurn() {
     }
+
+
 
 
 
