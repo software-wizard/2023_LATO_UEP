@@ -26,6 +26,22 @@ public class Scene1Controller {
 //        this.hero = economyHero;
 //    }
 
+    private static EconomyHero hero;
+    private static Castle playerCastle;
+    private static PlayerResources resources;
+
+    public void setHero(EconomyHero hero) {
+        this.hero = hero;
+    }
+
+    public void setPlayerCastle(Castle playerCastle) {
+        this.playerCastle = playerCastle;
+    }
+
+    public void setResources(PlayerResources resources) {
+        this.resources = resources;
+    }
+
     @FXML
     private Text goldCount;
 
@@ -57,7 +73,7 @@ public class Scene1Controller {
     @FXML
     private ImageView image2;
 
-    private ArrayList<Text> unitCounts;
+    private static ArrayList<Text> unitCounts;
     public void addUnitCountTextsToList() {
         unitCounts = new ArrayList<>();
         unitCounts.add(unit1Count);
@@ -69,18 +85,18 @@ public class Scene1Controller {
         unitCounts.add(unit7Count);
     }
 
-    static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
-    static PlayerResources resources = PlayerResources.builder()
-            .wood(100)
-            .ore(50)
-            .gold(50000)
-            .mercury(10)
-            .sulfur(20)
-            .crystal(30)
-            .gems(5)
-            .build();
-    static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), Castle.FractionType.NECROPOLIS, HeroEquipment.builder().build(), army);
+//    static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+//    static PlayerResources resources = PlayerResources.builder()
+//            .wood(100)
+//            .ore(50)
+//            .gold(50000)
+//            .mercury(10)
+//            .sulfur(20)
+//            .crystal(30)
+//            .gems(5)
+//            .build();
+//    static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
+//    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), Castle.FractionType.NECROPOLIS, HeroEquipment.builder().build(), army);
 
     static int currentBuyingUnit;
 
@@ -189,14 +205,14 @@ public class Scene1Controller {
             Scene2Controller controller = fxmlLoader.getController();
             controller.setUnitCost(goldCost);
             controller.setVisible(creatureNumber);
-            controller.setRefreshScene1Function(this::refreshUnitAmounts);
+          //  controller.setRefreshScene1Function(this::refreshUnitAmounts);
 
         }catch(Exception e){
             System.out.println("exception");
         }
     }
 
-    public void refreshUnitAmounts(){
+    public static void refreshUnitAmounts(){
         int x;
         if(!hero.getHeroArmy().isEmpty()){
             for (int i = 0; i < hero.getHeroArmy().size(); i++) {
@@ -213,6 +229,7 @@ public class Scene1Controller {
 
     public void EnterFort(MouseEvent mouseEvent) {
         showUnitsScene(hero.fraction);
+        refreshUnitAmounts();
     }
 
     void showUnitsScene(Castle.FractionType type){
@@ -230,17 +247,12 @@ public class Scene1Controller {
             stage.setTitle("Recruiting");
             stage.setScene(scene);
             stage.show();
-//            Scene2Controller controller = fxmlLoader.getController();
-//            controller.setUnitCost(goldCost);
-//            controller.setVisible(creatureNumber);
-//            controller.setRefreshScene1Function(this::refreshUnitAmounts);
-
         }catch(Exception e){
             System.out.println("exception");
         }
     }
 
-    public void EnterHall(MouseEvent mouseEvent) {
-    }
+//    public void EnterHall(MouseEvent mouseEvent) {
+//    }
 
 }

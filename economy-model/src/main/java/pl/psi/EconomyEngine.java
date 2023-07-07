@@ -42,6 +42,7 @@ public class EconomyEngine {
         this.board = new Board(getMapElements(newPlayers));
         this.turnQueue = new TurnQueue(newPlayers);
         turnQueue.addObserver(board);
+
     }
 
 
@@ -111,6 +112,7 @@ public class EconomyEngine {
         }
 
         Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
+//        castle1.addObserver(this);
         aMapElements.put(new Point(2, 2), castle1);
 
         Random rand = new Random();

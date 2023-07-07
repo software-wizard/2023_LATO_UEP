@@ -23,9 +23,6 @@ public class Scene3Controller {
 //    }
 
     @FXML
-    private Text goldNumber;
-
-    @FXML
     private Button buyButton;
 
     @FXML
@@ -66,35 +63,10 @@ public class Scene3Controller {
         for(TextField text: textFieldList){
             String recruitAmount = text.getCharacters().toString();
             if(Integer.parseInt(recruitAmount)>0){
-                buyCreatures(i, Integer.parseInt(recruitAmount));
+                Scene1Controller.buyCreatures(i, Integer.parseInt(recruitAmount));
             }
             i++;
         }
-        goldNumber.setText(String.valueOf(resources.getGold()));
     }
-
-    public static void buyCreatures(int currentBuyingUnit, int amount){
-        hero.addCreaturesToArmy((RecruitmentBuilding) playerCastle.getBuildingsOwned().get(currentBuyingUnit), amount, resources);
-        for (int i = 0; i<hero.getHeroArmy().size(); i++){
-            if(hero.getHeroArmy().get(i).getName() != null){
-                System.out.println(hero.getHeroArmy().get(i).getName()+" "+hero.getHeroArmy().get(i).getAmount());
-            }
-        }
-    }
-
-
-    static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
-    static PlayerResources resources = PlayerResources.builder()
-            .wood(100)
-            .ore(50)
-            .gold(50000)
-            .mercury(10)
-            .sulfur(20)
-            .crystal(30)
-            .gems(5)
-            .build();
-    static ArrayList<EconomyCreature> army = new ArrayList<EconomyCreature>();
-    static EconomyHero hero = new EconomyHero(HeroStatistics.builder().build(), army, HeroEquipment.builder().build());
-
 
 }

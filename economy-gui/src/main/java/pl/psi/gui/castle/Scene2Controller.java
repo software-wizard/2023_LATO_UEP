@@ -47,7 +47,7 @@ public class Scene2Controller {
     void recruitCreatures(MouseEvent event) {
         String recruitAmount = recruitAmountField.getCharacters().toString();
         Scene1Controller.buyCreatures(Scene1Controller.getCurrentBuyingUnit(), Integer.parseInt(recruitAmount));
-//tu ma się odpalać setRefreshScene
+        Scene1Controller.refreshUnitAmounts();
     }
 
 
