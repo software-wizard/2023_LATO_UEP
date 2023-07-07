@@ -37,33 +37,31 @@ public class MainBattleController implements PropertyChangeListener {
     private Button spellButton;
 
 
-
-    public MainBattleController( final Hero aHero1, final Hero aHero2 )
-    {
-        gameEngine = new GameEngine( aHero1, aHero2 );
+    public MainBattleController(final Hero aHero1, final Hero aHero2) {
+        gameEngine = new GameEngine(aHero1, aHero2);
     }
+
     @FXML
     private void initialize() throws FileNotFoundException {
         refreshGui();
         initializeSpellBook();
         gameEngine.addObserver(this);
+        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.pass());
     }
 
     private void refreshGui() throws FileNotFoundException {
         gridMap.getChildren()
-            .clear();
+                .clear();
         gridMap.setAlignment(Pos.CENTER);
-        for( int x = 0; x < 15; x++ )
-        {
-            for( int y = 0; y < 10; y++ )
-            {
+        for (int x = 0; x < 15; x++) {
+            for (int y = 0; y < 10; y++) {
                 Point currentPoint = new Point(x, y);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
-                        if(gameEngine.getMapObjectIf1().contains(mapObject)){
+                        if (gameEngine.getMapObjectIf1().contains(mapObject)) {
                             mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
@@ -92,7 +90,7 @@ public class MainBattleController implements PropertyChangeListener {
                     });
                 }
 
-                if(gameEngine.canPerformAction() && gameEngine.isControllable()) {
+                if (gameEngine.canPerformAction() && gameEngine.isControllable()) {
                     if (gameEngine.canAttack(currentPoint)) {
                         mapTile.setBorderColor(Color.RED);
                         mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -113,30 +111,30 @@ public class MainBattleController implements PropertyChangeListener {
 
         //repair skipping first object from queue
         //wywalic z kontrolera, do kolejki np
-        if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
+        if (gameEngine.canPerformAction() && !gameEngine.isControllable()) {
             Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
 
-            if (gameEngine.canAttack(randPoint)){
+            if (gameEngine.canAttack(randPoint)) {
                 gameEngine.attack(randPoint);
             }
-            if (gameEngine.canHeal(randPoint)){
+            if (gameEngine.canHeal(randPoint)) {
                 gameEngine.heal(randPoint);
             }
         }
     }
 
-    private void initializeSpellBook(){
+    private void initializeSpellBook() {
         spellButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Parent root;
-                try{
+                try {
                     root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("fxml/spell-book-gui2.fxml")));
                     Stage stage = new Stage();
                     stage.setTitle("Spell Book");
                     stage.setScene(new Scene(root, 250, 450));
                     stage.show();
-                }catch (final IOException aE){
+                } catch (final IOException aE) {
                     aE.printStackTrace();
                 }
             }
