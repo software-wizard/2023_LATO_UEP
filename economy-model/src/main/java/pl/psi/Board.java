@@ -34,7 +34,7 @@ public class Board implements PropertyChangeListener {
         }
     }
 
-    void addObserver(PropertyChangeListener aObserver) {
+    public void addObserver(PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aObserver);
     }
 
@@ -67,18 +67,22 @@ public class Board implements PropertyChangeListener {
     {
         if( canMove(aEconomyHero, aPoint ) )
         {
+
+            aEconomyHero.getHeroStatistics().setMoveRange(aEconomyHero.getHeroStatistics().getMoveRange()
+            -(int) Math.ceil(aPoint.distance( getHeroPosition(aEconomyHero).getX() , getHeroPosition(aEconomyHero).getY() )));
+
             if (map.get(aPoint)!=null) {
                 map.get(aPoint).apply(aEconomyHero, getPlayer(aEconomyHero));
 
                 if (map.get(aPoint).shouldBeRemoveAfterAction()) {
                     map.inverse().remove(map.get(aPoint));
+                    mapElements.inverse().remove(mapElements.get(aPoint));
                 }
             }
 
             mapHero.inverse()
                     .remove(aEconomyHero);
             mapHero.put( aPoint, aEconomyHero);
-            // TODO observer doesnot work
             observerSupport.firePropertyChange("HERO_MOVED", null, null);
         }
     }

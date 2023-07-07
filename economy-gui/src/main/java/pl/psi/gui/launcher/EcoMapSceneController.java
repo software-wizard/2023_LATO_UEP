@@ -1,5 +1,7 @@
 package pl.psi.gui.launcher;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import pl.psi.Hero;
 import pl.psi.artifacts.ArtifactFactory;
 import pl.psi.converter.EcoBattleConverter;
+import pl.psi.gui.castle.CastleLauncher;
 import pl.psi.gui.inventory.EcoEqSceneController;
 import pl.psi.gui.map.MapController;
 import pl.psi.hero.EconomyHero;
@@ -27,7 +30,7 @@ import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 
-public class EcoMapSceneController {
+public class EcoMapSceneController implements PropertyChangeListener {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -66,6 +69,7 @@ public class EcoMapSceneController {
 
     public void loadEconomyEngine(EconomyEngine economyEngine) {
         this.economyEngine = economyEngine;
+        this.economyEngine.getBoard().addObserver(this);
     }
 
     public void refreshGui() throws IOException {
@@ -75,7 +79,9 @@ public class EcoMapSceneController {
         displayCurrentDay(economyEngine.getCurrentDay());
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/map.fxml"));
-        loader.setController( new MapController(economyEngine) );
+        MapController mapController = new MapController(economyEngine);
+        this.economyEngine.getBoard().addObserver(mapController);
+        loader.setController( mapController );
         Scene scene = new Scene( loader.load());
 
         // set size to node casting to Pane
@@ -86,19 +92,24 @@ public class EcoMapSceneController {
 
         mapPane.getChildren().add(paneProbably);
     }
-    //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("HERO_MOVED")) {
+            try {
+                refreshGui();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public void displayName(String heroName) {
         heroNameLabel.setText("Hero name: " + heroName);
     }
 
     public void displayCurrentPlayerName(String playerName) {
         currentPlayerLabel.setText("Current player name: " + playerName);
-    }
-
-    public void displayAllPlayersWithProperties(List<Player> players) {
-        for (Player player : players) {
-            System.out.println(player.getName() + " " + player.getTown() + " " + player.getHeroName() + " " + player.getBonus());
-        }
     }
 
     public void displayResources(PlayerResources playerResources) {

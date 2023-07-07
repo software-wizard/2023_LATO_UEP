@@ -18,7 +18,24 @@ public class Resource implements MapElement {
 
     @Override
     public String getIcon() {
-        return "Resource";
+        switch (resourceType) {
+            case GOLD:
+                return "Resource_gold";
+            case WOOD:
+                return "Resource_wood";
+            case ORE:
+                return "Resource_ore";
+            case MERCURY:
+                return "Resource_mercury";
+            case SULFUR:
+                return "Resource_sulfur";
+            case CRYSTAL:
+                return "Resource_crystal";
+            case GEMS:
+                return "Resource_gem";
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -33,25 +50,25 @@ public class Resource implements MapElement {
         switch (resourceType) {
             case GOLD:
                 // Add gold for Player's resources
-                resources.setGold(resources.getGold()+ resourceAmount);
+                resources.setGold(resources.getGold() + resourceAmount);
                 break;
             case WOOD:
-                resources.setWood(resources.getWood()+ resourceAmount);
+                resources.setWood(resources.getWood() + resourceAmount);
                 break;
             case ORE:
-                resources.setOre(resources.getOre()+ resourceAmount);
+                resources.setOre(resources.getOre() + resourceAmount);
                 break;
             case MERCURY:
-                resources.setMercury(resources.getMercury()+ resourceAmount);
+                resources.setMercury(resources.getMercury() + resourceAmount);
                 break;
             case SULFUR:
-                resources.setSulfur(resources.getSulfur()+ resourceAmount);
+                resources.setSulfur(resources.getSulfur() + resourceAmount);
                 break;
             case CRYSTAL:
-                resources.setCrystal(resources.getCrystal()+ resourceAmount);
+                resources.setCrystal(resources.getCrystal() + resourceAmount);
                 break;
             case GEMS:
-                resources.setGems(resources.getGems()+ resourceAmount);
+                resources.setGems(resources.getGems() + resourceAmount);
                 break;
         }
     }

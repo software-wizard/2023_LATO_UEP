@@ -20,6 +20,7 @@ import java.util.*;
 @AllArgsConstructor
 public class EconomyEngine {
 
+    @Getter
     private final Board board;
     private final TurnQueue turnQueue;
     private EconomyEngine economyEngine;
@@ -34,6 +35,7 @@ public class EconomyEngine {
         this.board = new Board(gameReader.createMapElements(), Players);
         this.turnQueue = new TurnQueue(Players);
         turnQueue.addObserver(board);
+        // board.addObserver(MapController);
 
     }
 

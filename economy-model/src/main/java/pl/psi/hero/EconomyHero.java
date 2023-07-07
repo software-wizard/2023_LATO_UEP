@@ -100,7 +100,7 @@ public class EconomyHero implements MapElement {
 
     @Override
     public void endOfTurn() {
-
+        this.heroStatistics.setMoveRange(7);
     }
 
     public void addArtifactToBackpack(Artifact aArtifact) {

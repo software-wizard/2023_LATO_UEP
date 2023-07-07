@@ -89,9 +89,10 @@ public class GameReader {
 
         Random rand = new Random();
         List<String> elements = Arrays.asList("LearningStone", "MagicWell",
-                "Mine", "Resource", "StaticElement", "Resource");
+                "Mine", "Resource", "StaticElement", "Resource", "StaticElement", "StaticElement",
+                "StaticElement", "StaticElement", "StaticElement");
 
-        for (int i = 0; i < 35; i++) {
+        for (int i = 0; i < 45; i++) {
 
             pl.psi.Point currentPoint = null;
             boolean isEmpty = false;
@@ -105,6 +106,9 @@ public class GameReader {
             }
 
             String randomElement = elements.get(rand.nextInt(elements.size()));
+            ResourceType[] values = ResourceType.values();
+            int length = values.length;
+            int randIndex;
             switch (randomElement) {
                 case "LearningStone":
                     aMapElements.put(currentPoint, new LearningStone());
@@ -113,14 +117,20 @@ public class GameReader {
                     aMapElements.put(currentPoint, new MagicWell());
                     break;
                 case "Mine":
-                    ResourceType[] values = ResourceType.values();
-                    int length = values.length;
-                    int randIndex = new Random().nextInt(length);
+                    randIndex = new Random().nextInt(length);
 
                     aMapElements.put(currentPoint, new Mine(values[randIndex]));
                     break;
                 case "Resource":
-                    aMapElements.put(currentPoint, new Resource(ResourceType.GOLD, 1000));
+                    randIndex = new Random().nextInt(length);
+                    int resourceAmount;
+
+                    if (values[randIndex].equals(ResourceType.GOLD)) {
+                        resourceAmount = 1000;
+                    } else {
+                        resourceAmount = 2;
+                    }
+                    aMapElements.put(currentPoint, new Resource(values[randIndex], resourceAmount));
                     break;
                 case "StaticElement":
                     aMapElements.put(currentPoint, new StaticElement());

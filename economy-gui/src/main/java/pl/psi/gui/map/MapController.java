@@ -93,7 +93,8 @@ public class MapController implements PropertyChangeListener {
         refreshGui();
         if(evt.getPropertyName().equals("OPEN_CASTLE")){
             openCastle();
-            CastleLauncher.main(new String[0]);}
+            CastleLauncher.main(new String[0]);
+        }
     }
 
     private void openCastle(){

@@ -132,8 +132,6 @@ public class EcoLauncherSceneController implements Initializable
             ecoMapSceneController.loadEconomyEngine(economyEngine);
             ecoMapSceneController.refreshGui();
 
-            //do debugu
-            ecoMapSceneController.displayAllPlayersWithProperties(players);
         } catch (Exception e) {
             e.printStackTrace();
         }
