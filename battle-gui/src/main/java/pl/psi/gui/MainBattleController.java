@@ -46,6 +46,7 @@ public class MainBattleController implements PropertyChangeListener {
     private void initialize() throws FileNotFoundException {
         refreshGui();
         initializeSpellBook();
+        initializePass();
         gameEngine.addObserver(this);
     }
 
@@ -79,7 +80,7 @@ public class MainBattleController implements PropertyChangeListener {
                     }
                 });
 
-                gameEngine.verifyControllability();
+                //gameEngine.verifyControllability();
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setBorderColor(Color.GREENYELLOW);
@@ -141,6 +142,15 @@ public class MainBattleController implements PropertyChangeListener {
                 }
             }
         });
+    }
+
+    private void initializePass(){
+        passButton.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                gameEngine.pass();
+            }
+        }));
     }
 
     @Override
