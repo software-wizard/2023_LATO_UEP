@@ -4,9 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import pl.psi.EconomyEngine;
 import pl.psi.Point;
 import pl.psi.gui.castle.CastleLauncher;
+import pl.psi.gui.castle.Scene1;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
 
@@ -93,10 +96,13 @@ public class MapController implements PropertyChangeListener {
         refreshGui();
         if(evt.getPropertyName().equals("OPEN_CASTLE")){
             openCastle();
-            CastleLauncher.main(new String[0]);
+
         }
     }
 
+    @SneakyThrows
     private void openCastle(){
+//        CastleLauncher.main(new String[0]);
+        new Scene1().start(new Stage());
     }
 }

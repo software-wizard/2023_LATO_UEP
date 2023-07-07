@@ -22,7 +22,7 @@ public class Scene1 extends Application {
         //TODO jak już uda się przekazać instację EconomyHero przez kliknięcie w gui mapy w zamek, decyzja o wczytaniu pliku fxml powinna zostać podjęta na podstawie frakcji EconomyHero
         //TODO no i zamiast tworzyć poniższe elementy tylko je przekazać
 
-        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS, System.out::println);
         PlayerResources resources = PlayerResources.builder()
                 .wood(100)
                 .ore(50)

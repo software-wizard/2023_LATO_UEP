@@ -85,12 +85,6 @@ public class Castle implements MapElement {
     private ArrayList<Building> buildingsToBuy = new ArrayList<>();
     private ArrayList<Building> buildingsOwned = new ArrayList<>();
     private Consumer<String> fireMethod;
-    private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
-
-    public void addObserver(PropertyChangeListener listener){
-        observerSupport.addPropertyChangeListener(listener);
-    }
-
     public ArrayList<Building> getBuildingsToBuy() {
         return buildingsToBuy;
     }
@@ -107,9 +101,10 @@ public class Castle implements MapElement {
 
     private final EconomyHero owner = null;
 
-    public Castle(FractionType fractionType) {
+    public Castle(FractionType fractionType, Consumer<String> aFireEventMethod) {
         buildingsOwned = TownStarter.createBuildingsOwned(fractionType);
         buildingsToBuy = TownStarter.createBuildingsToBuy(fractionType);
+        fireMethod = aFireEventMethod;
     }
 
 
@@ -136,7 +131,6 @@ public class Castle implements MapElement {
     @Override
     public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         fireMethod.accept("OPEN_CASTLE");
-        observerSupport.firePropertyChange("OPEN_CASTLE", null, null);
     }
 
     @Override

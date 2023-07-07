@@ -29,7 +29,7 @@ public class EconomyEngine {
 
 
     public EconomyEngine(LinkedList<Player> aPlayers) {
-        GameReader gameReader = new GameReader(aPlayers);
+        GameReader gameReader = new GameReader(aPlayers, this::fireEvent);
         this.Players = gameReader.buildPlayers();
 
         this.board = new Board(gameReader.createMapElements(), Players);

@@ -1,7 +1,6 @@
 package pl.psi;
 
 import org.junit.jupiter.api.Test;
-import pl.psi.buildings.Building;
 import pl.psi.buildings.HallBuilding;
 import pl.psi.buildings.RecruitmentBuilding;
 import pl.psi.creatures.EconomyCreature;
@@ -40,13 +39,13 @@ public class CastleTest {
 
     @Test
     void shouldCreaturesToRecruitExist(){
-        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS, fireEventMethod);
         assertEquals("Skeleton",((RecruitmentBuilding)  playerCastle.getBuildingsOwned().get(1)).getCreaturesToRecruit().getName());
     }
 
     @Test
     void shouldBuyingCreaturesWork(){
-        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS, fireEventMethod);
         PlayerResources resources = PlayerResources.builder()
                 .wood(100)
                 .ore(50)
@@ -76,7 +75,7 @@ public class CastleTest {
 
     @Test
     void shouldAddingBuildingsToHallWork(){
-        Castle playerCastle = new Castle(Castle.FractionType.TOWER);
+        Castle playerCastle = new Castle(Castle.FractionType.TOWER, fireEventMethod);
         HallBuilding hall = (HallBuilding) playerCastle.getBuildingsOwned().get(0);
         hall.setBuildingsAwailable(playerCastle.getBuildingsToBuy());
         RecruitmentBuilding building = (RecruitmentBuilding) hall.getBuildingsAwailable().get(0);
@@ -85,7 +84,7 @@ public class CastleTest {
 
     @Test
     void shouldAddingBuildingsToHallWork2(){
-        Castle playerCastle = new Castle(Castle.FractionType.TOWER);
+        Castle playerCastle = new Castle(Castle.FractionType.TOWER, fireEventMethod);
         HallBuilding hall = (HallBuilding) playerCastle.getBuildingsOwned().get(0);
         hall.setBuildingsAwailable(playerCastle.getBuildingsToBuy());
         RecruitmentBuilding building = (RecruitmentBuilding) hall.getBuildingsAwailable().get(0);
@@ -96,14 +95,14 @@ public class CastleTest {
 
     @Test
     void shouldBuildingBuildingsWork(){
-        Castle currentCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        Castle currentCastle = new Castle(Castle.FractionType.NECROPOLIS, fireEventMethod);
         currentCastle.buildBuilding(currentCastle.getBuildingsToBuy(), currentCastle.getBuildingsOwned(), 7);
         assertTrue(currentCastle.getBuildingsToBuy().isEmpty());
     }
 
     @Test
     void shouldBuyingBuildingsWork(){
-        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
+        Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS, fireEventMethod);
         PlayerResources resources = PlayerResources.builder()
                 .wood(100)
                 .ore(50)

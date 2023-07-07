@@ -15,13 +15,16 @@ import pl.psi.player.PlayerResources;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class GameReader {
 
+    private final Consumer<String> fireEventMethod;
     private LinkedList<Player> Players;
 
-    public GameReader(LinkedList<Player> aPlayers) {
+    public GameReader(LinkedList<Player> aPlayers, Consumer<String> aFireEventMethod) {
         this.Players = aPlayers;
+        fireEventMethod = aFireEventMethod;
     }
 
     public LinkedList<Player> buildPlayers() {
@@ -84,8 +87,8 @@ public class GameReader {
             aMapElements.put(new pl.psi.Point(rand.nextInt(24), rand.nextInt(24)), Players.get(i).getEconomyHero());
         }
 
-        Castle castle1 = new Castle(Castle.FractionType.NECROPOLIS);
-        aMapElements.put(new pl.psi.Point(2, 2), castle1);
+        Castle castle = new Castle(Castle.FractionType.NECROPOLIS, fireEventMethod);
+        aMapElements.put(new pl.psi.Point(2, 2), castle);
 
         Random rand = new Random();
         List<String> elements = Arrays.asList("LearningStone", "MagicWell",
