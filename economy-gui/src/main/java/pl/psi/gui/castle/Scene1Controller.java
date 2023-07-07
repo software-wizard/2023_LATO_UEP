@@ -252,7 +252,7 @@ public class Scene1Controller {
         }
     }
 
-//    public void EnterHall(MouseEvent mouseEvent) {
-//    }
+    public void EnterHall(MouseEvent mouseEvent) {
+    }
 
 }
