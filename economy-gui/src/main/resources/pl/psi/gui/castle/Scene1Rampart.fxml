@@ -14,11 +14,6 @@
             <Image url="@../../../Images/Rampart/Background.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="54.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
       <ImageView fx:id="image2" fitHeight="150.0" fitWidth="240.0" layoutX="135.0" layoutY="47.0" onMouseClicked="#EnterFort" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Images/Rampart/Fort.png" />
@@ -91,32 +86,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Text fx:id="goldCount" fill="WHITE" layoutX="729.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50000">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="609.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="499.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="390.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="274.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="170.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="goldCount" fill="WHITE" layoutX="729.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="16.0" />
          </font>

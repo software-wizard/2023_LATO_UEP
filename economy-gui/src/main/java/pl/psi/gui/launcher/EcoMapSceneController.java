@@ -86,9 +86,7 @@ public class EcoMapSceneController implements PropertyChangeListener {
 
         // set size to node casting to Pane
         Node paneProbably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
-//        paneProbably.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-//            mapPane.setPrefSize(newValue.getWidth(), newValue.getHeight());
-//        });
+
 
         mapPane.getChildren().add(paneProbably);
     }

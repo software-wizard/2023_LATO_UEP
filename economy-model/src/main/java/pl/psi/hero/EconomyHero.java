@@ -48,7 +48,7 @@ public class EconomyHero implements MapElement {
 
     @Override
     public boolean isInteractive() {
-        return true;
+        return false;
     }
 
     @Override
