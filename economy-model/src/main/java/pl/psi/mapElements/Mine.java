@@ -44,8 +44,8 @@ public class Mine implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
-        currentOwner = aEconomyHero.getHeroStatistics().getPlayer();
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
+        currentOwner = aPlayer;
     }
 
     @Override

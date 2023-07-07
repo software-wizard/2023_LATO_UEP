@@ -2,6 +2,7 @@ package pl.psi.mapElements;
 
 import lombok.Getter;
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 @Getter
@@ -17,7 +18,7 @@ public class Resource implements MapElement {
 
     @Override
     public String getIcon() {
-        return null;
+        return "Resource";
     }
 
     @Override
@@ -26,9 +27,9 @@ public class Resource implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         // Get resources from Player's instance
-        PlayerResources resources = aEconomyHero.getHeroStatistics().getPlayer().getResources();
+        PlayerResources resources = aPlayer.getResources();
         switch (resourceType) {
             case GOLD:
                 // Add gold for Player's resources

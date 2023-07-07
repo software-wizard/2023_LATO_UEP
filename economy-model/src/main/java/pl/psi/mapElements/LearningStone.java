@@ -1,6 +1,7 @@
 package pl.psi.mapElements;
 
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class LearningStone implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         if (!visitedEconomyHeroes.contains(aEconomyHero)) {
             aEconomyHero.getHeroStatistics().setExperience(aEconomyHero.getHeroStatistics().getExperience()+1000);
             visitedEconomyHeroes.add(aEconomyHero);

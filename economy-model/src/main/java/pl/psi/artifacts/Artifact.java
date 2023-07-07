@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import pl.psi.hero.EconomyHero;
 import pl.psi.mapElements.MapElement;
+import pl.psi.player.Player;
 
 import java.awt.*;
 
@@ -34,7 +35,7 @@ public class Artifact implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         aEconomyHero.addArtifactToBackpack(this);
     }
 

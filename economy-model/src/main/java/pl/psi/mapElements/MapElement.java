@@ -1,6 +1,7 @@
 package pl.psi.mapElements;
 
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 
 public interface MapElement {
 
@@ -9,6 +10,6 @@ public interface MapElement {
     boolean isInteractive();
     boolean shouldBeRemoveAfterAction();
 
-    void apply(EconomyHero aEconomyHero);
+    void apply(EconomyHero aEconomyHero, Player aPlayer);
     void endOfTurn();
 }
