@@ -18,7 +18,7 @@ public class FirstAidTentHealPointsCalculator implements FirstAidTentIf{
     }
 
     private int heroFirstAidSkill;
-    protected int calculateHealPoints(int heroFirstAidSkill, int currentHp){
+    public int calculateHealPoints(int heroFirstAidSkill, int currentHp){
         switch (heroFirstAidSkill){
             case 0: currentHp += calculateUpperBoundary(25); break;
             case 1: currentHp += calculateUpperBoundary(50); break;

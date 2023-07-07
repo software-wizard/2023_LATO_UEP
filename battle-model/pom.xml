@@ -58,7 +58,6 @@
             <artifactId>hero-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>

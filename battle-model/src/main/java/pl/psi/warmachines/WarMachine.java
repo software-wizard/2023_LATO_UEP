@@ -4,11 +4,11 @@ import pl.psi.WarMachines.WarMachineStatisticIf;
 import com.google.common.collect.Range;
 import lombok.Getter;
 import lombok.Setter;
-import pl.psi.HealerIF;
 import pl.psi.MapObjectIf;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.HashMap;
 
 @Getter
 public class WarMachine implements PropertyChangeListener, MapObjectIf {
@@ -18,6 +18,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Setter
     private int amount;
     private int currentHp;
+    private final int counterAttackCounter = 0;
 
     WarMachine() {
     }
@@ -32,16 +33,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         calculator = aCalculator;
         HPcalculator = aHPcalculator;
     }
-
-
-    //todo uncomment when tent is ready
-//    public boolean canHeal() {
-//        return false;
-//    }
-//
-//    public boolean canAttack() {
-//        return true;
-//    }
 
 
     // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
@@ -64,14 +55,14 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
 
         int hp = aDefender.getCurrentHp() - hpToSubstract;
         if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setCurrentHp(aDefender.getMaxHp() + hp); // - (-) sth gives us +, so hp will be higher than max
             aDefender.setAmount(aDefender.getAmount() - 1);
         } else {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
 
-//        todo sth is wrong with dealing damage, amount subtraction isn't working properly
+//        todo sth is wrong with dealing damage, amount subtraction isn't working properly, smt currentHp > maxHp
 
 //        int hpToSubtract = aDamage % aDefender.getMaxHp();
 ////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
@@ -107,6 +98,11 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return false;
     }
 
+    @Override
+    public boolean isControllable() {
+        return false;
+    }
+
 
     Range<Integer> getDamage() {
         return stats.getDamage();
@@ -116,7 +112,7 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return stats.getAttack();
     }
 
-    int getArmor() {
+    public int getArmor() {
         return stats.getArmor();
     }
 
@@ -183,5 +179,9 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
     @Override
     public String toString() {
         return getName() + System.lineSeparator() + getCurrentHp();
+    }
+
+    public HashMap<String, Integer> getSkill() {
+        return null;
     }
 }

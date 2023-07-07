@@ -6,9 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum WarMachineStatistic implements WarMachineStatisticIf {
-    AMMO_CART("Ammo Cart", 0, 100, 0, 5, Range.closed(0, 0), 1, 1,
-            "Useful to have for long battles if you are using range attackers who run out of ammunition. Another subtle use for the ammo cart is that it can take one extra hit away from a powerful chain lightning - it will be destroyed of course.",
-            false), //
+
     BALLISTA("Ballista", 10, 250, 24, 10, Range.closed(8, 12), 5, 2,
             "Ballista is affected by hero's attack still, and unless your hero has a strong attack AND Artillery secondary skill, ballista will not do much damage, buy 2500 gold worth of creatures instead. If you are going for Artillery secondary skill, keep in mind that ballista only has 250 hit points, and once destroyed, the skill will remain useless for the rest of the battle. That is why heroes should choose Offense, Armourer, etc over Artillery. Note: without Artillery secondary skill, ballista will shoot without your control.",
             false), //
