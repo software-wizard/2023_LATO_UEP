@@ -39,6 +39,7 @@ public class Start extends Application
                 .getResource( "fxml/main-battle.fxml" ) );
             loader.setController( new MainBattleController( createP1(), createP2() ) );
             scene = new Scene( loader.load() );
+            primaryStage.setFullScreen(true);
             primaryStage.setScene( scene );
             primaryStage.setX( 5 );
             primaryStage.setY( 5 );

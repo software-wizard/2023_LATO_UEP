@@ -123,7 +123,11 @@ public class GameEngine {
                     && !isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
                     && turnQueue.getCurrentMapObject().canHeal();
-        }
+    }
+
+//    public boolean canRandomHeal(){
+//        return turnQueue.getRandomMapObject().canHeal();
+//    }
 
     public boolean isCurrentMapObject(Point aPoint) {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
@@ -164,45 +168,81 @@ public class GameEngine {
         return board.getPosition(mapObjectIf);
     }
 
-    public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs){
-        Random rand = new Random();
-        int i = rand.nextInt(aMapObjectIfs.size());
-        MapObjectIf randMO = aMapObjectIfs.stream().skip(i).findFirst().orElse(null);
-        return randMO;
-    }
-
     public MapObjectIf getRandomMapObject(){
-        MapObjectIf mo;
-        if(turnQueue.getCurrentMapObject().canAttack()){
-
-            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
-                mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
-            }else {
-                mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
-            }
-            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for attack: " + mo);
-            return mo;
-
-        }else {
-
-            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
-
-                do{
-                    mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
-                }while (turnQueue.getCurrentMapObject().equals(mo));
-
-            }else {
-
-                do{
-                    mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
-                }while (turnQueue.getCurrentMapObject().equals(mo));
-
-            }
-            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for heal: " + mo);
-            return mo;
-
-        }
+        return turnQueue.getRandomMapObject();
     }
+
+    public void attack(MapObjectIf randMO){
+        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack(), "Current map object is not a attacker");
+        try{
+            ((AttackerIF) turnQueue.getCurrentMapObject()).attack(randMO);
+            checkIfAlive(randMO);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        pass();
+    }
+    public void heal(MapObjectIf randMO){
+        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canHeal(), "Current map object is not a healer");
+        try{
+            ((HealerIF) turnQueue.getCurrentMapObject()).heal(randMO);
+            checkIfAlive(randMO);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        pass();
+    }
+
+    public void performAction(){
+        //if(!isControllable()){
+            MapObjectIf mo = getRandomMapObject();
+            if (turnQueue.getCurrentMapObject().canHeal()){
+                heal(mo);
+            }else if(turnQueue.getCurrentMapObject().canAttack()){
+                attack(mo);
+            }
+        //}
+    }
+
+//    public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs){
+//        Random rand = new Random();
+//        int i = rand.nextInt(aMapObjectIfs.size());
+//        MapObjectIf randMO = aMapObjectIfs.stream().skip(i).findFirst().orElse(null);
+//        return randMO;
+//    }
+//
+//    public MapObjectIf getRandomMapObject(){
+//        MapObjectIf mo;
+//        if(turnQueue.getCurrentMapObject().canAttack()){
+//
+//            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
+//                mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
+//            }else {
+//                mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
+//            }
+//            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for attack: " + mo);
+//            return mo;
+//
+//        }else {
+//
+//            if(mapObjectIf1.contains(turnQueue.getCurrentMapObject())){
+//
+//                do{
+//                    mo = getRandomMapObject(turnQueue.getMapObjectIfs1());
+//                }while (turnQueue.getCurrentMapObject().equals(mo));
+//
+//            }else {
+//
+//                do{
+//                    mo = getRandomMapObject(turnQueue.getMapObjectIfs2());
+//                }while (turnQueue.getCurrentMapObject().equals(mo));
+//
+//            }
+//            System.out.println("CurrMO: " + turnQueue.getCurrentMapObject() + " - Random MO for heal: " + mo);
+//            return mo;
+//
+//        }
+//    }
 
     public boolean isControllable() {
         return turnQueue.getCurrentMapObject().isControllable();
@@ -213,7 +253,8 @@ public class GameEngine {
             if (turnQueue.isTurnQueueEmpty()) {
                 turnQueue.endOfTurn();
             } else {
-                pass();
+                performAction();
+                //pass();
             }
         }
     }
