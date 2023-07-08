@@ -1,0 +1,41 @@
+// ******************************************************************
+//
+// Copyright 2023 PSI Software AG. All rights reserved.
+// PSI PROPRIETARY/CONFIDENTIAL. Use is subject to license terms
+//
+// ******************************************************************
+
+package pl.psi.battle.creatures;
+
+import pl.psi.eco.creatures.CreatureStatistic;
+
+/**
+ * TODO: Describe this class (The first line - until the first dot - will interpret as the brief description).
+ */
+public class CastleCreatureFactory
+{
+    public Creature create( final int aTier, final boolean aIsUpgraded, final int aAmount )
+    {
+        if( aIsUpgraded )
+        {
+            switch( aTier )
+            {
+                case 1:
+                    return new Creature.Builder().statistic( CreatureStatistic.BLACK_KNIGHT )
+                        .amount( aAmount )
+                        .build();
+            }
+        }
+        else
+        {
+            switch( aTier )
+            {
+                case 1:
+                    return new Creature.Builder().statistic( CreatureStatistic.BLACK_KNIGHT )
+                        .amount( aAmount )
+                        .build();
+            }
+        }
+        throw new IllegalArgumentException( "Cannot recognize creature by tier and upgrade or not." );
+    }
+}

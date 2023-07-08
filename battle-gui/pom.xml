@@ -21,7 +21,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>pl.psi.gui.Start</mainClass>
+                            <mainClass>pl.psi.eco.gui.Start</mainClass>
                         </configuration>
                     </execution>
                     <execution>
@@ -30,7 +30,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000</option>
                             </options>
-                            <mainClass>pl.psi.gui.Start</mainClass>
+                            <mainClass>pl.psi.eco.gui.Start</mainClass>
                         </configuration>
                     </execution>
                 </executions>
