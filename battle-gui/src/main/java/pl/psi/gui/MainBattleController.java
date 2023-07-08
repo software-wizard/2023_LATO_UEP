@@ -56,6 +56,7 @@ public class MainBattleController implements PropertyChangeListener {
                 Point currentPoint = new Point(x, y);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
+                mapTile.setBackgroundGraphic();
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
@@ -80,7 +81,7 @@ public class MainBattleController implements PropertyChangeListener {
                 }
 
                 if (gameEngine.canMove(currentPoint)) {
-                    mapTile.setBackground(Color.GREY);
+                    mapTile.setMoveBackground(Color.rgb(141,168,71));
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         gameEngine.move(currentPoint);
                     });
