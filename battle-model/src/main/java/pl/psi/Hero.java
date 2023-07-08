@@ -44,14 +44,10 @@ public class Hero
         }
     }
 
-
     public Hero( final List< Creature > aCreatures)
     {
         creatures = aCreatures;
     }
-
-//    public boolean isEnemy(MapObjectIf mapObjectIf1, MapObjectIf mapObjectIf2){
-//        return mapObjectIfs.contains(mapObjectIf1) != mapObjectIfs.contains(mapObjectIf2);
 
 //    private void loadSkills(){
 //        for (WarMachine warMachine : warMachines) {
