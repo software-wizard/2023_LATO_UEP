@@ -10,6 +10,7 @@ package pl.psi.eco.gui.map;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
@@ -23,9 +24,14 @@ import pl.psi.eco.Board;
 import pl.psi.eco.EconomyEngine;
 import pl.psi.eco.Point;
 import pl.psi.eco.converter.EcoBattleConverter;
+import pl.psi.eco.creatures.EconomyCreature;
 import pl.psi.eco.hero.EconomyHero;
+import pl.psi.eco.hero.HeroEquipment;
+import pl.psi.eco.hero.HeroStatistics;
+import pl.psi.eco.mapElements.Castle;
 import pl.psi.eco.mapElements.MapElement;
 import pl.psi.eco.gui.castle.Scene1;
+import pl.psi.eco.player.Player;
 
 public class MapController implements PropertyChangeListener
 {
@@ -145,7 +151,9 @@ public class MapController implements PropertyChangeListener
     @SneakyThrows
     private void openCastle()
     {
-        // CastleLauncher.main(new String[0]);
-        new Scene1().start( new Stage() );
+        Scene1 scene1 = new Scene1();
+        scene1.setPlayer(economyEngine.getCurrentPlayer());
+        System.out.println(economyEngine.getCurrentPlayer().getEconomyHero().getFraction());
+        scene1.start(new Stage());
     }
 }

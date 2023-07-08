@@ -18,12 +18,12 @@
    <children>
       <ImageView fx:id="image" fitHeight="513.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Background.png" />
+            <Image url="@../../../../Images/Necropolis/Background.png" />
          </image>
       </ImageView>
       <ImageView fx:id="image2" fitHeight="150.0" fitWidth="152.0" layoutX="170.0" layoutY="91.0" onMouseClicked="#EnterFort" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Fort.png" />
+            <Image url="@../../../../Images/Necropolis/Fort.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -31,7 +31,7 @@
       </ImageView>
       <ImageView fitHeight="104.0" fitWidth="152.0" layoutX="80.0" layoutY="244.0" onMouseClicked="#EnterRecruitment1" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment1.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment1.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -39,7 +39,7 @@
       </ImageView>
       <ImageView fitHeight="131.0" fitWidth="171.0" layoutX="494.0" layoutY="91.0" onMouseClicked="#EnterHall" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Hall.png" />
+            <Image url="@../../../../Images/Necropolis/Hall.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -47,7 +47,7 @@
       </ImageView>
       <ImageView fitHeight="182.0" fitWidth="134.0" layoutX="408.0" layoutY="92.0" onMouseClicked="#EnterRecruitment3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment3.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment3.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -55,7 +55,7 @@
       </ImageView>
       <ImageView fitHeight="77.0" fitWidth="138.0" layoutX="465.0" layoutY="251.0" onMouseClicked="#EnterRecruitment2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment2.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment2.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -63,7 +63,7 @@
       </ImageView>
       <ImageView fitHeight="67.0" fitWidth="191.0" layoutX="609.0" layoutY="257.0" onMouseClicked="#EnterRecruitment4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment4.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment4.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -71,7 +71,7 @@
       </ImageView>
       <ImageView fitHeight="68.0" fitWidth="101.0" layoutX="208.0" layoutY="223.0" onMouseClicked="#EnterRecruitment5" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment5.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment5.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -79,7 +79,7 @@
       </ImageView>
       <ImageView fitHeight="155.0" fitWidth="101.0" layoutX="-12.0" layoutY="56.0" onMouseClicked="#EnterRecruitment6" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment6.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment6.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -87,7 +87,7 @@
       </ImageView>
       <ImageView fitHeight="122.0" fitWidth="112.0" layoutX="662.0" layoutY="73.0" onMouseClicked="#EnterRecruitment7" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/Recruitment7.png" />
+            <Image url="@../../../../Images/Necropolis/Recruitment7.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -100,37 +100,37 @@
       </Text>
       <ImageView fitHeight="77.0" fitWidth="79.0" layoutX="88.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier1.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="170.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier2.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier2.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="69.0" layoutX="248.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier3.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="403.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier5.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier5.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="75.0" fitWidth="78.0" layoutX="481.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier6.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier6.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="560.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier7.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier7.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="69.0" layoutX="327.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Necropolis/UnitTier4.png" />
+            <Image url="@../../../../Images/Necropolis/UnitTier4.png" />
          </image>
       </ImageView>
       <Text fx:id="unit1Count" fill="WHITE" layoutX="148.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="17.9375">
