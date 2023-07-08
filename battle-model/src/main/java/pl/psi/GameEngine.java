@@ -123,7 +123,11 @@ public class GameEngine {
                     && !isEnemy(turnQueue.getCurrentMapObject(), board.getMapObject(point).get())
                     //&& board.getMapObject(point).get().getCurrentHp() < board.getMapObject(point).get().getMaxHp()
                     && turnQueue.getCurrentMapObject().canHeal();
-        }
+    }
+
+//    public boolean canRandomHeal(){
+//        return turnQueue.getRandomMapObject().canHeal();
+//    }
 
     public boolean isCurrentMapObject(Point aPoint) {
         return Optional.of(turnQueue.getCurrentMapObject()).equals(board.getMapObject(aPoint));
@@ -166,6 +170,38 @@ public class GameEngine {
 
     public MapObjectIf getRandomMapObject(){
         return turnQueue.getRandomMapObject();
+    }
+
+    public void attack(MapObjectIf randMO){
+        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canAttack(), "Current map object is not a attacker");
+        try{
+            ((AttackerIF) turnQueue.getCurrentMapObject()).attack(randMO);
+            checkIfAlive(randMO);
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        pass();
+    }
+    public void heal(MapObjectIf randMO){
+        Preconditions.checkArgument(turnQueue.getCurrentMapObject().canHeal(), "Current map object is not a healer");
+        try{
+            ((HealerIF) turnQueue.getCurrentMapObject()).heal(randMO);
+            checkIfAlive(randMO);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        pass();
+    }
+
+    public void performAction(){
+        //if(!isControllable()){
+            MapObjectIf mo = getRandomMapObject();
+            if (turnQueue.getCurrentMapObject().canHeal()){
+                heal(mo);
+            }else if(turnQueue.getCurrentMapObject().canAttack()){
+                attack(mo);
+            }
+        //}
     }
 
 //    public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs){
@@ -217,7 +253,8 @@ public class GameEngine {
             if (turnQueue.isTurnQueueEmpty()) {
                 turnQueue.endOfTurn();
             } else {
-                pass();
+                performAction();
+                //pass();
             }
         }
     }

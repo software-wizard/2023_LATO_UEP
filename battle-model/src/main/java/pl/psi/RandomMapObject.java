@@ -21,34 +21,34 @@ public class RandomMapObject {
 
     public MapObjectIf getRandomMapObject(Collection<MapObjectIf> mapObjectIfs1,
                                           Collection<MapObjectIf> mapObjectIfs2,
-                                          MapObjectIf currentMapObejct){
+                                          MapObjectIf currentMapObject){
         MapObjectIf mo;
-        if(currentMapObejct.canAttack()){
+        if(currentMapObject.canAttack()){
 
-            if(mapObjectIfs1.contains(currentMapObejct)){
+            if(mapObjectIfs1.contains(currentMapObject)){
                 mo = getRandomMapObject(mapObjectIfs2);
             }else {
                 mo = getRandomMapObject(mapObjectIfs1);
             }
-            System.out.println("CurrMO: " + currentMapObejct + " - Random MO for attack: " + mo);
+            System.out.println("CurrMO: " + currentMapObject + " - Random MO for attack: " + mo);
             return mo;
 
         }else {
 
-            if(mapObjectIfs1.contains(currentMapObejct)){
+            if(mapObjectIfs1.contains(currentMapObject)){
 
                 do{
                     mo = getRandomMapObject(mapObjectIfs1);
-                }while (currentMapObejct.equals(mo));
+                }while (currentMapObject.equals(mo));
 
             }else {
 
                 do{
                     mo = getRandomMapObject(mapObjectIfs2);
-                }while (currentMapObejct.equals(mo));
+                }while (currentMapObject.equals(mo));
 
             }
-            System.out.println("CurrMO: " + currentMapObejct + " - Random MO for heal: " + mo);
+            System.out.println("CurrMO: " + currentMapObject + " - Random MO for heal: " + mo);
             return mo;
 
         }

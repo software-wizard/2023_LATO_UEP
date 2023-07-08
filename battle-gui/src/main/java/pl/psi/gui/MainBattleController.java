@@ -46,8 +46,8 @@ public class MainBattleController implements PropertyChangeListener {
     private void initialize() throws FileNotFoundException {
         refreshGui();
         initializeSpellBook();
-        initializePass();
         gameEngine.addObserver(this);
+        passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.pass());
     }
 
     private void refreshGui() throws FileNotFoundException {
@@ -111,19 +111,23 @@ public class MainBattleController implements PropertyChangeListener {
                 gridMap.add(mapTile, x, y);
             }
         }
+        gameEngine.verifyControllability();
 
         //repair skipping first object from queue
         //wywalic z kontrolera, do kolejki np
-        if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
-            Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
-
-            if (gameEngine.canAttack(randPoint)){
-                gameEngine.attack(randPoint);
-            }
-            if (gameEngine.canHeal(randPoint)){
-                gameEngine.heal(randPoint);
-            }
-        }
+//        if(gameEngine.canPerformAction() && !gameEngine.isControllable()){
+//            Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
+//
+//            if (gameEngine.canAttack(randPoint)){
+//                gameEngine.attack(randPoint);
+//            }
+//            if (gameEngine.canHeal(randPoint)){
+//                gameEngine.heal(randPoint);
+//            }
+//        }
+//        if (!gameEngine.isControllable()){
+//            gameEngine.performAction();
+//        }
     }
 
     private void initializeSpellBook(){
@@ -142,15 +146,6 @@ public class MainBattleController implements PropertyChangeListener {
                 }
             }
         });
-    }
-
-    private void initializePass(){
-        passButton.setOnAction((new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                gameEngine.pass();
-            }
-        }));
     }
 
     @Override

@@ -88,5 +88,4 @@ public class TurnQueue {
     public MapObjectIf getRandomMapObject(){
         return randomMapObject.getRandomMapObject(mapObjectIfs1, mapObjectIfs2, getCurrentMapObject());
     }
-
 }

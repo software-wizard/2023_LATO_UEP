@@ -64,7 +64,7 @@ public class Creature implements PropertyChangeListener, MapObjectIf, AttackerIF
 
         int hp = aDefender.getCurrentHp() - hpToSubstract;
         if (hp <= 0) {
-            aDefender.setCurrentHp(aDefender.getMaxHp() - hp);
+            aDefender.setCurrentHp(aDefender.getMaxHp() + hp); //earlier: aDefender.getMaxHp() - hp, now: - (-) gives us +, so hp will be higher than max
             aDefender.setAmount(aDefender.getAmount() - 1);
         } else {
             aDefender.setCurrentHp(hp);
