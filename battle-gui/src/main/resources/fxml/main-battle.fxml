@@ -5,29 +5,29 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="700" prefWidth="1024" xmlns="http://javafx.com/javafx/8.0.171">
     <top>
         <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER" >
             <children>
-                <Label fx:id="p1Name" style="-fx-padding: 0 20 0 0;" text="Player 1">
+                <Label fx:id="p1Name"  text="Player 1">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="26.0"/>
                     </font>
                     <opaqueInsets>
                         <Insets/>
                     </opaqueInsets>
                 </Label>
-                <Label layoutX="10.0" layoutY="10.0" text="VS">
+                <Label fx:id="VS" layoutX="10.0" layoutY="10.0" text="VS" style="-fx-text-fill: white;">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="26.0"/>
                     </font>
                 </Label>
-                <Label fx:id="p2Name" alignment="TOP_RIGHT" layoutX="94.0" layoutY="10.0" style="-fx-padding: 0 0 0 20;"
-                       text="Player 2">
+                <Label fx:id="p2Name" style="-fx-text-fill: white; -fx-padding: 0 0 0 20;" text="Player 2">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="26.0"/>
                     </font>
                 </Label>
             </children>
@@ -38,27 +38,30 @@
         </GridPane>
     </center>
     <bottom>
-        <HBox alignment="TOP_RIGHT" prefHeight="1.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+        <HBox alignment="CENTER" prefHeight="1.0" prefWidth="600.0" BorderPane.alignment="CENTER" spacing="10">
             <children>
-                <Button fx:id="passButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="PASS"
+                <Button fx:id="passButton" mnemonicParsing="false" prefHeight="15.0" prefWidth="80.0" text="PASS"
                         textAlignment="CENTER">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Button>
-                <Button fx:id="spellButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0" text="SPELL"
+                <Button fx:id="spellButton" mnemonicParsing="false" prefHeight="15.0" prefWidth="80.0" text="SPELL"
                         textAlignment="CENTER">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Button>
-                <Button fx:id="defenceModeButton" mnemonicParsing="false" prefHeight="37.0" prefWidth="115.0"
-                        text="DEFENCE" textAlignment="CENTER">
+                <Button fx:id="defenceModeButton" mnemonicParsing="false" prefHeight="15.0" prefWidth="80.0" text="DEFENCE"
+                        textAlignment="CENTER">
                     <font>
-                        <Font size="16.0"/>
+                        <Font size="12.0"/>
                     </font>
                 </Button>
             </children>
         </HBox>
     </bottom>
+    <stylesheets>
+        <URL value="@gui.css"/>
+    </stylesheets>
 </BorderPane>

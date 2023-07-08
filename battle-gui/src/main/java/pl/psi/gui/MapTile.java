@@ -2,19 +2,16 @@ package pl.psi.gui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
+
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Affine;
-import org.w3c.dom.css.Rect;
+import lombok.Getter;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
@@ -29,34 +26,28 @@ class MapTile extends StackPane
     private Rectangle hpRect;
     private Rectangle amountRect;
     private Rectangle strokeRect;
+    @Getter
+    private ImageView imageView;
 
     MapTile( final String aName ) throws FileNotFoundException {
         rect = new Rectangle( 60, 60 );
         rect.setOpacity(0.2);
         strokeRect = new Rectangle(58, 58);
         strokeRect.setFill(Color.TRANSPARENT);
-//        strokeRect.setStroke(Color.BLACK);
-//        strokeRect.setStrokeWidth(0.8);
-
-
 
         backgroundLabel = new Label();
         backgroundLabel.setAlignment(Pos.CENTER);
         backgroundLabel.setWrapText(true);
         backgroundLabel.setMaxWidth(rect.getWidth() - 10);
         backgroundLabel.setMaxHeight(rect.getHeight());
-//        BorderStroke stroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null);
-//        Border border = new Border(stroke);
-//        backgroundLabel.setBorder(border);
         getChildren().add(backgroundLabel);
-
 
         backgroundStroke = new Label();
         backgroundStroke.setAlignment(Pos.CENTER);
         backgroundStroke.setWrapText(true);
         backgroundStroke.setMaxWidth(60);
         backgroundStroke.setMaxHeight(60);
-        BorderStroke stroke = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, null);
+        BorderStroke stroke = new BorderStroke(Color.YELLOWGREEN, BorderStrokeStyle.SOLID, null, BorderStroke.THIN);
         Border border = new Border(stroke);
         backgroundStroke.setBorder(border);
         getChildren().add(backgroundStroke);
@@ -86,9 +77,9 @@ class MapTile extends StackPane
     void setMoveBackground( final Color aColor )
     {
         rect.setFill(aColor);
-        rect.setOpacity(0.2);
+        rect.setOpacity(0.27);
         strokeRect.setFill( aColor );
-        strokeRect.setOpacity(0.2);
+        strokeRect.setOpacity(0.27);
     }
 
     void setBorderColor(final Color aColor){
@@ -96,8 +87,14 @@ class MapTile extends StackPane
         strokeRect.setStrokeWidth(2.0);
     }
 
+    void setGraphicBorder() {
+        DropShadow ds = new DropShadow( 20, Color.YELLOW );
+        ImageView imgV = getImageView();
+        imgV.setEffect(ds);
+    }
+
     public void setGraphic(String mapObjectName) throws FileNotFoundException {
-        ImageView imageView = new ImageView(loadImage(mapObjectName));
+        imageView = new ImageView(loadImage(mapObjectName));
         imageView.setFitHeight(rect.getHeight());
         imageView.setFitWidth(rect.getWidth());
         label.setGraphic(imageView);
@@ -171,6 +168,46 @@ class MapTile extends StackPane
 
         StackPane.setAlignment(amountRect, Pos.TOP_RIGHT);
         StackPane.setAlignment(amountLabel, Pos.TOP_RIGHT);
+        getChildren().addAll(amountRect, amountLabel);
+
+        String amountText = Integer.toString(mapObjectAmount);
+        amountLabel.setText(amountText);
+    }
+
+    public void setMirrorHpLabel(Integer mapObjectHp){
+        hpLabel = new Label();
+        hpLabel.setTextFill(Color.WHITE);
+        hpLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 8px;");
+        hpLabel.setAlignment(Pos.BOTTOM_CENTER);
+        hpLabel.setPrefWidth(30);
+        hpLabel.setPrefHeight(10);
+
+        hpRect = new Rectangle(30, 10);
+        hpRect.setFill(Color.CORNFLOWERBLUE);
+        hpRect.setOpacity(0.8);
+
+        StackPane.setAlignment(hpRect, Pos.BOTTOM_LEFT);
+        StackPane.setAlignment(hpLabel, Pos.BOTTOM_LEFT);
+        getChildren().addAll(hpRect, hpLabel);
+
+        String hpText = Integer.toString(mapObjectHp);
+        hpLabel.setText(hpText);
+    }
+
+    public void setMirrorAmountLabel(Integer mapObjectAmount){
+        amountLabel = new Label();
+        amountLabel.setTextFill(Color.WHITE);
+        amountLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 8px;");
+        amountLabel.setAlignment(Pos.TOP_CENTER);
+        amountLabel.setPrefWidth(30);
+        amountLabel.setPrefHeight(10);
+
+        amountRect = new Rectangle(30, 10);
+        amountRect.setFill(Color.CORAL);
+        amountRect.setOpacity(0.8);
+
+        StackPane.setAlignment(amountRect, Pos.TOP_LEFT);
+        StackPane.setAlignment(amountLabel, Pos.TOP_LEFT);
         getChildren().addAll(amountRect, amountLabel);
 
         String amountText = Integer.toString(mapObjectAmount);

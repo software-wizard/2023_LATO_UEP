@@ -56,20 +56,20 @@ public class MainBattleController implements PropertyChangeListener {
                 Point currentPoint = new Point(x, y);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
-                mapTile.setBackgroundGraphic();
+                //mapTile.setBackgroundGraphic();
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
                         if (gameEngine.getMapObjectIf1().contains(mapObject)) {
-                            mapTile.setBackground(Color.rgb(243, 198, 85));
+                            //mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
                             mapTile.setAmountLabel(mapObject.getAmount());
                         } else {
-                            mapTile.setBackground(Color.rgb(166, 206, 200));
+                            //mapTile.setBackground(Color.rgb(166, 206, 200));
                             mapTile.setMirrorGraphic(mapObject.getName());
-                            mapTile.setHpLabel(mapObject.getCurrentHp());
-                            mapTile.setAmountLabel(mapObject.getAmount());
+                            mapTile.setMirrorHpLabel(mapObject.getCurrentHp());
+                            mapTile.setMirrorAmountLabel(mapObject.getAmount());
                         }
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
@@ -77,11 +77,13 @@ public class MainBattleController implements PropertyChangeListener {
                 });
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
+                    mapTile.setMoveBackground(Color.BLACK);
                     mapTile.setBorderColor(Color.GREENYELLOW);
+                    mapTile.setGraphicBorder();
                 }
 
                 if (gameEngine.canMove(currentPoint)) {
-                    mapTile.setMoveBackground(Color.rgb(141,168,71));
+                    mapTile.setMoveBackground(Color.BLACK);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         gameEngine.move(currentPoint);
                     });
