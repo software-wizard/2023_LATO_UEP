@@ -35,7 +35,7 @@
 }
 
 #p1Name{
-    -fx-text-fill: white;
+    -fx-text-fill: #9AF8E1;
     -fx-padding: 0 20 0 0;
     -fx-font-weight: 800;
     -fx-effect:dropshadow(three-pass-box, black, 2, 0, 1, 2);
@@ -48,8 +48,8 @@
 }
 
 #p2Name{
-    -fx-text-fill: white;
-    -fx-padding: 0 20 0 0;
+    -fx-text-fill: #FBBA77;
+    -fx-padding: 0 0 0 20;
     -fx-font-weight: 800;
     -fx-effect:dropshadow(three-pass-box, black, 2, 0, 1, 2);
 }

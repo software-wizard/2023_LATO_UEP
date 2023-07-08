@@ -12,7 +12,7 @@
     <top>
         <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="600.0" BorderPane.alignment="CENTER" >
             <children>
-                <Label fx:id="p1Name"  text="Player 1">
+                <Label fx:id="p1Name" text="Player 1">
                     <font>
                         <Font size="26.0"/>
                     </font>
@@ -25,7 +25,7 @@
                         <Font size="26.0"/>
                     </font>
                 </Label>
-                <Label fx:id="p2Name" style="-fx-text-fill: white; -fx-padding: 0 0 0 20;" text="Player 2">
+                <Label fx:id="p2Name" text="Player 2">
                     <font>
                         <Font size="26.0"/>
                     </font>

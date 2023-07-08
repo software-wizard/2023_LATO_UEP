@@ -88,9 +88,12 @@ class MapTile extends StackPane
     }
 
     void setGraphicBorder() {
-        DropShadow ds = new DropShadow( 20, Color.YELLOW );
-        ImageView imgV = getImageView();
-        imgV.setEffect(ds);
+        rect.setFill(Color.ORANGE);
+        rect.setOpacity(0.35);
+
+        BorderStroke stroke = new BorderStroke(Color.LIGHTGOLDENRODYELLOW, BorderStrokeStyle.SOLID, null, BorderStroke.THIN);
+        Border border = new Border(stroke);
+        backgroundStroke.setBorder(border);
     }
 
     public void setGraphic(String mapObjectName) throws FileNotFoundException {

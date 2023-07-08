@@ -78,7 +78,7 @@ public class MainBattleController implements PropertyChangeListener {
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setMoveBackground(Color.BLACK);
-                    mapTile.setBorderColor(Color.GREENYELLOW);
+                    mapTile.setBorderColor(Color.ORANGE);
                     mapTile.setGraphicBorder();
                 }
 
