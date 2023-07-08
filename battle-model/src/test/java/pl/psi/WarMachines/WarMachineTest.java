@@ -3,6 +3,9 @@ package pl.psi.WarMachines;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.psi.AttackerIF;
+import pl.psi.MapObjectIf;
+import pl.psi.creatures.NecropolisFactory;
+import pl.psi.warmachines.Ballista;
 import pl.psi.warmachines.WarMachine;
 import pl.psi.warmachines.WarMachineFactory;
 
@@ -72,7 +75,7 @@ class WarMachineTest {
 //    }
     @Test //Test works for ArtillerySkill = 0 and ArcherySkill = 3
     void shouldSubtractAmount() throws Exception {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
+        Ballista ballista = (Ballista) new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 0, 1);
         MapObjectIf dreadKnight = new NecropolisFactory().create( true, 6, 5);
 
         ballista.attack(dreadKnight);
