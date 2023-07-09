@@ -19,8 +19,7 @@ public enum WarMachineStatistic implements WarMachineStatisticIf {
 
 
     private final String name;
-
-    private final int attack; //counterattack?
+    private final int attack;
     private final int maxHp;
     private final int shotRange;
     private final int armor;

@@ -19,12 +19,17 @@ public interface MapObjectIf extends PropertyChangeListener {
     int getMoveRange();
 
     int getAmount();
+
     void setAmount(int a);
 
     boolean canHeal();
+
     boolean canAttack();
+
     boolean isControllable();
+
     int getArmor();
+
     int getCounterAttackCounter();
 }
 

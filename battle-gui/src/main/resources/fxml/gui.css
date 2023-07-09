@@ -1,0 +1,55 @@
+#passButton{
+    -fx-text-fill: #4A3808;
+    -fx-font-weight: bold;
+    -fx-background-color: #987B3B;
+    -fx-background-radius: 2;
+    -fx-padding: 5
+}
+
+#passButton:hover{
+    -fx-background-color: #DFB951;
+}
+
+#spellButton{
+    -fx-text-fill: #4A3808;
+    -fx-font-weight: bold;
+    -fx-background-color: #987B3B;
+    -fx-background-radius: 2;
+    -fx-padding: 5
+}
+
+#spellButton:hover{
+    -fx-background-color: #DFB951;
+}
+
+#defenceModeButton{
+    -fx-text-fill: #4A3808;
+    -fx-font-weight: bold;
+    -fx-background-color: #987B3B;
+    -fx-background-radius: 2;
+    -fx-padding: 5;
+}
+
+#defenceModeButton:hover{
+    -fx-background-color: #DFB951;
+}
+
+#p1Name{
+    -fx-text-fill: #9AF8E1;
+    -fx-padding: 0 20 0 0;
+    -fx-font-weight: 800;
+    -fx-effect:dropshadow(three-pass-box, black, 2, 0, 1, 2);
+}
+
+#VS{
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+    -fx-effect:dropshadow(three-pass-box, black, 2, 0, 1, 2);
+}
+
+#p2Name{
+    -fx-text-fill: #FBBA77;
+    -fx-padding: 0 0 0 20;
+    -fx-font-weight: 800;
+    -fx-effect:dropshadow(three-pass-box, black, 2, 0, 1, 2);
+}

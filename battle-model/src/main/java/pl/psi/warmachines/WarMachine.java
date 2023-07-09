@@ -34,17 +34,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         HPcalculator = aHPcalculator;
     }
 
-
-    // TODO zrobić fabryke maszyn, i wrócic żeby ten namiot zrobić
-    // fabryka będzie miec parametr enum i drugi parametr z poziomem skila
-//    public boolean canHeal() {
-//        boolean canHeal = stats.getName().equals("First Aid Tent");
-//        return canHeal;
-//    }
-//    public boolean canAttack() {
-//        return !stats.getName().equals("First Aid Tent") && !stats.getName().equals("Ammo Cart");
-//    }
-
     public boolean isAlive() {
         return getAmount() > 0;
     }
@@ -61,18 +50,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
             aDefender.setCurrentHp(hp);
         }
         aDefender.setAmount(aDefender.getAmount() - amountToSubstract);
-
-//        todo sth is wrong with dealing damage, amount subtraction isn't working properly, smt currentHp > maxHp
-
-//        int hpToSubtract = aDamage % aDefender.getMaxHp();
-////        int amountToSubtract = Math.round((float) aDamage / aDefender.getMaxHp());
-//
-//        int hp = aDefender.getCurrentHp() - hpToSubtract;
-//        //            System.out.println("HP: " + hp);
-//        //            System.out.println("War Machine is dead");
-//        //            aDefender.setAmount(aDefender.getAmount() - 1);
-//        aDefender.setCurrentHp(Math.max(hp, 0));
-////        aDefender.setAmount(aDefender.getAmount() - amountToSubtract);
     }
 
     public int getMaxHp() {
@@ -116,17 +93,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         return stats.getArmor();
     }
 
-//    @Override
-//    public void propertyChange(final PropertyChangeEvent evt) {
-//        if (TurnQueue.END_OF_TURN.equals(evt.getPropertyName())) {
-//            counterAttackCounter = 1;
-//        }
-//    }
-
-    protected void restoreCurrentHpToMax() {
-        currentHp = stats.getMaxHp();
-    }
-
     public String getName() {
         return stats.getName();
     }
@@ -139,12 +105,10 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        //todo shouldn't be empty
     }
 
     public boolean checkIfAlive(MapObjectIf defender) {
         return defender.getAmount() > 0;
-        //return defender.getCurrentHp() > 0;
     }
 
     public static class Builder {

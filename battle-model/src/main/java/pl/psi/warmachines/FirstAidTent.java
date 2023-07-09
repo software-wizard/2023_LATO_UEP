@@ -18,7 +18,7 @@ public class FirstAidTent extends WarMachine implements HealerIF {
     @Override
     public void heal(MapObjectIf ally) throws Exception {
         if (isAlive()) {
-            final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp());
+            final int hp = getHPcalculator().calculateHealPoint(this, ally, ally.getCurrentHp(), firstAidSkillLevel);
             ally.setCurrentHp(hp);
             if ((ally.getCurrentHp() > ally.getMaxHp())) {
                 ally.setCurrentHp(ally.getMaxHp());
@@ -31,15 +31,14 @@ public class FirstAidTent extends WarMachine implements HealerIF {
         return true;
     }
 
+    @Override
+    public boolean isControllable() {
+        return firstAidSkillLevel > 0;
+    }
 
     public HashMap<String, Integer> getSkill(){
         HashMap<String, Integer> skill = new HashMap<>();
         skill.put(FIRST_AID, firstAidSkillLevel);
         return skill;
-    }
-
-    @Override
-    public boolean isControllable() {
-        return firstAidSkillLevel > 0;
     }
 }
