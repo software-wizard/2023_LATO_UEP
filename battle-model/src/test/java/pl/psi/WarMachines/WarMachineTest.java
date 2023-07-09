@@ -78,17 +78,17 @@ class WarMachineTest {
         Ballista ballista = (Ballista) new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 0, 1);
         MapObjectIf dreadKnight = new NecropolisFactory().create( true, 6, 5);
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 5);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 3);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
 
-        ballista.attack(dreadKnight);
+        ((AttackerIF) ballista).attack(dreadKnight);
         assertTrue(dreadKnight.getAmount() <= 1);
         assertFalse(dreadKnight.getAmount() < 0);
         assertTrue(dreadKnight.getCurrentHp() <= dreadKnight.getMaxHp());
