@@ -15,6 +15,7 @@ public class TurnQueue {
 
     public static final String END_OF_TURN = "END_OF_TURN";
     public static final String NEXT_MAP_OBJECT = "NEXT_CREATURE";
+    public static final String END_OF_ROUND = "END_OF_ROUND";
     private final PropertyChangeSupport observerSupport = new PropertyChangeSupport(this);
     private final Collection<MapObjectIf> mapObjectIfs;
     @Getter
@@ -44,7 +45,7 @@ public class TurnQueue {
     private void initQueue() {
         mapObjectsQueue.addAll(mapObjectIfs);
         if(mapObjectIfs.size() <= 1){
-            observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
+            observerSupport.firePropertyChange(END_OF_ROUND, roundNumber - 1, roundNumber);
         }
     }
 
@@ -65,7 +66,7 @@ public class TurnQueue {
     public void endOfTurn() {
         roundNumber++;
         initQueue();
-//        observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
+        observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
     }
 
     void addObserver(PropertyChangeListener aObserver) {

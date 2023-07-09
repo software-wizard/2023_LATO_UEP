@@ -33,6 +33,7 @@ public class MainBattleController implements PropertyChangeListener {
     private Button passButton;
     @FXML
     private Button spellButton;
+    private static final String END_OF_TURN = "END_OF_TURN";
   
     public MainBattleController(final Hero aHero1, final Hero aHero2) {
         gameEngine = new GameEngine(aHero1, aHero2);
@@ -74,8 +75,6 @@ public class MainBattleController implements PropertyChangeListener {
                         throw new RuntimeException(e);
                     }
                 });
-
-                gameEngine.verifyControllability();
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setMoveBackground(Color.BLACK);
@@ -131,10 +130,12 @@ public class MainBattleController implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        try {
-            refreshGui();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        if (!evt.getPropertyName().equals(END_OF_TURN)){
+            try {
+                refreshGui();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
