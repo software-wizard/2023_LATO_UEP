@@ -25,9 +25,14 @@ import java.util.ArrayList;
 public class Scene1 extends Application {
 
     private Player player;
+    private int fxmlChooser;
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public void setFXML(int fxmlChooser) {
+        this.fxmlChooser=fxmlChooser;
     }
 
     @Override
@@ -54,12 +59,19 @@ public class Scene1 extends Application {
 
         Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS, System.out::println);
 
+//        String filePath = "Scene1Rampart.fxml";
+//        if(player.getEconomyHero().getFraction().equals(Castle.FractionType.NECROPOLIS)){
+//            playerCastle = new Castle(Castle.FractionType.NECROPOLIS, System.out::println);
+//            filePath = "Scene1Necropolis.fxml";
+//        }else if (player.getEconomyHero().getFraction().equals(Castle.FractionType.RAMPART)) {
+//            playerCastle = new Castle(Castle.FractionType.RAMPART, System.out::println);
+//            filePath = "Scene1Rampart.fxml";
+//        }
+
         String filePath = "";
-        if(player.getEconomyHero().getFraction().equals(Castle.FractionType.NECROPOLIS)){
-            playerCastle = new Castle(Castle.FractionType.NECROPOLIS, System.out::println);
+        if(fxmlChooser%2==0){
             filePath = "Scene1Necropolis.fxml";
-        }else if (player.getEconomyHero().getFraction().equals(Castle.FractionType.RAMPART)) {
-            playerCastle = new Castle(Castle.FractionType.RAMPART, System.out::println);
+        }else {
             filePath = "Scene1Rampart.fxml";
         }
 
@@ -70,7 +82,7 @@ public class Scene1 extends Application {
         controller.setHero(player.getEconomyHero());
         controller.setPlayerCastle(playerCastle);
         controller.setResources(player.getResources());
-
+        controller.setFxml(fxmlChooser);
         stage.setTitle("Heroes III");
         stage.setScene(scene);
         stage.show();
@@ -79,4 +91,6 @@ public class Scene1 extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+
 }

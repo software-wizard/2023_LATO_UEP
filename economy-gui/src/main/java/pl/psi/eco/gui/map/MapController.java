@@ -40,6 +40,8 @@ public class MapController implements PropertyChangeListener
     @FXML
     private GridPane gridMap;
 
+    private int fxmlChooser = 1;
+
     public MapController( EconomyEngine aEngine )
     {
         this.economyEngine = aEngine;
@@ -151,9 +153,10 @@ public class MapController implements PropertyChangeListener
     @SneakyThrows
     private void openCastle()
     {
+        fxmlChooser++;
         Scene1 scene1 = new Scene1();
         scene1.setPlayer(economyEngine.getCurrentPlayer());
-        System.out.println(economyEngine.getCurrentPlayer().getEconomyHero().getFraction());
+        scene1.setFXML(fxmlChooser);
         scene1.start(new Stage());
     }
 }

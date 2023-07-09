@@ -63,6 +63,7 @@ public class Scene3Controller {
             String recruitAmount = text.getCharacters().toString();
             if(Integer.parseInt(recruitAmount)>0){
                 Scene1Controller.buyCreatures(i, Integer.parseInt(recruitAmount));
+                Scene1Controller.refreshUnitAmounts();
             }
             i++;
         }

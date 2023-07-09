@@ -54,6 +54,8 @@ public class Scene2Controller {
         String recruitAmount = recruitAmountField.getCharacters().toString();
         Scene1Controller.buyCreatures(Scene1Controller.getCurrentBuyingUnit(), Integer.parseInt(recruitAmount));
         Scene1Controller.refreshUnitAmounts();
+
+
     }
 
 

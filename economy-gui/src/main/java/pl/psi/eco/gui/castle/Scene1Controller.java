@@ -33,6 +33,7 @@ public class Scene1Controller {
     private static EconomyHero hero;
     private static Castle playerCastle;
     private static PlayerResources resources;
+    private int fxmlChooser;
 
     public void setHero(EconomyHero hero) {
         this.hero = hero;
@@ -87,6 +88,7 @@ public class Scene1Controller {
         unitCounts.add(unit5Count);
         unitCounts.add(unit6Count);
         unitCounts.add(unit7Count);
+        unitCounts.add(goldCount);
     }
 
 //    static Castle playerCastle = new Castle(Castle.FractionType.NECROPOLIS);
@@ -139,6 +141,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 2, hero.fraction);
         setCurrentBuyingUnit(2);
+        addUnitCountTextsToList();
         refreshUnitAmounts();
         refreshResourceAmounts();
     }
@@ -149,6 +152,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 3, hero.fraction);
         setCurrentBuyingUnit(3);
+        addUnitCountTextsToList();
         refreshUnitAmounts();
         refreshResourceAmounts();
     }
@@ -159,6 +163,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 4, hero.fraction);
         setCurrentBuyingUnit(4);
+        addUnitCountTextsToList();
         refreshUnitAmounts();
         refreshResourceAmounts();
     }
@@ -169,6 +174,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 5, hero.fraction);
         setCurrentBuyingUnit(5);
+        addUnitCountTextsToList();
         refreshUnitAmounts();
         refreshResourceAmounts();
     }
@@ -179,6 +185,7 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 6, hero.fraction);
         setCurrentBuyingUnit(6);
+        addUnitCountTextsToList();
         refreshUnitAmounts();
         refreshResourceAmounts();
     }
@@ -189,15 +196,23 @@ public class Scene1Controller {
         String goldCost = String.valueOf(building.getCreaturesToRecruit().getGoldCost());
         showRecruitingScene(goldCost, 7, hero.fraction);
         setCurrentBuyingUnit(7);
+        addUnitCountTextsToList();
         refreshResourceAmounts();
     }
 
     void showRecruitingScene(String goldCost, int creatureNumber, Castle.FractionType type){
         try{
+//            String filePath = "Scene2Rampart.fxml";
+//            if(type.equals(Castle.FractionType.NECROPOLIS)){
+//                filePath = "Scene2Necropolis.fxml";
+//            }else if (type.equals(Castle.FractionType.RAMPART)) {
+//                filePath = "Scene2Rampart.fxml";
+//            }
+
             String filePath = "";
-            if(type.equals(Castle.FractionType.NECROPOLIS)){
+            if(fxmlChooser%2==0){
                 filePath = "Scene2Necropolis.fxml";
-            }else if (type.equals(Castle.FractionType.RAMPART)) {
+            }else {
                 filePath = "Scene2Rampart.fxml";
             }
             FXMLLoader fxmlLoader = new FXMLLoader(Scene1.class.getResource(filePath));
@@ -218,12 +233,14 @@ public class Scene1Controller {
 
     public static void refreshUnitAmounts(){
         int x;
+
         if(!hero.getHeroArmy().isEmpty()){
             for (int i = 0; i < hero.getHeroArmy().size(); i++) {
                 x = hero.getHeroArmy().get(i).getTier();
                 unitCounts.get(x-1).setText(String.valueOf(hero.getHeroArmy().get(i).getAmount()));
             }
         }
+        unitCounts.get(7).setText(String.valueOf(resources.getGold()));
     }
 
     public void refreshResourceAmounts(){
@@ -239,10 +256,17 @@ public class Scene1Controller {
     void showUnitsScene(Castle.FractionType type){
 
         try{
+//            String filePath = "Scene3Rampart.fxml";
+//            if(type.equals(Castle.FractionType.NECROPOLIS)){
+//                filePath = "Scene3Necropolis.fxml";
+//            }else if (type.equals(Castle.FractionType.RAMPART)) {
+//                filePath = "Scene3Rampart.fxml";
+//            }
+
             String filePath = "";
-            if(type.equals(Castle.FractionType.NECROPOLIS)){
+            if(fxmlChooser%2==0){
                 filePath = "Scene3Necropolis.fxml";
-            }else if (type.equals(Castle.FractionType.RAMPART)) {
+            }else {
                 filePath = "Scene3Rampart.fxml";
             }
             FXMLLoader fxmlLoader = new FXMLLoader(Scene1.class.getResource(filePath));
@@ -259,4 +283,7 @@ public class Scene1Controller {
     public void EnterHall(MouseEvent mouseEvent) {
     }
 
+    public void setFxml(int fxmlChooser) {
+        this.fxmlChooser = fxmlChooser;
+    }
 }
