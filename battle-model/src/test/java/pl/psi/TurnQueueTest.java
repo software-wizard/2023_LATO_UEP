@@ -3,6 +3,7 @@ package pl.psi;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Disabled;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import pl.psi.creatures.Creature;
 import pl.psi.creatures.CreatureStats;
 import pl.psi.warmachines.WarMachine;
+import pl.psi.warmachines.WarMachineFactory;
 
 class TurnQueueTest
 {
@@ -70,10 +72,12 @@ class TurnQueueTest
 
     @Test
     void removeMapObject() {
-        WarMachine ballista = new WarMachine.Builder().statistic(WarMachineStatistic.BALLISTA).build();
-        WarMachine catapult = new WarMachine.Builder().statistic(WarMachineStatistic.CATAPULT).build();
-        WarMachine firstAidTent = new WarMachine.Builder().statistic(WarMachineStatistic.FIRST_AID_TENT).build();
-        TurnQueue turnQueue1 = new TurnQueue(List.of(ballista, catapult), List.of(firstAidTent));
+        WarMachine ballista = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 2);
+        WarMachine catapult = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 2);
+        WarMachine firstAidTent = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 2);
+        List<MapObjectIf> mapObjectIf1 = new ArrayList<>(List.of(ballista, catapult));
+        List<MapObjectIf> mapObjectIf2 = new ArrayList<>(List.of(firstAidTent));
+        TurnQueue turnQueue1 = new TurnQueue(mapObjectIf1, mapObjectIf2);
         assertEquals(ballista, turnQueue1.getCurrentMapObject());
 
         turnQueue1.next();
