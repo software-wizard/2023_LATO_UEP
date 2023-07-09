@@ -147,8 +147,18 @@ public class GameEngine {
         return turnQueue.getRandomMapObject();
     }
 
-    public void performAction() {
-        MapObjectIf mo = getRandomMapObject();
+    public void checkControllableActions() {
+        if (!turnQueue.getCurrentMapObject().isControllable()){
+            MapObjectIf mo = getRandomMapObject();
+            if (mo != null) {
+                performActionOnRandomObject(mo);
+            } else {
+                System.out.println("No map object to perform action on");
+            }
+        }
+    }
+
+    private void performActionOnRandomObject(MapObjectIf mo) {
         if (turnQueue.getCurrentMapObject().canHeal()) {
             healRandomMapObject(mo);
         } else if (turnQueue.getCurrentMapObject().canAttack()) {
@@ -162,17 +172,6 @@ public class GameEngine {
 
     public boolean isControllable() {
         return turnQueue.getCurrentMapObject().isControllable();
-    }
-
-    public void verifyControllability() {
-        if (!isControllable()) {
-            if (turnQueue.isTurnQueueEmpty()) {
-                turnQueue.endOfTurn();
-            } else {
-                performAction();
-                //pass();
-            }
-        }
     }
 
     private void checkIfAlive(MapObjectIf defender) {

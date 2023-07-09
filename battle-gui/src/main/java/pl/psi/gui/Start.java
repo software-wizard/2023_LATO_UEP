@@ -71,18 +71,19 @@ public class Start extends Application
 
     private Hero createP2()
     {
-        Creature creature1 = new NecropolisFactory().create( true, 2, 10);
+        Creature creature1 = new NecropolisFactory().create( true, 2, 3);
         WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.BALLISTA, 1, 2);
         WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 0, 1);
+        WarMachine warMachine3 = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 2);
 
-        return new Hero(List.of(creature1), List.of(warMachine1, warMachine2));
+        return new Hero(List.of(creature1), List.of(warMachine1, warMachine2, warMachine3));
     }
 
     private Hero createP1()
     {
         Creature creature1 = new NecropolisFactory().create( false, 2, 15);
         Creature creature2 = new NecropolisFactory().create( true, 3, 3 );
-        WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 1, 2);
+        WarMachine warMachine1 = new WarMachineFactory().create(WarMachineStatistic.CATAPULT, 0, 2);
         WarMachine warMachine2 = new WarMachineFactory().create(WarMachineStatistic.FIRST_AID_TENT, 1, 1);
 
         return new Hero(List.of(creature1, creature2), List.of(warMachine1, warMachine2));
