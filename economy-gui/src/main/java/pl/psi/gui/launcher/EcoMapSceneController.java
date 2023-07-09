@@ -1,6 +1,9 @@
 package pl.psi.gui.launcher;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.event.ActionEvent;
@@ -10,18 +13,24 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.psi.Hero;
 import pl.psi.artifacts.ArtifactFactory;
-import pl.psi.artifacts.ArtifactStatistics;
+import pl.psi.converter.EcoBattleConverter;
+import pl.psi.gui.castle.CastleLauncher;
 import pl.psi.gui.inventory.EcoEqSceneController;
+import pl.psi.gui.map.MapController;
+import pl.psi.hero.EconomyHero;
 import pl.psi.hero.HeroEquipment;
-import pl.psi.artifacts.Artifact;
 import pl.psi.EconomyEngine;
 import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 
-public class EcoMapSceneController {
+public class EcoMapSceneController implements PropertyChangeListener {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -34,6 +43,8 @@ public class EcoMapSceneController {
 
     @FXML
     Label currentPlayerLabel;
+    @FXML
+    Label currentDayLabel;
     @FXML
     Label heroNameLabel;
     @FXML
@@ -51,28 +62,52 @@ public class EcoMapSceneController {
     @FXML
     Label gemsLabel;
 
+
+    @FXML
+    AnchorPane mapPane;
+
+
     public void loadEconomyEngine(EconomyEngine economyEngine) {
         this.economyEngine = economyEngine;
+        this.economyEngine.getBoard().addObserver(this);
     }
 
-    public void refreshGui() {
+    public void refreshGui() throws IOException {
         displayCurrentPlayerName(economyEngine.getCurrentPlayer().getName());
         displayName(economyEngine.getCurrentPlayer().getHeroName());
         displayResources(economyEngine.getCurrentPlayer().getResources());
+        displayCurrentDay(economyEngine.getCurrentDay());
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/map.fxml"));
+        MapController mapController = new MapController(economyEngine);
+        this.economyEngine.getBoard().addObserver(mapController);
+        loader.setController( mapController );
+        Scene scene = new Scene( loader.load());
+
+        // set size to node casting to Pane
+        Node paneProbably = scene.getRoot().getChildrenUnmodifiable().stream().filter(BorderPane.class::isInstance).map(BorderPane.class::cast).findFirst().get().getCenter();
+
+
+        mapPane.getChildren().add(paneProbably);
     }
-    //placeholder na heroName, trzeba zmienic na pobieranie z klasy Player (jesli sie da)
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("HERO_MOVED")) {
+            try {
+                refreshGui();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public void displayName(String heroName) {
         heroNameLabel.setText("Hero name: " + heroName);
     }
 
     public void displayCurrentPlayerName(String playerName) {
         currentPlayerLabel.setText("Current player name: " + playerName);
-    }
-
-    public void displayAllPlayersWithProperties(List<Player> players) {
-        for (Player player : players) {
-            System.out.println(player.getName() + " " + player.getTown() + " " + player.getHeroName() + " " + player.getBonus());
-        }
     }
 
     public void displayResources(PlayerResources playerResources) {
@@ -85,13 +120,29 @@ public class EcoMapSceneController {
         gemsLabel.setText("Gems: "+ playerResources.getGems());
     }
 
+    public void goToBattle(ActionEvent event) throws IOException {
+
+        try {
+            EcoBattleConverter converter = new EcoBattleConverter();
+            converter.startBattle(economyEngine.getCurrentPlayer().getEconomyHero(), economyEngine.getCurrentPlayer().getEconomyHero());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void switchToLauncher(ActionEvent event) throws IOException {
         root = FXMLLoader.load((getClass().getClassLoader().getResource("fxml/ecoLauncherScene.fxml")));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new  Scene(root);
+
+        Screen screen = Screen.getPrimary();
+        stage.setX(screen.getVisualBounds().getMinX());
+        stage.setY(screen.getVisualBounds().getMinY());
+        stage.setWidth(screen.getVisualBounds().getWidth());
+        stage.setHeight(screen.getVisualBounds().getHeight());
+
         stage.setScene( scene );
-        stage.setX( 5 );
-        stage.setY( 5 );
         stage.show();
     }
 
@@ -100,21 +151,21 @@ public class EcoMapSceneController {
         refreshGui();
     }
 
+    public void displayCurrentDay(int day) {
+        currentDayLabel.setText("Current day: " + day);
+    }
+
     public void openEq(ActionEvent event) throws IOException {
-        ArtifactFactory artifactFactory = new ArtifactFactory();
-        HeroEquipment aHeroEq = new HeroEquipment();
-        aHeroEq.addItemToBackpack(artifactFactory.create("helmet","skull helmet"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("cape","vampire's cowl"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("necklace","pedant of courage"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("rightHand","sword of hellfire"));
-        aHeroEq.addItemToBackpack(artifactFactory.create("leftHand","sentinel's shield"));
+
+        EconomyHero ecoHero = economyEngine.getEcoHero();
+        HeroEquipment aHeroEq = ecoHero.getHeroEquipment();
 
         FXMLLoader loaderInventory = new FXMLLoader(getClass().getClassLoader().getResource("fxml/eq.fxml"));
         rootInventory = loaderInventory.load();
 
         try {
             EcoEqSceneController ecoEqSceneController = loaderInventory.getController();
-            ecoEqSceneController.refreshEq(aHeroEq);
+            ecoEqSceneController.refreshEq(aHeroEq,economyEngine);
         } catch (Exception e) {
             e.printStackTrace();
         }

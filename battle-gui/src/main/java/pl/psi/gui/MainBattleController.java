@@ -34,7 +34,7 @@ public class MainBattleController implements PropertyChangeListener {
     private Button passButton;
     @FXML
     private Button spellButton;
-
+  
     public MainBattleController(final Hero aHero1, final Hero aHero2) {
         gameEngine = new GameEngine(aHero1, aHero2);
     }
@@ -75,6 +75,8 @@ public class MainBattleController implements PropertyChangeListener {
                         throw new RuntimeException(e);
                     }
                 });
+
+                gameEngine.verifyControllability();
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
                     mapTile.setMoveBackground(Color.BLACK);

@@ -1,5 +1,6 @@
 package pl.psi.mapElements;
 
+import lombok.Getter;
 import pl.psi.ResourceType;
 import pl.psi.hero.EconomyHero;
 import pl.psi.player.Player;
@@ -8,10 +9,33 @@ import pl.psi.player.PlayerResources;
 public class Mine implements MapElement {
 
     private final ResourceType resourceType;
+    @Getter
     private Player currentOwner = null;
 
     public Mine(ResourceType aResourceType) {
         this.resourceType = aResourceType;
+    }
+
+    @Override
+    public String getIcon() {
+        switch (resourceType) {
+            case GOLD:
+                return "Gold_Mine";
+            case WOOD:
+                return "Sawmill";
+            case ORE:
+                return "Ore_Pit";
+            case MERCURY:
+                return "Alchemist's_Lab";
+            case SULFUR:
+                return "Sulfur_Dune";
+            case CRYSTAL:
+                return "Crystal_Cavern";
+            case GEMS:
+                return "Gem_Pond";
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -20,8 +44,8 @@ public class Mine implements MapElement {
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
-        currentOwner = aEconomyHero.getHeroStatistics().getPlayer();
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
+        currentOwner = aPlayer;
     }
 
     @Override

@@ -33,7 +33,6 @@ public class WarMachine implements PropertyChangeListener, MapObjectIf {
         calculator = aCalculator;
         HPcalculator = aHPcalculator;
     }
-
     public boolean isAlive() {
         return getAmount() > 0;
     }

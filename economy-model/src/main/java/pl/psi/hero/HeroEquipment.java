@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import pl.psi.artifacts.Artifact;
+import pl.psi.artifacts.ArtifactFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 @AllArgsConstructor
@@ -33,6 +35,15 @@ public class HeroEquipment {
         this.heroInventory.put("firstAidTent", null);
         this.heroInventory.put("catapult", null);
         this.heroInventory.put("spellbook", null);
+        //add sample artifacts
+        ArtifactFactory artifactFactory = new ArtifactFactory();
+
+        this.addItemToBackpack(artifactFactory.create("helmet","skull helmet"));
+        this.addItemToBackpack(artifactFactory.create("cape","vampire's cowl"));
+        this.addItemToBackpack(artifactFactory.create("necklace","pedant of courage"));
+        this.addItemToBackpack(artifactFactory.create("rightHand","sword of hellfire"));
+        this.addItemToBackpack(artifactFactory.create("leftHand","sentinel's shield"));
+
     }
 
     public void addItemToBackpack(Artifact item){

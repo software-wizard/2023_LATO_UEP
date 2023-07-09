@@ -11,149 +11,119 @@
    <children>
       <ImageView fx:id="image" fitHeight="513.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Background.png" />
+            <Image url="@../../../Images/Rampart/Background.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="54.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <ImageView fx:id="image2" fitHeight="150.0" fitWidth="152.0" layoutX="170.0" layoutY="91.0" onMouseClicked="#EnterFort" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image2" fitHeight="150.0" fitWidth="240.0" layoutX="135.0" layoutY="47.0" onMouseClicked="#EnterFort" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Fort.png" />
+            <Image url="@../../../Images/Rampart/Fort.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="104.0" fitWidth="152.0" layoutX="80.0" layoutY="244.0" onMouseClicked="#EnterRecruitment1" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="105.0" fitWidth="182.0" layoutX="-4.0" layoutY="270.0" onMouseClicked="#EnterRecruitment1" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment1.png" />
+            <Image url="@../../../Images/Rampart/Recruitment1.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="131.0" fitWidth="171.0" layoutX="494.0" layoutY="91.0" onMouseClicked="#EnterHall" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="131.0" fitWidth="171.0" layoutX="633.0" layoutY="250.0" onMouseClicked="#EnterHall" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Hall.png" />
+            <Image url="@../../../Images/Rampart/Hall.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="182.0" fitWidth="134.0" layoutX="408.0" layoutY="92.0" onMouseClicked="#EnterRecruitment3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="182.0" fitWidth="134.0" layoutX="662.0" layoutY="136.0" onMouseClicked="#EnterRecruitment3" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment3.png" />
+            <Image url="@../../../Images/Rampart/Recruitment3.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="77.0" fitWidth="138.0" layoutX="465.0" layoutY="251.0" onMouseClicked="#EnterRecruitment2" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="77.0" fitWidth="138.0" layoutY="152.0" onMouseClicked="#EnterRecruitment2" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment2.png" />
+            <Image url="@../../../Images/Rampart/Recruitment2.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="191.0" layoutX="609.0" layoutY="257.0" onMouseClicked="#EnterRecruitment4" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="116.0" fitWidth="127.0" layoutX="350.0" layoutY="80.0" onMouseClicked="#EnterRecruitment4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment4.png" />
+            <Image url="@../../../Images/Rampart/Recruitment4.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="68.0" fitWidth="101.0" layoutX="208.0" layoutY="223.0" onMouseClicked="#EnterRecruitment5" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="98.0" fitWidth="181.0" layoutX="128.0" layoutY="171.0" onMouseClicked="#EnterRecruitment5" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment5.png" />
+            <Image url="@../../../Images/Rampart/Recruitment5.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="155.0" fitWidth="101.0" layoutX="-12.0" layoutY="56.0" onMouseClicked="#EnterRecruitment6" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="41.0" fitWidth="87.0" layoutX="495.0" layoutY="116.0" onMouseClicked="#EnterRecruitment6" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment6.png" />
+            <Image url="@../../../Images/Rampart/Recruitment6.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView fitHeight="122.0" fitWidth="112.0" layoutX="662.0" layoutY="73.0" onMouseClicked="#EnterRecruitment7" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="193.0" layoutX="613.0" layoutY="47.0" onMouseClicked="#EnterRecruitment7" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/Recruitment7.png" />
+            <Image url="@../../../Images/Rampart/Recruitment7.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Text fx:id="goldCount" fill="WHITE" layoutX="729.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="50000">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="609.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="499.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="390.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="274.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Text fill="WHITE" layoutX="170.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="goldCount" fill="WHITE" layoutX="729.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
       <ImageView fitHeight="77.0" fitWidth="79.0" layoutX="88.0" layoutY="387.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier1.png" />
+            <Image url="@../../../Images/Rampart/UnitTier1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="73.0" fitWidth="76.0" layoutX="170.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier2.png" />
+            <Image url="@../../../Images/Rampart/UnitTier2.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="69.0" layoutX="248.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier3.png" />
+            <Image url="@../../../Images/Rampart/UnitTier3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="403.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier5.png" />
+            <Image url="@../../../Images/Rampart/UnitTier5.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="75.0" fitWidth="78.0" layoutX="481.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier6.png" />
+            <Image url="@../../../Images/Rampart/UnitTier6.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="560.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier7.png" />
+            <Image url="@../../../Images/Rampart/UnitTier7.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="69.0" layoutX="327.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../Images/UnitTier4.png" />
+            <Image url="@../../../Images/Rampart/UnitTier4.png" />
          </image>
       </ImageView>
       <Text fx:id="unit1Count" fill="WHITE" layoutX="148.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="17.9375">

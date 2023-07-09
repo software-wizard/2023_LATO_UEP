@@ -47,7 +47,7 @@ public class Scene2Controller {
     void recruitCreatures(MouseEvent event) {
         String recruitAmount = recruitAmountField.getCharacters().toString();
         Scene1Controller.buyCreatures(Scene1Controller.getCurrentBuyingUnit(), Integer.parseInt(recruitAmount));
-//tu ma się odpalać setRefreshScene
+        Scene1Controller.refreshUnitAmounts();
     }
 
 
@@ -56,15 +56,15 @@ public class Scene2Controller {
     }
 
     public void setVisible(int i){
-//        switch (i) {
-//            case 1 -> recruitingUnit1.setVisible(true);
-//            case 2 -> recruitingUnit2.setVisible(true);
-//            case 3 -> recruitingUnit3.setVisible(true);
-//            case 4 -> recruitingUnit4.setVisible(true);
-//            case 5 -> recruitingUnit5.setVisible(true);
-//            case 6 -> recruitingUnit6.setVisible(true);
-//            case 7 -> recruitingUnit7.setVisible(true);
-//        }
+        switch (i) {
+            case 1 -> recruitingUnit1.setVisible(true);
+            case 2 -> recruitingUnit2.setVisible(true);
+            case 3 -> recruitingUnit3.setVisible(true);
+            case 4 -> recruitingUnit4.setVisible(true);
+            case 5 -> recruitingUnit5.setVisible(true);
+            case 6 -> recruitingUnit6.setVisible(true);
+            case 7 -> recruitingUnit7.setVisible(true);
+        }
 
     }
 

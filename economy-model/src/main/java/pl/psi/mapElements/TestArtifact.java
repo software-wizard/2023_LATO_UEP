@@ -8,7 +8,7 @@ import pl.psi.artifacts.ArtifactStatistics;
 @Getter
 public class TestArtifact extends Artifact {
 
-    public TestArtifact(String aType,String aName){
+    public TestArtifact(String aType, String aName){
         super(aType,aName, ArtifactStatistics.builder().build());
     }
 

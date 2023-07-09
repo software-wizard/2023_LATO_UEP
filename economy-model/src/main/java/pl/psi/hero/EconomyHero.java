@@ -3,6 +3,7 @@ package pl.psi.hero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import pl.psi.artifacts.Artifact;
 import pl.psi.buildings.Building;
 import pl.psi.buildings.RecruitmentBuilding;
@@ -10,6 +11,7 @@ import pl.psi.creatures.EconomyCreature;
 import pl.psi.mapElements.Castle;
 import pl.psi.mapElements.MapElement;
 import pl.psi.mapElements.Resource;
+import pl.psi.player.Player;
 import pl.psi.player.PlayerResources;
 
 import java.util.ArrayList;
@@ -17,11 +19,10 @@ import java.util.ArrayList;
 
 @Builder
 @Getter
+@Setter
 @AllArgsConstructor
 public class EconomyHero implements MapElement {
 
-
-    // Metoda apply for EconomyArtifact
 
     private HeroStatistics heroStatistics;
 
@@ -41,12 +42,17 @@ public class EconomyHero implements MapElement {
     }
 
     @Override
-    public boolean isInteractive() {
-        return true;
+    public String getIcon() {
+        return null;
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
+    public boolean isInteractive() {
+        return false;
+    }
+
+    @Override
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
         // TODO exchange army and so on?
         // TODO battle if enemy hero
     }
@@ -94,7 +100,7 @@ public class EconomyHero implements MapElement {
 
     @Override
     public void endOfTurn() {
-
+        this.heroStatistics.setMoveRange(7);
     }
 
     public void addArtifactToBackpack(Artifact aArtifact) {

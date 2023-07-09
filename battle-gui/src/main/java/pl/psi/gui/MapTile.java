@@ -216,4 +216,5 @@ class MapTile extends StackPane
         String amountText = Integer.toString(mapObjectAmount);
         amountLabel.setText(amountText);
     }
+
 }

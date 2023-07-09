@@ -2,10 +2,14 @@ package pl.psi.player;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import pl.psi.hero.EconomyHero;
 
+import java.awt.*;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Builder
 public class Player {
 
@@ -16,39 +20,17 @@ public class Player {
     private String heroName;
     private String bonus;
 
-    public Player(String aName, PlayerResources aResources, String town, String heroName, String bonus) {
+    private EconomyHero economyHero;
+    private Color color;
+
+    public Player(String aName, PlayerResources aResources, String town, String heroName, String bonus,
+                  EconomyHero aEconomyHero, Color aColor) {
         this.name = aName;
         this.resources = aResources;
         this.town = town;
         this.heroName = heroName;
         this.bonus = bonus;
-    }
-
-    @Override
-    public boolean equals(Object o) { // TODO is ok?
-
-        if (o == this) {
-            return true;
-        }
-
-        if (!(o instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) o;
-
-        return Objects.equals(this.getName(), player.getName());
-    }
-
-    public void setTown(String chosenTown) {
-        this.town = chosenTown;
-    }
-
-    public void setHeroName(String chosenHero) {
-        this.heroName = chosenHero;
-    }
-
-    public void setBonus(String chosenBonus) {
-        this.bonus = chosenBonus;
+        this.economyHero = aEconomyHero;
+        this.color = aColor;
     }
 }

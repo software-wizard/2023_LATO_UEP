@@ -19,6 +19,7 @@ public class GameEngine {
     protected List<MapObjectIf> mapObjectIf1 = new ArrayList<>();
     protected List<MapObjectIf> mapObjectIf2 = new ArrayList<>();
     public Hero hero1;
+
     public Hero hero2;
 
     public GameEngine(final Hero aHero1, final Hero aHero2) {

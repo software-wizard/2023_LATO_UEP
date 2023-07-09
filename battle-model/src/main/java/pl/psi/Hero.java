@@ -44,11 +44,11 @@ public class Hero
         }
     }
 
+
     public Hero( final List< Creature > aCreatures)
     {
         creatures = aCreatures;
     }
-
 //    private void loadSkills(){
 //        for (WarMachine warMachine : warMachines) {
 //            skills.putAll(warMachine.getSkill());

@@ -71,8 +71,12 @@
 package pl.psi.mapElements;
 import pl.psi.buildings.Building;
 import pl.psi.hero.EconomyHero;
+import pl.psi.player.Player;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 
 public class Castle implements MapElement {
@@ -80,7 +84,7 @@ public class Castle implements MapElement {
 
     private ArrayList<Building> buildingsToBuy = new ArrayList<>();
     private ArrayList<Building> buildingsOwned = new ArrayList<>();
-
+    private Consumer<String> fireMethod;
     public ArrayList<Building> getBuildingsToBuy() {
         return buildingsToBuy;
     }
@@ -91,17 +95,19 @@ public class Castle implements MapElement {
 
     public enum FractionType {
         TOWER,
+        RAMPART,
         NECROPOLIS;
     }
 
     private final EconomyHero owner = null;
 
-    public Castle(FractionType fractionType) {
+    public Castle(FractionType fractionType, Consumer<String> aFireEventMethod) {
         buildingsOwned = TownStarter.createBuildingsOwned(fractionType);
         buildingsToBuy = TownStarter.createBuildingsToBuy(fractionType);
+        fireMethod = aFireEventMethod;
     }
 
-    //pole w building zamiast int id, enum z "nazwą" budynku
+
     public void buildBuilding(ArrayList<Building> buildingsToBuy, ArrayList<Building> buildingsOwned, int buildingID){
         ArrayList<Building> buildingsToBuyCopy = new ArrayList<>(buildingsToBuy);
         for(Building building: buildingsToBuyCopy){
@@ -113,13 +119,18 @@ public class Castle implements MapElement {
     }
 
     @Override
+    public String getIcon() {
+        return "Castle";
+    }
+
+    @Override
     public boolean isInteractive() {
         return true;
     }
 
     @Override
-    public void apply(EconomyHero aEconomyHero) {
-
+    public void apply(EconomyHero aEconomyHero, Player aPlayer) {
+        fireMethod.accept("OPEN_CASTLE");
     }
 
     @Override
@@ -130,6 +141,8 @@ public class Castle implements MapElement {
     @Override
     public void endOfTurn() {
     }
+
+
 
 
 

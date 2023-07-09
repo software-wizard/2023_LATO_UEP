@@ -41,4 +41,5 @@ public class FirstAidTent extends WarMachine implements HealerIF {
         skill.put(FIRST_AID, firstAidSkillLevel);
         return skill;
     }
+
 }
