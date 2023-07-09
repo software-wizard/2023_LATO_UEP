@@ -32,11 +32,9 @@ public class MainBattleController implements PropertyChangeListener {
     private GridPane gridMap;
     @FXML
     private Button passButton;
-
     @FXML
     private Button spellButton;
-
-
+  
     public MainBattleController(final Hero aHero1, final Hero aHero2) {
         gameEngine = new GameEngine(aHero1, aHero2);
     }
@@ -58,19 +56,20 @@ public class MainBattleController implements PropertyChangeListener {
                 Point currentPoint = new Point(x, y);
                 Optional<MapObjectIf> gameObject = gameEngine.getMapObject(currentPoint);
                 final MapTile mapTile = new MapTile("");
+                //mapTile.setBackgroundGraphic();
 
                 gameObject.ifPresent((mapObject) -> {
                     try {
                         if (gameEngine.getMapObjectIf1().contains(mapObject)) {
-                            mapTile.setBackground(Color.rgb(243, 198, 85));
+                            //mapTile.setBackground(Color.rgb(243, 198, 85));
                             mapTile.setGraphic(mapObject.getName());
                             mapTile.setHpLabel(mapObject.getCurrentHp());
                             mapTile.setAmountLabel(mapObject.getAmount());
                         } else {
-                            mapTile.setBackground(Color.rgb(166, 206, 200));
+                            //mapTile.setBackground(Color.rgb(166, 206, 200));
                             mapTile.setMirrorGraphic(mapObject.getName());
-                            mapTile.setHpLabel(mapObject.getCurrentHp());
-                            mapTile.setAmountLabel(mapObject.getAmount());
+                            mapTile.setMirrorHpLabel(mapObject.getCurrentHp());
+                            mapTile.setMirrorAmountLabel(mapObject.getAmount());
                         }
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
@@ -80,11 +79,13 @@ public class MainBattleController implements PropertyChangeListener {
                 gameEngine.verifyControllability();
 
                 if (gameEngine.isCurrentMapObject(currentPoint)) {
-                    mapTile.setBorderColor(Color.GREENYELLOW);
+                    mapTile.setMoveBackground(Color.BLACK);
+                    mapTile.setBorderColor(Color.ORANGE);
+                    mapTile.setGraphicBorder();
                 }
 
                 if (gameEngine.canMove(currentPoint)) {
-                    mapTile.setBackground(Color.GREY);
+                    mapTile.setMoveBackground(Color.BLACK);
                     mapTile.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
                         gameEngine.move(currentPoint);
                     });
@@ -108,19 +109,7 @@ public class MainBattleController implements PropertyChangeListener {
                 gridMap.add(mapTile, x, y);
             }
         }
-
-        //repair skipping first object from queue
-        //wywalic z kontrolera, do kolejki np
-        if (gameEngine.canPerformAction() && !gameEngine.isControllable()) {
-            Point randPoint = gameEngine.getMapObjectPosition(gameEngine.getRandomMapObject());
-
-            if (gameEngine.canAttack(randPoint)) {
-                gameEngine.attack(randPoint);
-            }
-            if (gameEngine.canHeal(randPoint)) {
-                gameEngine.heal(randPoint);
-            }
-        }
+        gameEngine.verifyControllability();
     }
 
     private void initializeSpellBook() {

@@ -1,8 +1,13 @@
 package pl.psi.gui;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import pl.psi.warmachines.WarMachine;
 import pl.psi.WarMachines.WarMachineStatistic;
 import pl.psi.Hero;
@@ -38,7 +43,21 @@ public class Start extends Application
             loader.setLocation( Start.class.getClassLoader()
                 .getResource( "fxml/main-battle.fxml" ) );
             loader.setController( new MainBattleController( createP1(), createP2() ) );
-            scene = new Scene( loader.load() );
+
+            Parent root = loader.load();
+            StackPane stackPane = new StackPane();
+            Image img = new Image(new FileInputStream("battle-gui/src/main/resources/AppGui/Background.png"));
+            BackgroundImage bImg = new BackgroundImage(img,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(1.0, 1.0, true, true, false, true));
+            Background bGround = new Background(bImg);
+            stackPane.getChildren().add(root);
+            stackPane.setBackground(bGround);
+
+            scene = new Scene( stackPane );
+            primaryStage.setFullScreen(true);
             primaryStage.setScene( scene );
             primaryStage.setX( 5 );
             primaryStage.setY( 5 );

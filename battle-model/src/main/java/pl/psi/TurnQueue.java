@@ -25,6 +25,7 @@ public class TurnQueue {
     private MapObjectIf currentMapObject;
     private final Queue<MapObjectIf> mapObjectsQueue;
     private int roundNumber;
+    private RandomMapObject randomMapObject;
 
     public TurnQueue(final Collection<MapObjectIf> aMapObjectList1,
                      final Collection<MapObjectIf> aMapObjectList2) {
@@ -36,6 +37,8 @@ public class TurnQueue {
         initQueue();
         mapObjectIfs.forEach(observerSupport::addPropertyChangeListener);
         next();
+
+        randomMapObject = new RandomMapObject(mapObjectIfs1, mapObjectIfs2);
     }
 
     private void initQueue() {
@@ -80,5 +83,9 @@ public class TurnQueue {
 
     public boolean isTurnQueueEmpty() {
         return mapObjectsQueue.isEmpty();
+    }
+
+    public MapObjectIf getRandomMapObject(){
+        return randomMapObject.getRandomMapObject(mapObjectIfs1, mapObjectIfs2, getCurrentMapObject());
     }
 }
