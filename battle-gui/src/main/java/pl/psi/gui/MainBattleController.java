@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 import java.io.FileNotFoundException;
 import java.util.Optional;
@@ -41,9 +40,9 @@ public class MainBattleController implements PropertyChangeListener {
 
     @FXML
     private void initialize() throws FileNotFoundException {
+        gameEngine.addObserver(this);
         refreshGui();
         initializeSpellBook();
-        gameEngine.addObserver(this);
         passButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.pass());
     }
 
@@ -107,7 +106,7 @@ public class MainBattleController implements PropertyChangeListener {
                 gridMap.add(mapTile, x, y);
             }
         }
-        gameEngine.verifyControllability();
+        gameEngine.checkControllableActions();
     }
 
     private void initializeSpellBook() {

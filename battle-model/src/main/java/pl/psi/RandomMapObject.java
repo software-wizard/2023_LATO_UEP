@@ -15,9 +15,13 @@ public class RandomMapObject {
 
     public MapObjectIf getRandomMapObject(Collection<MapObjectIf> aMapObjectIfs) {
         Random rand = new Random();
-        int i = rand.nextInt(aMapObjectIfs.size());
-        MapObjectIf randMO = aMapObjectIfs.stream().skip(i).findFirst().orElse(null);
-        return randMO;
+        if (aMapObjectIfs.isEmpty()) {
+            return null;
+        } else {
+            int i = rand.nextInt(aMapObjectIfs.size());
+            MapObjectIf randMO = aMapObjectIfs.stream().skip(i).findFirst().orElse(null);
+            return randMO;
+        }
     }
 
     public MapObjectIf getRandomMapObject(Collection<MapObjectIf> mapObjectIfs1,

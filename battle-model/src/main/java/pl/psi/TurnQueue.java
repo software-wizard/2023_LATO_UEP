@@ -43,6 +43,9 @@ public class TurnQueue {
 
     private void initQueue() {
         mapObjectsQueue.addAll(mapObjectIfs);
+        if(mapObjectIfs.size() <= 1){
+            observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
+        }
     }
 
     public MapObjectIf getCurrentMapObject() {
@@ -62,7 +65,7 @@ public class TurnQueue {
     public void endOfTurn() {
         roundNumber++;
         initQueue();
-        observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
+//        observerSupport.firePropertyChange(END_OF_TURN, roundNumber - 1, roundNumber);
     }
 
     void addObserver(PropertyChangeListener aObserver) {
