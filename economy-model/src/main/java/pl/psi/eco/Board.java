@@ -26,6 +26,7 @@ public class Board implements PropertyChangeListener
 {
 
     public static final String START_BATTLE = "START_BATTLE";
+    public static final String HERO_MOVED = "HERO_MOVED";
     @Getter
     private int MapSize = 25;
     private LinkedList<Player> Players;
@@ -88,16 +89,46 @@ public class Board implements PropertyChangeListener
         return Optional.ofNullable( mapHero.get( aPoint ) );
     }
 
+    private void checkBattle(EconomyHero aEconomyHero, Point aPoint) {
+        for( int i = -1; i <= 1; i++ )
+        {
+            for( int j = -1; j <= 1; j++ )
+            {
+                if( mapHero.containsKey( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) )
+                {
+                    if( aEconomyHero != mapHero.get( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) )
+                    {
+                        try
+                        {
+                            observerSupport.firePropertyChange( START_BATTLE, null,
+                                    new Pair<>( aEconomyHero,
+                                            mapHero.get( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) ) );
+                        }
+                        catch( Exception e )
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateMoveRange(EconomyHero aEconomyHero, Point aPoint) {
+        aEconomyHero.getHeroStatistics()
+                .setMoveRange( aEconomyHero.getHeroStatistics()
+                        .getMoveRange()
+                        - (int)Math.ceil( aPoint.distance( getHeroPosition( aEconomyHero ).getX(),
+                        getHeroPosition( aEconomyHero ).getY() ) ) );
+    }
+
     void move( final EconomyHero aEconomyHero, final Point aPoint )
     {
+        System.out.println("Move action");
+
         if( canMove( aEconomyHero, aPoint ) )
         {
-
-            aEconomyHero.getHeroStatistics()
-                .setMoveRange( aEconomyHero.getHeroStatistics()
-                    .getMoveRange()
-                    - (int)Math.ceil( aPoint.distance( getHeroPosition( aEconomyHero ).getX(),
-                        getHeroPosition( aEconomyHero ).getY() ) ) );
+            updateMoveRange(aEconomyHero, aPoint);
 
             if( map.get( aPoint ) != null )
             {
@@ -114,34 +145,12 @@ public class Board implements PropertyChangeListener
                     .apply( aEconomyHero, getPlayer( aEconomyHero ) );
             }
 
-            for( int i = -1; i <= 1; i++ )
-            {
-                for( int j = -1; j <= 1; j++ )
-                {
-                    if( mapHero.containsKey( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) )
-                    {
-                        if( aEconomyHero != mapHero.get( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) )
-                        {
-                            System.out.println( "O Bogowie, walka! " + i + " " + j );
-                            try
-                            {
-                                observerSupport.firePropertyChange( START_BATTLE, null,
-                                    new Pair<>( aEconomyHero,
-                                        mapHero.get( new Point( aPoint.getX() + i, aPoint.getY() + j ) ) ) );
-                            }
-                            catch( Exception e )
-                            {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
-            }
+            checkBattle(aEconomyHero, aPoint);
 
             mapHero.inverse()
                 .remove( aEconomyHero );
             mapHero.put( aPoint, aEconomyHero );
-            observerSupport.firePropertyChange( "HERO_MOVED", null, null );
+            observerSupport.firePropertyChange( HERO_MOVED, null, null );
         }
     }
 

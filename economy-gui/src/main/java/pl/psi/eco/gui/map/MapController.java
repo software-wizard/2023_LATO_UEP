@@ -10,7 +10,6 @@ package pl.psi.eco.gui.map;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.fxml.FXML;
@@ -24,14 +23,9 @@ import pl.psi.eco.Board;
 import pl.psi.eco.EconomyEngine;
 import pl.psi.eco.Point;
 import pl.psi.eco.converter.EcoBattleConverter;
-import pl.psi.eco.creatures.EconomyCreature;
 import pl.psi.eco.hero.EconomyHero;
-import pl.psi.eco.hero.HeroEquipment;
-import pl.psi.eco.hero.HeroStatistics;
-import pl.psi.eco.mapElements.Castle;
 import pl.psi.eco.mapElements.MapElement;
 import pl.psi.eco.gui.castle.Scene1;
-import pl.psi.eco.player.Player;
 
 public class MapController implements PropertyChangeListener
 {
@@ -115,7 +109,6 @@ public class MapController implements PropertyChangeListener
                     mapTile.addEventHandler( MouseEvent.MOUSE_CLICKED, ( e ) -> {
                         economyEngine.move( currentPoint, economyEngine.getCurrentPlayer()
                             .getEconomyHero() );
-
                     } );
                 }
 
@@ -127,7 +120,12 @@ public class MapController implements PropertyChangeListener
     @Override
     public void propertyChange( PropertyChangeEvent evt )
     {
-        refreshGui();
+        System.out.println("Event observer - MapController "+evt
+                .getPropertyName());
+        if (evt.getPropertyName().equals(Board.HERO_MOVED)) {
+            refreshGui();
+        }
+
         if( evt.getPropertyName()
             .equals( "OPEN_CASTLE" ) )
         {

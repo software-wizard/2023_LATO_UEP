@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pl.psi.eco.Board;
 import pl.psi.eco.converter.EcoBattleConverter;
 import pl.psi.eco.EconomyEngine;
 import pl.psi.eco.gui.inventory.EcoEqSceneController;
@@ -94,7 +95,8 @@ public class EcoMapSceneController implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if (evt.getPropertyName().equals("HERO_MOVED")) {
+        System.out.println("Event observer - EcoMapSceneController");
+        if (evt.getPropertyName().equals(Board.HERO_MOVED)) {
             try {
                 refreshGui();
             } catch (IOException e) {
